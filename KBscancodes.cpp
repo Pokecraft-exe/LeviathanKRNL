@@ -1,6 +1,7 @@
 #include "typedefs.cpp"
 #include "printf.cpp"
 
+int* ProtectedPoz = (int*)&ProtectedPos;
 bool ShiftPressed = false;
 uint_8 LastScancode;
 
