@@ -16,20 +16,28 @@ struct IDT64{
 
 extern IDT64 _idt[256];
 extern uint_64 isr1;
+extern uint_64 isr12;
 extern "C" void LoadIDT();
 
 void InitIDT(){
-    for (int i = 0; i <= 256, i++ ;){
-	    _idt[i].zero = 0;
-	    _idt[i].offset_low = (uint_16)(((uint_64)&isr1 & 0x000000000000ffff));
-	    _idt[i].offset_mid = (uint_16)(((uint_64)&isr1 & 0x00000000ffff0000) >> 16);
-	    _idt[i].offset_high = (uint_32)(((uint_64)&isr1 & 0xffffffff00000000) >> 32);
-	    _idt[i].ist = 0;
-	    _idt[i].selector = 0x08;
-	    _idt[i].types_attr = 0x8e;
+    //for (int i = 0; i <= 256, i++ ;){
+	    _idt[1].zero = 0;
+	    _idt[1].offset_low = (uint_16)(((uint_64)&isr1 & 0x000000000000ffff));
+	    _idt[1].offset_mid = (uint_16)(((uint_64)&isr1 & 0x00000000ffff0000) >> 16);
+	    _idt[1].offset_high = (uint_32)(((uint_64)&isr1 & 0xffffffff00000000) >> 32);
+	    _idt[1].ist = 0;
+	    _idt[1].selector = 0x08;
+	    _idt[1].types_attr = 0x8e;
+	    _idt[12].zero = 0;
+	    _idt[12].offset_low = (uint_16)(((uint_64)&isr1 & 0x000000000000ffff));
+	    _idt[12].offset_mid = (uint_16)(((uint_64)&isr1 & 0x00000000ffff0000) >> 16);
+	    _idt[12].offset_high = (uint_32)(((uint_64)&isr1 & 0xffffffff00000000) >> 32);
+	    _idt[12].ist = 0;
+	    _idt[12].selector = 0x08;
+	    _idt[12].types_attr = 0x8e;
 
 	    RemapPic();
-    }
+    //}
 	outb(0x21, 0xfd);
 	outb(0xa1, 0xff);
 	LoadIDT();
@@ -60,29 +68,26 @@ sbyte mouse_y=0;
 //License: Use as you wish, except to cause damage
 
 extern "C" void isr12_handler(){
-  printf("hello");
-  switch(mouse_cycle)
+  
+switch(mouse_cycle)
   {
     case 0:
-      mouse_byte[0]=inb(0x60);
+      mouse_byte[0]=inb(0x64);
       mouse_cycle++;
       break;
     case 1:
-      mouse_byte[1]=inb(0x60);
+      mouse_byte[1]=inb(0x64);
       mouse_cycle++;
       break;
     case 2:
-      mouse_byte[2]=inb(0x60);
-      
-      
+      mouse_byte[2]=inb(0x64);
       mouse_x = mouse_byte[1];
       mouse_y = mouse_byte[2];
+      SetCursorPosition(PositionFromCoords(mouse_x, mouse_y));
       mouse_cycle=0;
       break;
-    default:
-      break;
   }
-    printf(IntToStr(mouse_x));
+    
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }

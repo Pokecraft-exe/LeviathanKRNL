@@ -10,13 +10,14 @@ extern "C" void _start(){
     MainKeyboardHandler = Keyboardhandler;
     InitIDT();
     mouse_install();
-    //isr12_handler();
+    isr12_handler();
     SetCursorPosition(PositionFromCoords(0, 0));
     cls();
     beep(10000);
+    printf("Kernel By poke\n");
     printf("x64 Booting\n");
     printf(Text);
-    printf("\nPress any Key to login.\n");
+    //printf("\nPress any Key to login.\n");
     printf("Scan Codes Interrupts\n");
     return;
 }
