@@ -7,9 +7,7 @@
 
 uint_16 CursorPosition;
 uint8 test;
-int ProtectedPos[];
-int protectedpostabl = 0;
-
+int ProtectedPos[2044];
 void cls(uint_64 ClearColor = BACKGROUND_BLACK | FOREGROUND_WHITE)
 {
   uint_64 value =0;
@@ -57,7 +55,6 @@ void printf(const char* str, uint_8 color = BACKGROUND_BLACK | FOREGROUND_WHITE,
         *(VGA_MEMORY + index * 2 + 1) = color;
         if (protectedstr == true) {
             ProtectedPos[index] = 1;
-            protectedpostabl = protectedpostabl++;
         }
         index++;
     }
@@ -81,7 +78,6 @@ void printchar(char chr, uint_8 color = BACKGROUND_BLACK | FOREGROUND_WHITE, boo
         *(VGA_MEMORY + CursorPosition * 2 + 1) = color;
         if (protectedstr == true) {
             ProtectedPos[CursorPosition] = 1;
-            protectedpostabl = protectedpostabl++;
         }
         SetCursorPosition(CursorPosition + 1);
     }
