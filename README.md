@@ -1,6 +1,7 @@
 # LeviathanKernel
 
-Leviathan Kernel est un kernel avec un bootloader opensource.\n
+Leviathan Kernel est un kernel avec un bootloader opensource.
+
 Merci a AbsurdPoncho pour le dont d'une partie de son code
 
 # important code non terminé
