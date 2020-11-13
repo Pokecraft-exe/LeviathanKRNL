@@ -11,7 +11,67 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
         switch (ShiftPressed) {
         
         case true:
-            printchar(chr - 32);
+            switch (scancodes){
+                case 0x32:
+                    printf("?");
+                    break;
+                case 0x33:
+                    printf(".");
+                    break;
+                case 0x34:
+                    printf("/");
+                    break;
+                case 0x35:
+                    printf("!");
+                    break;
+                case 0x2B:
+                    printf("µ");
+                    break;
+                case 0x1B:
+                    printf("£");
+                    break;
+                case 0x1A:
+                    printf("¨");
+                    break;
+                case 0x02:
+                    printf("1");
+                    break;
+                case 0x03:
+                    printf("2");
+                    break;
+                case 0x04:
+                    printf("3");
+                    break;
+                case 0x05:
+                    printf("4");
+                    break;
+                case 0x06:
+                    printf("5");
+                    break;
+                case 0x07:
+                    printf("6");
+                    break;
+                case 0x08:
+                    printf("7");
+                    break;
+                case 0x09:
+                    printf("8");
+                    break;
+                case 0x0A:
+                    printf("9");
+                    break;
+                case 0x0B:
+                    printf("0");
+                    break;
+                case 0x0C:
+                    printf("°");
+                    break;
+                case 0x0D:
+                    printf("+");
+                    break;
+                default:
+                    printchar(chr - 32);
+            }
             break;
         case false:
             printchar(chr);
@@ -19,7 +79,7 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
         }
     }else{
         switch (scancodes) {
-            if (ProtectedPoz[CursorPosition] == 0){
+            if (ProtectedPoz[CursorPosition] != 1){
                 case 0x0E: //backspace
                     SetCursorPosition(CursorPosition - 1);
 	    		    printchar(' ');
@@ -30,15 +90,16 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
 	    	    	break;
 	    	    case 0xAA: //Left Shift Released
           			ShiftPressed = false;
+                    break;
           		case 0x36: //Right Shift
           			ShiftPressed = true;
           			break;
          		case 0xB6: //Right Shift Released
          			ShiftPressed = false;
          			break;
-                 case 0x1C: //enter
-                     printf("\n");
-                     break;
+                case 0x1C: //enter
+                    printf("\n");
+                    break;
                  // numpad
                  case 0x52:
                      printf(IntToStr(0));
@@ -106,7 +167,11 @@ void KeyboardHandler0xE0(uint_8 scanCode) {
         printf("/");
         break;
     case 0x5E:
-        printf("Do Not PRESS SHUT DOWN BUTTON!!!");
+        cls();
+        SetCursorPosition(PositionFromCoords(0, 0));
+        //outb(0xB004, 0x2000);
+        //outb(0x604, 0x2000);
+        //outb(0x4004, 0x3400);
         break;
     case 0x1C: //enter
         printf("\n");

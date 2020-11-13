@@ -18,3 +18,5 @@ typedef signed long long int_64;
 typedef unsigned char byte;
 typedef signed char sbyte;
 typedef unsigned int dword;
+typedef char * string;
+typedef char * str;

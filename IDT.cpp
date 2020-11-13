@@ -55,39 +55,35 @@ extern "C" void isr1_handler(){
 	if (MainKeyboardHandler != 0) {
 		MainKeyboardHandler(scanCode, chr);
 	}
+
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }
 
-byte mouse_cycle=0;     
-sbyte mouse_byte[3];    
-sbyte mouse_x=0;        
-sbyte mouse_y=0;         
-
-//Mouse.inc by SANiK
-//License: Use as you wish, except to cause damage
-
 extern "C" void isr12_handler(){
-  
-switch(mouse_cycle)
-  {
-    case 0:
-      mouse_byte[0]=inb(0x64);
-      mouse_cycle++;
-      break;
-    case 1:
-      mouse_byte[1]=inb(0x64);
-      mouse_cycle++;
-      break;
-    case 2:
-      mouse_byte[2]=inb(0x64);
-      mouse_x = mouse_byte[1];
-      mouse_y = mouse_byte[2];
-      SetCursorPosition(PositionFromCoords(mouse_x, mouse_y));
-      mouse_cycle=0;
-      break;
-  }
-    
+    uint_8 offset = 0;
+    uint_8 buttons = 0;
+    uint_8 buffer[3];
+    uint_8 status = inb(0x60);
+    if(!(status & 0x20)){}
+    static int8 x=40,y=12;
+    buffer[offset] = inb(0x60);
+    offset = (offset+1) % 3;
+    if (offset == 0){
+        static uint16* VideoMemory = (uint16*)0xb8000;
+        VideoMemory[80*y+x] = ((VideoMemory[80*y+x] & 0xF000) >> 4)
+                            | ((VideoMemory[80*y+x] & 0x0F00) << 4)
+                            | ((VideoMemory[80*y+x] & 0x00FF));
+        x=buffer[1];
+        if (x < 0) x = 0;
+        if (x >= 80) x = 79;
+        y=buffer[2];
+        if (y < 0) y = 0;
+        if (y >= 25) y = 24;
+        VideoMemory[80*y+x] = ((VideoMemory[80*y+x] & 0xF000) >> 4)
+                            | ((VideoMemory[80*y+x] & 0x0F00) << 4)
+                            | ((VideoMemory[80*y+x] & 0x00FF));
+    }
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }
