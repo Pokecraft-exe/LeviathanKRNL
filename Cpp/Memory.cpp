@@ -24,6 +24,7 @@ void memcpy(void* destination, void* source, uint_64 num){
     for (uint8* destptr8 = (uint8*)((uint64)destination + newnum); destptr8 < (uint8*)((uint64)destination + newnum); destptr8++) {
         *destptr8 = *srcptr8;
         srcptr8++;
+    }
 }
 
 void printMemMap(MemoryMapEntry* memoryMap, uint16 pos) {

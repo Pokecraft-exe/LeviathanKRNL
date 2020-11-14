@@ -23,24 +23,18 @@ extern "C" void _start(){
     printf("\nPress any Key to login.\n");
 
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
-    
+    // to do: GUI
     InitHeap(0x100000, 0x100000);
-    void* TestMemoryAdress = malloc(0x10);
-    void* TestMemoryAdress2 = malloc(0x10);
-    void* TestMemoryAdress3 = malloc(0x10);
-    printf(HexToString((uint_64) TestMemoryAdress));
+    malloc(0x4000);
+    uint_64* Test = (uint_64*)aligned_Alloc(0x4000, 0x08);
+    printf(HexToString((uint_64)Test));
     printf("\n");
-    printf(HexToString((uint_64) TestMemoryAdress2));
-    printf("\n");
-    printf(HexToString((uint_64) TestMemoryAdress3));
+    free(Test);
 
-    free(TestMemoryAdress);
-    free(TestMemoryAdress2);
-    free(TestMemoryAdress3);
-
-    void* Test4 = malloc(0x60);
+    uint_64* Test2 = (uint_64*)malloc(0x4000);
+    printf(HexToString((uint_64)Test2));
     printf("\n");
-    printf(HexToString((uint_64) Test4));
+
 
     return;
 }

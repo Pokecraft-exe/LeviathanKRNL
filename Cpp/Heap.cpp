@@ -21,6 +21,22 @@ void* calloc(uint_64 num, uint_64 size) {
     return calloc(num * size);
 }
 
+void* realloc(void* address, uint_64 newSize){
+    MemorySegmentHeader* oldSegmentHeader;
+    AlignedMemorySegmentHeader* AMSH = (AlignedMemorySegmentHeader*)address - 1;
+    if (AMSH->IsAligned){
+        oldSegmentHeader = (MemorySegmentHeader*)(uint_64)AMSH->MemorySegmentHeaderAddress;
+    }else{
+        oldSegmentHeader = ((MemorySegmentHeader*)address) - 1;
+    }
+    uint_64 smallersize = newSize;
+    if (oldSegmentHeader->MemoryLength < newSize) smallersize = oldSegmentHeader->MemoryLength;
+    void* newMem = malloc(newSize);
+    memcpy(newMem, address, smallersize);
+    free(address);
+    return newMem;
+}
+
 void* malloc(uint_64 size) {
     uint_64 remainder = size % 8;
     size -= remainder;
@@ -84,8 +100,40 @@ void CombineFreeSegments(MemorySegmentHeader* a, MemorySegmentHeader* b){
     }
 }
 
+void* aligned_Alloc(uint_64 alignment, uint_64 size){
+    uint_64 alignmentReminder = alignment % 8;
+    alignment -= alignmentReminder;
+    if (alignmentReminder != 0) alignment += 8;
+
+    uint_64 sizeReminder = size % 8;
+    size -= sizeReminder;
+    if (sizeReminder != 0) size += 8;
+
+    uint_64 fullsize = size + alignment;
+
+    void* mallocVal = malloc(fullsize);
+    uint_64 address = (uint_64)mallocVal;
+
+    uint_64 Reminder = address % alignment;
+    address -= alignment;
+    if (Reminder != 0) {
+        address += alignment;
+
+        AlignedMemorySegmentHeader* ASMH = (AlignedMemorySegmentHeader*)address - 1;
+        ASMH->IsAligned = true;
+        ASMH->MemorySegmentHeaderAddress = (uint_64)mallocVal - sizeof(MemorySegmentHeader);
+    }
+    return (void*)address;
+}
+
 void free(void* address) {
-    MemorySegmentHeader* currentMemorySegment = ((MemorySegmentHeader*)address) - 1;
+    MemorySegmentHeader* currentMemorySegment;
+    AlignedMemorySegmentHeader* AMSH = (AlignedMemorySegmentHeader*)address - 1;
+    if (AMSH->IsAligned){
+        currentMemorySegment = (MemorySegmentHeader*)(uint_64)AMSH->MemorySegmentHeaderAddress;
+    }else{
+        currentMemorySegment = ((MemorySegmentHeader*)address) - 1;
+    }
     currentMemorySegment->Free = true;
 
     if (currentMemorySegment < FirstFreeMemorySegment) FirstFreeMemorySegment = currentMemorySegment;
