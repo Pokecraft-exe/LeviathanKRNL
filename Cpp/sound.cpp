@@ -1,7 +1,4 @@
-#include "typedefs.cpp"
-#include "IO.cpp"
-#include "IDT.cpp"
-
+#include "H/sound.h"
  //Play sound using built in speaker
  static void PlaySound(uint32 nFrequence) {
  	uint32 Div;

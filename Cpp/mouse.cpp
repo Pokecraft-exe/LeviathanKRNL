@@ -1,5 +1,5 @@
-#include "IO.cpp"
-#include "typedefs.cpp"
+#include "H/IO.h"
+#include "H/typedefs.h"
 
 //Mouse.inc by SANiK
 //License: Use as you wish, except to cause damage
@@ -52,12 +52,10 @@ inline void mouse_write(byte a_write) //unsigned char
 
 void mouse_install()
 {
-  byte _status;  //unsigned char
-
+  byte _status;
   //Enable the auxiliary mouse device
   mouse_wait(1);
   outb(0x64, 0xA8);
- 
   //Enable the interrupts
   mouse_wait(1);
   outb(0x64, 0x20);
@@ -67,15 +65,10 @@ void mouse_install()
   outb(0x64, 0x60);
   mouse_wait(1);
   outb(0x60, _status);
- 
   //Tell the mouse to use default settings
   mouse_write(0xF6);
   mouse_read();  //Acknowledge
- 
   //Enable the mouse
   mouse_write(0xF4);
   mouse_read();  //Acknowledge
-
-  //Setup the mouse handler
-  isr12_handler();
 }

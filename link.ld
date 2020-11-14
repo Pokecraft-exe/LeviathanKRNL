@@ -4,9 +4,15 @@ ENTRY (_start)
 
 INPUT
 (
-    ExtendedProgram.o
-    Kernel.o
-    binaries.o
+    ASM/ExtendedProgram.o
+    Cpp/Kernel.o
+    Cpp/IDT.o
+    Cpp/IO.o
+    Cpp/KBscancodes.o
+    Cpp/Memory.o
+    Cpp/printf.o
+    Cpp/sound.o
+    ASM/binaries.o
 )
 
 OUTPUT

@@ -1,12 +1,13 @@
 
 jmp EnterProtectedMode
 
-%include "gdt.s"
-%include "print.s"
-
+%include "ASM/gdt.s"
+%include "ASM/print.s"
+%include "ASM/DetectMemory.s"
 
 EnterProtectedMode:
-	call EnableA20
+	call DetectMemory
+    call EnableA20
 	cli
 	lgdt [gdt_descriptor]
 	mov eax, cr0
@@ -22,8 +23,8 @@ EnableA20:
 
 [bits 32]
 
-%include "CPUID.s"
-%include "SimplePaging.s"
+%include "ASM/CPUID.s"
+%include "ASM/SimplePaging.s"
 
 StartProtectedMode:
 
@@ -55,7 +56,7 @@ StartProtectedMode:
 [bits 64]
 [extern _start]
 
-%include "IDT.s"
+%include "ASM/IDT.s"
 
 Start64Bit:
 	mov edi, 0xb8000

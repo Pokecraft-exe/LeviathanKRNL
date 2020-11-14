@@ -1,7 +1,4 @@
-#include "typedefs.cpp"
-#include "printf.cpp"
-
-char* ProtectedPoz = (char*)&ProtectedPos;
+#include "H/KBscancodes.h"
 
 bool ShiftPressed = false;
 uint_8 LastScancode;
@@ -79,7 +76,7 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
         }
     }else{
         switch (scancodes) {
-            if (ProtectedPoz[CursorPosition] != 1){
+            if (ProtectedPos[CursorPosition] != 1){
                 case 0x0E: //backspace
                     SetCursorPosition(CursorPosition - 1);
 	    		    printchar(' ');

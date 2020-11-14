@@ -1,14 +1,9 @@
-#pragma once
-#define VGA_MEMORY (unsigned char*)0xb8000
-#define VGA_WIDTH 80
-#include "IO.cpp"
-#include "typedefs.cpp"
-#include "Colors.cpp"
+#include "H/printf.h"
 
 uint_16 CursorPosition;
-uint8 test;
 int ProtectedPos[2044];
-void cls(uint_64 ClearColor = BACKGROUND_BLACK | FOREGROUND_WHITE)
+
+void cls(uint_64 ClearColor)
 {
   uint_64 value =0;
   value += ClearColor << 8;
@@ -17,7 +12,6 @@ void cls(uint_64 ClearColor = BACKGROUND_BLACK | FOREGROUND_WHITE)
   value += ClearColor << 56;
   for (uint_64* i = (uint_64*)VGA_MEMORY; i < (uint_64*)(VGA_MEMORY + 4000); i++){
       *i = value;
-      test ++;
   }
 }
 
@@ -35,7 +29,7 @@ uint_16 PositionFromCoords(uint_8 x, uint_8 y){
   return y * VGA_WIDTH + x;
 }
 
-void printf(const char* str, uint_8 color = BACKGROUND_BLACK | FOREGROUND_WHITE, bool protectedstr = false){
+void printf(const char* str, uint_8 color, bool protectedstr){
   uint_8* charPtr = (uint_8*)str;
   uint_16 index = CursorPosition;
   int i = 0;
@@ -63,7 +57,7 @@ void printf(const char* str, uint_8 color = BACKGROUND_BLACK | FOREGROUND_WHITE,
   }
 }
 
-void printchar(char chr, uint_8 color = BACKGROUND_BLACK | FOREGROUND_WHITE, bool protectedstr = false){
+void printchar(char chr, uint_8 color, bool protectedstr){
     switch (chr) {
       case 10:
         SetCursorPosition(CursorPosition += VGA_WIDTH);
@@ -102,6 +96,15 @@ const char* HexToString(T value) {
     return hexToStringOutput;
 }
 
+const char* HexToString(uint_8 value) {return HexToString<uint_8>(value);}
+const char* HexToString(uint_16 value) {return HexToString<uint_16>(value);}
+const char* HexToString(uint_32 value) {return HexToString<uint_32>(value);}
+const char* HexToString(uint_64 value) {return HexToString<uint_64>(value);}
+const char* HexToString(char value) {return HexToString<char>(value);}
+const char* HexToString(short value) {return HexToString<short>(value);}
+const char* HexToString(int value) {return HexToString<int>(value);}
+const char* HexToString(long long value) {return HexToString<long long>(value);}
+
 char integerToStringOutput[128];
 template<typename T>
 const char* IntToStr(T value) {
@@ -134,6 +137,15 @@ const char* IntToStr(T value) {
 	integerToStringOutput[isNegative + size + 1] = 0;
 	return integerToStringOutput;
 }
+
+const char* IntToStr(uint_8 value) {return IntToStr<uint_8>(value);}
+const char* IntToStr(uint_16 value) {return IntToStr<uint_16>(value);}
+const char* IntToStr(uint_32 value) {return IntToStr<uint_32>(value);}
+const char* IntToStr(uint_64 value) {return IntToStr<uint_64>(value);}
+const char* IntToStr(char value) {return IntToStr<char>(value);}
+const char* IntToStr(short value) {return IntToStr<short>(value);}
+const char* IntToStr(int value) {return IntToStr<int>(value);}
+const char* IntToStr(long long value) {return IntToStr<long long>(value);}
 
 char floatToStringOutput[128];
 const char* FloatToString(float value, uint_8 decimalPlaces) {
