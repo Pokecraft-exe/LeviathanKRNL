@@ -2,6 +2,7 @@
 
 uint_16 CursorPosition;
 int ProtectedPos[2044];
+//for (i = 0; i = 2044; i++) ProtectedPos[i] = 0;
 
 void cls(uint_64 ClearColor)
 {

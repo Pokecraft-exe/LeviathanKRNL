@@ -1,7 +1,30 @@
 #include "H/Memory.h"
 
-uint8 UsableMemoryRegionCount;
+uint_8 UsableMemoryRegionCount;
 MemoryMapEntry* UsableMemoryRegions[10];
+
+void memcpy(void* destination, void* source, uint_64 num){
+    if (num <= 8) {
+        uint8* valPtr = (uint8*)&source;
+        for (uint8* ptr = (uint8*)destination; ptr < (uint8*)((uint_64)destination + num); ptr++) {
+            *ptr = *valPtr;
+            valPtr++;
+        }
+        return;
+    }
+    uint_64 proceedingBytes = num % 8;
+    uint_64 newnum = num - proceedingBytes;
+    uint_64* srcptr = (uint_64*)source;
+
+    for (uint64* destptr = (uint64*)destination; destptr < (uint64*)((uint_64)destination + newnum); destptr++) {
+        *destptr = *srcptr;
+        srcptr++;
+    }
+    uint8* srcptr8 = (uint8*)((uint_64)source + newnum);
+    for (uint8* destptr8 = (uint8*)((uint64)destination + newnum); destptr8 < (uint8*)((uint64)destination + newnum); destptr8++) {
+        *destptr8 = *srcptr8;
+        srcptr8++;
+}
 
 void printMemMap(MemoryMapEntry* memoryMap, uint16 pos) {
     SetCursorPosition(pos);
@@ -55,7 +78,7 @@ void memset(void* start, uint_64 value, uint_64 num){
     }
     uint8* valPtr = (uint8*)&value;
     for (uint8* ptr = (uint8*)((uint64)start + newnum); ptr < (uint8*)((uint64)start + newnum); ptr++) {
-        *prt = *valPtr;
+        *ptr = *valPtr;
         valPtr++;
     }
 }
