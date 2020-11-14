@@ -25,16 +25,6 @@ extern "C" void _start(){
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
     // to do: GUI
     InitHeap(0x100000, 0x100000);
-    malloc(0x4000);
-    uint_64* Test = (uint_64*)aligned_Alloc(0x4000, 0x08);
-    printf(HexToString((uint_64)Test));
-    printf("\n");
-    free(Test);
-
-    uint_64* Test2 = (uint_64*)malloc(0x4000);
-    printf(HexToString((uint_64)Test2));
-    printf("\n");
-
 
     return;
 }
