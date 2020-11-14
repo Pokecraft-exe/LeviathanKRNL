@@ -36,3 +36,26 @@ MemoryMapEntry** GetUsableMemoryRegions() {
     return UsableMemoryRegions;
 
 }
+
+void memset(void* start, uint_64 value, uint_64 num){
+    
+    if (num <= 8) {
+        uint8* valPtr = (uint8*)&value;
+        for (uint8* ptr = (uint8*)start; ptr < (uint8*)((uint_64)start + num); ptr++) {
+            *ptr = *valPtr;
+            valPtr++;
+        }
+        return;
+    }
+    uint_64 proceedingBytes = num % 8;
+    uint_64 newnum = num - proceedingBytes;
+
+    for (uint64* ptr = (uint64*)start; ptr < (uint64*)((uint_64)start + newnum); ptr++) {
+        *ptr = value;
+    }
+    uint8* valPtr = (uint8*)&value;
+    for (uint8* ptr = (uint8*)((uint64)start + newnum); ptr < (uint8*)((uint64)start + newnum); ptr++) {
+        *prt = *valPtr;
+        valPtr++;
+    }
+}
