@@ -14,6 +14,7 @@ void cls(uint_64 ClearColor)
   for (uint_64* i = (uint_64*)VGA_MEMORY; i < (uint_64*)(VGA_MEMORY + 4000); i++){
       *i = value;
   }
+  SetCursorPosition(PositionFromCoords(0, 0));
 }
 
 void SetCursorPosition(unsigned short position){

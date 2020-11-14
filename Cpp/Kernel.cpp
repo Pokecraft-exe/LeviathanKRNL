@@ -14,7 +14,7 @@ extern "C" void _start(){
     MainKeyboardHandler = Keyboardhandler;
     InitIDT();
     mouse_install();
-    SetCursorPosition(PositionFromCoords(0, 0));
+    //SetCursorPosition(PositionFromCoords(0, 0));
     cls();
     beep(10000);
     printf("Kernel By pokecraft\n");
