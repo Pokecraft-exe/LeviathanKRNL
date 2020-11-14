@@ -4,6 +4,9 @@
 #include "H/sound.h"
 #include "mouse.cpp"
 #include "H/Memory.h"
+#include "H/Heap.h"
+#include "H/Colors.h"
+#include "H/typedefs.h"
 
 extern const char Text[];
 
@@ -18,11 +21,12 @@ extern "C" void _start(){
     printf("x64 Booting\n");
     printf(Text);
     printf("\nPress any Key to login.\n");
-    MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
-    for (uint8 i = 0; i < UsableMemoryRegionCount; i++) {
-        MemoryMapEntry* memMap = usableMemoryMaps[i];
-        printMemMap(memMap, CursorPosition);
 
-    }
+    MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
+    
+    InitHeap(0x100000, 0x100000);
+    void* TestMemoryAdress = malloc(60);
+    printf(HexToString((uint_64) TestMemoryAdress));
+
     return;
 }

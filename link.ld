@@ -12,6 +12,7 @@ INPUT
     Cpp/Memory.o
     Cpp/printf.o
     Cpp/sound.o
+    Cpp/Heap.o
     ASM/binaries.o
 )
 
