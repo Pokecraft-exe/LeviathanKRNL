@@ -11,6 +11,7 @@ x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/Memory.cpp" -o "Cpp/Mem
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/printf.cpp" -o "Cpp/printf.o"
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/sound.cpp" -o "Cpp/sound.o"
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/Heap.cpp" -o "Cpp/Heap.o"
+x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/vga.cpp" -o "Cpp/vga.o"
 
 x86_64-elf-ld -T"link.ld"
 

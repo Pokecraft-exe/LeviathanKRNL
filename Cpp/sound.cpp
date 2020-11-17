@@ -10,7 +10,7 @@
  	outb(0x42, (uint8) (Div) );
  	outb(0x42, (uint8) (Div >> 8));
  
-        //And play the sound using the PC speaker
+        //And play the sound usiinitPITng the PC speaker
  	tmp = inb(0x61);
   	if (tmp != (tmp | 3)) {
  		outb(0x61, tmp | 3);
@@ -27,6 +27,7 @@
  //Make a beep
  void beep(int time) {
  	 PlaySound(1000);
+	 //slee(10);
  	 noSound();
           //set_PIT_2(old_frequency);
  }

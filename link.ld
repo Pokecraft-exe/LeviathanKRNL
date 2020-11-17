@@ -13,6 +13,7 @@ INPUT
     Cpp/printf.o
     Cpp/sound.o
     Cpp/Heap.o
+    Cpp/vga.o
     ASM/binaries.o
 )
 
