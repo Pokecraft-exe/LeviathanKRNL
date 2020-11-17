@@ -56,19 +56,13 @@ extern "C" void isr12_handler(){
     buffer[offset] = inb(0x60);
     offset = (offset+1) % 3;
     if (offset == 0){
-        static uint16* VideoMemory = (uint16*)0xb8000;
-        VideoMemory[80*y+x] = ((VideoMemory[80*y+x] & 0xF000) >> 4)
-                            | ((VideoMemory[80*y+x] & 0x0F00) << 4)
-                            | ((VideoMemory[80*y+x] & 0x00FF));
         x=buffer[1];
         if (x < 0) x = 0;
         if (x >= 80) x = 79;
         y=buffer[2];
         if (y < 0) y = 0;
         if (y >= 25) y = 24;
-        VideoMemory[80*y+x] = ((VideoMemory[80*y+x] & 0xF000) >> 4)
-                            | ((VideoMemory[80*y+x] & 0x0F00) << 4)
-                            | ((VideoMemory[80*y+x] & 0x00FF));
+		//ctmouse(x, y);
     }
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);

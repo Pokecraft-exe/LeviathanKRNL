@@ -41,7 +41,6 @@ bool SupportsMode(uint32 width, uint32 height, uint32 colordepth){
 
 bool SetMode(uint32 width, uint32 height, uint32 colordepth){
     if(!SupportsMode(width, height, colordepth)) return false;
-
     unsigned char g_320x200x256[] =
     {
             0x63,
@@ -56,7 +55,6 @@ bool SetMode(uint32 width, uint32 height, uint32 colordepth){
             0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F,
             0x41, 0x00, 0x0F, 0x00, 0x00
     };
-	
     WriteRegisters(g_320x200x256);
     return true;
 }

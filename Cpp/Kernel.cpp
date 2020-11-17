@@ -28,9 +28,9 @@ extern "C" void _start(){
     SetMode(300, 200, 256);
     for (int32 y = 0; y < 200; y++){
         for (int32 x = 0; x < 320; x++){
-            putPixel(x, y, 255, 000, 000);
+            //putPixel(x, y, 0xA8, 0x00, 0x00);
         }
     }
-
+    while(1)
     return;
 }
