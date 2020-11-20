@@ -4,6 +4,7 @@
 #include "IO.h"
 #include "typedefs.h"
 #include "Colors.h"
+#include "KBscancodes.h"
 
 extern uint_16 CursorPosition;
 extern int ProtectedPos[2044];
@@ -12,6 +13,7 @@ void SetCursorPosition(unsigned short position);
 uint_16 PositionFromCoords(uint_8 x, uint_8 y);
 void printf(const char* str, uint_8 color = BACKGROUND_BLACK | FOREGROUND_WHITE, bool protectedstr = false);
 void printchar(char chr, uint_8 color = BACKGROUND_BLACK | FOREGROUND_WHITE, bool protectedstr = false);
+//void scanf(string address);
 
 const char* HexToString(uint_8 value);
 const char* HexToString(uint16 value);

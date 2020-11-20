@@ -1,4 +1,10 @@
 
+[bits 16]
+
+mov ah, 0h
+mov al, 13h
+int 0x10
+
 jmp EnterProtectedMode
 
 %include "ASM/gdt.s"
@@ -63,7 +69,7 @@ Start64Bit:
 	mov rax, 0x1f201f201f201f20
 	mov ecx, 500
 	rep stosq
-    call _start
+	call _start
 	jmp $
 
 

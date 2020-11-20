@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "H/KBscancodes.h"
 #include "H/printf.h"
 #include "H/IDT.h"
@@ -9,10 +8,15 @@
 #include "H/Colors.h"
 #include "H/typedefs.h"
 #include "H/vga.h"
+//#include "Shell.cpp"
 
 extern const char Text[];
 
 extern "C" void _start(){
+    unsigned int * vga = (unsigned int*)0xA000;
+    for (int i = 0; i < 307200; i++){
+        vga[i] = 0x2;
+    }
     MainKeyboardHandler = Keyboardhandler;
     InitIDT();
     mouse_install();
@@ -24,43 +28,16 @@ extern "C" void _start(){
     printf("\nPress any Key to login.\n");
 
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
-    // to do: GUI
+    // to do: GUI, scanf, shell
     InitHeap(0x100000, 0x100000);
-    SetMode(300, 200, 256);
+    //SetMode(300, 200, 256);
     for (int32 y = 0; y < 200; y++){
         for (int32 x = 0; x < 320; x++){
             //putPixel(x, y, 0xA8, 0x00, 0x00);
         }
     }
+
+    //Shell();
     while(1)
     return;
-=======
-#include "H/KBscancodes.h"
-#include "H/printf.h"
-#include "H/IDT.h"
-#include "H/sound.h"
-#include "mouse.cpp"
-#include "H/Memory.h"
-
-extern const char Text[];
-
-extern "C" void _start(){
-    MainKeyboardHandler = Keyboardhandler;
-    InitIDT();
-    mouse_install();
-    SetCursorPosition(PositionFromCoords(0, 0));
-    cls();
-    beep(10000);
-    printf("Kernel By pokecraft\n");
-    printf("x64 Booting\n");
-    printf(Text);
-    printf("\nPress any Key to login.\n");
-    MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
-    for (uint8 i = 0; i < UsableMemoryRegionCount; i++) {
-        MemoryMapEntry* memMap = usableMemoryMaps[i];
-        printMemMap(memMap, CursorPosition);
-
-    }
-    return;
->>>>>>> bf54bc8486253a4351f69cd188f1e3114ac53636
 }

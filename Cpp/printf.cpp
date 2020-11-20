@@ -79,6 +79,8 @@ void printchar(char chr, uint_8 color, bool protectedstr){
     }
 }
 
+
+
 char hexToStringOutput[128];
 template<typename T>
 const char* HexToString(T value) {

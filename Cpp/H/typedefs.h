@@ -20,3 +20,5 @@ typedef signed char sbyte;
 typedef unsigned int dword;
 typedef char * string;
 typedef char * str;
+typedef char * String;
+typedef char * Str;
