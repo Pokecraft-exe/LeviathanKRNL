@@ -59,21 +59,21 @@ bool SetMode(uint32 width, uint32 height, uint32 colordepth){
     return true;
 }
 
-//unsigned int * GetFrameBufferSegment(){
-//    outb(0x3c0, 0x06);
-//    unsigned int * segmentNumber = inb(0x3cf) & (3<<2);
-//    switch(segmentNumber){
-//        case 0<<2: return (unsigned int*)0x00000;
-//        case 1<<2: return (unsigned int*)0xA0000;
-//        case 2<<2: return (unsigned int*)0xB0000;
-//        case 3<<2: return (unsigned int*)0xB8000;
-//    }
-//}
+char * GetFrameBufferSegment(){
+    outb(0x3c0, 0x06);
+    int segmentNumber = inb(0x3cf) & (3<<2);
+    switch(segmentNumber){
+        case 0<<2: return (char*)0x00000;
+        case 1<<2: return (char*)0xA0000;
+        case 2<<2: return (char*)0xB0000;
+        case 3<<2: return (char*)0xB8000;
+    }
+}
 
 char* pixel = (char*)0xA0000; //GetFrameBufferSegment();
 
 void putPixel(uint32 x, uint32 y,  uint8 colorIndex){
-    pixel = (unsigned int*)0xA0000; //GetFrameBufferSegment();
+    pixel = (char*)0xA0000; //GetFrameBufferSegment();
     pixel[320*y+x] = colorIndex;
 }
 
@@ -87,21 +87,76 @@ void putPixel(uint32 x, uint32 y,  uint8 r, uint8 g, uint8 b){
     putPixel(x,y, getColorIndex(r,g,b));
 }
 
-void Box(unsigned int px, unsigned int py, unsigned int fx, unsigned int fy, int r, int g, int b){
-    unsigned int x = px;
-    unsigned int y = py;
+void DRect(int px, int py, int fx, int fy, uint8 r, uint8 g, uint8 b){
+    int x = px;
+    int y = py;
     while (x != fx && y != fy){
         for (y = 320; y < fy; y++){putPixel(x, fy, r, g, b);}
         y = py;
         x++;
         for (y = 320; y < fy; y++){putPixel(x, fy, r, g, b);}
-        if(x == fx){
-            y = fy;
-            x = fx;
-        }else{
-            y = py;
-            x++;
-        }
+        //if(x == fx){
+        //    y = fy;
+        //    x = fx;
+        //}else{
+        y = py;
+        x++;
+        //}
     }
     
+}
+
+void line(int locationX, int locationY, int size, int color)
+{
+    char * vga = (char*)0xA0000;
+    vga += locationX + (locationY * 640);    
+    int offset = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        for (int a = 0; a < size; a++)
+        {
+            vga[offset] = color;
+            offset++;
+        }
+
+        offset += 320;
+    }
+}
+
+void Box(int locationX, int locationY, int size, int color)
+{
+    char * vga = (char*)0xA0000;
+    vga += locationX + (locationY * 640);    
+    int offset = 0;
+
+    for (int i = 0; i < size; i++)
+    {
+        for (int a = 0; a < size; a++)
+        {
+            vga[offset] = color;
+            offset++;
+        }
+
+        offset += 310;
+    }
+}
+
+void Rect(int locationX, int locationY, int sizeX, int sizeY, int color)
+{
+    char * vga = (char*)0xA0000;
+    vga += locationX + (locationY * 320);    
+    int offset = 0;
+
+    for (int i = 0; i < sizeY; i++)
+    {
+        for (int a = 0; a < sizeX; a++)
+        {
+            vga[320*a+i] = color; //205
+        }
+    }
+}
+
+void window(int locationX, int locationY, int sizeX, int sizeY){
+    Rect(locationX, locationY, sizeX, sizeY, 15);
 }

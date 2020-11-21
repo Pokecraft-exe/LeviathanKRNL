@@ -15,7 +15,7 @@ extern const char Text[];
 extern "C" void _start(){
     char * vga = (char*)0xA0000;
     for (int i = 0; i < 307200; i++){
-        vga[i] = 1;
+        vga[i] = 0x2;
     }
     MainKeyboardHandler = Keyboardhandler;
     InitIDT();
@@ -28,14 +28,14 @@ extern "C" void _start(){
     printf("\nPress any Key to login.\n");
 
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
-    // scanf, shell
+    // TODO:scanf, shell
     InitHeap(0x100000, 0x100000);
     //for (int32 y = 0; y < 200; y++){
         //for (int32 x = 0; x < 320; x++){
             //putPixel(x, y, 0x00, 0xA8, 0x00);
         //}
     //}
-    Box(0, 0, 320, 200, 0x00, 0xA8, 0x00);
+    window(45, 10, 100, 51);
 
     //Shell();
     while(1)
