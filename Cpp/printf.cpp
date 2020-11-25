@@ -77,6 +77,7 @@ void printchar(char chr, uint_8 color, bool protectedstr){
         }
         SetCursorPosition(CursorPosition + 1);
     }
+    //drawchar(chr, 0, 0, 15);
 }
 
 

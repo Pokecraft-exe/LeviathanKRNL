@@ -62,7 +62,7 @@ extern "C" void isr12_handler(){
         y=buffer[2];
         if (y < 0) y = 0;
         if (y >= 25) y = 24;
-		//ctmouse(x, y);
+		ctmouse(x, y);
     }
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);

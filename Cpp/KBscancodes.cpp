@@ -140,6 +140,9 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
                 case 0x2B:
                       printf("/");
                       break;
+                case 0x66:
+                      Rect(0,0,320,200,6464);
+                      break;
             }
         }
     }

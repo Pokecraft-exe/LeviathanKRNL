@@ -1,5 +1,6 @@
 #include "typedefs.h"
 #include "printf.h"
+#include "vga.h"
 
 extern bool ShiftPressed;
 extern uint_8 LastScancode;

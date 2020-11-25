@@ -3,6 +3,7 @@
 #include "KBScanCodeSet1.h"
 #include "IO.h"
 #include "printf.h"
+#include "vga.h"
 
 struct IDT64{
   uint_16 offset_low;

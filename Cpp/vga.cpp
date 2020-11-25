@@ -70,11 +70,16 @@ char * GetFrameBufferSegment(){
     }
 }
 
-char* pixel = (char*)0xA0000; //GetFrameBufferSegment();
+char* layer1[307200];
+char* layer2[307200];
+char* layer3[307200];
+char* layer4[307200];
+char* layer5[307200];
 
 void putPixel(uint32 x, uint32 y,  uint8 colorIndex){
-    pixel = (char*)0xA0000; //GetFrameBufferSegment();
-    pixel[320*y+x] = colorIndex;
+    char* pixel = (char*)0xA0000; //GetFrameBufferSegment();
+    pixel[320*y+x] = colorIndex;//*layer[320*y+x] = colorIndex;
+    //layerToFb();
 }
 
 uint8 getColorIndex(uint8 r, uint8 g, uint8 b){
@@ -87,59 +92,32 @@ void putPixel(uint32 x, uint32 y,  uint8 r, uint8 g, uint8 b){
     putPixel(x,y, getColorIndex(r,g,b));
 }
 
-void DRect(int px, int py, int fx, int fy, uint8 r, uint8 g, uint8 b){
-    int x = px;
-    int y = py;
-    while (x != fx && y != fy){
-        for (y = 320; y < fy; y++){putPixel(x, fy, r, g, b);}
-        y = py;
-        x++;
-        for (y = 320; y < fy; y++){putPixel(x, fy, r, g, b);}
-        //if(x == fx){
-        //    y = fy;
-        //    x = fx;
-        //}else{
-        y = py;
-        x++;
-        //}
-    }
-    
-}
-
-void line(int locationX, int locationY, int size, int color)
-{
-    char * vga = (char*)0xA0000;
-    vga += locationX + (locationY * 640);    
-    int offset = 0;
-
-    for (int i = 0; i < size; i++)
-    {
-        for (int a = 0; a < size; a++)
-        {
-            vga[offset] = color;
-            offset++;
-        }
-
-        offset += 320;
-    }
-}
-
-void Box(int locationX, int locationY, int size, int color)
-{
-    char * vga = (char*)0xA0000;
-    vga += locationX + (locationY * 640);    
-    int offset = 0;
-
-    for (int i = 0; i < size; i++)
-    {
-        for (int a = 0; a < size; a++)
-        {
-            vga[offset] = color;
-            offset++;
-        }
-
-        offset += 310;
-    }
+void Line(int x0, int y0, int x1, int y1, uint8 color){
+    int dx, dy, p, x, y;
+ 
+	dx=x1-x0;
+	dy=y1-y0;
+ 
+	x=x0;
+	y=y0;
+ 
+	p=2*dy-dx;
+ 
+	while(x<x1)
+	{
+		if(p>=0)
+		{
+			putPixel(x,y,color);
+			y=y+1;
+			p=p+2*dy-2*dx;
+		}
+		else
+		{
+			putPixel(x,y,color);
+			p=p+2*dy;
+		}
+		x=x+1;
+	}
 }
 
 void Rect(int locationX, int locationY, int sizeX, int sizeY, int color)
@@ -159,4 +137,52 @@ void Rect(int locationX, int locationY, int sizeX, int sizeY, int color)
 
 void window(int locationX, int locationY, int sizeX, int sizeY){
     Rect(locationX, locationY, sizeX, sizeY, 15);
+}
+
+void ctmouse(int x, int y){
+    Rect(x,y,5,10, 1);
+}
+
+string* font = LevFont;
+
+int nullfunc(){
+    return 0;
+}
+ 
+void drawchar(int c, int x, int y, int fgcolor){
+
+    int xpos;
+    int ypos;
+    //void _assos['1'] = putPixel(xpos+x, ypos+y, fgcolor);
+    //void _assos['0'] = nullfunc();
+    //char chr = font[c[9*xpos+ypos]]
+    for (xpos = 0; xpos <= 9; xpos++){
+        for (ypos = 0; ypos <= 9; ypos++){
+            //_assos[chr];
+            //if (font[c[9*ypos+xpos]] == '1') putPixel(xpos+x, ypos+y, fgcolor);
+        }
+    }
+}
+
+void __BOOTSCREEN__(){
+    float[][] projection = {
+        {1, 0, 0},
+        {0, 1, 0}
+    };
+
+    //matmul
+    uint32[2] projected2D;
+    projected2D[1] = (projection[1][1] * points0x) + (projection[1][2] * points0y) + (projection)
+
+    uint32 points0x = 100; uint32 points0y = 100;
+    uint32 points1x = 50; uint32 points1y = 100;
+    uint32 points2x = 50; uint32 points2y = 50;
+    uint32 points3x = 100; uint32 points3y = 50;
+
+    /*putPixel(points0x ,points0y, 15);
+    putPixel(points1x ,points1y, 15);
+    putPixel(points2x ,points2y, 15);
+    putPixel(points3x ,points3y, 15);*/
+
+    while(1);
 }

@@ -14,6 +14,7 @@ INPUT
     Cpp/sound.o
     Cpp/Heap.o
     Cpp/vga.o
+    Cpp/Font.o
     ASM/binaries.o
 )
 
