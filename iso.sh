@@ -6,13 +6,6 @@ nasm ASM/binaries.s -f elf64 -o ASM/binaries.o
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/Kernel.cpp" -o "Cpp/Kernel.o"
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/IDT.cpp" -o "Cpp/IDT.o"
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/IO.cpp" -o "Cpp/IO.o"
-x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/KBscancodes.cpp" -o "Cpp/KBscancodes.o"
-x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/Memory.cpp" -o "Cpp/Memory.o"
-x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/printf.cpp" -o "Cpp/printf.o"
-x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/sound.cpp" -o "Cpp/sound.o"
-x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/Heap.cpp" -o "Cpp/Heap.o"
-x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/vga.cpp" -o "Cpp/vga.o"
-x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/Font.cpp" -o "Cpp/Font.o"
 
 x86_64-elf-ld -T"link.ld"
 
