@@ -8,13 +8,6 @@ INPUT
     Cpp/Kernel.o
     Cpp/IDT.o
     Cpp/IO.o
-    Cpp/KBscancodes.o
-    Cpp/Memory.o
-    Cpp/printf.o
-    Cpp/sound.o
-    Cpp/Heap.o
-    Cpp/vga.o
-    Cpp/Font.o
     ASM/binaries.o
 )
 
