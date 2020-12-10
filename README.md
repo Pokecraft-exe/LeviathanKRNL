@@ -1,13 +1,18 @@
 # LeviathanKRNL
 
- licence:
+Leviathan Kernel is a Graphical Kernel made for Dos OS, it have a cursor controlled dy keyboard driver,
+
+images
+![Alt text](Capture%20d’écran%202020-12-10%20090034.png?raw=true "cursor V3") 
+
+# licence:
 
  ---------------------------------------------
  [EN]
 
  2020 09/12
- This code is read-only, @pokecraft-exe or 
- Julian Lavis--Fabbri is the sole owner and writer of this code and no
+ This code is read-only, Julian Lavis--Fabbri alias 
+ @pokecraft-exe is the sole owner and writer of this code and no
  one can modify or use it without his
  permission.
  
@@ -15,8 +20,8 @@
  [FR]
 
  2020 09/12
- Ce code est en lecture seule, @pokecraft-exe
- ou Julian Lavis--Fabbri
+ Ce code est en lecture seule, Julian Lavis--Fabbri
+ alias @pokecraft-exe
  est l'unique propriétaire et auteur de 
  ce code et personne ne peut le modifier 
  ou l'utiliser sans sa permission.
