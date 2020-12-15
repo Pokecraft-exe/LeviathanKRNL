@@ -11,37 +11,15 @@
  #   #            #    #
   #####################
 
+void delay(uint64 clocks)
+{
 
-struct window{
-    char* name;
-    int top;
-    int left;
-    int bottom;
-    int right;
-    char* handle;
-}
+    asm("push %rax");
 
-void printWindows(Window *w, uint64 n){
+    for(uint64 i = 0; i < clocks; i+=8)
+        asm("xor %rax, %rax");
 
-  printDesktop(); // a function that will print the background
+    asm("pop %rax");
 
-   for(uint64 i = 0; i < n; i++)
-   {
-      for(uint64 x = w[i].left; x < w[i].right; x++)
-        for(uint64 y = w[i].top; y < w[i].bottom; y++)
-        {
-            putpixel(x, y, 15);
-        }
-   }
-}
-
-window Window(int y, int x, int ymax, intxmax, char* name){
-    window w;
-    w.name = name;
-    w.top = y;
-    w.left = x;
-    w.bottom = ymax;
-    w.right = xmax;
-    w.handle = name;
-    return w;
+    return;
 }
