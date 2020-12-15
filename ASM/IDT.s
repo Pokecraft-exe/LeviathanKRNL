@@ -35,14 +35,14 @@ isr1:
   iretq
   GLOBAL isr1
 
-[extern isr12_handler]
+[extern irq12_handler]
 
-isr12:
+irq12:
   PUSHALL
-  call isr12_handler
+  call irq12_handler
   POPALL
   iretq
-  GLOBAL isr12
+  GLOBAL irq12
 
 LoadIDT:
   lidt[idtDescriptor]
