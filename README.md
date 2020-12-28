@@ -1,7 +1,7 @@
 # LeviathanKRNL
 
 Leviathan Kernel is a Graphical Kernel made for Dos OS, it have a cursor controlled dy keyboard driver,
-please look the wiki page ;)
+please look the wiki page ;) https://github.com/Pokecraft-exe/LeviathanKRNL/wiki/Index
 
 images
 
