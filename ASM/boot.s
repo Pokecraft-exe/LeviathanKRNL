@@ -1,18 +1,22 @@
+bits    32
+	
+section         .text
+        align   4
+        dd      0x1BADB002
+        dd      0x00
+        dd      - (0x1BADB002+0x00)
 
-[org 0x7c00]
+global kmain
+%include file.s
 
-mov [BOOT_DISK], dl
+jmp kmain
 
-mov bp, 0x7c00
-mov sp, bp
-
-call ReadDisk
-
-jmp PROGRAM_SPACE
-
-%include "ASM/print.s"
-%include "ASM/file.s"
-
-times 510-($-$$) db 0
-
-dw 0xaa55
+kmain:
+	xor ax, ax
+	mov ds, ax
+	mov ss, ax
+	mov ebp, 0x100000 ; the kernel is loaded at 0x100000
+	mov esp, ebp
+	cli 
+    call ReadDisk
+    hlt

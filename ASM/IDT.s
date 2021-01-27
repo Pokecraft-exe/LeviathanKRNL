@@ -1,4 +1,3 @@
-
 [extern _idt]
 idtDescriptor:
   dw 4095
@@ -34,15 +33,6 @@ isr1:
   POPALL
   iretq
   GLOBAL isr1
-
-[extern irq12_handler]
-
-irq12:
-  PUSHALL
-  call irq12_handler
-  POPALL
-  iretq
-  GLOBAL irq12
 
 LoadIDT:
   lidt[idtDescriptor]

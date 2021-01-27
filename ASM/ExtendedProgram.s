@@ -1,10 +1,9 @@
 
 [bits 16]
 
-;;; GUI MODE ;;;
-;;; mov ah, 0h
-;;; mov al, 13h
-;;; int 0x10
+mov ah, 0h
+mov al, 13h
+int 0x10
 
 jmp EnterProtectedMode
 

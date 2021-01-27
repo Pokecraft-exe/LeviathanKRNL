@@ -12,15 +12,13 @@ ReadDisk:
 	mov cl, 0x02
 
 	int 0x13
-	;jc DiskReadFailed
 	ret
 
 BOOT_DISK:
 	db 0
 
 DiskReadErrorString:
-	%include "ASM/BSOD.s"
-	call RescueASM
+	db 'Kernel panic an error occured',0
 
 DiskReadFailed:
 	mov bx, DiskReadErrorString

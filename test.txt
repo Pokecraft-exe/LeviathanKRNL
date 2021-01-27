@@ -10,16 +10,3 @@
 #    #            #    #
  #   #            #    #
   #####################
-
-void delay(uint64 clocks)
-{
-
-    asm("push %rax");
-
-    for(uint64 i = 0; i < clocks; i+=8)
-        asm("xor %rax, %rax");
-
-    asm("pop %rax");
-
-    return;
-}

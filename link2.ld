@@ -1,13 +1,20 @@
 OUTPUT_FORMAT(binary)
-
 ENTRY (_start)
-
 INPUT
 (
     ASM/ExtendedProgram.o
     Cpp/Kernel.o
     Cpp/IDT.o
     Cpp/IO.o
+    Cpp/KBscancodes.o
+    Cpp/Memory.o
+    Cpp/printf.o
+    Cpp/Heap.o
+    Cpp/vga.o
+    Cpp/Font.o
+    Cpp/3D.o
+    Cpp/math.o
+    Cpp/serial.o
     ASM/binaries.o
 )
 
