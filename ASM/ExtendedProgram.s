@@ -10,9 +10,11 @@ jmp EnterProtectedMode
 %include "ASM/gdt.s"
 %include "ASM/print.s"
 %include "ASM/DetectMemory.s"
+%include "ASM/font.s"
 
 EnterProtectedMode:
 	call DetectMemory
+	;call FONT
     call EnableA20
 	cli
 	lgdt [gdt_descriptor]

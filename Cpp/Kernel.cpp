@@ -14,7 +14,7 @@
 //#include "H/Time.h"
 #define NULL ((void*)0)
 
-char* gets(int s){
+/*char* gets(int s){
     char CHAR[s];
     int ptr = 0;
     while (1){
@@ -22,13 +22,13 @@ char* gets(int s){
             puts("\n\r");
             return CHAR;
         }else{
-            CHAR[ptr] = KEY;
-            write_serial(KEY);
+            CHAR[ptr] = read_serial();
+            write_serial(read_serial());
             ptr++;
         }
     }
     return CHAR;
-}
+}*/
 
 extern "C" void _start(){
     //__BOOTSCREEN__();
@@ -47,22 +47,24 @@ extern "C" void _start(){
     // TODO: font, mouse ,buttons and others
     puts(SERIALBLUE);puts((char*)"Initializing KeyBoard [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     //Making the windowMananger
-    Window WindowMananger;
     puts(SERIALBLUE);puts((char*)"Initializing Windowing [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     //taskbar
-    WindowMananger.NewWindow(0, 190, 360, 10, (char*)"");
+    //WindowMananger.NewWindow(3, 190, 360, 10, (char*)"");
     //double windowing test
-    WindowMananger.NewWindow(10, 25, 50, 100, (char*)"TEST");
+    WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
     ctmouse(160, 100);
-    char* command = gets(100);
-    puts(command);
-    //draw_char('C', 100, 20);
     WindowMananger.Refresh();
+    /*for (char c = 0; c<255; c++){
+        draw_char(c,100,20);
+        write_serial(c);
+        Screen1.swap();
+                for (int k = 0; k<1000000; k++){}
+    }WindowMananger.Refresh();*/
     while(1) {   //mainloop
     //mouse_updater();
-
+        
 	}
     return;
 }

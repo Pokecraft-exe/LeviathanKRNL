@@ -5,6 +5,7 @@
 #include "3D.h"
 #include "math.h"
 #include "IDT.h"
+#include "serial.h"
 #define BLACK 0
 #define WHITE 15
 #define GREEN 2
@@ -34,14 +35,52 @@ struct WindowProperty{
     bool focus = 0;
 };
 
-class screen;
+class screen{
+public:
+    char buffer2[320*200];
+    char* buffer = (char*)0xA0000;
+    
+    void swap() {
+        char* vga = (char*)0xA0000;
+        for (int i = 0; i < 320; i++)
+        {
+            for (int a = 0; a < 200; a++)
+            {
+                vga[320*a+i] = buffer2[320*a+i];
+            }
+        }
+    }
+    
+    void putPixel(uint32 x, uint32 y,  int colorIndex){
+        /*if( x > 360 ) return;
+        if( x < 0 ) return;
+        if( y > 200 ) return;
+        if( y < 0 ) return;*/
+        buffer2[320*y+x] = colorIndex;
+    }
+
+    int getColorIndex(int r, int g, int b){
+        if(r == 0x00, g == 0x00, b == 0xA8) return 1;
+        if(r == 0x00, g == 0xA8, b == 0x00) return 2;
+        if(r == 0xA8, g == 0x00, b == 0x00) return 3;
+        if(r == 0x00, g == 0x00, b == 0x00) return 0;
+        if(r == 0xA8, g == 0xA8, b == 0xA8) return 15;
+        return 0x00;
+    }
+
+    void putPixel(uint32 x, uint32 y,  int r, int g, int b){
+        putPixel(x,y, getColorIndex(r,g,b));
+    }
+};
+
+extern screen Screen1;
 
 void Line(int x0, int y0, int x1, int y1, int color);
 //void Triangle(int x1, int y1, int x2, int y2, int x3, int y3, int color);
 void Rect(int locationX, int locationY, int sizeX, int sizeY, int color);
 void ctmouse(int x, int y);
 void DeskColor(int color);
-void drawchar(int c, int x, int y, int fgcolor);
+void draw_char(unsigned char c, int x, int y);
 bool GetLeftClick();
 bool GetRightClick();
 bool GetClick();
@@ -67,6 +106,19 @@ public:
         Windows[windows] = w;
     }
 
+    void Label(char* Text, int x, int y){
+        uint_8* charPtr = (uint_8*)Text;
+        while(*charPtr != 0)
+        {
+            draw_char(*charPtr, x, y);
+            x=x+9;
+            charPtr++;
+        }
+    }
+
+    void SeeChar(char Text, int x, int y){
+        draw_char(Text, x, y);
+    }
     void Refresh(){
 
         DeskColor(GRAY);
@@ -87,6 +139,9 @@ public:
         Windows[i].top = Windows[i].top + 1;
       }}}}
       Rect(Windows[i].left, Windows[i].top, Windows[i].right, Windows[i].top+Windows[i].bottom, WHITE);
+      Label(Windows[i].name, Windows[i].left, Windows[i].top);
       }
    }
 };
+
+extern Window WindowMananger;
