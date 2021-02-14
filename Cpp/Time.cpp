@@ -234,16 +234,6 @@ void initRTC(uint8 rate)
     return;
 }
 
-void delay(int clocks)
-{
-    asm("push %rax");
-    for(uint64 i = 0; i < clocks; i+=8){
-        asm("xor %rax, %rax");
-    }
-    asm("pop %rax");
-    return;
-}
-
 void initPIT(uint32 freq, uint8 channel)
 {
 

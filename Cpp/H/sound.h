@@ -3,7 +3,7 @@
 #include "IO.h"
 #include "IDT.h"
 
-void PlaySound(uint32 nFrequence);
+extern char MasterVolume;
+void PlaySound(uint32 nFrequence,char Volume);
 void noSound();
 void beep();
-void delay(int);

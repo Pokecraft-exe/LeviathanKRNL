@@ -1,6 +1,5 @@
 #include "H/IDT.h"
 
-mouse KBmouse;
 extern IDT64 _idt[256];
 extern uint_64 isr1;
 extern "C" void LoadIDT();
@@ -23,7 +22,6 @@ void InitializeIDT(){
 }
 
 void(*MainKeyboardHandler)(uint_8 scanCode, uint_8 chr);
-
 extern "C" void isr1_handler(){
 	uint_8 scanCode = inb(0x60);
 	uint_8 chr = 0;
@@ -34,35 +32,11 @@ extern "C" void isr1_handler(){
 	if (MainKeyboardHandler != 0) {
 		MainKeyboardHandler(scanCode, chr);
 	}
-
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }
 
-uint8 mouse_cycle=0;   
-int8 mouse_byte[3];   
-int8 mouse_x=0;        
-int8 mouse_y=0; 
-
 extern "C" void isr12_handler(){
-      switch(mouse_cycle)
-  {
-    case 0:
-      mouse_byte[0]=inb(0x60);
-      mouse_cycle++;
-      break;
-    case 1:
-      mouse_byte[1]=inb(0x60);
-      mouse_cycle++;
-      break;
-    case 2:
-      mouse_byte[2]=inb(0x60);
-      mouse_x=mouse_byte[1];
-      mouse_y=mouse_byte[2];
-      ctmouse(mouse_x, mouse_y);
-      mouse_cycle=0;
-      break;
-  }
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }

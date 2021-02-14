@@ -27,17 +27,13 @@ void memcpy(void* destination, void* source, uint_64 num){
     }
 }
 
-void printMemMap(MemoryMapEntry* memoryMap, uint16 pos) {
-    SetCursorPosition(pos);
-
-    printf("Memory Base: "); printf(IntToStr(memoryMap->BaseAddress));
-    SetCursorPosition(pos + 80);
-    printf("Region Length: "); printf(IntToStr(memoryMap->RegionLength));
-    printf("\n");
-    printf("Memory Type: "); printf(IntToStr(memoryMap->RegionType));
-    printf("\n");
-    printf("Memory Attributes: "); printf(IntToStr(memoryMap->ExtendedAttributes));
-    printf("\n\n");
+void printMemMap(MemoryMapEntry* memoryMap) {
+    /*debug("Memory Base: ",memoryMap->BaseAddress);
+    debug("Region Length: ",memoryMap->RegionLength);
+    debug("Memory Type: ",memoryMap->RegionType);
+    debug("Memory Attributes: ",memoryMap->ExtendedAttributes);*/
+    debug("Usable Memory Region count :", UsableMemoryRegionCount);
+    debug("Memory Region count :",MemoryRegionCount);
 
 }
 

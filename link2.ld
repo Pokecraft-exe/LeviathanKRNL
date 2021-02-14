@@ -12,8 +12,10 @@ INPUT
     Cpp/Heap.o
     Cpp/vga.o
     Cpp/Font.o
+    Cpp/sound.o
     Cpp/3D.o
     Cpp/math.o
+    Cpp/Mouse.o
     Cpp/serial.o
     ASM/binaries.o
 )

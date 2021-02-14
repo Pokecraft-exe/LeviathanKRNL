@@ -5,7 +5,9 @@
 #include "3D.h"
 #include "math.h"
 #include "IDT.h"
+#include "printf.h"
 #include "serial.h"
+#include "mouse.h"
 #define BLACK 0
 #define WHITE 15
 #define GREEN 2
@@ -25,14 +27,24 @@
 #define RED 4
 
 struct WindowProperty{
-    int windows = 0;
     char* handle;
     char* name;
     int top;
     int left;
     int bottom;
     int right;
+    bool Closable = 1;
     bool focus = 0;
+};
+
+struct ButtonProperty{
+    char* text;
+    int x;
+    int y;
+    int xend=9;
+    int yend=9;
+    bool Click = 0;
+    void* OnClick;
 };
 
 class screen{
@@ -52,10 +64,7 @@ public:
     }
     
     void putPixel(uint32 x, uint32 y,  int colorIndex){
-        /*if( x > 360 ) return;
-        if( x < 0 ) return;
-        if( y > 200 ) return;
-        if( y < 0 ) return;*/
+        if( x > 360 || x < 0 || y > 200 || y < 0 ) return;
         buffer2[320*y+x] = colorIndex;
     }
 
@@ -80,7 +89,7 @@ void Line(int x0, int y0, int x1, int y1, int color);
 void Rect(int locationX, int locationY, int sizeX, int sizeY, int color);
 void ctmouse(int x, int y);
 void DeskColor(int color);
-void draw_char(unsigned char c, int x, int y);
+void draw_char(unsigned char c, int x, int y/*, int fgcolor*/);
 bool GetLeftClick();
 bool GetRightClick();
 bool GetClick();
@@ -90,11 +99,27 @@ bool GetMouseLeft();
 bool GetMouseRight();
 int GetMouseX();
 int GetMouseY();
-extern WindowProperty Windows[100];
-class Window{
+int GetMouseVelocityX();
+int GetMouseVelocityY();
+
+/*class Button{
 public:
+    void NewButton(char* Text, int X, int Y, int SizeX, int SizeY){
+        ButtonProperty w;
+        w.name = Text;
+        w.y = Y;
+        w.x = X;
+        Windows[windows+1] = w;
+    }
+};*/
+class Window{
+private:
+    WindowProperty Windows[100];
+    WindowProperty EmptyWindow;
+    //Button Buttons[100];
     int windows = 0;
-    void NewWindow(int X, int Y, int SizeX, int SizeY, char* NewName){
+public:
+    void NewWindow(int X, int Y, int SizeX, int SizeY, char* NewName, bool Closable=1){
         WindowProperty w;
         w.name = NewName;
         w.top = Y;
@@ -102,8 +127,9 @@ public:
         w.bottom = SizeY;
         w.right = SizeX;
         w.handle = NewName;
-        w.windows = windows + 1;
-        Windows[windows] = w;
+        w.Closable = Closable;
+        windows = windows + 1;
+        Windows[windows+1] = w;
     }
 
     void Label(char* Text, int x, int y){
@@ -116,8 +142,26 @@ public:
         }
     }
 
+    void Button(/*char* Text, */int x, int y, int xend, int yend, int fgcolor/*, void* OnClick*/){
+        Rect(x,y,xend,yend,fgcolor);
+        if (GetMouseX() >= x && xend >= GetMouseX() && GetMouseY() >= y && yend>= GetMouseY() && GetLeftClick());// OnClick();
+    }
+
+    bool CompareWindows(WindowProperty w1, WindowProperty w2){
+        if (w1.name == w2.name &&
+        w1.top==w2.top&&
+        w1.left==w2.left&&
+        w1.bottom==w2.bottom&&
+        w1.right==w2.right&&
+        w1.handle==w2.handle) return 1;
+        return 0;
+    }
+
     void SeeChar(char Text, int x, int y){
         draw_char(Text, x, y);
+    }
+    void Close(){
+        return;
     }
     void Refresh(){
 
@@ -126,21 +170,29 @@ public:
 
    for(uint64 i = 0; i < n; i++)
   {
-      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && GetLeftClick() && GetMouseRight()){
-        Windows[i].left = Windows[i].left + 1;
+      if (!CompareWindows(Windows[i],EmptyWindow)){
+      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseRight()){
+        Windows[i].left = Windows[i].left + GetMouseVelocityX();
       }else{
-      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && GetLeftClick() && GetMouseLeft()){
-        Windows[i].left = Windows[i].left - 1;
+      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseLeft()){
+        Windows[i].left = Windows[i].left - GetMouseVelocityX();
       }else{
-      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && GetLeftClick() && GetMouseUp()){
-        Windows[i].top = Windows[i].top - 1;
+      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseUp()){
+        Windows[i].top = Windows[i].top - GetMouseVelocityY();
       }else{
-      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && GetLeftClick() && GetMouseDown()){
-        Windows[i].top = Windows[i].top + 1;
+      if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseDown()){
+        Windows[i].top = Windows[i].top + GetMouseVelocityY();
       }}}}
-      Rect(Windows[i].left, Windows[i].top, Windows[i].right, Windows[i].top+Windows[i].bottom, WHITE);
-      Label(Windows[i].name, Windows[i].left, Windows[i].top);
+      Rect(Windows[i].left, Windows[i].top, Windows[i].right, Windows[i].bottom, WHITE);
+      int placeX=Windows[i].right+1;//+Windows[i].left;
+      //puts("placing rectangle at X");puts(IntToStr(placeX-9));puts(", Y");puts(IntToStr(Windows[i].top));
+      if(Windows[i].Closable){
+          Rect(placeX, Windows[i].top,9,9, RED);
+          if (GetMouseX() >= placeX && placeX+9 >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].top+9>= GetMouseY() && GetLeftClick())Windows[i]= EmptyWindow;
       }
+      Label(Windows[i].name, Windows[i].left, Windows[i].top);
+      //Button(/*(char*)"",*/placeX-9,Windows[i].top,9,9,RED/*, Close*/);
+      }}
    }
 };
 

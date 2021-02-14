@@ -204,14 +204,22 @@ void KeyboardHandler0xE0(uint_8 scanCode) {
         KEY = '/';
         break;
     case 0x5E:
-        cls();
-        SetCursorPosition(PositionFromCoords(0, 0));
+        
         //outb(0xB004, 0x2000);
         //outb(0x604, 0x2000);
         //outb(0x4004, 0x3400);
         break;
     case 0x1C: //enter
         KEY = '\n';
+        break;
+    case 0x2E:
+        MasterVolume--;
+        break;
+    case 0x30:
+        MasterVolume++;
+        break;
+    case 0x20:
+        MasterVolume=0;
         break;
 	}
 }

@@ -1,5 +1,6 @@
-
-[bits 16]
+code16
+org 0x7c00
+section .text
 
 mov ah, 0h
 mov al, 13h
@@ -29,10 +30,11 @@ EnableA20:
 	out 0x92, al
 	ret
 
-[bits 32]
+code32
 
 %include "ASM/CPUID.s"
 %include "ASM/SimplePaging.s"
+section .text
 
 StartProtectedMode:
 
@@ -57,12 +59,13 @@ StartProtectedMode:
 
 	call DetectCPUID
 	call DetectLongMode
-  	call SetUpIdentityPaging
+  	call SetUpPaging
+	call enable_paging
 	call EditGDT
     jmp codeseg:Start64Bit
 
-[bits 64]
-[extern _start]
+code64
+extern _start
 
 %include "ASM/IDT.s"
 

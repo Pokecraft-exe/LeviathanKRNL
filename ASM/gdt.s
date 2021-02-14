@@ -8,6 +8,7 @@ gdt_codedesc:
 	db 10011010b		; Flags
 	db 11001111b		; Flags + Upper Limit
 	db 0x00				; Base (high)
+	GLOBAL gdt_codedesc
 gdt_datadesc:
 	dw 0xFFFF
 	dw 0x0000
@@ -15,6 +16,7 @@ gdt_datadesc:
 	db 10010010b
 	db 11001111b
 	db 0x00
+	GLOBAL gdt_datadesc
 
 gdt_end:
 
@@ -24,6 +26,7 @@ gdt_descriptor:
 		dq gdt_nulldesc
 
 codeseg equ gdt_codedesc - gdt_nulldesc
+GLOBAL codeseg
 dataseg equ gdt_datadesc - gdt_nulldesc
 [bits 32]
 

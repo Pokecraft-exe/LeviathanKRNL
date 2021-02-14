@@ -1,8 +1,7 @@
-#include "mouse.cpp"
 #include "H/KBscancodes.h"
 #include "H/printf.h"
 #include "H/IDT.h"
-//#include "H/sound.h"
+#include "H/sound.h"
 #include "H/Memory.h"
 #include "H/Heap.h"
 #include "H/Colors.h"
@@ -11,27 +10,24 @@
 #include "H/Font.h"
 #include "H/serial.h"
 #include "H/3D.h"
+#include "H/mouse.h"
 //#include "H/Time.h"
-#define NULL ((void*)0)
+#include "H/stddef.h"
 
-/*char* gets(int s){
-    char CHAR[s];
-    int ptr = 0;
-    while (1){
-        if (read_serial() == 10){
-            puts("\n\r");
-            return CHAR;
-        }else{
-            CHAR[ptr] = read_serial();
-            write_serial(read_serial());
-            ptr++;
-        }
+void delay(int clocks)
+{
+    asm("push %rax");
+    for(uint64 i = 0; i < clocks; i+=8){
+        asm("xor %rax, %rax");
     }
-    return CHAR;
-}*/
+    asm("pop %rax");
+    return;
+}
 
 extern "C" void _start(){
     //__BOOTSCREEN__();
+    MasterVolume = 100;
+    //PlaySound(469,MasterVolume);
     InitHeap(0x100000, 0x100000);
     InitializeIDT();
     MainKeyboardHandler = Keyboardhandler;
@@ -49,21 +45,21 @@ extern "C" void _start(){
     //Making the windowMananger
     puts(SERIALBLUE);puts((char*)"Initializing Windowing [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     //taskbar
-    //WindowMananger.NewWindow(3, 190, 360, 10, (char*)"");
+    WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
     ctmouse(160, 100);
+    puts("Refresh");
     WindowMananger.Refresh();
-    /*for (char c = 0; c<255; c++){
-        draw_char(c,100,20);
-        write_serial(c);
-        Screen1.swap();
-                for (int k = 0; k<1000000; k++){}
-    }WindowMananger.Refresh();*/
     while(1) {   //mainloop
-    //mouse_updater();
+    mouse_updater(inb(0x60));
+    MousePacket();
+    /*PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
+    PlaySound(1570,MasterVolume);for (int ii = 0; ii<200000;ii++);{}
+    PlaySound(1969,MasterVolume);for (int iii = 0; iii<200000;iii++);{}
+    PlaySound(1477,MasterVolume);for (int iiii = 0; iiii<200000;iiii++);{}*/
         
 	}
     return;

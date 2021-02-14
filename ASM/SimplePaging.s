@@ -1,39 +1,45 @@
+section .text
 
-PageTableEntry equ 0x1000
+SetUpPaging:
+	mov eax, PageTableL3
+	or eax, 0b11
+	mov [PageTableL4], eax
 
-SetUpIdentityPaging:
+	mov eax, PageTableL2
+	or eax, 0b11
+	mov [PageTableL3], eax
 
-	mov edi, PageTableEntry
-	mov cr3, edi
+	mov ecx, 0
 
-	mov dword [edi], 0x2003
-	add edi, 0x1000
-	mov dword [edi], 0x3003
-	add edi, 0x1000
-	mov dword [edi], 0x4003
-	add edi, 0x1000
+.looop:
 
-	mov ebx, 0x00000003
-	mov ecx, 512
+	mov eax, 0x200000
+	mul ecx
+	or eax, 0b10000011
+	mov [PageTableL2 + ecx * 8], eax
 
-	.SetEntry:
-		mov dword [edi], ebx
-		add ebx, 0x1000
-		add edi, 8
-		loop .SetEntry
+	inc ecx
+	cmp ecx, 512
+	jne .looop
+	ret
 
+enable_paging:
+	mov eax, PageTableL4
+	mov cr3, eax
 	mov eax, cr4
 	or eax, 1 << 5
 	mov cr4, eax
-
-	mov ecx, 0xC0000080
-	rdmsr
-	or eax, 1 << 8
-	wrmsr
-
 	mov eax, cr0
 	or eax, 1 << 31
 	mov cr0, eax
-
 	ret
 
+section .bss
+align 4096
+PageTableL4:
+	resb 4096
+PageTableL3:
+	resb 4096
+PageTableL2:
+	resb 4096
+	

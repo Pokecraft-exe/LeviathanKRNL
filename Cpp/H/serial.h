@@ -1,6 +1,7 @@
 #pragma once
 #include "IO.h"
 #include "typedefs.h"
+#include "printf.h"
 #define PORT 0x3f8          // COM1
 #define SERIALWHITE (char*)"\033[1;37m"
 #define SERIALBLACK (char*)"\033[1;30m"
@@ -16,4 +17,7 @@ int is_transmit_empty();
 int serial_received();
 char read_serial();
 void write_serial(char a);
-void puts(char* a);
+void puts(const char* a);
+void debug(const char* Message, bool Status);
+void debug(const char* Message, int Value);
+void debug(const char* Message, float Value);

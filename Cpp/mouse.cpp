@@ -1,45 +1,74 @@
-#include "H/IO.h"
-#include "H/IDT.h"
-#include "H/typedefs.h"
-#include "H/vga.h"
+#include "H/mouse.h"
 
-//extern int get_mouse_pos_x;
-//extern int get_mouse_pos_x;
+mouse KBmouse;
+bool GetLeftClick(){
+	return KBmouse.mouseLeftClick;
+}
+bool GetRightClick(){
+	return KBmouse.mouseRightClick;
+}
+bool GetClick(){
+	return KBmouse.mouseClick;
+}
+bool GetMouseUp(){
+	return KBmouse.mouseUp;
+}
+bool GetMouseDown(){
+	return KBmouse.mouseDown;
+}
+bool GetMouseLeft(){
+	return KBmouse.mouseLeft;
+}
+bool GetMouseRight(){
+	return KBmouse.mouseRight;
+}
+int GetMouseX(){
+	return KBmouse.x;
+}
+int GetMouseY(){
+	return KBmouse.y;
+}
+int GetMouseVelocityX(){
+	return KBmouse.velox;
+}
+int GetMouseVelocityY(){
+	return KBmouse.veloy;
+}
 
-void mouse_wait(unsigned char type)
+void mouse_wait()
 {
   unsigned int _time_out=100000;
-  if(type==0)
+  while(_time_out--) //Data
   {
-    while(_time_out--) //Data
+    if((inb(0x64) & 0b10)==0)
     {
-      if((inb(0x64) & 1)==1)
-      {
-        return;
-      }
+      return;
     }
-    return;
   }
-  else
-  {
-    while(_time_out--) //Signal
-    {
-      if((inb(0x64) & 2)==0)
-      {
-        return;
-      }
-    }
     return;
-  }
 }
+
+void mousewait()
+{
+  unsigned int _time_out=100000;
+  while(_time_out--) //Data
+  {
+    if(inb(0x64) & 0b1)
+    {
+      return;
+    }
+  }
+    return;
+}
+
 void mouse_write(unsigned char a_write)
 {
  //Wait to be able to send a command
- mouse_wait(1);
+ mouse_wait();
  //Tell the mouse we are sending a command
  outb(0x64, 0xD4);
  //Wait for the final part
- mouse_wait(1);
+ mouse_wait();
  //Finally write
  outb(0x60, a_write);
 }
@@ -47,22 +76,21 @@ void mouse_write(unsigned char a_write)
 unsigned char mouse_read()
 {
  //Get response from mouse
- mouse_wait(0);
+ mousewait();
  return inb(0x60);
 }
 
  void mouseinit()
 {
-    mouse_wait(1);
     outb(0x64,0xA8);
-    mouse_wait(1);
+    mouse_wait();
     outb(0x64,0x20);
     unsigned char status_byte;
-    mouse_wait(0);
-    status_byte = (inb(0x60) | 2);
-    mouse_wait(1);
+    mousewait();
+    status_byte |= 0b10;
+    mouse_wait();
     outb(0x64, 0x60);
-    mouse_wait(1);
+    mouse_wait();
     outb(0x60, status_byte);
     mouse_write(0xF6);
     mouse_read();
@@ -70,38 +98,108 @@ unsigned char mouse_read()
     mouse_read();
     //interruptHandlerRegister(12,&mouse_handler);
 }
-/*	uint8 mouse_cycle=0;
+
+bool lookMouseOrKeyboard(){
+  char bytes;
+  int byte[4];
+  switch (bytes){
+    case 0:
+      byte[0]=inb(0x64);
+      bytes++;
+      break;
+    case 1:
+      byte[1]=inb(0x64);
+      bytes++;
+      break;
+    case 2:
+      byte[2]=inb(0x64);
+      bytes++;
+      break;
+    case 3:
+      byte[3]=inb(0x64);
+      bytes++;
+    case 4:
+      if (inb(0x64)==0x20)return 1;
+      else return 0;
+      break;
+  }
+  return 0;
+}
+
+	uint8 mouse_cycle=0;
 	int8 mouse_byte[3];
-  int I;
-void mouse_updater()
+  bool mouse_byteReady = false;
+void mouse_updater(uint8_t data)
 {
+    if (mouse_byteReady) return;
   	switch(mouse_cycle)
   {
     case 0:
-      I = 0;
-      mouse_byte[0]=inb(0x60);
+      if ((data & 0b00001000)==0) break;
+      mouse_byte[0]=data;
       mouse_cycle++;
       break;
     case 1:
-      if (KBmouse.x+inb(0x60) >= 320 || KBmouse.x+inb(0x60) <= 0){
-       KBmouse.x=KBmouse.x;
-      }else{
-      KBmouse.velox=inb(0x60)/4;}
+      mouse_byte[1]=data;
       mouse_cycle++;
       break;
     case 2:
-      if (KBmouse.y-inb(0x60) >= 200 || KBmouse.y-inb(0x60) <= 0){
-        KBmouse.y=KBmouse.y;
-      }else{
-      KBmouse.veloy=inb(0x60);
-      //while (I != 1000){I++;}
-      }
-      KBmouse.x+=0;//KBmouse.velox;
-      KBmouse.y-=0;//KBmouse.veloy;
-      ctmouse(KBmouse.x, KBmouse.y);
+      mouse_byte[2]=data;
+      mouse_byteReady = true;
       mouse_cycle=0;
       break;
   }
 }
 
-*/
+void MousePacket(){
+      if (!mouse_byteReady/*||!lookMouseOrKeyboard()*/) return;
+        if (mouse_byte[0] & PS2Leftbutton) {
+          KBmouse.mouseLeftClick = true;
+          KBmouse.mouseClick = true;
+        }else{
+          KBmouse.mouseLeftClick = false;
+          KBmouse.mouseClick = false;
+        }
+        mouse_byte[1]/=6;
+        mouse_byte[2]/=5,4;
+        if (!(mouse_byte[0] & PS2XSign)){
+            KBmouse.x += mouse_byte[1];
+            write_serial('R');
+            if (mouse_byte[0] & PS2XOverflow){
+                KBmouse.x += 255;
+            }
+        }else{
+            mouse_byte[1] = 256 - mouse_byte[1];
+            KBmouse.x -= mouse_byte[1];
+            write_serial('L');
+            if (mouse_byte[0] & PS2XOverflow){
+                KBmouse.x -= 255;
+            }
+        }
+
+        if (!(mouse_byte[0] & PS2YSign)){
+            KBmouse.y -= mouse_byte[2];
+            write_serial('U');
+            if (mouse_byte[0] & PS2YOverflow){
+                KBmouse.y -= 255;
+            }
+        }else{
+            mouse_byte[2] = 256 - mouse_byte[2];
+            KBmouse.y += mouse_byte[2];
+            write_serial('D');
+            if (mouse_byte[0] & PS2YOverflow){
+                KBmouse.y += 255;
+            }
+        }
+
+        if (KBmouse.x < 0) KBmouse.x = 0;
+        if (KBmouse.x > 320) KBmouse.x = 320;
+        KBmouse.velox = mouse_byte[1];
+        KBmouse.veloy = mouse_byte[2];
+        if (KBmouse.y < 0) KBmouse.y = 0;
+        if (KBmouse.y > 200) KBmouse.y = 200;
+
+        ctmouse(KBmouse.x, KBmouse.y);
+
+        mouse_byteReady = false;
+}

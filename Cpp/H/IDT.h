@@ -5,20 +5,6 @@
 #include "printf.h"
 #include "vga.h"
 
-struct mouse{
-  int x = 160;
-  int y = 100;
-  bool mouseLeft;
-  bool mouseRight;
-  bool mouseDown;
-  bool mouseUp;
-  bool mouseLeftClick;
-  bool mouseRightClick;
-  bool mouseClick;
-};
-
-extern mouse KBmouse;
-
 struct IDT64{
   uint_16 offset_low;
   uint_16 selector;
