@@ -2,7 +2,7 @@
 
 
 BPB:
-    jmp start
+    jmp init
     nop
     .OEMName db "BOOT"
     .BytsPerSec dw 0x0200
@@ -24,28 +24,42 @@ BPB:
     .FSInfo dw 0x0001
     .BkBootSec dw 0x0000
     times 12 db 0  
-    
 
-BS:                                                                                           
-    .DrvNum       dd 0x80
+BS:
+    .DrvNum       db 0x80
     .Reserved1    db 0x00
     .BootSig      db 0x29
     .VolID        dd 0xa0a615c
     .VolLab       db "LeviathanBoot"
     .FileSysType  db "FAT32   "
 
+init:
+    ; As some BIOSes set CS:IP to 0x07c0:0x0000, we have to setup all segments
+    ; to ensure that all segments are empty in order to NOT assume that it is
+    ; set to the correct values. Otherwise, segmentation will probably produce
+    ; bogus real addresses and thus this may fail to boot.
+    
+    xor ax, ax
+    mov ds, ax
+    mov es, ax
+    mov gs, ax
+    mov fs, ax
+    mov ss, ax
+    jmp 0x0000:start ; We set CS = 0 by doing a long jump
+
 start:
-mov [BOOT_DISK], dl
-
-mov bp, 0x7c00
-mov sp, bp
-
-call ReadDisk
-jmp PROGRAM_SPACE
+    ; Save the disk's identification number
+    mov [BOOT_DISK], dl
+    
+    ; Put the stack pointer right before the boot sector.
+    ; TODO: Relocate the sector to place it @ 0x0000:0x0500 instead
+    mov sp, 0x7bff
+    
+    call ReadDisk
+    jmp PROGRAM_SPACE
 
 %include "ASM/print.s"
 %include "ASM/file.s"
 
-times 510-($-$$) db 0
-
-dw 0xaa55
+    times 510-($-$$) db 0
+    dw 0xaa55

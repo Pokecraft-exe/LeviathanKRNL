@@ -1,10 +1,9 @@
-code16
-org 0x7c00
+bits 16
 section .text
 
-mov ah, 0h
-mov al, 13h
-int 0x10
+;mov ah, 0h
+;mov al, 13h
+;int 0x10
 
 jmp EnterProtectedMode
 
@@ -30,7 +29,7 @@ EnableA20:
 	out 0x92, al
 	ret
 
-code32
+bits 32
 
 %include "ASM/CPUID.s"
 %include "ASM/SimplePaging.s"
@@ -64,7 +63,7 @@ StartProtectedMode:
 	call EditGDT
     jmp codeseg:Start64Bit
 
-code64
+bits 64
 extern _start
 
 %include "ASM/IDT.s"
