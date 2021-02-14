@@ -31,7 +31,7 @@ enable_paging:
 	mov cr4, eax
 	mov eax, cr0
 	or eax, 1 << 31
-	mov cr0, eax
+	mov cr0, eax // It seems to break here
 	ret
 
 section .bss
