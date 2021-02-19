@@ -22,6 +22,7 @@ x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/serial.cpp" -o "Cpp/ser
 x86_64-elf-ld -T"link2.ld"
 
 cat ASM/boot2.bin Kernel.bin > boot.flp
+cat ASM/boot2.bin Kernel.bin > boot.iso
 rm ASM/*.bin
 rm Cpp/*.o
 rm ASM/*.o
