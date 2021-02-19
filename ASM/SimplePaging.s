@@ -4,14 +4,14 @@ SetUpPaging:
 	GLOBAL Total_paged
 	mov ax, Total_paged
 	add ax, 4
-	mov Total_paged, ax
+	mov [Total_paged], ax
 	mov eax, PageTableL3
 	or eax, 0b11
 	mov [PageTableL4], eax
 
 	mov ax, Total_paged
 	add ax, 4
-	mov Total_paged, ax
+	mov [Total_paged], ax
 	mov eax, PageTableL2
 	or eax, 0b11
 	mov [PageTableL3], eax
@@ -21,7 +21,7 @@ SetUpPaging:
 .looop:
 	mov ax, Total_paged
 	add ax, 16000
-	mov Total_paged, ax
+	mov [Total_paged], ax
 	mov eax, 0x200000
 	mul ecx
 	or eax, 0b10000011
