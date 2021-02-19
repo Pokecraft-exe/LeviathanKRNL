@@ -1,4 +1,4 @@
-[org 0x7c00]
+[org 0x0000]
 
 
 BPB:
@@ -45,7 +45,7 @@ init:
     mov gs, ax
     mov fs, ax
     mov ss, ax
-    jmp 0x0000:start ; We set CS = 0 by doing a long jump
+    jmp 0x7c00:start ; We set CS = 0 by doing a long jump
 
 start:
     ; Save the disk's identification number

@@ -178,8 +178,8 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
                 case 0x2B:
                       KEY = '/';
                       break;
-                case 0x66:
-                      Rect(0,0,320,200,CYAN);
+                case 0x3B:
+                      PlaySound(400,10);
                       break;
         }
     }
