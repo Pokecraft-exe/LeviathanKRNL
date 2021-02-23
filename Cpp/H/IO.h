@@ -39,3 +39,79 @@ struct CPUState
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
 void RemapPic(uint8 master, uint8 slave);
+
+class Port8Bit{
+private:
+    uint16_t portnumber;
+public:
+    Port8Bit(uint16_t port){
+        portnumber = port;
+    }
+    void Write(uint8_t data){
+        asm volatile ("outb %0, %1" : : "a"(data), "Nd"(portnumber));
+    }
+    uint8_t Read(){
+        uint8_t returnVal;
+        asm volatile ("inb %1, %0"
+        : "=a"(returnVal)
+        : "Nd"(portnumber));
+        return returnVal;
+    }
+};
+
+class Port8BitSlow{
+private:
+    uint16_t portnumber;
+public:
+    Port8BitSlow(uint16_t port){
+        portnumber = port;
+    }
+    void Write(uint8_t data){
+        asm volatile ("outb %0, %1\njmp 1f\n1: jmp 1f\n1:" : : "a"(data), "Nd"(portnumber));
+    }
+    uint8_t Read(){
+        uint8_t returnVal;
+        asm volatile ("inb %1, %0"
+        : "=a"(returnVal)
+        : "Nd"(portnumber));
+        return returnVal;
+    }
+};
+
+class Port16Bit{
+private:
+    uint16_t portnumber;
+public:
+    Port16Bit(uint16_t port){
+        portnumber = port;
+    }
+    void Write(uint16_t data){
+        asm volatile ("outw %0, %1" : : "a"(data), "Nd"(portnumber));
+    }
+    uint16_t Read(){
+        uint16_t returnVal;
+        asm volatile ("inw %1, %0"
+        : "=a"(returnVal)
+        : "Nd"(portnumber));
+        return returnVal;
+    }
+};
+
+class Port32Bit{
+private:
+    uint16_t portnumber;
+public:
+    Port32Bit(uint16_t port){
+        portnumber = port;
+    }
+    void Write(uint32_t data){
+        asm volatile ("outl %0, %1" : : "a"(data), "Nd"(portnumber));
+    }
+    uint32_t Read(){
+        uint32_t returnVal;
+        asm volatile ("inl %1, %0"
+        : "=a"(returnVal)
+        : "Nd"(portnumber));
+        return returnVal;
+    }
+};

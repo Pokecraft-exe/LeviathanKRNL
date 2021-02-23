@@ -88,7 +88,7 @@ void draw_char(unsigned char c, int x, int y/*, int fgcolor*/)
         for (int cx = 0; cx < 9; cx++){
             char d = c-1;
             int yy = cy+9*d;
-            if (LevFont[9*yy+cx] == '1'){
+            if (LevFont[9*yy+cx] == 1){
                 write_serial('1');
                 Screen1.putPixel(x+cx,y+cy,BLACK);
             }else{ 

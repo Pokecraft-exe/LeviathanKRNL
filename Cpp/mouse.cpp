@@ -160,18 +160,18 @@ void MousePacket(){
           KBmouse.mouseLeftClick = false;
           KBmouse.mouseClick = false;
         }
-        mouse_byte[1]/=6;
-        mouse_byte[2]/=5,4;
+        mouse_byte[1]/=2;
+        mouse_byte[2]/=2;
         if (!(mouse_byte[0] & PS2XSign)){
             KBmouse.x += mouse_byte[1];
-            write_serial('R');
+            //write_serial('R');
             if (mouse_byte[0] & PS2XOverflow){
                 KBmouse.x += 255;
             }
         }else{
             mouse_byte[1] = 256 - mouse_byte[1];
             KBmouse.x -= mouse_byte[1];
-            write_serial('L');
+            //write_serial('L');
             if (mouse_byte[0] & PS2XOverflow){
                 KBmouse.x -= 255;
             }
@@ -179,14 +179,14 @@ void MousePacket(){
 
         if (!(mouse_byte[0] & PS2YSign)){
             KBmouse.y -= mouse_byte[2];
-            write_serial('U');
+            //write_serial('U');
             if (mouse_byte[0] & PS2YOverflow){
                 KBmouse.y -= 255;
             }
         }else{
             mouse_byte[2] = 256 - mouse_byte[2];
             KBmouse.y += mouse_byte[2];
-            write_serial('D');
+            //write_serial('D');
             if (mouse_byte[0] & PS2YOverflow){
                 KBmouse.y += 255;
             }
@@ -195,10 +195,9 @@ void MousePacket(){
         if (KBmouse.x < 0) KBmouse.x = 0;
         if (KBmouse.x > 320) KBmouse.x = 320;
         KBmouse.velox = mouse_byte[1];
-        KBmouse.veloy = mouse_byte[2];
         if (KBmouse.y < 0) KBmouse.y = 0;
         if (KBmouse.y > 200) KBmouse.y = 200;
-
+        KBmouse.veloy = mouse_byte[2];
         ctmouse(KBmouse.x, KBmouse.y);
 
         mouse_byteReady = false;
