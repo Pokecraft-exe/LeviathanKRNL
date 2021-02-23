@@ -72,10 +72,6 @@ extern "C" void _start(){
     KBmouse.y = 100;
     //ctmouse(160, 100);
     puts("Refresh");
-    float A=1.5;
-    float B=1.25;
-    float C=A+B;
-    puts(FloatToString(C, 2));
     //WindowMananger.Refresh();
     while(1) {   //mainloop
         mouse_updater(inb(0x60));
