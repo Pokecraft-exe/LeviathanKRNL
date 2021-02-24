@@ -76,14 +76,14 @@ extern "C" void _start(){
     KBmouse.y = 100;
     //ctmouse(160, 100);
     //WindowMananger.Refresh();*/
-    puts("Refresh");
+    puts("Refresh\r\n");
     File File_test;
-    puts("cre   ating file");
+    puts("creating file\r\n");
     File_test.Rename((char*)"Filetest",(char*)"txt");
     puts("reading '");puts(File_test.name);puts(".");puts(File_test.extention);
     File_test.Write((char*)"helloworld, this is a test ramdisk file!!!");
-    File_test.Append((char*)"\ntext appended");
-    puts("' with content:\n");
+    File_test.Append((char*)"\r\ntext appended");
+    puts("' with content:\n\r");
     puts(File_test.Read());
     //restart();
     while(1) {   //mainloop
