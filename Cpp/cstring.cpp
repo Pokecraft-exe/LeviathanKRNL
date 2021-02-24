@@ -56,17 +56,17 @@ char * strcpy(char * dest, const char * src) {
 
 char * strtok_r(char * str, const char * delim, char ** saveptr) {
 	char * token;
-	if (str == NULL) {
+	if (str == "\0") {
 		str = *saveptr;
 	}
 	str += strspn(str, delim);
 	if (*str == '\0') {
 		*saveptr = str;
-		return NULL;
+		return "\0";
 	}
 	token = str;
 	str = strpbrk(token, delim);
-	if (str == NULL) {
+	if (str == "\0") {
 		*saveptr = (char *)lfind(token, '\0');
 	} else {
 		*str = '\0';
@@ -93,7 +93,7 @@ size_t rfind(const char * str, const char accept) {
 }
 
 char * strstr(const char * haystack, const char * needle) {
-	const char * out = NULL;
+	const char * out = "\0";
 	const char * ptr;
 	const char * acc;
 	const char * p;
@@ -114,7 +114,7 @@ char * strstr(const char * haystack, const char * needle) {
 			return (char *)out;
 		}
 	}
-	return NULL;
+	return "\0";
 }
 
 size_t strspn(const char * str, const char * accept) {
