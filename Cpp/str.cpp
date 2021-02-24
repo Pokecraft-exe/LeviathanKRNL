@@ -141,7 +141,7 @@ char * strpbrk(const char * str, const char * accept) {
 	const char *acc = accept;
 
 	if (!*str) {
-		return NULL;
+		return "\0";
 	}
 
 	while (*str) {
@@ -157,7 +157,7 @@ char * strpbrk(const char * str, const char * accept) {
 	}
 
 	if (*acc == '\0') {
-		return NULL;
+		return "\0";
 	}
 
 	return (char *)str;
