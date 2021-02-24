@@ -78,9 +78,9 @@ extern "C" void _start(){
     puts("Refresh");
     WindowMananger.Refresh();
     File File_test;
-    File_test.Rename("Filetest","txt");
-    File_test.Write("helloworld, this is a test ramdisk file!!!");
-    File_test.Append("\ntext appended");
+    File_test.Rename((char*)"Filetest",(char*)"txt");
+    File_test.Write((char*)"helloworld, this is a test ramdisk file!!!");
+    File_test.Append((char*)"\ntext appended");
     puts("reading '");puts(File_test.name);puts(".");puts(File_test.extention);puts("' with content:\n");
     puts(File_test.Read());
     //restart();
