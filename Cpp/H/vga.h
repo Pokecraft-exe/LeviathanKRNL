@@ -191,7 +191,7 @@ public:
     void Refresh(){
 
         DeskColor(GRAY);
-
+        int n=100;
    for(uint64 i = 0; i < n; i++)
   {
       if (!CompareWindows(Windows[i],EmptyWindow)){
