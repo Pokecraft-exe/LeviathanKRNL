@@ -75,7 +75,7 @@ extern "C" void _start(){
     KBmouse.x = 160;
     KBmouse.y = 100;
     ctmouse(160, 100);
-    WindowMananger.Refresh();
+    //WindowMananger.Refresh();
     puts("Refresh");
     File File_test;
     puts("cre   ating file");
