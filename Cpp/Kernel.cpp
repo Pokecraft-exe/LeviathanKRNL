@@ -46,7 +46,7 @@ public:
 };
 
 extern "C" void _start(){
-    /*/__BOOTSCREEN__();
+    //__BOOTSCREEN__();
     MasterVolume = 100;
     
     //PlaySound(469,MasterVolume);
@@ -57,7 +57,7 @@ extern "C" void _start(){
     puts(SERIALBLUE);puts((char*)"Initializing Serial [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing VGA [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing PAGING [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
-    puts("Paged:");puts(IntToStr(Total_paged));puts("kb\n\r");
+    puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing Heap [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing Memory Manangment [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing IDT's [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
@@ -74,8 +74,8 @@ extern "C" void _start(){
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
-    //ctmouse(160, 100);
-    //WindowMananger.Refresh();*/
+    ctmouse(160, 100);
+    WindowMananger.Refresh();
     puts("Refresh\r\n");
     File File_test;
     puts("creating file\r\n");

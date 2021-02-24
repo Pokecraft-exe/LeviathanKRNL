@@ -160,7 +160,7 @@ void MousePacket(){
           KBmouse.mouseLeftClick = false;
           KBmouse.mouseClick = false;
         }
-        mouse_byte[1]/=mouse_byte[2];
+        mouse_byte[1]/=mouse_byte[1];
         mouse_byte[2]/=mouse_byte[2];
         if (!(mouse_byte[0] & PS2XSign)){
             KBmouse.x += mouse_byte[1];
