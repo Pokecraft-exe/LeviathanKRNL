@@ -151,9 +151,9 @@ public:
         b.y=y;
         b.xend=xend;
         b.yend=yend;
-        b.fgcolor=fgcolor;
+        b.Color=fgcolor;
         button+=1;
-        Button[button]=b;
+        Buttons[button]=b;
         }
 
    void ButtonMananger(){
