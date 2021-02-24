@@ -16,7 +16,7 @@ int strcmp(const char * a, const char * b) {
 	}
 }
 
-char* strncat(char* string1, char* string2, uint32_t n)){
+char* strncat(char* string1, char* string2, uint32_t n){
 	char* s=string1;
 	string1 += strlen(string1);
 	uint32_t ss = __strlen(string2,n);
@@ -42,7 +42,7 @@ uint32_t __strlen(const char *str, uint32_t maxlen) {
 	}
 	return i;
 }
-
+/*
 char * strdup(const char *str) {
 	int len = strlen(str);
 	char * out = malloc(sizeof(char) * (len+1));
@@ -164,3 +164,4 @@ char * strpbrk(const char * str, const char * accept) {
 
 	return (char *)str;
 }
+*/
