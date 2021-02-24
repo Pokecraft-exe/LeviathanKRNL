@@ -5,3 +5,4 @@
 #define True true
 #define XOR !
 #include "typedefs.h"
+#define size_t long unsigned int
