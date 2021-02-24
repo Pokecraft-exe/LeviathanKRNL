@@ -71,6 +71,7 @@ extern "C" void _start(){
     //taskbar
     WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
+    puts("taskbar\n\r");
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
