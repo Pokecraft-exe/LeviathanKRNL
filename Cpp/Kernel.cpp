@@ -74,7 +74,7 @@ extern "C" void _start(){
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
-    ctmouse(160, 100);
+    //ctmouse(160, 100);
     //WindowMananger.Refresh();
     puts("Refresh");
     File File_test;
