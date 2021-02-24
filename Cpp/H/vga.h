@@ -38,7 +38,7 @@ struct ButtonProperty{
 };
 
 struct WindowProperty{
-    ButtonProperty Button[100];
+    //ButtonProperty Button[100];
     char* handle;
     char* name;
     int top;
