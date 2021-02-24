@@ -71,7 +71,6 @@ extern "C" void _start(){
     //taskbar
     WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
-    puts("taskbar\n\r");
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
@@ -88,8 +87,8 @@ extern "C" void _start(){
     puts(File_test.Read());
     //restart();
     while(1) {   //mainloop
-        mouse_updater(inb(0x60));
-        MousePacket();
+        //mouse_updater(inb(0x60));
+        //MousePacket();
         /*PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
         PlaySound(1570,MasterVolume);for (int ii = 0; ii<200000;ii++);{}
         PlaySound(1969,MasterVolume);for (int iii = 0; iii<200000;iii++);{}
