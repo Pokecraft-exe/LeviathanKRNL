@@ -17,6 +17,7 @@ INPUT
     Cpp/math.o
     Cpp/Mouse.o
     Cpp/serial.o
+    Cpp/cstring.o
     ASM/binaries.o
 )
 

@@ -13,7 +13,7 @@
 #include "H/mouse.h"
 //#include "H/Time.h"
 #include "H/stddef.h"
-#include "str.cpp"
+#include "H/cstring.h"
 extern "C" uint16_t Total_paged;
 void delay(int clocks)
 {
@@ -24,24 +24,6 @@ void delay(int clocks)
     asm("pop %rax");
     return;
 }
-
-/*void lvga(char mode){
-    switch (mode){
-        case 1:
-            asm("mov %ah, $0h");
-            asm("mov %al, $13h");
-            asm("int $0x10");
-            break;
-        case 2:
-            asm("mov %ah, $0h");
-            asm("mov %al, $13h");
-            asm("int $0x10");
-            breakudu;
-        default:
-            debug("uncognized mode",mode);
-   }
-}*/
-
 class File {
 private:
 	string data;

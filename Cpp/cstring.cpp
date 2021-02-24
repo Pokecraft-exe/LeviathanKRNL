@@ -1,4 +1,4 @@
-int strcmp(const char * a, const char * b) {
+#include "H/cstring.h" {
 	uint32_t i = 0;
 	while (1) {
 		if (a[i] < b[i]) {
