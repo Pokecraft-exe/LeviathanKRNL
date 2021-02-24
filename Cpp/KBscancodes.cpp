@@ -118,6 +118,8 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
                      KBmouse.mouseLeft = 0;
                      KBmouse.mouseDown = 1;
                      KBmouse.mouseUp = 0;
+                     KBmouse.veloy=1;
+                     KBmouse.velox=0;
                      ctmouse(KBmouse.x, KBmouse.y);
                      break;
                  case 0x51:
@@ -130,6 +132,8 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
                      KBmouse.mouseLeft = 1;
                      KBmouse.mouseDown = 0;
                      KBmouse.mouseUp = 0;
+                     KBmouse.velox=1;
+                     KBmouse.veloy=0;
                      ctmouse(KBmouse.x, KBmouse.y);
                      break;
                  case 0x4C:
@@ -149,6 +153,8 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
                      KBmouse.mouseLeft = 0;
                      KBmouse.mouseDown = 0;
                      KBmouse.mouseUp = 0;
+                     KBmouse.velox=1;
+                     KBmouse.veloy=0;
                      ctmouse(KBmouse.x, KBmouse.y);
                      break;
                  case 0x47:
@@ -161,6 +167,8 @@ void StandardKeyboardHandler(uint8 scancodes, uint8 chr){
                      KBmouse.mouseLeft = 0;
                      KBmouse.mouseDown = 1;
                      KBmouse.mouseUp = 1;
+                     KBmouse.veloy = 1;
+                     KBmouse.velox=0;
                      ctmouse(KBmouse.x, KBmouse.y);
                      break;
                  case 0x49:
