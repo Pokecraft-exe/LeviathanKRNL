@@ -26,20 +26,20 @@ void delay(int clocks)
 }
 class File {
 private:
-	string data;
+	char* data;
 public:
-	string name;
-	string extention;
-	string Read() {
+	char* name;
+	char* extention;
+	char* Read() {
 		return data;
 	}
-	void Write(string newData) {
+	void Write(char* newData) {
  		data = newData;
 	}
-	void Append(string newData) {
+	void Append(char* newData) {
 		data = strncat(data,newData,strlen(newData));
 	}
-	void Rename(string NewName, string NewExtention) {
+	void Rename(char* NewName, char* NewExtention) {
 		name = NewName;
 		extention = NewExtention;
 	}
