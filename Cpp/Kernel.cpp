@@ -13,6 +13,7 @@
 #include "H/mouse.h"
 //#include "H/Time.h"
 #include "H/stddef.h"
+#include "str.cpp"
 extern "C" uint16_t Total_paged;
 void delay(int clocks)
 {
@@ -54,7 +55,7 @@ public:
  		data = newData;
 	}
 	void Append(string newData) {
-		data = data + newData;
+		data = strncat(data,newData,strlen(newData));
 	}
 	void Rename(string NewName, string NewExtention) {
 		name = NewName;
@@ -98,7 +99,7 @@ extern "C" void _start(){
     File_test.Rename("Filetest","txt");
     File_test.Write("helloworld, this is a test ramdisk file!!!");
     File_test.Append("\ntext appended");
-    puts("reading '");puts(File_test.name);puts(".");puts(File_test.extention);puts("' with content:\n")
+    puts("reading '");puts(File_test.name);puts(".");puts(File_test.extention);puts("' with content:\n");
     puts(File_test.Read());
     //restart();
     while(1) {   //mainloop

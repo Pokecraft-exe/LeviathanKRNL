@@ -158,17 +158,17 @@ public:
 
    void ButtonMananger(){
         for(uint64 i = 0; i < 100; i++){
-            int x = Button[i].x;
-            int y = Button[i].y;
-            int xend = Button[i].xend;
-            int yend = Button[i].yend;
-            int fgcolor = Button[i].fgcolor;
+            int x = Buttons[i].x;
+            int y = Buttons[i].y;
+            int xend = Buttons[i].xend;
+            int yend = Buttons[i].yend;
+            int fgcolor = Buttons[i].Color;
             Rect(x,y,xend,yend,fgcolor);
             if (GetMouseX() >= x &&
             xend >= GetMouseX() &&
             GetMouseY() >= y &&
             yend>= GetMouseY() &&
-            GetLeftClick()) Button[i].Click=1;// OnClick();
+            GetLeftClick()) Buttons[i].Click=1;// OnClick();
         }
     }
 

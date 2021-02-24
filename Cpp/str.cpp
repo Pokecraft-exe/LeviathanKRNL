@@ -14,10 +14,29 @@ int strcmp(const char * a, const char * b) {
 	}
 }
 
+char* strncat(char* string1, char* string2, uint32_t n=strlen(string2)){
+	char* s=string1;
+	string1 += strlen(string1);
+	uint32_t ss = __strlen(string2,n);
+	string1[ss] = '\0';
+	memcpy(string1,string2,ss);
+	return s;
+
+}
+
 uint32_t strlen(const char *str) {
 	int i = 0;
 	while (str[i] != (char)0) {
 		++i;
+	}
+	return i;
+}
+
+uint32_t __strlen(const char *str, uint32_t mexlen) {
+	int i = 0;
+	while (str[i] != (char)0) {
+		++i;
+		if (i==maxlen) return i;
 	}
 	return i;
 }
