@@ -18,6 +18,7 @@ x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/mouse.cpp" -o "Cpp/Mous
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/3D.cpp" -o "Cpp/3D.o"
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/math.cpp" -o "Cpp/math.o"
 x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/serial.cpp" -o "Cpp/serial.o"
+x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "Cpp/cstring.cpp" -o "Cpp/cstring.o"
 
 x86_64-elf-ld -T"link2.ld"
 
