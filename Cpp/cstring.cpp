@@ -1,4 +1,6 @@
-#include "H/cstring.h" {
+#include "H/cstring.h"
+
+int strcmp(const char * a, const char * b) {
 	uint32_t i = 0;
 	while (1) {
 		if (a[i] < b[i]) {
@@ -14,7 +16,7 @@
 	}
 }
 
-char* strncat(char* string1, char* string2, uint32_t n=strlen(string2)){
+char* strncat(char* string1, char* string2, uint32_t n)){
 	char* s=string1;
 	string1 += strlen(string1);
 	uint32_t ss = __strlen(string2,n);
@@ -32,7 +34,7 @@ uint32_t strlen(const char *str) {
 	return i;
 }
 
-uint32_t __strlen(const char *str, uint32_t mexlen) {
+uint32_t __strlen(const char *str, uint32_t maxlen) {
 	int i = 0;
 	while (str[i] != (char)0) {
 		++i;
