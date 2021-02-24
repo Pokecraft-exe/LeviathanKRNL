@@ -1,6 +1,6 @@
 #include "Heap.h"
 #include "Memory.h"
-#include "typedefs.h"
+#include "stddef.h"
 int strcmp(const char * a, const char * b);
 char* strncat(char* string1, char* string2, uint32_t n);
 uint32_t strlen(const char *str);
