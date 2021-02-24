@@ -53,3 +53,6 @@ cat ASM/boot2.bin Kernel.bin > compaq.iso
 rm ASM/*.bin
 rm Cpp/*.o
 rm ASM/*.o
+git add *
+git commit -m"automatik pu$h"
+git push

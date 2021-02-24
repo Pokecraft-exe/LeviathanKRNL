@@ -26,7 +26,19 @@
 #define NEW 16
 #define RED 4
 
+struct ButtonProperty{
+    char* text;
+    int x;
+    int y;
+    int xend=9;
+    int yend=9;
+    bool Click = 0;
+    int Color;
+    int* OnClick;
+};
+
 struct WindowProperty{
+    ButtonProperty Button[100];
     char* handle;
     char* name;
     int top;
@@ -37,15 +49,14 @@ struct WindowProperty{
     bool focus = 0;
 };
 
-struct ButtonProperty{
+struct TextProperty{
     char* text;
     int x;
     int y;
     int xend=9;
     int yend=9;
-    bool Click = 0;
-    void* OnClick;
 };
+
 
 class screen{
 public:
@@ -102,21 +113,13 @@ int GetMouseY();
 int GetMouseVelocityX();
 int GetMouseVelocityY();
 
-/*class Button{
-public:
-    void NewButton(char* Text, int X, int Y, int SizeX, int SizeY){
-        ButtonProperty w;
-        w.name = Text;
-        w.y = Y;
-        w.x = X;
-        Windows[windows+1] = w;
-    }
-};*/
 class Window{
 private:
     WindowProperty Windows[100];
     WindowProperty EmptyWindow;
-    //Button Buttons[100];
+    ButtonProperty Buttons[100];
+    ButtonProperty EmptyButton;
+    int button = 0;
     int windows = 0;
 public:
     void NewWindow(int X, int Y, int SizeX, int SizeY, char* NewName, bool Closable=1){
@@ -143,8 +146,30 @@ public:
     }
 
     void Button(/*char* Text, */int x, int y, int xend, int yend, int fgcolor/*, void* OnClick*/){
-        Rect(x,y,xend,yend,fgcolor);
-        if (GetMouseX() >= x && xend >= GetMouseX() && GetMouseY() >= y && yend>= GetMouseY() && GetLeftClick());// OnClick();
+        ButtonProperty b;
+        b.x=x;
+        b.y=y;
+        b.xend=xend;
+        b.yend=yend;
+        b.fgcolor=fgcolor;
+        button+=1;
+        Button[button]=b;
+        }
+
+   void ButtonMananger(){
+        for(uint64 i = 0; i < 100; i++){
+            int x = Button[i].x;
+            int y = Button[i].y;
+            int xend = Button[i].xend;
+            int yend = Button[i].yend;
+            int fgcolor = Button[i].fgcolor;
+            Rect(x,y,xend,yend,fgcolor);
+            if (GetMouseX() >= x &&
+            xend >= GetMouseX() &&
+            GetMouseY() >= y &&
+            yend>= GetMouseY() &&
+            GetLeftClick()) Button[i].Click=1;// OnClick();
+        }
     }
 
     bool CompareWindows(WindowProperty w1, WindowProperty w2){
@@ -166,7 +191,6 @@ public:
     void Refresh(){
 
         DeskColor(GRAY);
-        int n = 100;
 
    for(uint64 i = 0; i < n; i++)
   {
@@ -192,6 +216,7 @@ public:
       }
       Label(Windows[i].name, Windows[i].left, Windows[i].top);
       //Button(/*(char*)"",*/placeX-9,Windows[i].top,9,9,RED/*, Close*/);
+      ButtonMananger();
       }}
    }
 };

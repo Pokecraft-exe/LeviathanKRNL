@@ -41,6 +41,27 @@ void delay(int clocks)
    }
 }*/
 
+class File {
+private:
+	string data;
+public:
+	string name;
+	string extention;
+	string Read() {
+		return data;
+	}
+	void Write(string newData) {
+ 		data = newData;
+	}
+	void Append(string newData) {
+		data = data + newData;
+	}
+	void Rename(string NewName, string NewExtention) {
+		name = NewName;
+		extention = NewExtention;
+	}
+};
+
 extern "C" void _start(){
     //__BOOTSCREEN__();
     MasterVolume = 100;
@@ -70,9 +91,16 @@ extern "C" void _start(){
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
-    //ctmouse(160, 100);
+    ctmouse(160, 100);
     puts("Refresh");
-    //WindowMananger.Refresh();
+    WindowMananger.Refresh();
+    File File_test;
+    File_test.Rename("Filetest","txt");
+    File_test.Write("helloworld, this is a test ramdisk file!!!");
+    File_test.Append("\ntext appended");
+    puts("reading '");puts(File_test.name);puts(".");puts(File_test.extention);puts("' with content:\n")
+    puts(File_test.Read());
+    //restart();
     while(1) {   //mainloop
         mouse_updater(inb(0x60));
         MousePacket();
