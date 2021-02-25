@@ -101,5 +101,5 @@ extern Directory Partition("RAM://");
 
 void initRAMDISK(){
 	puts("Partition on RAM://\n\r");
-	Partition.ls;
+	Partition.ls();
 }
