@@ -1,4 +1,5 @@
 #pragma once
+#include "cstring.h"
 class File {
 private:
 	char* data;
@@ -30,11 +31,11 @@ private:
 	int currentDirIndex = -1;
 	File emptyFile;
 public:
-	Directory(const char* &Name) {
+	Directory(const char* Name) {
 		fileName = Name;
 	}
 	
-	void cd(const char* &Name) {
+	void cd(const char* Name) {
 		if (Name == "..")
 			currentDirIndex = -1; // -1 is root
 		else {
@@ -60,10 +61,11 @@ public:
 			return childDir[currentDirIndex].open( Name, ext);
 	}
 
-	void mkdir(const char* & Name) {
-		if (currentDirIndex == -1)
+	void mkdir(const char* Name) {
+		if (currentDirIndex == -1){
 			childDir[chalddir+1]=Directory( Name);
 			childdir++;
+        }
 		else
 			childDir[currentDirIndex].mkdir( Name);
 	}
@@ -72,9 +74,10 @@ public:
 		File newfile;
 		newfile.name =  Name;
 		newfile.extention = ext;
-		if (currentDirIndex == -1)
+		if (currentDirIndex == -1){
 			childFile[childfile+1]=newfile;
 			childfile++;
+        }
 		else
 			childDir[currentDirIndex].mkfile( Name, ext);
 	}
