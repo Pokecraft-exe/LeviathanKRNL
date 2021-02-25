@@ -31,11 +31,11 @@ private:
 	int currentDirIndex = -1;
 	File emptyFile;
 public:
-	Directory(const char* Name) {
+	Directory(char* Name) {
 		fileName = Name;
 	}
 	
-	void cd(const char* Name) {
+	void cd(char* Name) {
 		if (Name == "..")
 			currentDirIndex = -1; // -1 is root
 		else {
@@ -48,7 +48,7 @@ public:
 		}
 	}
 
-	File *open(const char* Name, const char* ext) {
+	File *open(char* Name, char* ext) {
 		if (currentDirIndex == -1) {
 			for (int i = 0; i < 100; i++) {
 				if (childFile[i].name == Name &&
@@ -61,9 +61,9 @@ public:
 			return childDir[currentDirIndex].open( Name, ext);
 	}
 
-	void mkdir(const char* Name) {
+	void mkdir(char* Name) {
 		if (currentDirIndex == -1){
-			childDir[chalddir+1]=Directory( Name);
+			childDir[childdir+1]=Directory( Name);
 			childdir++;
         }
 		else
@@ -86,10 +86,10 @@ public:
 		if (currentDirIndex == -1) {
 			puts(">>> ");puts(IntToStr(childdir));puts(" directory(s) found in ");puts(fileName);puts(":\n\r");
 			puts("::: ");puts(IntToStr(childfile));puts(" file(s) found in ");puts(fileName);puts(":\r\n");
-			for (const Directory &dir : childDir) {
+			for (Directory &dir : childDir) {
 				puts("> ");puts(dir.fileName);puts("\r\n");
 			}
-			for (const File &file : childFile) {
+			for (File &file : childFile) {
 				puts(": ");puts(file.name);puts(".");puts(file.extention);puts("\n\r");
 			}
 		} else
