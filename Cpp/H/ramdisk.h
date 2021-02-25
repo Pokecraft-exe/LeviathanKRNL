@@ -90,7 +90,7 @@ public:
 				puts("> ");puts(dir.fileName);puts("\r\n");
 			}
 			for (const File &file : childFile) {
-				puts(": ");puts(file.name);puts(".");puts(file.extention);puts(std::endl;
+				puts(": ");puts(file.name);puts(".");puts(file.extention);puts("\n\r");
 			}
 		} else
 			childDir[currentDirIndex].ls();
