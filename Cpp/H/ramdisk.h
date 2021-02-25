@@ -25,7 +25,7 @@ class Directory {
 private:
 	Directory childDir[100];
 	int childdir;
-	int chaldfile;
+	int childfile;
 	File childFile[100];
 	char* fileName;
 	int currentDirIndex = -1;
@@ -84,7 +84,7 @@ public:
 
 	void ls() {
 		if (currentDirIndex == -1) {
-			puts(">>> ");puts(IntToStr(childdir));puts(" directory(s) found in ");puts(fileName;puts(":\n\r");
+			puts(">>> ");puts(IntToStr(childdir));puts(" directory(s) found in ");puts(fileName);puts(":\n\r");
 			puts("::: ");puts(IntToStr(childfile));puts(" file(s) found in ");puts(fileName);puts(":\r\n");
 			for (const Directory &dir : childDir) {
 				puts("> ");puts(dir.fileName);puts("\r\n");
