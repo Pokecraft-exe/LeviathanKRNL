@@ -13,6 +13,7 @@
 #include "H/mouse.h"
 //#include "H/Time.h"
 #include "H/stddef.h"
+#include "H/ramdisk.h"
 #include "H/cstring.h"
 extern "C" uint16_t Total_paged;
 void delay(int clocks)
@@ -24,26 +25,6 @@ void delay(int clocks)
     asm("pop %rax");
     return;
 }
-class File {
-private:
-	char* data;
-public:
-	char* name;
-	char* extention;
-	char* Read() {
-		return data;
-	}
-	void Write(char* newData) {
- 		data = newData;
-	}
-	void Append(char* newData) {
-		data = strncat(data,newData,strlen(newData));
-	}
-	void Rename(char* NewName, char* NewExtention) {
-		name = NewName;
-		extention = NewExtention;
-	}
-};
 
 extern "C" void _start(){
     //__BOOTSCREEN__();
@@ -77,6 +58,9 @@ extern "C" void _start(){
     ctmouse(160, 100);
     WindowMananger.Refresh();
     puts("Refresh\r\n");
+
+    initRAMDISK();
+    puts(SERIALBLUE);puts((char*)"Initializing RAMDISK [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     File File_test;
     puts("creating file\r\n");
     File_test.Rename((char*)"Filetest",(char*)"txt");
