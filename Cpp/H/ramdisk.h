@@ -1,8 +1,5 @@
 #pragma once
 #include "cstring.h"
-#include <vector.h>
-using namespace std;
-
 class File {
 private:
 	char* data;
@@ -24,72 +21,79 @@ public:
 	}
 };
 
-class Directory {//cr�er une classe nom�e directory (aussi le type directory)
-private: // seul la classe peut untiliser ces fonctions
-	std::vector<Directory> childDir;
-	std::vector<File> childFile;
+class Directory {
+private:
+	Directory childDir[100];
+	int childdir;
+	int childfile;
+	File childFile[100];
 	char* fileName;
 	int currentDirIndex = -1;
-	File emptyFile; // cr�er un fichier nomm� emptyFile
-public: // tout le code peut utiliser ces fonctions
-	Directory(char* char*__fileName) {
-		fileName = __fileName;
+	File emptyFile;
+public:
+	Directory(char* Name) {
+		fileName = Name;
 	}
 	
-	
-	void cd(char* char*__fileName) {
-		if (__fileName == "..")
+	void cd(char* Name) {
+		if (Name == "..")
 			currentDirIndex = -1; // -1 is root
 		else {
 			if (currentDirIndex == -1) {
-				for (int i = 0; i < childDir.size(); i++)
-					if (childDir.at(i).fileName == __fileName)
+				for (int i = 0; i < 100; i++)
+					if (childDir[i].fileName == Name)
 						currentDirIndex = i;
 			} else
-				childDir.at(currentDirIndex).cd(__fileName);
+				childDir[currentDirIndex].cd(Name);
 		}
 	}
 
-	File *open(char* __fileName, char* ext) {
+	File *open(char* Name, char* ext) {
 		if (currentDirIndex == -1) {
-			for (int i = 0; i < childFile.size(); i++) {
-				if (childFile.at(i).name == __fileName &&
-					childFile.at(i).extention == ext) {
-					return &childFile.at(i);
+			for (int i = 0; i < 100; i++) {
+				if (childFile[i].name == Name &&
+					childFile[i].extention == ext) {
+					return &childFile[i];
 				}
 			}
 			return &emptyFile;
 		} else
-			return childDir.at(currentDirIndex).open(__fileName, ext);
+			return childDir[currentDirIndex].open( Name, ext);
 	}
 
-	void mkdir(char* char*__fileName) {
-		if (currentDirIndex == -1)
-			childDir.push_back(Directory(__fileName));
+	void mkdir(char* Name) {
+		if (currentDirIndex == -1){
+			childDir[childdir+1]=Directory( Name);
+			childdir++;
+        }
 		else
-			childDir.at(currentDirIndex).mkdir(__fileName);
+			childDir[currentDirIndex].mkdir( Name);
 	}
-	void mkfile(char* __fileName, char* ext) {
+
+	void mkfile(char*  Name, char* ext) {
 		File newfile;
-		newfile.name = __fileName;
+		newfile.name =  Name;
 		newfile.extention = ext;
-		if (currentDirIndex == -1)
-			childFile.push_back(newfile);
+		if (currentDirIndex == -1){
+			childFile[childfile+1]=newfile;
+			childfile++;
+        }
 		else
-			childDir.at(currentDirIndex).mkfile(__fileName, ext);
+			childDir[currentDirIndex].mkfile( Name, ext);
 	}
+
 	void ls() {
 		if (currentDirIndex == -1) {
-			puts(">>> ");puts(IntToStr(childDir.size()));puts(" directory(s) found in ");puts(fileName;puts(":\n\r");
-			puts("::: ");puts(IntToStr(childFile.size()));puts(" file(s) found in ");puts(fileName);puts(":\r\n");
+			puts(">>> ");puts(IntToStr(childdir));puts(" directory(s) found in ");puts(fileName);puts(":\n\r");
+			puts("::: ");puts(IntToStr(childfile));puts(" file(s) found in ");puts(fileName);puts(":\r\n");
 			for (Directory &dir : childDir) {
 				puts("> ");puts(dir.fileName);puts("\r\n");
 			}
 			for (File &file : childFile) {
-				puts(": ");puts(file.name);puts(".");puts(file.extention);puts("\r\n");
+				puts(": ");puts(file.name);puts(".");puts(file.extention);puts("\n\r");
 			}
 		} else
-			childDir.at(currentDirIndex).ls();
+			childDir[currentDirIndex].ls();
 	}
 };
 
