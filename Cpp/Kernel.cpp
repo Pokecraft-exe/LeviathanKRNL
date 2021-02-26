@@ -35,7 +35,7 @@ extern "C" void _start(){
     InitializeIDT();
     MainKeyboardHandler = Keyboardhandler;
     init_serial();
-    write_serial('a')
+    write_serial('a');
     puts(SERIALBLUE);puts((char*)"Initializing Serial [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing VGA [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing PAGING [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
@@ -59,7 +59,6 @@ extern "C" void _start(){
     ctmouse(160, 100);
     WindowMananger.Refresh();
     puts("Refresh\r\n");
-
     initRAMDISK();
     puts(SERIALBLUE);puts((char*)"Initializing RAMDISK [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     File File_test;
@@ -72,8 +71,8 @@ extern "C" void _start(){
     puts(File_test.Read());
     //restart();
     while(1) {   //mainloop
-        //mouse_updater(inb(0x60));
-        //MousePacket();
+        mouse_updater(inb(0x60));
+        MousePacket();
         /*PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
         PlaySound(1570,MasterVolume);for (int ii = 0; ii<200000;ii++);{}
         PlaySound(1969,MasterVolume);for (int iii = 0; iii<200000;iii++);{}
