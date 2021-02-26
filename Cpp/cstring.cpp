@@ -45,8 +45,8 @@ uint32_t __strlen(const char *str, uint32_t maxlen) {
 
 char * strdup(const char *str) {
 	int len = strlen(str);
-	char * out = malloc(sizeof(char) * (len+1));
-	memcpy(out, str, len+1);
+	char * out = malloc(&sizeof(char) * (len+1));
+	memcpy(&out, &str, len+1);
 	return out;
 }
 
