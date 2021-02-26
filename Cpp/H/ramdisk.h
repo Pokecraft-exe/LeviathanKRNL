@@ -86,11 +86,11 @@ public:
 		if (currentDirIndex == -1) {
 			puts(">>> ");puts(IntToStr(childdir));puts(" directory(s) found in ");puts(fileName);puts(":\n\r");
 			puts("::: ");puts(IntToStr(childfile));puts(" file(s) found in ");puts(fileName);puts(":\r\n");
-			for (Directory &dir : childDir) {
-				puts("> ");puts(dir.fileName);puts("\r\n");
+			for (int i; i<=childdir;i++) {
+				puts("> ");puts(childDir[i].fileName);puts("\r\n");
 			}
-			for (File &file : childFile) {
-				puts(": ");puts(file.name);puts(".");puts(file.extention);puts("\n\r");
+			for (int i;i<=childfile;i++) {
+				puts(": ");puts(childFile.name);puts(".");puts(childFile.extention);puts("\n\r");
 			}
 		} else
 			childDir[currentDirIndex].ls();
