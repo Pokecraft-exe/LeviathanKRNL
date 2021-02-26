@@ -50,7 +50,7 @@ char * strdup(const char *str) {
 	return out;
 }
 */
-char * strcpy(char * dest, const char * src) {
+char * strcpy(char * dest, char * src) {
 	int len = strlen(src);
 	memcpy(dest, src, len+1);
 	return dest;
