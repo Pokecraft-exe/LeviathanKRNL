@@ -43,12 +43,11 @@ char read_serial() {
 }
 
 void puts(const char* a){
-  uint_8* charPtr = (uint_8*)a;
   int i = 0;
-  while(*charPtr != 0)
+  while(a[i] != 0)
   {
-    write_serial(*charPtr);
-    charPtr++;
+    write_serial(a[i]);
+    i++;
   }
 }
 

@@ -1,21 +1,22 @@
 #pragma once
 #include "cstring.h"
+#include "stddef.h"
 class File {
 private:
-	char* data;
+	string data;
 public:
-	char* name;
-	char* extention;
-	char* Read() {
+	string name;
+	string extention;
+	string Read() {
 		return data;
 	}
-	void Write(char* newData) {
+	void Write(string newData) {
  		data = newData;
 	}
-	void Append(char* newData) {
+	void Append(string newData) {
 		data = strncat(data,newData,strlen(newData));
 	}
-	void Rename(char* NewName, char* NewExtention) {
+	void Rename(string NewName, string NewExtention) {
 		name = NewName;
 		extention = NewExtention;
 	}
@@ -27,15 +28,15 @@ private:
 	int childdir;
 	int childfile;
 	File childFile[100];
-	char* fileName;
+	string fileName;
 	int currentDirIndex = -1;
 	File emptyFile;
 public:
-	Directory(char* Name) {
+	Directory(string Name) {
 		fileName = Name;
 	}
 	
-	void cd(char* Name) {
+	void cd(string Name) {
 		if (Name == "..")
 			currentDirIndex = -1; // -1 is root
 		else {
@@ -48,7 +49,7 @@ public:
 		}
 	}
 
-	File *open(char* Name, char* ext) {
+	File *open(string Name, string ext) {
 		if (currentDirIndex == -1) {
 			for (int i = 0; i < 100; i++) {
 				if (childFile[i].name == Name &&
@@ -61,7 +62,7 @@ public:
 			return childDir[currentDirIndex].open( Name, ext);
 	}
 
-	void mkdir(char* Name) {
+	void mkdir(string Name) {
 		if (currentDirIndex == -1){
 			childDir[childdir+1]=Directory( Name);
 			childdir++;
@@ -70,7 +71,7 @@ public:
 			childDir[currentDirIndex].mkdir( Name);
 	}
 
-	void mkfile(char*  Name, char* ext) {
+	void mkfile(string  Name, string ext) {
 		File newfile;
 		newfile.name =  Name;
 		newfile.extention = ext;
