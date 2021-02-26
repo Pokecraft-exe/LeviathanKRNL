@@ -23,7 +23,7 @@ public:
 
 class Directory {
 private:
-	Directory childDir[100];
+	Directory* childDir;
 	int childdir;
 	int childfile;
 	File childFile[100];
