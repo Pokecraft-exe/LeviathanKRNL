@@ -52,7 +52,7 @@ char * strdup(const char *str) {
 
 char * strcpy(char * dest, const char * src) {
 	int len = strlen(src);
-	memcpy(dest, src, len+1);
+	memcpy(&dest, &src, len+1);
 	return dest;
 }
 
