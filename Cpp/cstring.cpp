@@ -17,7 +17,7 @@ int strcmp(const char * a, const char * b) {
 }
 
 char * strncat(char * string1, char * string2, uint32_t n){
-	const char * s=string1;
+	char * s=string1;
 	string1 += strlen(string1);
 	uint32_t ss = __strlen(string2,n);
 	string1[ss] = '\0';
