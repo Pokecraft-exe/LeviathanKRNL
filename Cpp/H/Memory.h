@@ -16,5 +16,5 @@ extern uint8 UsableMemoryRegionCount;
 
 void printMemMap(MemoryMapEntry* memoryMap);
 MemoryMapEntry** GetUsableMemoryRegions();
-void memset(void* start, uint_64 value, uint_64 num);
-void memcpy(void* destination, void* source, uint_64 num);
+void memset(const void* start, uint_64 value, uint_64 num);
+void memcpy(const void* destination, const void* source, uint_64 num);

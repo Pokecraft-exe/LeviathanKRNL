@@ -3,7 +3,7 @@
 uint_8 UsableMemoryRegionCount;
 MemoryMapEntry* UsableMemoryRegions[10];
 
-void memcpy(void* destination, void* source, uint_64 num){
+void memcpy(const void* destination, const void* source, uint_64 num){
     if (num <= 8) {
         uint8* valPtr = (uint8*)&source;
         for (uint8* ptr = (uint8*)destination; ptr < (uint8*)((uint_64)destination + num); ptr++) {
