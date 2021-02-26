@@ -2,7 +2,7 @@
 #include "Memory.h"
 #include "stddef.h"
 int strcmp(const char * a, const char * b);
-const char* strncat(const char* string1, const char* string2, uint32_t n);
+char* strncat(char* string1, char* string2, uint32_t n);
 uint32_t strlen(const char *str);
 uint32_t __strlen(const char *str, uint32_t mexlen);
 char * strdup(const char *str);
