@@ -90,7 +90,7 @@ public:
 				puts("> ");puts(childDir[i].fileName);puts("\r\n");
 			}
 			for (int i;i<=childfile;i++) {
-				puts(": ");puts(childFile.name);puts(".");puts(childFile.extention);puts("\n\r");
+				puts(": ");puts(childFile[i].name);puts(".");puts(childFile[i].extention);puts("\n\r");
 			}
 		} else
 			childDir[currentDirIndex].ls();
