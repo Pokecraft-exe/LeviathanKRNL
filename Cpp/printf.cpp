@@ -48,9 +48,6 @@ void printf(char* str, uint_8 color, bool protectedstr){
       default:
         *(VGA_MEMORY + index * 2) = *charPtr;
         *(VGA_MEMORY + index * 2 + 1) = color;
-        if (protectedstr == true) {
-            ProtectedPos[index] = 1;
-        }
         index++;
     }
     charPtr++;
