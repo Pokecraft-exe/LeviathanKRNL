@@ -14,6 +14,7 @@ INPUT
     Cpp/Font.o
     Cpp/sound.o
     Cpp/3D.o
+    Cpp/2D.o
     Cpp/math.o
     Cpp/Mouse.o
     Cpp/serial.o

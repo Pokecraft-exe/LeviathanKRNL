@@ -10,6 +10,7 @@
 #include "H/Font.h"
 #include "H/serial.h"
 #include "H/3D.h"
+#include "H/2D.h"
 #include "H/mouse.h"
 //#include "H/Time.h"
 #include "H/stddef.h"
@@ -29,7 +30,7 @@ void delay(int clocks)
 extern "C" void _start(){
     //__BOOTSCREEN__();
     MasterVolume = 100;
-    
+    /*
     //PlaySound(469,MasterVolume);
     InitHeap(0x100000, 0x100000);
     InitializeIDT();
@@ -69,15 +70,17 @@ extern "C" void _start(){
     File_test.Append((char*)"\r\ntext appended");
     puts("' with content:\n\r");
     puts(File_test.Read());
+    */
+    initPhysics();
     //restart();
-    while(1) {   //mainloop
+    /*while(1) {   //mainloop
         mouse_updater(inb(0x60));
         MousePacket();
-        /*PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
+        PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
         PlaySound(1570,MasterVolume);for (int ii = 0; ii<200000;ii++);{}
         PlaySound(1969,MasterVolume);for (int iii = 0; iii<200000;iii++);{}
-        PlaySound(1477,MasterVolume);for (int iiii = 0; iiii<200000;iiii++);{}*/
+        PlaySound(1477,MasterVolume);for (int iiii = 0; iiii<200000;iiii++);{}
         
-	}
+	}*/
     return;
 }
