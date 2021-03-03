@@ -51,7 +51,7 @@ void puts(char* a){
   }
 }
 
-void debug(const char* Message, bool Status){
+void debug(char* Message, bool Status){
    puts(Message);
    puts("[");
    if (Status){
@@ -67,7 +67,7 @@ void debug(const char* Message, bool Status){
    }
 }
 
-void debug(const char* Message, int Value){
+void debug(char* Message, int Value){
    puts(Message);
    write_serial('\033');
    write_serial('[');
@@ -88,4 +88,4 @@ void debug(const char* Message, int Value){
    write_serial('\r');
 }
 
-void debug(const char* Message, float Value){puts(Message);puts(FloatToString(Value,5));puts("\n\r");}
+void debug(char* Message, float Value){puts(Message);puts(FloatToString(Value,5));puts("\n\r");}
