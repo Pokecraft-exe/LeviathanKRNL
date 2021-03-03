@@ -1,7 +1,6 @@
 #include "H/printf.h"
 
 uint_16 CursorPosition;
-int ProtectedPos[2044];
 //for (i = 0; i = 2044; i++) ProtectedPos[i] = 0;
 
 void cls(uint_64 ClearColor)
@@ -31,7 +30,7 @@ uint_16 PositionFromCoords(uint_8 x, uint_8 y){
   return y * VGA_WIDTH + x;
 }
 
-void printf(const char* str, uint_8 color, bool protectedstr){
+void printf(char* str, uint_8 color, bool protectedstr){
   uint_8* charPtr = (uint_8*)str;
   uint_16 index = CursorPosition;
   int i = 0;
@@ -84,7 +83,7 @@ void printchar(char chr, uint_8 color, bool protectedstr){
 
 char hexToStringOutput[128];
 template<typename T>
-const char* HexToString(T value) {
+char* HexToString(T value) {
     T* valPtr = &value;
     uint_8* ptr;
     uint_8 temp;
@@ -101,18 +100,18 @@ const char* HexToString(T value) {
     return hexToStringOutput;
 }
 
-const char* HexToString(uint_8 value) {return HexToString<uint_8>(value);}
-const char* HexToString(uint_16 value) {return HexToString<uint_16>(value);}
-const char* HexToString(uint_32 value) {return HexToString<uint_32>(value);}
-const char* HexToString(uint_64 value) {return HexToString<uint_64>(value);}
-const char* HexToString(char value) {return HexToString<char>(value);}
-const char* HexToString(short value) {return HexToString<short>(value);}
-const char* HexToString(int value) {return HexToString<int>(value);}
-const char* HexToString(long long value) {return HexToString<long long>(value);}
+char* HexToString(uint_8 value) {return HexToString<uint_8>(value);}
+char* HexToString(uint_16 value) {return HexToString<uint_16>(value);}
+char* HexToString(uint_32 value) {return HexToString<uint_32>(value);}
+char* HexToString(uint_64 value) {return HexToString<uint_64>(value);}
+char* HexToString(char value) {return HexToString<char>(value);}
+char* HexToString(short value) {return HexToString<short>(value);}
+char* HexToString(int value) {return HexToString<int>(value);}
+char* HexToString(long long value) {return HexToString<long long>(value);}
 
 char integerToStringOutput[128];
 template<typename T>
-const char* IntToStr(T value) {
+char* IntToStr(T value) {
 
 	uint_8 isNegative = 0;
 
@@ -143,17 +142,17 @@ const char* IntToStr(T value) {
 	return integerToStringOutput;
 }
 
-const char* IntToStr(uint_8 value) {return IntToStr<uint_8>(value);}
-const char* IntToStr(uint_16 value) {return IntToStr<uint_16>(value);}
-const char* IntToStr(uint_32 value) {return IntToStr<uint_32>(value);}
-const char* IntToStr(uint_64 value) {return IntToStr<uint_64>(value);}
-const char* IntToStr(char value) {return IntToStr<char>(value);}
-const char* IntToStr(short value) {return IntToStr<short>(value);}
-const char* IntToStr(int value) {return IntToStr<int>(value);}
-const char* IntToStr(long long value) {return IntToStr<long long>(value);}
+char* IntToStr(uint_8 value) {return IntToStr<uint_8>(value);}
+char* IntToStr(uint_16 value) {return IntToStr<uint_16>(value);}
+char* IntToStr(uint_32 value) {return IntToStr<uint_32>(value);}
+char* IntToStr(uint_64 value) {return IntToStr<uint_64>(value);}
+char* IntToStr(char value) {return IntToStr<char>(value);}
+char* IntToStr(short value) {return IntToStr<short>(value);}
+char* IntToStr(int value) {return IntToStr<int>(value);}
+char* IntToStr(long long value) {return IntToStr<long long>(value);}
 
 char floatToStringOutput[128];
-const char* FloatToString(float value, uint_8 decimalPlaces) {
+char* FloatToString(float value, uint_8 decimalPlaces) {
 	char* intPtr = (char*)IntToStr((int)value);
 	char* floatPtr = floatToStringOutput;
 
