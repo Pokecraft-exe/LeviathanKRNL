@@ -17,7 +17,7 @@ int is_transmit_empty();
 int serial_received();
 char read_serial();
 void write_serial(char a);
-void puts(const char* a);
+void puts(char* a);
 void debug(const char* Message, bool Status);
 void debug(const char* Message, int Value);
 void debug(const char* Message, float Value);
