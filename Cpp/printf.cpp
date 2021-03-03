@@ -68,9 +68,6 @@ void printchar(char chr, uint_8 color, bool protectedstr){
       default:
         *(VGA_MEMORY + CursorPosition * 2) = chr;
         *(VGA_MEMORY + CursorPosition * 2 + 1) = color;
-        if (protectedstr == true) {
-            ProtectedPos[CursorPosition] = 1;
-        }
         SetCursorPosition(CursorPosition + 1);
     }
     //drawchar(chr, 0, 0, 15);
