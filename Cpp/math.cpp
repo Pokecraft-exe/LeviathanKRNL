@@ -74,14 +74,14 @@ float tanf(float a){
     return x / y;
 }
 
-int set_operator(char operator, int number){
-    if (operator == '-'){
+int set_operator(char operator_, int number){
+    if (operator_ == '-'){
         if (number<0){
             number*=-2;
             return number/2
         }
     }
-    }if (operator == '+'){
+    }if (operator_ == '+'){
         if (number>0){
             number*=-2;
             return number/2
