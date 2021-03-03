@@ -5,3 +5,4 @@ uint64 abs(uint64 n);
 float pow(float x, int power);
 int dist(int a, int b, int a2, int b2);
 float tanf(float a);
+int set_operator(char operator, int number);

@@ -1,6 +1,7 @@
 #pragma once
 #include "stddef.h"
 #include "vga.h"
+#include "math.h"
 
 void initPhysics();
 
@@ -23,11 +24,12 @@ private:
 public:
 	physics(bool gravityMode, int Force)// 1 = plane mode, 0 = spheric mode (like earth)
 	{
-		if (gravityMode){
+		/*if (gravityMode){
 			planeGravity=1;
 			gravityCenterX=160;
 			gravityCenterY=200;
-		}
+		}*/
+
 		molnum=0;
 		gravityForce=Force;
 	}
@@ -49,16 +51,17 @@ public:
 	
 	bool iterate(int number){
 		if (number > 1){
-			return 0;
+			number = 1;
 		}
-        DeskColor(15);
-		for (int ii = 0; ii < molnum; ii++)
-    	{
-            Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
-            if (mol[ii].X!=160) mol[ii].X = gravityForce/160-mol[ii].X;
-            if (mol[ii].Y!=100) mol[ii].Y = gravityForce/100-mol[ii].Y;
-    	}
-		Screen1.swap();
-		
-	}
+        for (int i; i<number; i++){
+            DeskColor(15);
+            for (int ii = 0; ii < molnum; ii++)
+            {
+                Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
+                if (mol[ii].X!=160) mol[ii].X = set_operator('+',gravityForce/160-mol[ii].X);
+                if (mol[ii].Y!=100) mol[ii].Y = set_operator('+',gravityForce/100-mol[ii].Y);
+            }
+            Screen1.swap();
+	    }
+    }
 };

@@ -42,7 +42,7 @@ char read_serial() {
    return inb(PORT);
 }
 
-void puts(char* &a){
+void puts(char* a){
   int i = 0;
   while(a[i] != 0)
   {
