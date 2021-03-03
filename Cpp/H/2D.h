@@ -54,7 +54,7 @@ public:
         DeskColor(15);
 		for (int ii = 0; ii < molnum; ii++)
     	{
-            putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
+            Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
             if (mol[ii].X!=160) mol[ii].X = gravityForce/160-mol[ii].X;
             if (mol[ii].Y!=100) mol[ii].Y = gravityForce/100-mol[ii].Y;
     	}
