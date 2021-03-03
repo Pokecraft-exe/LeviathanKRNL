@@ -87,5 +87,5 @@ int set_operator(char operator_, int number){
             return number/2;
         }
     }
-    return 0
+    return 0;
 }
