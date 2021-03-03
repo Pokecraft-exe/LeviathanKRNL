@@ -78,13 +78,13 @@ int set_operator(char operator_, int number){
     if (operator_ == '-'){
         if (number<0){
             number*=-2;
-            return number/2
+            return number/2;
         }
     }
-    }if (operator_ == '+'){
+    if (operator_ == '+'){
         if (number>0){
             number*=-2;
-            return number/2
+            return number/2;
         }
     }
     return 0
