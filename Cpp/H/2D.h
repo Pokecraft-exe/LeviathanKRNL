@@ -29,8 +29,9 @@ public:
 			gravityCenterX=160;
 			gravityCenterY=200;
 		}*/
-
+        while(1);
 		molnum=0;
+        while(1);
 		gravityForce=Force;
 	}
 	
