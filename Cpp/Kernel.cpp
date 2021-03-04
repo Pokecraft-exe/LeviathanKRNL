@@ -79,7 +79,7 @@ extern "C" void _start(){
     //restart();
     while(1) {   //mainloop
         Physics.iterate(2);
-        write_serial('T')
+        write_serial('T');
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
