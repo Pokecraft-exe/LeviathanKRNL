@@ -72,16 +72,20 @@ extern "C" void _start(){
     puts("' with content:\n\r");
     puts(File_test.Read());
     */
-    initPhysics();
+    physics Physics;
+    Physics.setWater(200,50);
+	Physics.setWater(201,51);
+    Physics.iterate(2);
     //restart();
-    /*while(1) {   //mainloop
-        mouse_updater(inb(0x60));
+    while(1) {   //mainloop
+        Physics.iterate(2);
+        /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
         PlaySound(1570,MasterVolume);for (int ii = 0; ii<200000;ii++);{}
         PlaySound(1969,MasterVolume);for (int iii = 0; iii<200000;iii++);{}
-        PlaySound(1477,MasterVolume);for (int iiii = 0; iiii<200000;iiii++);{}
+        PlaySound(1477,MasterVolume);for (int iiii = 0; iiii<200000;iiii++);{}*/
         
-	}*/
+	}
     return;
 }
