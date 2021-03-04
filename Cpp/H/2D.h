@@ -18,7 +18,7 @@ private:
 	int gravityCenterY;
 	bool planeGravity;
 	int gravityForce;
-	molecule mol[320*200];
+	molecule mol[320];
 	int molnum;
 	molecule Emptymol;
 public:
