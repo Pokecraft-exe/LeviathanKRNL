@@ -56,9 +56,9 @@ public:
             DeskColor(15);
             for (int ii = 0; ii < molnum; ii++)
             {
-                Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
-                if (mol[ii].X!=160) mol[ii].X = set_operator('+',gravityForce/160-mol[ii].X);
-                if (mol[ii].Y!=100) mol[ii].Y = set_operator('+',gravityForce/100-mol[ii].Y);
+               Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
+               mol[ii].X = set_operator('+',gravityForce/160-mol[ii].X);
+               mol[ii].Y = set_operator('+',gravityForce/100-mol[ii].Y);
             }
             Screen1.swap();
 	    }
