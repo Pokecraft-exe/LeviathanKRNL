@@ -22,7 +22,7 @@ private:
 	int molnum;
 	molecule Emptymol;
 public:
-	physics(bool gravityMode, int Force)// 1 = plane mode, 0 = spheric mode (like earth)
+	physics(bool gravityMode=1, int Force=15)// 1 = plane mode, 0 = spheric mode (like earth)
 	{
 		/*if (gravityMode){
 			planeGravity=1;
