@@ -59,8 +59,10 @@ public:
             for (int ii = 0; ii < molnum; ii++)
             {
                 Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
-                mol[ii].X = gravityForce/set_operator('+',160-mol[ii].X);
-                mol[ii].Y = gravityForce/set_operator('+',100-mol[ii].Y);
+				int X = 160-mol[ii].X;
+				int Y = 100-mol[ii].Y;
+                mol[ii].X = set_operator('+',15/X);
+                mol[ii].Y = set_operator('+',15/Y);
             }
             Screen1.swap();
 	    }
