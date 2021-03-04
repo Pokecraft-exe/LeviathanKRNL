@@ -2,6 +2,8 @@
 #include "stddef.h"
 #include "vga.h"
 #include "math.h"
+#include "serial.h"
+#include "printf.h"
 
 void initPhysics();
 
@@ -56,9 +58,23 @@ public:
             DeskColor(15);
             for (int ii = 0; ii < molnum; ii++)
             {
-               Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
-               mol[ii].X = set_operator('+',gravityForce/160-mol[ii].X);
-               mol[ii].Y = set_operator('+',gravityForce/100-mol[ii].Y);
+                Screen1.putPixel(mol[ii].X,mol[ii].Y,mol[ii].color);
+                mol[ii].X = set_operator('+',gravityForce/160-mol[ii].X);
+                mol[ii].Y = set_operator('+',gravityForce/100-mol[ii].Y);
+                char* a = IntToStr(mol[ii].X);
+                int i = 0;
+                while(a[i] != 0)
+                {
+                    write_serial(a[i]);
+                    i++;
+                }
+                a = IntToStr(mol[ii].Y);
+                i = 0;
+                while(a[i] != 0)
+                {
+                    write_serial(a[i]);
+                    i++;
+                }
             }
             Screen1.swap();
 	    }
