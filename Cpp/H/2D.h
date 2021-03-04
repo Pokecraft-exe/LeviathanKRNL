@@ -63,8 +63,8 @@ public:
 				int Y = 100-mol[ii].Y;
                 mol[ii].X = set_operator('+',15/X);
                 mol[ii].Y = set_operator('+',15/Y);
+				Screen1.swap();
             }
-            Screen1.swap();
 	    }
     }
 };
