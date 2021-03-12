@@ -42,15 +42,6 @@ char read_serial() {
    return inb(PORT);
 }
 
-void puts(char* a){
-  int i = 0;
-  while(a[i] != 0)
-  {
-    write_serial(a[i]);
-    i++;
-  }
-}
-
 void debug(char* Message, bool Status){
    puts(Message);
    puts("[");
