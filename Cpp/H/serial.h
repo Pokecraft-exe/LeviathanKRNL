@@ -17,6 +17,3 @@ int is_transmit_empty();
 int serial_received();
 char read_serial();
 void write_serial(char a);
-void debug(char* Message, bool Status);
-void debug(char* Message, int Value);
-void debug(char* Message, float Value);
