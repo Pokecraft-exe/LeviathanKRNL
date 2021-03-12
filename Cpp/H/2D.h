@@ -58,7 +58,8 @@ public:
             DeskColor(15);
             for (int ii = 0; ii < molnum; ii++)
             {
-                Screen1.buffer[320*mol[ii].Y+mol[ii].X] = mol[ii].color;
+				char* buffer = (char*)0xA0000;
+                buffer[320*mol[ii].Y+mol[ii].X] = mol[ii].color;
 				int X = 160-mol[ii].X;
 				int Y = 100-mol[ii].Y;
                 mol[ii].X = set_operator('+',15/X);
