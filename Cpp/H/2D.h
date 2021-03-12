@@ -4,14 +4,6 @@
 #include "math.h"
 #include "serial.h"
 #include "printf.h"
-void putss(char* Text){
-	int a=0;
-	while(Text[a] != '\0'){
-		write_serial(Text[a]);
-		a++;
-	}
-}
-
 
 void initPhysics();
 
@@ -56,7 +48,14 @@ public:
 		mol[molnum].Y=Y;
 		molnum++;
 	}
-    
+
+	void putss(char* Text){
+		int a=0;
+		while(Text[a] != '\0'){
+			write_serial(Text[a]);
+			a++;
+		}
+	}
 	
 	bool iterate(int number){
 		if (number > 1){
