@@ -4,6 +4,14 @@
 #include "math.h"
 #include "serial.h"
 #include "printf.h"
+void putss(char* text){
+	int a=0;
+	while(Text[a] != '\0'){
+		write_serial(Text[a]);
+		a++;
+	}
+}
+
 
 void initPhysics();
 
@@ -64,6 +72,8 @@ public:
 				int Y = 100-mol[ii].Y;
                 mol[ii].X = set_operator('+',15/X);
                 mol[ii].Y = set_operator('+',15/Y);
+				putss(IntToStr(mol[ii].X));
+				putss(IntToStrr(mol[ii].Y));
             }
 	    }
     }
