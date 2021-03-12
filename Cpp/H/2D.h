@@ -49,10 +49,16 @@ public:
 		molnum++;
 	}
 
+	void write_seriall(char a) {
+	while (is_transmit_empty() == 0);
+	
+	outb(PORT,a);
+	}
+
 	void putss(char* Text){
 		int a=0;
 		while(Text[a] != '\0'){
-			write_serial(Text[a]);
+			write_seriall(Text[a]);
 			a++;
 		}
 	}

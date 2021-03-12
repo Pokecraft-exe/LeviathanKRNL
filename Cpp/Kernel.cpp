@@ -27,6 +27,14 @@ void delay(int clocks)
     return;
 }
 
+void puts(char* Text){
+	int a=0;
+	while(Text[a] != '\0'){
+		write_serial(Text[a]);
+		a++;
+	}
+}
+
 extern "C" void _start(){
     //__BOOTSCREEN__();
     MasterVolume = 100;
