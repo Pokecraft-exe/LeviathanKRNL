@@ -53,7 +53,7 @@ extern "C" void _start(){
     //Making the windowMananger
     puts(SERIALBLUE);puts("Initializing Windowing [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //taskbar
-    
+
     WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
@@ -62,7 +62,7 @@ extern "C" void _start(){
     ctmouse(160, 100);
     WindowMananger.Refresh();
     puts("Refresh\r\n");
-    initRAMDISK();
+    write_serial('r');initRAMDISK();
     puts(SERIALBLUE);puts("Initializing RAMDISK [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     
     /*physics Physics;
