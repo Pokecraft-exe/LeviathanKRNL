@@ -86,14 +86,16 @@ public:
 		if (currentDirIndex == -1) {
 			puts(">>> ");puts(IntToStr(childdir));puts(" directory(s) found in ");puts(fileName);puts(":\n\r");
 			puts("::: ");puts(IntToStr(childfile));puts(" file(s) found in ");puts(fileName);puts(":\r\n");
+			write_serial('h');
 			for (int i; i<=childdir;i++) {
 				puts("> ");puts(childDir[i].fileName);puts("\r\n");
 			}
+			write_serial('i');
 			for (int i;i<=childfile;i++) {
 				puts(": ");puts(childFile[i].name);puts(".");puts(childFile[i].extention);puts("\n\r");
 			}
-		} else
-			childDir[currentDirIndex].ls();
+			write_serial('b');
+		} else childDir[currentDirIndex].ls();
 	}
 };
 
@@ -101,7 +103,6 @@ extern Directory Partition("RAM://");
 
 void initRAMDISK(){
 	puts("Partition on RAM://\n\r");
-	write_serial('h');
 	Partition.ls();
 	write_serial('c');
 }
