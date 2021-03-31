@@ -101,5 +101,7 @@ extern Directory Partition("RAM://");
 
 void initRAMDISK(){
 	puts("Partition on RAM://\n\r");
+	write_serial('h');
 	Partition.ls();
+	write_serial('c');
 }
