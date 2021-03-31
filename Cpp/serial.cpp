@@ -41,3 +41,52 @@ char read_serial() {
  
    return inb(PORT);
 }
+
+void puts(const char* a){
+  uint_8* charPtr = (uint_8*)a;
+  int i = 0;
+  while(*charPtr != 0)
+  {
+    write_serial(*charPtr);
+    charPtr++;
+  }
+}
+
+void debug(const char* Message, bool Status){
+   puts(Message);
+   puts("[");
+   if (Status){
+      puts(SERIALGREEN);
+      puts("OK");
+      puts(SERIALBLUE);
+      puts("]\n\r");
+   }else{
+      puts(SERIALRED);
+      puts("ERROR");
+      puts(SERIALBLUE);
+      puts("]\n\r");
+   }
+}
+
+void debug(const char* Message, int Value){
+   puts(Message);
+   write_serial('\033');
+   write_serial('[');
+   write_serial('1');
+   write_serial(';');
+   write_serial('3');
+   write_serial('2');
+   write_serial('m');
+   puts(IntToStr(Value));
+   write_serial('\033');
+   write_serial('[');
+   write_serial('1');
+   write_serial(';');
+   write_serial('3');
+   write_serial('4');
+   write_serial('m');
+   write_serial('\n');
+   write_serial('\r');
+}
+
+void debug(const char* Message, float Value){puts(Message);puts(FloatToString(Value,5));puts("\n\r");}

@@ -10,7 +10,7 @@
 #include "H/Font.h"
 #include "H/serial.h"
 #include "H/3D.h"
-#include "H/2D.h"
+//#include "H/2D.h"
 #include "H/mouse.h"
 //#include "H/Time.h"
 #include "H/stddef.h"
@@ -25,14 +25,6 @@ void delay(int clocks)
     }
     asm("pop %rax");
     return;
-}
-
-void puts(char* Text){
-	int a=0;
-	while(Text[a] != '\0'){
-		write_serial(Text[a]);
-		a++;
-	}
 }
 
 extern "C" void _start(){
@@ -54,7 +46,7 @@ extern "C" void _start(){
     puts(SERIALBLUE);puts((char*)"Initializing Memory Manangment [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     puts(SERIALBLUE);puts((char*)"Initializing IDT's [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
     write_serial('b');
-    /*mouseinit();
+    //mouseinit();
     puts(SERIALBLUE);puts((char*)"Initializing Mouse [");puts(SERIALRED);puts((char*)"ERROR");puts(SERIALBLUE);puts((char*)"]\n\r");
     // TODO: font, mouse ,buttons and others
     puts(SERIALBLUE);puts((char*)"Initializing KeyBoard [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
@@ -71,23 +63,13 @@ extern "C" void _start(){
     puts("Refresh\r\n");
     initRAMDISK();
     puts(SERIALBLUE);puts((char*)"Initializing RAMDISK [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
-    File File_test;
-    puts("creating file\r\n");
-    File_test.Rename((char*)"Filetest",(char*)"txt");
-    puts("reading '");puts(File_test.name);puts(".");puts(File_test.extention);
-    File_test.Write((char*)"helloworld, this is a test ramdisk file!!!");
-    File_test.Append((char*)"\r\ntext appended");
-    puts("' with content:\n\r");
-    puts(File_test.Read());
-    */
-    physics Physics;
+    
+    /*physics Physics;
     Physics.setWater(200,50);
 	Physics.setWater(201,51);
-    Physics.iterate(2);
+    Physics.iterate(2);*/
     //restart();
     while(1) {   //mainloop
-        Physics.iterate(2);
-        
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}

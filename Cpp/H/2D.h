@@ -48,20 +48,7 @@ public:
 		mol[molnum].Y=Y;
 		molnum++;
 	}
-
-	void write_seriall(char a) {
-	while (is_transmit_empty() == 0);
-	
-	outb(PORT,a);
-	}
-
-	void putss(char* Text){
-		int a=0;
-		while(Text[a] != '\0'){
-			write_seriall(Text[a]);
-			a++;
-		}
-	}
+    
 	
 	bool iterate(int number){
 		if (number > 1){
@@ -71,14 +58,11 @@ public:
             DeskColor(15);
             for (int ii = 0; ii < molnum; ii++)
             {
-				char* buffer = (char*)0xA0000;
-                buffer[320*mol[ii].Y+mol[ii].X] = mol[ii].color;
+                Screen1.buffer[320*mol[ii].Y+mol[ii].X] = mol[ii].color;
 				int X = 160-mol[ii].X;
 				int Y = 100-mol[ii].Y;
-                mol[ii].X = set_operator('+',15/X);
-                mol[ii].Y = set_operator('+',15/Y);
-				putss(IntToStr(mol[ii].X));
-				putss(IntToStr(mol[ii].Y));
+                mol[ii].X = set_operator('+',15/X);                                                        
+                mol[ii].Y = set_operator('+',15/Y);     
             }
 	    }
     }
