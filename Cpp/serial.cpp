@@ -44,10 +44,9 @@ char read_serial() {
 
 void puts(const char* a){
   int i = 0;
-  while(a[i] != 0)
+  for(i = 0; a[i] != 0; i++)
   {
     write_serial(a[i]);
-    i++;
   }
 }
 
