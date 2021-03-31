@@ -38,21 +38,22 @@ extern "C" void _start(){
     MainKeyboardHandler = Keyboardhandler;
     init_serial();
     write_serial('a');
-    puts(SERIALBLUE);puts((char*)"Initializing Serial [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
-    puts(SERIALBLUE);puts((char*)"Initializing VGA [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
-    puts(SERIALBLUE);puts((char*)"Initializing PAGING [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
+    puts(SERIALBLUE);puts("Initializing Serial [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
+    puts(SERIALBLUE);puts("Initializing VGA [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
+    puts(SERIALBLUE);puts("Initializing PAGING [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
-    puts(SERIALBLUE);puts((char*)"Initializing Heap [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
-    puts(SERIALBLUE);puts((char*)"Initializing Memory Manangment [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
-    puts(SERIALBLUE);puts((char*)"Initializing IDT's [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
+    puts(SERIALBLUE);puts("Initializing Heap [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
+    puts(SERIALBLUE);puts("Initializing Memory Manangment [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
+    puts(SERIALBLUE);puts("Initializing IDT's [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     write_serial('b');
     //mouseinit();
-    puts(SERIALBLUE);puts((char*)"Initializing Mouse [");puts(SERIALRED);puts((char*)"ERROR");puts(SERIALBLUE);puts((char*)"]\n\r");
+    puts(SERIALBLUE);puts("Initializing Mouse [");puts(SERIALRED);puts("ERROR");puts(SERIALBLUE);puts("]\n\r");
     // TODO: font, mouse ,buttons and others
-    puts(SERIALBLUE);puts((char*)"Initializing KeyBoard [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
+    puts(SERIALBLUE);puts("Initializing KeyBoard [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //Making the windowMananger
-    puts(SERIALBLUE);puts((char*)"Initializing Windowing [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
+    puts(SERIALBLUE);puts("Initializing Windowing [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //taskbar
+    
     WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
@@ -62,7 +63,7 @@ extern "C" void _start(){
     WindowMananger.Refresh();
     puts("Refresh\r\n");
     initRAMDISK();
-    puts(SERIALBLUE);puts((char*)"Initializing RAMDISK [");puts(SERIALGREEN);puts((char*)"Ok");puts(SERIALBLUE);puts((char*)"]\n\r");
+    puts(SERIALBLUE);puts("Initializing RAMDISK [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     
     /*physics Physics;
     Physics.setWater(200,50);
