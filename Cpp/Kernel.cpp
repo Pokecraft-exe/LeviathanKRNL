@@ -54,13 +54,13 @@ extern "C" void _start(){
     puts(SERIALBLUE);puts("Initializing Windowing [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //taskbar
 
-    WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
+    /*WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
-    ctmouse(160, 100);
-    WindowMananger.Refresh();
+    //ctmouse(160, 100);
+    WindowMananger.Refresh();*/
     puts("Refresh\r\n");
     write_serial('r');initRAMDISK();
     puts(SERIALBLUE);puts("Initializing RAMDISK [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
