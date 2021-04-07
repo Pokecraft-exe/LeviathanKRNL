@@ -37,7 +37,6 @@ extern "C" void _start(){
     IDT MainInterrupt;
     MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
-
     init_serial();
     write_serial('a');
     puts(SERIALBLUE);puts("Initializing Serial [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
