@@ -43,7 +43,7 @@ extern "C" void _start(){
     for(int i;a[i]!=0;i++){
         write_serial(a[i]);
     }
-    free(&a)
+    free(&a);
     for(int i;b[i]!=0;i++){
         write_serial(b[i]);
     }
