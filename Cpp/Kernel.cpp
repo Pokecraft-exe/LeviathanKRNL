@@ -35,13 +35,17 @@ extern "C" void _start(){
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
     InitHeap(0x100000, 0x100000);
     IDT MainInterrupt;
-    //MainInterrupt.InitIDT();
+    MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
     init_serial();
     char* a=SERIALBLUE;
-    strncat(a,"Initializing Serial [OK]\n\rInitializing VGA [OK]\n\r",strlen("Initializing Serial [OK]\n\rInitializing VGA [OK]\n\r"));
+    char* b="Initializing Serial [OK]\n\rInitializing VGA [OK]\n\r";
     for(int i;a[i]!=0;i++){
         write_serial(a[i]);
+    }
+    free(&a)
+    for(int i;b[i]!=0;i++){
+        write_serial(b[i]);
     }
     //puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
     puts(SERIALBLUE);puts("Initializing Heap [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
