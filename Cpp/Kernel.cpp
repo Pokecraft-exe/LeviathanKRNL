@@ -35,7 +35,7 @@ extern "C" void _start(){
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
     InitHeap(0x100000, 0x100000);
     IDT MainInterrupt;
-    MainInterrupt.InitIDT();
+    //MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
     init_serial();
     char* a=SERIALBLUE;
