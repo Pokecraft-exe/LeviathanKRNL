@@ -33,6 +33,7 @@ public:
 };
 
 struct interrupt_frame;
+void* malloc(uint_64 size);
 
 struct IDTR{
   uint16_t Limit;
