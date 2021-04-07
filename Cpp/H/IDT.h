@@ -41,6 +41,7 @@ struct IDTR{
 }__attribute__((packed));
 
 __attribute__((interrupt)) void isr1_handler(interrupt_frame* frame);
+__attribute__((interrupt)) void pagefault(struct interrupt_frame* frame)
 
 class IDT
 {
