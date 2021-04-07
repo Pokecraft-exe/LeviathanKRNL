@@ -61,8 +61,8 @@ public:
 
     RemapPic(0,0);
 
-    PIC1_D.Write((uint8_t)0b11111101);
-    PIC2_D.Write((uint8_t)0b11111111);
+    PIC1_D().Write((uint8_t)0b11111101);
+    PIC2_D().Write((uint8_t)0b11111111);
 
     asm ("sti");
     asm ("cli");
