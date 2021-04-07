@@ -34,8 +34,10 @@ extern "C" void _start(){
     //PlaySound(469,MasterVolume);
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
     InitHeap(0x100000, 0x100000);
-    InitializeIDT();
+    IDT MainInterrupt;
+    MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
+
     init_serial();
     write_serial('a');
     puts(SERIALBLUE);puts("Initializing Serial [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
@@ -62,7 +64,7 @@ extern "C" void _start(){
     //ctmouse(160, 100);
     WindowMananger.Refresh();*/
     puts("Refresh\r\n");
-    write_serial('r');initRAMDISK();
+    write_serial('r');//initRAMDISK();
     puts(SERIALBLUE);puts("Initializing RAMDISK [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     
     /*physics Physics;

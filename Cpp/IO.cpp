@@ -22,8 +22,8 @@ void RemapPic(uint8 master, uint8 slave){
     outb(PIC1_COMMAND, ICW1_INIT | ICW1_ICW4);
     outb(PIC2_COMMAND, ICW1_INIT | ICW1_ICW4);
 
-    outb(PIC1_DATA, master);
-    outb(PIC2_DATA, slave);
+    outb(PIC1_DATA, 0);
+    outb(PIC2_DATA, 8);
 
     outb(PIC1_DATA, 4);
     outb(PIC2_DATA, 2);
