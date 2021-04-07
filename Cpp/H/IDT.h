@@ -38,7 +38,7 @@ struct IDTR{
   uint64_t Offset;
 }__attribute__((packed));
 
-__attribute__((interrupt)) void isr1_handler()
+__attribute__((interrupt)) void isr1_handler();
 
 class IDT
 {
