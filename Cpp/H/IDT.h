@@ -27,7 +27,7 @@ class IDT64{
     offset |= (uint64_t)offset_low;
     offset |= (uint64_t)(offset_mid << 16);
     offset |= (uint64_t)(offset_high << 32);
-    return offset
+    return offset;
   }
 };
 
@@ -69,5 +69,5 @@ public:
 };
 
 
-extern void(*MainKeyboardHandler)(uint_8 scanCode, uint_
+extern void(*MainKeyboardHandler)(uint_8 scanCode, uint_8 chr);
 
