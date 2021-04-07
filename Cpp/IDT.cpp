@@ -45,24 +45,30 @@ int panic(){
 	write_serial('r');
 	write_serial('t');
 	write_serial(' ');
-	write_serial('i');
-	write_serial('n');
-	write_serial(' ');
-	write_serial('f');
-	write_serial('e');
 	write_serial('w');
-	write_serial(' ');
-	write_serial('s');
+	write_serial('h');
 	write_serial('e');
-	write_serial('c');
-	write_serial('o');
 	write_serial('n');
-    write_serial('d');
+	write_serial(' ');
+	write_serial('y');
+	write_serial('o');
+	write_serial('u');
+	write_serial(' ');
+	write_serial('p');
+	write_serial('r');
+	write_serial('e');
+    write_serial('s');
 	write_serial('s');
+	write_serial(' ');
+	write_serial('a');
+	write_serial(' ');
+	write_serial('k');
+	write_serial('e');
+	write_serial('y');
 	write_serial('.');
 	write_serial('.');
 	write_serial('.');
-	for (int i = 0; i != 200000000; i++);
+	while(read_serial() == '\0')continue
 	restart();
 	return 0;
 }
@@ -86,6 +92,8 @@ __attribute__((interrupt)) void pagefault(struct interrupt_frame* frame){
 	write_serial('l');
 	write_serial('t');
 	write_serial('!');
+	write_serial('\n');
+	write_serial('\r');
 	panic();
 	while(true);
 }
