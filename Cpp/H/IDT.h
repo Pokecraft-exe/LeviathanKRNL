@@ -10,6 +10,7 @@
 #define IDT_TG 0b10001111
 
 class IDT64{
+public:
   uint16_t offset_low;
   uint16_t selector;
   uint8_t ist;
