@@ -51,7 +51,7 @@ public:
     idtr.Limit = 0x0FFF;
     idtr.Offset = malloc(4096);
 
-    IDT64 Keyboard = (IDT64)(idtr.Offset +,0x21 * sizeof(IDT64));
+    IDT64* Keyboard = (IDT64)(idtr.Offset + 0x21 * sizeof(IDT64));
     Keyboard->Set_Offset((uint64_t)isr1_handler);
     Keyboard->types_attr = IDT_IG;
     Keyboard->selector = 0x08;
