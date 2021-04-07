@@ -57,7 +57,7 @@ public:
     idtr.Limit = 0x0FFF;
     idtr.Offset = (uint64_t)malloc(4096);
 
-    SetIDTGate((void*)isr1_handler, 0x21, IDT_IG, 0x08)
+    SetIDTGate((void*)isr1_handler, 0x21, IDT_IG, 0x08);
 
     asm ("lidt %0" :: "m"(idtr));
 
