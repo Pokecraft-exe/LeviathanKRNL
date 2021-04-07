@@ -68,7 +68,7 @@ int panic(){
 	write_serial('.');
 	write_serial('.');
 	write_serial('.');
-	while(read_serial() == '\0')continue
+	while(read_serial() == '\0')continue;
 	restart();
 	return 0;
 }
