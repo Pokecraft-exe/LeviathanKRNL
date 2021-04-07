@@ -45,8 +45,8 @@ class IDT
 {
 private:
   IDTR idtr;
-  Port8Bit PIC1_D(0x21);
-  Port8Bit PIC2_D(0xA1);
+  Port8Bit PIC1_D((uint16_t)0x21);
+  Port8Bit PIC2_D((uint16_t)0xA1);
 public:
   InitIDT(){
     idtr.Limit = 0x0FFF;
