@@ -45,8 +45,8 @@ class IDT
 {
 private:
   IDTR idtr;
-  Port8Bit PIC1_DATA(PIC1_DATA);
-  Port8Bit PIC2_DATA(PIC2_DATA);
+  Port8Bit PIC1_D(PIC1_DATA);
+  Port8Bit PIC2_D(PIC2_DATA);
 public:
   InitIDT(){
     idtr.Limit = 0x0FFF;
@@ -61,8 +61,8 @@ public:
 
     RemapPic(0,0);
 
-    PIC1_DATA.Write((uint8_t)0b11111101);
-    PIC2_DATA.Write((uint8_t)0b11111111);
+    PIC1_D.Write((uint8_t)0b11111101);
+    PIC2_D.Write((uint8_t)0b11111111);
 
     asm ("sti");
     asm ("cli");
