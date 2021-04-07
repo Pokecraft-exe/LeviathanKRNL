@@ -62,7 +62,7 @@ int panic(){
 	write_serial('.');
 	write_serial('.');
 	write_serial('.');
-	for (int i = 0, i != 200000000; i++);
+	for (int i = 0; i != 200000000; i++);
 	restart();
 	return 0;
 }
