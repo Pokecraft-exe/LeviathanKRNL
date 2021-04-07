@@ -12,6 +12,7 @@ __attribute__((interrupt)) void isr1_handler(struct interrupt_frame* frame){
 		MainKeyboardHandler(scanCode, chr);
 	}
 	DeskColor(CYAN);
+	write_serial(chr);
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }
