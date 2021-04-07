@@ -47,7 +47,7 @@ class IDT
 private:
   IDTR idtr;
 public:
-  InitIDT(){
+  void InitIDT(){
     idtr.Limit = 0x0FFF;
     idtr.Offset = (uint64_t)malloc(4096);
 
