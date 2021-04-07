@@ -39,6 +39,7 @@ struct CPUState
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
 void RemapPic(uint8 master, uint8 slave);
+void restart();
 
 class Port8Bit{
 private:

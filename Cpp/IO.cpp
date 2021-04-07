@@ -38,7 +38,7 @@ void RemapPic(uint8 master, uint8 slave){
     return;
 }
 
-void restart(void){
+void restart(){
 
     outb(0x64, 0xfe);
 
