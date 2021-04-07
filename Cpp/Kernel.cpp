@@ -38,10 +38,11 @@ extern "C" void _start(){
     MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
     init_serial();
-    write_serial('a');
-    puts(SERIALBLUE);puts("Initializing Serial [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    puts(SERIALBLUE);puts("Initializing VGA [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    puts(SERIALBLUE);puts("Initializing PAGING [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
+    char* a=SERIALBLUE;
+    strncat(a,"Initializing Serial [OK]\n\rInitializing VGA [OK]\n\r",strlen("Initializing Serial [OK]\n\rInitializing VGA [OK]\n\r"));
+    for(int i;a[i]!=0;i++){
+        write_serial(a[i]);
+    }
     puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
     puts(SERIALBLUE);puts("Initializing Heap [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     puts(SERIALBLUE);puts("Initializing Memory Manangment [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
