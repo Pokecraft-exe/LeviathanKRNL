@@ -39,14 +39,14 @@ struct IDTR{
   uint64_t Offset;
 }__attribute__((packed));
 
-__attribute__((interrupt)) void isr1_handler();
+__attribute__((interrupt)) void isr1_handler(interrupt_frame frame);
 
 class IDT
 {
 private:
   IDTR idtr;
-  Port8Bit PIC1_D(PIC1_DATA);
-  Port8Bit PIC2_D(PIC2_DATA);
+  Port8Bit PIC1_D(0x21);
+  Port8Bit PIC2_D(0xA1);
 public:
   InitIDT(){
     idtr.Limit = 0x0FFF;
