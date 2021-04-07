@@ -43,7 +43,7 @@ extern "C" void _start(){
     for(int i;a[i]!=0;i++){
         write_serial(a[i]);
     }
-    puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
+    //puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
     puts(SERIALBLUE);puts("Initializing Heap [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     puts(SERIALBLUE);puts("Initializing Memory Manangment [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     puts(SERIALBLUE);puts("Initializing IDT's [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
