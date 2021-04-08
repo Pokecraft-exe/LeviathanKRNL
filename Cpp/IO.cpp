@@ -14,25 +14,19 @@ unsigned char inb(unsigned short port){
 
 CPUState GetState(){
   CPUState CPU;
-  CPU.eax = asm volatile ("eax");
-  CPU.ebx = asm("abx");
-  CPU.ecx = asm("ecx");
-  CPU.edx = asm("edx");
-  CPU.esi = asm("esi");
-  CPU.edi = asm("edi");
-  CPU.ebp = asm("abp");
+  CPU.eax asm("eax");
+  CPU.ebx asm("abx");
+  CPU.ecx asm("ecx");
+  CPU.edx asm("edx");
+  CPU.esi asm("esi");
+  CPU.edi asm("edi");
+  CPU.ebp asm("abp");
 
-  CPU.cr0 = asm("cr0");
-  CPU.cr2 = asm("cr2");
-  CPU.cr3 = asm("cr3");
-    
-  CPU.error = asm("error");
+  CPU.cr0 asm("cr0");
+  CPU.cr2 asm("cr2");
+  CPU.cr3 asm("cr3");
 
-  CPU.eip = asm("eip");
-  CPU.cs = asm("cs");
-  CPU.eflags = asm("eflags");
-  CPU.esp = asm("esp");
-  CPU.ss = asm("ss");
+  CPU.eip asm("eip");
   return CPU;
 }
 

@@ -12,14 +12,14 @@
 
 struct CPUState
     {
-        uint32_t eax;
-        uint32_t ebx;
-        uint32_t ecx;
-        uint32_t edx;
+        register unsigned long eax;
+        register unsigned long ebx;
+        register unsigned long ecx;
+        register unsigned long edx;
 
-        uint32_t esi;
-        uint32_t edi;
-        uint32_t ebp;
+        register unsigned long esi;
+        register unsigned long edi;
+        register unsigned long ebp;
 
         /*
         common::uint32_t gs;
@@ -27,17 +27,17 @@ struct CPUState
         common::uint32_t es;
         common::uint32_t ds;
         */
-        uint32_t cr0;
-        uint32_t cr2;
-        uint32_t cr3;
+        register unsigned long cr0;
+        register unsigned long cr2;
+        register unsigned long cr3;
     
-        uint32_t error;
+        register unsigned long error;
 
-        uint32_t eip;
-        uint32_t cs;
-        uint32_t eflags;
-        uint32_t esp;
-        uint32_t ss;        
+        register unsigned long eip;
+        register unsigned long cs;
+        register unsigned long eflags;
+        register unsigned long esp;
+        register unsigned long ss;        
     } __attribute__((packed));
     
 void outb(unsigned short port, unsigned char val);
