@@ -14,7 +14,7 @@ unsigned char inb(unsigned short port){
 
 CPUState GetState(){
   CPUState CPU;
-  CPU.eax = asm("eax");
+  CPU.eax = asm volatile ("eax");
   CPU.ebx = asm("abx");
   CPU.ecx = asm("ecx");
   CPU.edx = asm("edx");
