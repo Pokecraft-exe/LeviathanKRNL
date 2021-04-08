@@ -1,5 +1,9 @@
 #include "H/IDT.h"
 
+void printK(const char* a){
+	for (int i=0;a[i]!='\0';i++) write_serial();
+}
+
 void(*MainKeyboardHandler)(uint_8 scanCode, uint_8 chr);
 __attribute__((interrupt)) void isr1_handler(struct interrupt_frame* frame){
 	uint_8 scanCode = inb(0x60);
@@ -17,7 +21,8 @@ __attribute__((interrupt)) void isr1_handler(struct interrupt_frame* frame){
 	outb(0xa0, 0x20);
 }
 
-int panic(){
+int panic(const char* qrcode, CPUState state){
+	printK(qrcode);
 	write_serial('Y');
 	write_serial('o');
 	write_serial('u');
@@ -94,6 +99,7 @@ __attribute__((interrupt)) void pagefault(struct interrupt_frame* frame){
 	write_serial('!');
 	write_serial('\n');
 	write_serial('\r');
-	panic();
+	panic("▄▄▄▄▄▄▄  ▄     ▄▄  ▄  ▄▄▄▄▄▄▄\n\r█ ▄▄▄ █ ▀█▄█▀ ▄ ▄▀█   █ ▄▄▄ █\n\r█ ███ █ ▀▀▄▀▄▄▄▄   ▄█ █ ███ █\n\r█▄▄▄▄▄█ █ █ ▄▀█▀█ █ ▄ █▄▄▄▄▄█\n\r▄▄▄▄▄ ▄▄▄▄▄ █▀▄█  ▀▄ ▄ ▄ ▄ ▄ \n\r█▄▀  ▀▄▀██ ▄▄  █▀▄▀▀█▄▀██   ▀\n\r█ ▀ ▄ ▄█▄█▀█  ▀▄█  ▄▄▄▀▀ █▄▀ \n\r▀  ▄ ▀▄  ▀▀ ▀██▄ ▄▀ ▀▀█▀▀▄▄ ▀\n\r▀▄█▀ ▀▄▀█▀█ █▀▄██▄█▄▀▀▀▄▀▄▄▀ \n\r█ █▄█▄▄▀▀▀ ▄▄  █▀   █▀▀█▀ █ ▀\n\r█  █ ▀▄▀██▄█  ▀▄█▄ ██▄██▄ ▄█▄\n\r▄▄▄▄▄▄▄ █ █ ▀██▄██▀▄█ ▄ ███▀▀\n\r█ ▄▄▄ █ ▄ ▀ █▀▄▄▄▄▀ █▄▄▄█ ▄▄▀\n\r█ ███ █ █▄█▄▄  ▄▀▀▄█ ▄▄▄▄███▀\n\r█▄▄▄▄▄█ █▄ █  ▀██ ▀▄▀▄▀▄▄▀▄▀ \n\r
+",GetState());
 	while(true);
 }

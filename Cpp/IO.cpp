@@ -12,6 +12,30 @@ unsigned char inb(unsigned short port){
   return returnVal;
 }
 
+CPUState GetState(){
+  CPUState CPU;
+  CPU.eax = asm("eax");
+  CPU.ebx = asm("abx");
+  CPU.ecx = asm("ecx");
+  CPU.edx = asm("edx");
+  CPU.esi = asm("esi");
+  CPU.edi = asm("edi");
+  CPU.ebp = asm("abp");
+
+  CPU.cr0 = asm("cr0");
+  CPU.cr2 = asm("cr2");
+  CPU.cr3 = asm("cr3");
+    
+  CPU.error = asm("error");
+
+  CPU.eip = asm("eip");
+  CPU.cs = asm("cs");
+  CPU.eflags = asm("eflags");
+  CPU.esp = asm("esp");
+  CPU.ss = asm("ss");
+  return CPU;
+}
+
 void RemapPic(uint8 master, uint8 slave){
 
     uint8 a1, a2;

@@ -27,6 +27,10 @@ struct CPUState
         common::uint32_t es;
         common::uint32_t ds;
         */
+        uint32_t cr0;
+        uint32_t cr2;
+        uint32_t cr3;
+    
         uint32_t error;
 
         uint32_t eip;
@@ -39,6 +43,7 @@ struct CPUState
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
 void RemapPic(uint8 master, uint8 slave);
+CPUState GetState();
 void restart();
 
 class Port8Bit{
