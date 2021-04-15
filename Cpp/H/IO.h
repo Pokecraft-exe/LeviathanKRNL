@@ -9,17 +9,18 @@
 #define ICW1_INIT 0x10
 #define ICW1_ICW4 0x01
 #define ICW4_8086 0x01
+#define StackP 0x7bff
 
 struct CPUState
     {
-        register unsigned long eax;
-        register unsigned long ebx;
-        register unsigned long ecx;
-        register unsigned long edx;
+        unsigned long eax;
+        unsigned long ebx;
+        unsigned long ecx;
+        unsigned long edx;
 
-        register unsigned long esi;
-        register unsigned long edi;
-        register unsigned long ebp;
+        unsigned long esi;
+        unsigned long edi;
+        unsigned long ebp;
 
         /*
         common::uint32_t gs;
@@ -27,17 +28,17 @@ struct CPUState
         common::uint32_t es;
         common::uint32_t ds;
         */
-        register unsigned long cr0;
-        register unsigned long cr2;
-        register unsigned long cr3;
+        unsigned long cr0;
+        unsigned long cr2;
+        unsigned long cr3;
     
-        register unsigned long error;
+        unsigned long error;
 
-        register unsigned long eip;
-        register unsigned long cs;
-        register unsigned long eflags;
-        register unsigned long esp;
-        register unsigned long ss;        
+        unsigned long eip;
+        unsigned long cs;
+        unsigned long eflags;
+        unsigned long esp;
+        unsigned long ss;        
     } __attribute__((packed));
     
 void outb(unsigned short port, unsigned char val);
