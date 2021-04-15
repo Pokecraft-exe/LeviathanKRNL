@@ -1,7 +1,7 @@
 #include "H/IDT.h"
 
 void printK(const char* a){
-	for (int i=0;a[i]!='\0';i++) write_serial();
+	for (int i=0;a[i]!='\0';i++) write_serial(a[i]);
 }
 
 void(*MainKeyboardHandler)(uint_8 scanCode, uint_8 chr);
