@@ -22,7 +22,7 @@ __attribute__((interrupt)) void isr1_handler(struct interrupt_frame* frame){
 }
 
 int panic(const char* qrcode, CPUState state){
-	printK(qrcode);
+	for (int i=0;qrcode[i]!='\0';i++) write_serial(qrcode[i]);
 	write_serial('Y');
 	write_serial('o');
 	write_serial('u');
