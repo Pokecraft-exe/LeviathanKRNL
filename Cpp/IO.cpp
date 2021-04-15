@@ -13,7 +13,7 @@ unsigned char inb(unsigned short port){
 }
 
 CPUState GetState(){
-  CPUState CPU;
+  CPUState CPU;/*
   CPU.eax asm("eax");
   CPU.ebx asm("abx");
   CPU.ecx asm("ecx");
@@ -26,7 +26,7 @@ CPUState GetState(){
   CPU.cr2 asm("cr2");
   CPU.cr3 asm("cr3");
 
-  CPU.eip asm("eip");
+  CPU.eip asm("eip");*/
   return CPU;
 }
 
