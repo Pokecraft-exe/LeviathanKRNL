@@ -1,7 +1,12 @@
 #include "H/IDT.h"
 
 void printK(const char* a){
-	for (int i=0;a[i]!='\0';i++) write_serial(a[i]);
+	unsigned int i;
+	while (a[i] != '\0'){
+		write_serial(a[i]);
+		write_serial('c');
+		i++;
+	}
 }
 
 void(*MainKeyboardHandler)(uint_8 scanCode, uint_8 chr);
@@ -22,7 +27,8 @@ __attribute__((interrupt)) void isr1_handler(struct interrupt_frame* frame){
 }
 
 int panic(CPUState state){
-	//for (int i=0;qrcode[i]!='\0';i++) write_serial(qrcode[i]);
+	//for (int i=0;qrcode[i]!='\0';i++) write_serial(qrcode[i]
+	printK("hello world!");
 	write_serial('Y');
 	write_serial('o');
 	write_serial('u');
