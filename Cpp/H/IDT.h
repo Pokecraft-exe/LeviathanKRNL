@@ -66,7 +66,7 @@ public:
     asm ("lidt %0" :: "m"(idtr));
 
     RemapPic(0,0);
-    while(1);
+    
     outb(0x21, 0b11111101);
     outb(0xA1, 0b11111111);
     while(1);
