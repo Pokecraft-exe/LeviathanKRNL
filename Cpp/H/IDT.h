@@ -62,7 +62,7 @@ public:
     Keyboard->Set_Offset((uint64_t)isr1_handler);
     Keyboard->types_attr = IDT_IG;
     Keyboard->selector = 0x08;
-    while(1);
+    
     asm ("lidt %0" :: "m"(idtr));
     while(1);
     RemapPic(0,0);
