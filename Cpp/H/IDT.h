@@ -53,13 +53,11 @@ public:
     asm ("cli");
     idtr.Limit = 0x0FFF;
     idtr.Offset = (uint64_t)IDT;
-    
-    IDT[0xE] = (IDT64*)(idtr.Offset + 0xE * sizeof(IDT64));
+
     IDT[0xE]->Set_Offset((uint64_t)pagefault);
     IDT[0xE]->types_attr = IDT_IG;
     IDT[0xE]->selector = 0x08;
-    
-    IDT[0x21] = (IDT64*)(idtr.Offset + 0x21 * sizeof(IDT64));
+
     IDT[0x21]->Set_Offset((uint64_t)isr1_handler);
     IDT[0x21]->types_attr = IDT_IG;
     IDT[0x21]->selector = 0x08;
