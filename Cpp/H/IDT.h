@@ -52,7 +52,7 @@ public:
     asm ("cli");
     idtr.Limit = 0x0FFF;
     idtr.Offset = (uint64_t)malloc(4096);
-    while(1);
+    
     IDT64* PF = (IDT64*)(idtr.Offset + 0xE * sizeof(IDT64));
     PF->Set_Offset((uint64_t)pagefault);
     PF->types_attr = IDT_IG;
