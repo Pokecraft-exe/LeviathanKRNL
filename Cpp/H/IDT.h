@@ -16,7 +16,7 @@ public:
   uint8_t ist;
   uint8_t types_attr;
   uint16_t offset_mid;
-  uint32_t offset_high;
+  uint64_t offset_high;
   uint32_t zero;
   void Set_Offset(uint64_t Offset){
     offset_low= (uint16_t)(Offset & 0x000000000000ffff);
