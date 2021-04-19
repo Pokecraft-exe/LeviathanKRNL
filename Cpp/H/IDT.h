@@ -16,7 +16,7 @@ public:
   uint8_t ist;
   uint8_t types_attr;
   uint16_t offset_mid;
-  uint64_t offset_high;
+  uint32_t offset_high;
   uint32_t zero;
   void Set_Offset(uint64_t Offset){
     offset_low= (uint16_t)(Offset & 0x000000000000ffff);
@@ -52,24 +52,24 @@ public:
     asm ("cli");
     idtr.Limit = 0x0FFF;
     idtr.Offset = (uint64_t)malloc(4096);
-
+    while(1);
     IDT64* PF = (IDT64*)(idtr.Offset + 0xE * sizeof(IDT64));
     PF->Set_Offset((uint64_t)pagefault);
     PF->types_attr = IDT_IG;
     PF->selector = 0x08;
-
+    while(1);
     IDT64* Keyboard = (IDT64*)(idtr.Offset + 0x21 * sizeof(IDT64));
     Keyboard->Set_Offset((uint64_t)isr1_handler);
     Keyboard->types_attr = IDT_IG;
     Keyboard->selector = 0x08;
-
+    while(1);
     asm ("lidt %0" :: "m"(idtr));
-
+    while(1);
     RemapPic(0,0);
-
+    while(1);
     outb(0x21, 0b11111101);
     outb(0xA1, 0b11111111);
-
+    while(1);
     asm ("sti");
   }
 };
