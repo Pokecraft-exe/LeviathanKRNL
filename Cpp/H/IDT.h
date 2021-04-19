@@ -47,20 +47,20 @@ class IDT
 {
 private:
   IDTR idtr;
-  IDT64* IDT[256];
+  IDT64* IDTA[256];
 public:
   void InitIDT(){
     asm ("cli");
-    idtr.Limit = 0x0FFF;
-    idtr.Offset = (uint64_t)IDT;
+    idtr.Limit = (int)sizeof(IDTA)-1;
+    idtr.Offset = (uint64_t)IDTA;
 
-    IDT[0xE]->Set_Offset((uint64_t)pagefault);
-    IDT[0xE]->types_attr = IDT_IG;
-    IDT[0xE]->selector = 0x08;
+    IDTA[0xE]->Set_Offset((uint64_t)pagefault);
+    IDTA[0xE]->types_attr = IDT_IG;
+    IDTA[0xE]->selector = 0x08;
 
-    IDT[0x21]->Set_Offset((uint64_t)isr1_handler);
-    IDT[0x21]->types_attr = IDT_IG;
-    IDT[0x21]->selector = 0x08;
+    IDTA[0x21]->Set_Offset((uint64_t)isr1_handler);
+    IDTA[0x21]->types_attr = IDT_IG;
+    IDTA[0x21]->selector = 0x08;
     
     asm ("lidt %0" :: "m"(idtr));
 
