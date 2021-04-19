@@ -16,7 +16,7 @@ public:
   uint8_t ist;
   uint8_t types_attr;
   uint16_t offset_mid;
-  uint64_t offset_high;
+  uint32_t offset_high;
   uint32_t zero;
   void Set_Offset(uint64_t Offset){
     offset_low= (uint16_t)(Offset & 0x000000000000ffff);
@@ -30,7 +30,7 @@ public:
     offset |= (uint64_t)(offset_high << 32);
     return offset;
   }
-};
+}__attribute__((packed));
 
 struct interrupt_frame;
 void* malloc(uint_64 size);
@@ -49,6 +49,7 @@ private:
   IDTR idtr;
 public:
   void InitIDT(){
+    asm ("cli");
     idtr.Limit = 0x0FFF;
     idtr.Offset = (uint64_t)malloc(4096);
 
@@ -70,7 +71,6 @@ public:
     outb(0xA1, 0b11111111);
 
     asm ("sti");
-    asm ("cli");
   }
 };
 
