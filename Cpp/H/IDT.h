@@ -57,7 +57,7 @@ public:
     PF->Set_Offset((uint64_t)pagefault);
     PF->types_attr = IDT_IG;
     PF->selector = 0x08;
-    while(1);
+    
     IDT64* Keyboard = (IDT64*)(idtr.Offset + 0x21 * sizeof(IDT64));
     Keyboard->Set_Offset((uint64_t)isr1_handler);
     Keyboard->types_attr = IDT_IG;
