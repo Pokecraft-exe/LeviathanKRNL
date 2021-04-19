@@ -51,7 +51,7 @@ private:
 public:
   void InitIDT(){
     asm ("cli");
-    idtr.Limit = (int)sizeof(IDTA)-1;
+    idtr.Limit = (uint16_t)sizeof(IDTA)-1;
     idtr.Offset = (uint64_t)IDTA;
 
     IDTA[0xE]->Set_Offset((uint64_t)pagefault);
