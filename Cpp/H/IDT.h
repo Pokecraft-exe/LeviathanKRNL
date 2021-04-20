@@ -51,7 +51,7 @@ private:
 public:
   void InitIDT(){
     idtr.Limit = 0x0FFF;
-    idtr.Offset = (uint64_t)IDTA;
+    idtr.Offset = (uint64_t)malloc(4096);
 
     IDTA[0xE]->Set_Offset((uint64_t)pagefault);
     IDTA[0xE]->types_attr = IDT_IG;
