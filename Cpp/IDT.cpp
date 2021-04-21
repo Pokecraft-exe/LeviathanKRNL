@@ -133,11 +133,13 @@ int NO_ERROR_MODE(){
 
 		if (scanCode < 0x3A){
 			chr = KBSet1::ScanCodeLookupTable[scanCode];
+			write_serial(chr);
 		}
 		if (MainKeyboardHandler != 0) {
 			MainKeyboardHandler(scanCode, chr);
+			write_serial(chr);
 		}
-		write_serial(chr);
+		
 /*
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
         PlaySound(1570,MasterVolume);for (int ii = 0; ii<200000;ii++);{}
