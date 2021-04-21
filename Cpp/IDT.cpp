@@ -112,7 +112,6 @@ __attribute__((interrupt)) void pagefault(struct interrupt_frame* frame){
 }
 
 int NO_ERROR_MODE(){
-	void _start(){
     //__BOOTSCREEN__();
 
     WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
