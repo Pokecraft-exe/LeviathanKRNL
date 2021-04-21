@@ -46,22 +46,24 @@ __attribute__((interrupt)) void pagefault(struct interrupt_frame* frame);
 class IDT
 {
 private:
-  IDTR idtr;
-  IDT64* IDTA[256];
+  IDTR idtrr;
+  //IDT64* IDTA[256];
 public:
   void InitIDT(){
-    idtr.Limit = 0x0FFF;
-    idtr.Offset = (uint64_t)malloc(4096);
+    idtrr.Limit = 0x0FFF;
+    idtrr.Offset = (uint64_t)malloc(4096);
 
-    IDTA[0xE]->Set_Offset((uint64_t)pagefault);
-    IDTA[0xE]->types_attr = IDT_IG;
-    IDTA[0xE]->selector = 0x08;
+    IDT64* PF = (IDT64*)(idtrr.Offset + 0xE * sizeof(IDT64));
+    PF->Set_Offset((uint64_t)pagefault);
+    PF->types_attr = IDT_IG;
+    PF->selector = 0x08;
 
-    IDTA[0x21]->Set_Offset((uint64_t)isr1_handler);
+    IDT64* KB = (IDT64*)(idtrr.Offset + 0x21 * sizeof(IDT64));
+    KB->Set_Offset((uint64_t)isr1_handler);
     IDTA[0x21]->types_attr = IDT_IG;
     IDTA[0x21]->selector = 0x08;
     
-    asm ("lidt %0" :: "m"(idtr));
+    asm ("lidt %0" :: "m"(idtrr));
 
     RemapPic(0,0);
     
