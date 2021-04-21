@@ -60,8 +60,8 @@ public:
 
     IDT64* KB = (IDT64*)(idtrr.Offset + 0x21 * sizeof(IDT64));
     KB->Set_Offset((uint64_t)isr1_handler);
-    IDTA[0x21]->types_attr = IDT_IG;
-    IDTA[0x21]->selector = 0x08;
+    KB->types_attr = IDT_IG;
+    KB->selector = 0x08;
     
     asm ("lidt %0" :: "m"(idtrr));
 
