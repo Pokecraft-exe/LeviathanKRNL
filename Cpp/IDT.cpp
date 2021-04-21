@@ -20,7 +20,6 @@ __attribute__((interrupt)) void isr1_handler(struct interrupt_frame* frame){
 	if (MainKeyboardHandler != 0) {
 		MainKeyboardHandler(scanCode, chr);
 	}
-	DeskColor(CYAN);
 	write_serial(chr);
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
@@ -83,7 +82,7 @@ int panic(CPUState state){
 	write_serial('\r');
 	//write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial(' ');write_serial('▄');write_serial(' ');write_serial(' ');write_serial(' ');write_serial(' ');write_serial(' ');write_serial('▄');write_serial('▄');write_serial(' ');write_serial(' ');write_serial('▄');write_serial(' ');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('\n');write_serial('\r');write_serial('█');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▀');write_serial('█');write_serial('▄');write_serial('█');write_serial('▀');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('▄');write_serial('▀');write_serial('█');write_serial(' ');write_serial(' ');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial('█');write_serial('\n');write_serial('\r');write_serial('█');write_serial(' ');write_serial('█');write_serial('█');write_serial('█');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▀');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial(' ');write_serial(' ');write_serial('▄');write_serial('█');write_serial(' ');write_serial('█');write_serial(' ');write_serial('█');write_serial('█');write_serial('█');write_serial(' ');write_serial('█');write_serial('\n');write_serial('\r');write_serial('█');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('█');write_serial(' ');write_serial('█');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▄');write_serial('▀');write_serial('█');write_serial('▀');write_serial('█');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('█');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('█');write_serial('\n');write_serial('\r');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial('█');write_serial('▀');write_serial('▄');write_serial('█');write_serial(' ');write_serial(' ');write_serial('▀');write_serial('▄');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('\n');write_serial('\r');write_serial('█');write_serial('▄');write_serial('▀');write_serial(' ');write_serial(' ');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('█');write_serial('█');write_serial(' ');write_serial('▄');write_serial('▄');write_serial(' ');write_serial(' ');write_serial('█');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('▀');write_serial('█');write_serial('▄');write_serial('▀');write_serial('█');write_serial('█');write_serial(' ');write_serial(' ');write_serial(' ');write_serial('▀');write_serial('\n');write_serial('\r');write_serial('█');write_serial(' ');write_serial('▀');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('▄');write_serial('█');write_serial('▄');write_serial('█');write_serial('▀');write_serial('█');write_serial(' ');write_serial(' ');write_serial('▀');write_serial('▄');write_serial('█');write_serial(' ');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▀');write_serial('▀');write_serial(' ');write_serial('█');write_serial('▄');write_serial('▀');write_serial(' ');write_serial('\n');write_serial('\r');write_serial('▀');write_serial(' ');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('▀');write_serial('▄');write_serial(' ');write_serial(' ');write_serial('▀');write_serial('▀');write_serial(' ');write_serial('▀');write_serial('█');write_serial('█');write_serial('▄');write_serial(' ');write_serial('▄');write_serial('▀');write_serial(' ');write_serial('▀');write_serial('▀');write_serial('█');write_serial('▀');write_serial('▀');write_serial('▄');write_serial('▄');write_serial(' ');write_serial('▀');write_serial('\n');write_serial('\r');write_serial('▀');write_serial('▄');write_serial('█');write_serial('▀');write_serial(' ');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('█');write_serial('▀');write_serial('█');write_serial(' ');write_serial('█');write_serial('▀');write_serial('▄');write_serial('█');write_serial('█');write_serial('▄');write_serial('█');write_serial('▄');write_serial('▀');write_serial('▀');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('▄');write_serial('▄');write_serial('▀');write_serial(' ');write_serial('\n');write_serial('\r');write_serial('█');write_serial(' ');write_serial('█');write_serial('▄');write_serial('█');write_serial('▄');write_serial('▄');write_serial('▀');write_serial('▀');write_serial('▀');write_serial(' ');write_serial('▄');write_serial('▄');write_serial(' ');write_serial(' ');write_serial('█');write_serial('▀');write_serial(' ');write_serial(' ');write_serial(' ');write_serial('█');write_serial('▀');write_serial('▀');write_serial('█');write_serial('▀');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▀');write_serial('\n');write_serial('\r');write_serial('█');write_serial(' ');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('█');write_serial('█');write_serial('▄');write_serial('█');write_serial(' ');write_serial(' ');write_serial('▀');write_serial('▄');write_serial('█');write_serial('▄');write_serial(' ');write_serial('█');write_serial('█');write_serial('▄');write_serial('█');write_serial('█');write_serial('▄');write_serial(' ');write_serial('▄');write_serial('█');write_serial('▄');write_serial('\n');write_serial('\r');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial('█');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▀');write_serial('█');write_serial('█');write_serial('▄');write_serial('█');write_serial('█');write_serial('▀');write_serial('▄');write_serial('█');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('█');write_serial('█');write_serial('█');write_serial('▀');write_serial('▀');write_serial('\n');write_serial('\r');write_serial('█');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▄');write_serial(' ');write_serial('█');write_serial(' ');write_serial('▄');write_serial(' ');write_serial('▀');write_serial(' ');write_serial('█');write_serial('▀');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▀');write_serial(' ');write_serial('█');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('█');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▀');write_serial('\n');write_serial('\r');write_serial('█');write_serial(' ');write_serial('█');write_serial('█');write_serial('█');write_serial(' ');write_serial('█');write_serial(' ');write_serial('█');write_serial('▄');write_serial('█');write_serial('▄');write_serial('▄');write_serial(' ');write_serial(' ');write_serial('▄');write_serial('▀');write_serial('▀');write_serial('▄');write_serial('█');write_serial(' ');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('█');write_serial('█');write_serial('█');write_serial('▀');write_serial('\n');write_serial('\r');write_serial('█');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('▄');write_serial('█');write_serial(' ');write_serial('█');write_serial('▄');write_serial(' ');write_serial('█');write_serial(' ');write_serial(' ');write_serial('▀');write_serial('█');write_serial('█');write_serial(' ');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('▄');write_serial('▀');write_serial('▄');write_serial('▄');write_serial('▀');write_serial('▄');write_serial('▀');write_serial(' ');write_serial('\n');write_serial('\r');
 	while(read_serial() == '\0')continue;
-	restart();
+	NO_ERROR_MODE();
 	return 0;
 }
 
@@ -110,4 +109,42 @@ __attribute__((interrupt)) void pagefault(struct interrupt_frame* frame){
 	write_serial('\r');
 	panic(GetState());
 	while(true);
+}
+
+int NO_ERROR_MODE(){
+	void _start(){
+    //__BOOTSCREEN__();
+
+    WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
+    //double windowing test
+    WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
+    KBmouse.x = 160;
+    KBmouse.y = 100;
+    //ctmouse(160, 100);
+    WindowMananger.Refresh();
+    puts("Refresh\r\n");
+    /*physics Physics;
+    Physics.setWater(200,50);
+	Physics.setWater(201,51);
+    Physics.iterate(2);*/
+    //restart();
+    while(1) {   //mainloop
+        uint_8 scanCode = inb(0x60);
+		uint_8 chr = 0;
+
+		if (scanCode < 0x3A){
+			chr = KBSet1::ScanCodeLookupTable[scanCode];
+		}
+		if (MainKeyboardHandler != 0) {
+			MainKeyboardHandler(scanCode, chr);
+		}
+		write_serial(chr);
+/*
+        PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
+        PlaySound(1570,MasterVolume);for (int ii = 0; ii<200000;ii++);{}
+        PlaySound(1969,MasterVolume);for (int iii = 0; iii<200000;iii++);{}
+        PlaySound(1477,MasterVolume);for (int iiii = 0; iiii<200000;iiii++);{}*/
+        
+	}
+    return 1;
 }
