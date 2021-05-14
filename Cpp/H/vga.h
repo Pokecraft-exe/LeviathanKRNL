@@ -133,7 +133,8 @@ public:
         w.Closable = Closable;
         windows = windows + 1;
         Windows[windows+1] = w;
-        return Windows[windows+1]*;
+        WindowProperty* w2 =  &Windows[windows+1];
+        return w2;
     }
 
     void Label(char* Text, int x, int y){
