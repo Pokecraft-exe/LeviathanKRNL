@@ -40,15 +40,6 @@ extern "C" void _start(){
     MainKeyboardHandler = Keyboardhandler;
     write_serial('b');
     init_serial();
-    char* a=SERIALBLUE;
-    char* b="Initializing Serial [OK]\n\rInitializing VGA [OK]\n\r";
-    for(int i;a[i]!=0;i++){
-        write_serial(a[i]);
-    }
-    free(&a);
-    for(int i;b[i]!=0;i++){
-        write_serial(b[i]);
-    }
     write_serial('c');
     //puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
     puts(SERIALBLUE);puts("Initializing Heap [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
