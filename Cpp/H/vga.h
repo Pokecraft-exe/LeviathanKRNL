@@ -122,7 +122,7 @@ private:
     int button = 0;
     int windows = 0;
 public:
-    void NewWindow(int X, int Y, int SizeX, int SizeY, char* NewName, bool Closable=1){
+    WindowProperty* NewWindow(int X, int Y, int SizeX, int SizeY, char* NewName, bool Closable=1){
         WindowProperty w;
         w.name = NewName;
         w.top = Y;
@@ -133,6 +133,7 @@ public:
         w.Closable = Closable;
         windows = windows + 1;
         Windows[windows+1] = w;
+        return Windows[windows+1]*;
     }
 
     void Label(char* Text, int x, int y){

@@ -35,7 +35,7 @@ extern "C" void _start(){
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
     InitHeap(0x100000, 0x100000);
     IDT MainInterrupt;
-    MainInterrupt.InitIDT();
+    //MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
     init_serial();
     char* a=SERIALBLUE;
@@ -60,7 +60,7 @@ extern "C" void _start(){
     puts(SERIALBLUE);puts("Initializing Windowing [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //taskbar
 
-    WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
+    WindowsProperty Win1 = WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
@@ -77,6 +77,7 @@ extern "C" void _start(){
     Physics.iterate(2);*/
     //restart();
     while(1) {   //mainloop
+        Win1.top++;
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}

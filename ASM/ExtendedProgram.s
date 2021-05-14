@@ -1,6 +1,7 @@
 bits 16
 section .text
 
+;vga GUImode
   	mov ah, 0h
 	mov al, 13h
 	int 0x10
