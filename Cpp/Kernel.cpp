@@ -34,9 +34,11 @@ extern "C" void _start(){
     //PlaySound(469,MasterVolume);
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
     InitHeap(0x100000, 0x100000);
+    write_serial('a');
     //IDT MainInterrupt;
     //MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
+    write_serial('b');
     init_serial();
     char* a=SERIALBLUE;
     char* b="Initializing Serial [OK]\n\rInitializing VGA [OK]\n\r";
@@ -47,11 +49,12 @@ extern "C" void _start(){
     for(int i;b[i]!=0;i++){
         write_serial(b[i]);
     }
+    write_serial('c');
     //puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
     puts(SERIALBLUE);puts("Initializing Heap [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     puts(SERIALBLUE);puts("Initializing Memory Manangment [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     puts(SERIALBLUE);puts("Initializing IDT's [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    write_serial('b');
+    write_serial('d');
     //mouseinit();
     puts(SERIALBLUE);puts("Initializing Mouse [");puts(SERIALRED);puts("ERROR");puts(SERIALBLUE);puts("]\n\r");
     // TODO: font, mouse ,buttons and others
@@ -59,16 +62,18 @@ extern "C" void _start(){
     //Making the windowMananger
     puts(SERIALBLUE);puts("Initializing Windowing [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //taskbar
-
+    write_serial('e');
     WindowProperty* Win1 = WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
+    write_serial('f');
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
     //ctmouse(160, 100);
     WindowMananger.Refresh();
+    write_serial('g');
     puts("Refresh\r\n");
-    write_serial('r');//initRAMDISK();
+    write_serial('h');//initRAMDISK();
     puts(SERIALBLUE);puts("Initializing RAMDISK [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     
     /*physics Physics;
