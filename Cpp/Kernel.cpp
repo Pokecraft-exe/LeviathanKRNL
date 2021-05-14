@@ -60,8 +60,7 @@ extern "C" void _start(){
     WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
-    //ctmouse(160, 100);
-    WindowMananger.Refresh();
+    ctmouse(160, 100);
     write_serial('g');
     puts("Refresh\r\n");
     write_serial('h');//initRAMDISK();
@@ -74,6 +73,7 @@ extern "C" void _start(){
     //restart();
     while(1) {   //mainloop
         Win1->top++;
+        ctmouse(160, 100);
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
