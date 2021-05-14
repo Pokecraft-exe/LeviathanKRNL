@@ -73,7 +73,9 @@ extern "C" void _start(){
     //restart();
     while(1) {   //mainloop
         Win1->top++;
+        write_serial('i');
         ctmouse(160, 100);
+        write_serial('j');
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
