@@ -34,7 +34,7 @@ extern "C" void _start(){
     //PlaySound(469,MasterVolume);
     MemoryMapEntry** usableMemoryMaps = GetUsableMemoryRegions();
     InitHeap(0x100000, 0x100000);
-    IDT MainInterrupt;
+    //IDT MainInterrupt;
     //MainInterrupt.InitIDT();
     MainKeyboardHandler = Keyboardhandler;
     init_serial();
