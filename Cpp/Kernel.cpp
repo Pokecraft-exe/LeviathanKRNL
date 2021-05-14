@@ -77,7 +77,7 @@ extern "C" void _start(){
     Physics.iterate(2);*/
     //restart();
     while(1) {   //mainloop
-        Win1.top++;
+        Win1->top++;
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
