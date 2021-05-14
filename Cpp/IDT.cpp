@@ -1,7 +1,7 @@
 #include "H/IDT.h"
 
 void printK(const char* a){
-	unsigned int i = 0gdhdv chbv;
+	unsigned int i = 0;
 	while (a[i] != '\0'){
 		write_serial(a[i]);
 		write_serial('c');
