@@ -56,9 +56,9 @@ extern "C" void _start(){
     //initRAMDISK();
     //restart();
     while(1) {   //mainloop
-        Win1->left= Win1->left + 3;
+        Win1->left= Win1->left + 10;
         ctmouse(160, 100);
-        if (Win1->left+Win1->right == 320) restart();
+        if (Win1->topt < 25) restart();
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
