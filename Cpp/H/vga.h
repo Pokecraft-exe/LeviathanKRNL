@@ -196,7 +196,6 @@ public:
         int n=100;
         for(uint64 i = 0; i < n; i++)
         {
-            write_serial('l');
             if (!CompareWindows(Windows[i],EmptyWindow)){
                 if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseRight()){
                     Windows[i].left = Windows[i].left + GetMouseVelocityX();
