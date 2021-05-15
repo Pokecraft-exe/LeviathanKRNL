@@ -74,9 +74,7 @@ extern "C" void _start(){
     while(1) {   //mainloop
         Win1->left++;
         write_serial('i');
-        WindowMananger.Refresh();
-        write_serial('m');
-        Screen1.swap();
+        ctmouse(160, 100);
         write_serial('j');
         /*mouse_updater(inb(0x60));
         MousePacket();
