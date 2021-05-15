@@ -75,6 +75,7 @@ extern "C" void _start(){
         Win1->top++;
         write_serial('i');
         Screen1.swap();
+        write_serial('m');
         WindowMananger.Refresh();
         write_serial('j');
         /*mouse_updater(inb(0x60));
