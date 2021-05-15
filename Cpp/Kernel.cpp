@@ -41,41 +41,24 @@ extern "C" void _start(){
     write_serial('b');
     init_serial();
     write_serial('c');
-    //puts("Paged:");puts(SERIALGREEN);puts(IntToStr(Total_paged));puts("kb\n\r");
-    puts(SERIALBLUE);puts("Initializing Heap [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    puts(SERIALBLUE);puts("Initializing Memory Manangment [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    puts(SERIALBLUE);puts("Initializing IDT's [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    write_serial('d');
     //mouseinit();
-    puts(SERIALBLUE);puts("Initializing Mouse [");puts(SERIALRED);puts("ERROR");puts(SERIALBLUE);puts("]\n\r");
+    write_serial('d');
     // TODO: font, mouse ,buttons and others
-    puts(SERIALBLUE);puts("Initializing KeyBoard [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    //Making the windowMananger
-    puts(SERIALBLUE);puts("Initializing Windowing [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //taskbar
-    write_serial('e');
     WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
-    write_serial('f');
+    write_serial('e');
     WindowProperty* Win1 = WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
     ctmouse(160, 100);
-    write_serial('g');
-    puts("Refresh\r\n");
-    write_serial('h');//initRAMDISK();
-    puts(SERIALBLUE);puts("Initializing RAMDISK [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
-    
-    /*physics Physics;
-    Physics.setWater(200,50);
-	Physics.setWater(201,51);
-    Physics.iterate(2);*/
+    write_serial('f');
+    //initRAMDISK();
     //restart();
     while(1) {   //mainloop
-        Win1->left++;
-        write_serial('i');
+        Win1->left= Win1->left + 3;
         ctmouse(160, 100);
-        write_serial('j');
+        if (Win1->left+Win1->right == 320) restart();
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
