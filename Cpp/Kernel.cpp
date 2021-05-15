@@ -54,10 +54,10 @@ extern "C" void _start(){
     puts(SERIALBLUE);puts("Initializing Windowing [");puts(SERIALGREEN);puts("Ok");puts(SERIALBLUE);puts("]\n\r");
     //taskbar
     write_serial('e');
-    WindowProperty* Win1 = WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
+    WindowMananger.NewWindow(0, 190, 320, 10, (char*)"", 0);
     //double windowing test
     write_serial('f');
-    WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
+    WindowProperty* Win1 = WindowMananger.NewWindow(10, 25, 50, 100, (char*)"\n\r");
     KBmouse.x = 160;
     KBmouse.y = 100;
     ctmouse(160, 100);
