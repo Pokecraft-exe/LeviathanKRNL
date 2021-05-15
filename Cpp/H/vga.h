@@ -215,7 +215,7 @@ public:
                 Rect(Windows[i].left, Windows[i].top, Windows[i].right, Windows[i].bottom, WHITE);
                 
                 //Draw Close button
-                int placeX=Windows[i].right+1;
+                int placeX=Windows[i].left+Windows[i].right-9;
                 if(Windows[i].Closable){
                     Rect(placeX, Windows[i].top,9,9, RED);
                     if (GetMouseX() >= placeX && placeX+9 >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].top+9>= GetMouseY() && GetLeftClick())Windows[i]= EmptyWindow;
