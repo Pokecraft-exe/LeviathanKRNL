@@ -216,9 +216,9 @@ public:
           Rect(placeX, Windows[i].top,9,9, RED);
           if (GetMouseX() >= placeX && placeX+9 >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].top+9>= GetMouseY() && GetLeftClick())Windows[i]= EmptyWindow;
       }
-      Label(Windows[i].name, Windows[i].left, Windows[i].top);
+      //Label(Windows[i].name, Windows[i].left, Windows[i].top);
       //Button(/*(char*)"",*/placeX-9,Windows[i].top,9,9,RED/*, Close*/);
-      ButtonMananger();
+      //ButtonMananger();
       }}
    }
 };
