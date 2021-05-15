@@ -72,7 +72,7 @@ extern "C" void _start(){
     Physics.iterate(2);*/
     //restart();
     while(1) {   //mainloop
-        Win1->top++;
+        Win1->left++;
         write_serial('i');
         WindowMananger.Refresh();
         write_serial('m');

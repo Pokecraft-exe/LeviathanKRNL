@@ -194,24 +194,28 @@ public:
 
         DeskColor(GRAY);
         int n=100;
+
         for(uint64 i = 0; i < n; i++)
         {
             if (!CompareWindows(Windows[i],EmptyWindow)){
-                if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseRight()){
+                /*if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()/ GetMouseRight()){
                     Windows[i].left = Windows[i].left + GetMouseVelocityX();
                 }else{
-                if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseLeft()){
+                if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()/ GetMouseLeft()){
                     Windows[i].left = Windows[i].left - GetMouseVelocityX();
                 }else{
-                if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseUp()){
+                if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()/ GetMouseUp()){
                     Windows[i].top = Windows[i].top - GetMouseVelocityY();
                 }else{
-                if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()*/ GetMouseDown()){
+                if (GetMouseX() >= Windows[i].left && Windows[i].right >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].bottom >= GetMouseY() && /*GetLeftClick()/ GetMouseDown()){
                     Windows[i].top = Windows[i].top + GetMouseVelocityY();
-                }}}}
+                }}}}*/
+                
+                //Draw window at Lest=X, Top=Y Right=SizeX, Bottom=SizeY
                 Rect(Windows[i].left, Windows[i].top, Windows[i].right, Windows[i].bottom, WHITE);
-                int placeX=Windows[i].right+1;//+Windows[i].left;
-                //puts("placing rectangle at X");puts(IntToStr(placeX-9));puts(", Y");puts(IntToStr(Windows[i].top));
+                
+                //Draw Close button
+                int placeX=Windows[i].right+1;
                 if(Windows[i].Closable){
                     Rect(placeX, Windows[i].top,9,9, RED);
                     if (GetMouseX() >= placeX && placeX+9 >= GetMouseX() && GetMouseY() >= Windows[i].top && Windows[i].top+9>= GetMouseY() && GetLeftClick())Windows[i]= EmptyWindow;
