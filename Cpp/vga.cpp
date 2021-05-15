@@ -58,6 +58,7 @@ void Rect(int locationX, int locationY, int sizeX, int sizeY, int color)
 
 void ctmouse(int x, int y){
     WindowMananger.Refresh();
+    
     if (KBmouse.mouseLeftClick)Rect(315, 0, 5, 5, RED);
     if (KBmouse.mouseRightClick)Rect(315, 0, 5, 5, BLUE);
     Screen1.putPixel(x,y,BLACK);
