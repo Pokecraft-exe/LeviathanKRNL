@@ -58,7 +58,6 @@ extern "C" void _start(){
     while(1) {   //mainloop
         Win1->left= Win1->left + 10;
         ctmouse(160, 100);
-        if (Win1->top < 25) restart();
         /*mouse_updater(inb(0x60));
         MousePacket();
         PlaySound(1043,MasterVolume);for (int i = 0; i<200000;i++);{}
