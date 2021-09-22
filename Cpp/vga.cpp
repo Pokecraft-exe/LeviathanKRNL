@@ -81,19 +81,20 @@ void Triangle(int x1, int y1, int x2, int y2, int x3, int y3, char color){
     Line(x3, y3, x1, y1, color);
 }
 
-int CoordsToPosition(x, y){
-    return y * 375 + x
+int CoordsToPosition(int x, int y){
+    return y * 375 + x;
 }
 
-void dawchar(char c, int x, int y){
+void dawchar(char c){
     for (int a = 0; a < 6; a++){
         for (int ii = 0; ii < 4; ii++){
-            i = 4*c+ii;
-            if Font[CoordsToPosition(i, a)] == '1'{
-                Screen1.putPixel(x+i,y+a,BLACK);
+            int i = 4*c+ii;
+            if (Font[CoordsToPosition(i, a)] == '1'){
+                puts('1');
             }else{
-                continue;
-	    }
+                puts('0');
+	        }
         }
+        puts('\n');
     }
 }
