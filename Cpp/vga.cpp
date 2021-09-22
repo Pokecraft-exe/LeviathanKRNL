@@ -85,7 +85,7 @@ int CoordsToPosition(x, y){
     return y * 375 + x
 }
 
-def getchar(char c, int x, int y){
+void dawchar(char c, int x, int y){
     for (int a = 0; a < 6; a++){
         for (int ii = 0; ii < 4; ii++){
             i = 4*c+ii;
