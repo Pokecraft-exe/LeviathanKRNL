@@ -1,6 +1,6 @@
-.o
-.flp
-.iso
-.bin
-.elf
+*.o
+*.flp
+*.iso
+*.bin
+*.elf
 
