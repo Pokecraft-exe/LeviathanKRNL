@@ -1,7 +1,0 @@
-RescueASM:
-	mov al, 0x00
-  mov ah, 0x0b
-  mov bh, 0x00
-  mov bl, 0x01
-  int 0x10
-
