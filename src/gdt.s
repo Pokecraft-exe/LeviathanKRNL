@@ -45,20 +45,23 @@ GLOBAL codeseg
 dataseg equ gdt_datadesc - gdt_nulldesc
 
 
-;extern start_K
+extern start_K
 
-;EditGDT:
-;	mov al, 10101111b
-;	mov [gdt_codedesc + 6], al
-;
-;	mov [gdt_datadesc + 6], al
-;	ret
+EditGDT:
+	mov al, 10101111b
+	mov [gdt_codedesc + 6], al
+	mov [gdt_datadesc + 6], al
+	mov [gdt_user_codedesc + 6], al
+	mov [gdt_user_datadesc + 6], al
+	ret
 	
-[bits 32]
-;global far_jump_to_kernel
-;far_jump_to_kernel:
-;	call EditGDT
-;	lgdt [gdt_descriptor]
-;	jmp codeseg:jump_gdt
-;jump_gdt:
-;	hlt;call start_K
+
+global far_jump_to_kernel
+
+far_jump_to_kernel:
+	call EditGDT
+	lgdt [gdt_descriptor]
+	jmp jump_gdt
+jump_gdt:
+	call start_K
+[BITS 32]

@@ -1,6 +1,5 @@
-*.o
+obj/
 *.flp
 *.iso
 *.bin
 *.elf
-

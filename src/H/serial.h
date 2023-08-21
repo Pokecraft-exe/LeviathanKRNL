@@ -1,6 +1,5 @@
 #pragma once
-#include "IO.h"
-#include "typedefs.h"
+
 #define PORT 0x3f8          // COM1
 #define SERIALWHITE (char*)"\033[1;37m"
 #define SERIALBLACK (char*)"\033[1;30m"

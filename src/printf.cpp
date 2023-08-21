@@ -1,47 +1,51 @@
 #include "H/printf.h"
 
-uint_16 CursorPosition;
+uint16_t Console_size = (framebuffer->width*framebuffer->height)/16;
+uint16_t VGA_WIDTH = framebuffer->width/16;
+uint16_t CursorPosition;
 //for (i = 0; i = 2044; i++) ProtectedPos[i] = 0;
 
-void cls(uint_64 ClearColor)
+void cls(uint32_t color)
 {
-  uint_64 value =0;
-  value += ClearColor << 8;
-  value += ClearColor << 24;
-  value += ClearColor << 40;
-  value += ClearColor << 56;
-  for (uint_64* i = (uint_64*)VGA_MEMORY; i < (uint_64*)(VGA_MEMORY + 4000); i++){
-      *i = value;
-  }
-  SetCursorPosition(PositionFromCoords(0, 0));
+	uint32_t max = framebuffer->width*framebuffer->height;
+	uint32_t *fb = (uint32_t*)framebuffer->address;
+	for (uint32_t i = 0; i <= max; i++) {
+		fb[i] = color;
+	}
 }
 
-void SetCursorPosition(unsigned short position){
-
-  outb(0x3D4, 0x0F);
-  outb(0x3D5, (uint_8)(position & 0xFF));
-  outb(0x3D4, 0x0E);
-  outb(0x3D5, (uint_8)((position >> 8) & 0xFF));
-
+void SetCursorPosition(uint16_t position){
   CursorPosition = position;
 }
 
-uint_16 PositionFromCoords(uint_8 x, uint_8 y){
+uint16_t PositionFromCoords(uint8_t x, uint8_t y){
   return y * VGA_WIDTH + x;
 }
 
-void print(const char* str, uint_8 color){
-  uint_16 index = CursorPosition;
+struct point{
+	int x;
+	int y;
+};
+
+struct point CoordsFromPosition(uint32_t position){
+	point coords;
+	coords.y = (position/VGA_WIDTH);
+	coords.x = coords.y*VGA_WIDTH-position;
+	return coords;
+}
+
+void print(const char* str, uint32_t color){
+  uint16_t index = CursorPosition;
   int i = 0;
   while(str[i] != 0)
   {
     if (str[i] == 10){
-        index+= VGA_WIDTH;
+        index += VGA_WIDTH;
         index -= index % VGA_WIDTH;
     } else {
-        *(VGA_MEMORY + index * 2) = str[i];
-        *(VGA_MEMORY + index * 2 + 1) = color;
-        index++; 
+        point coords = CoordsFromPosition(CursorPosition);
+        DrawChar(str[i], coords.x*16, coords.y*16, color, 2);
+        index++;
     }
     i++;
     SetCursorPosition(index);
@@ -51,22 +55,17 @@ void print(const char* str, uint_8 color){
   SetCursorPosition(index);
 }
 
-void printchar(char chr, uint_8 color, bool protectedstr){
+void printchar(char chr, uint32_t color){
     switch (chr) {
       case 10:
         SetCursorPosition(CursorPosition += VGA_WIDTH);
         SetCursorPosition(CursorPosition -= CursorPosition % VGA_WIDTH);
         break;
-      case 13:
-        SetCursorPosition(CursorPosition += VGA_WIDTH);
-        SetCursorPosition(CursorPosition -= CursorPosition % VGA_WIDTH);
-        break;
       default:
-        *(VGA_MEMORY + CursorPosition * 2) = chr;
-        *(VGA_MEMORY + CursorPosition * 2 + 1) = color;
-        SetCursorPosition(CursorPosition + 1);
+      	point coords = CoordsFromPosition(CursorPosition);
+        DrawChar(chr, coords.x*16, coords.y*16, color, 2);
+        CursorPosition++;
     }
-    //drawchar(chr, 0, 0, 15);
 }
 
 
@@ -80,7 +79,7 @@ char* HexToString(T value) {
     uint8_t size = (sizeof(T)) * 2 - 1;
     uint8_t i;
     for (i = 0; i < size; i++) {
-        ptr = ((uint_8*)valPtr + i);
+        ptr = ((uint8_t*)valPtr + i);
         temp = ((*ptr & 0xF0) >> 4);
         hexToStringOutput[size - (i * 2 + 1)] = temp + (temp > 9 ? 55 : 48);
         temp = ((*ptr & 0x0F));
@@ -91,10 +90,10 @@ char* HexToString(T value) {
 }
 
 char* HexToString(void* value) {return HexToString<void*>(value);}
-char* HexToString(uint8_t value) {return HexToString<uint_8>(value);}
-char* HexToString(uint16_t value) {return HexToString<uint_16>(value);}
-char* HexToString(uint32_t value) {return HexToString<uint_32>(value);}
-char* HexToString(uint64_t value) {return HexToString<uint_64>(value);}
+char* HexToString(uint8_t value) {return HexToString<uint8_t>(value);}
+char* HexToString(uint16_t value) {return HexToString<uint16_t>(value);}
+char* HexToString(uint32_t value) {return HexToString<uint32_t>(value);}
+char* HexToString(uint64_t value) {return HexToString<uint64_t>(value);}
 char* HexToString(char value) {return HexToString<char>(value);}
 char* HexToString(short value) {return HexToString<short>(value);}
 char* HexToString(int value) {return HexToString<int>(value);}
@@ -104,7 +103,7 @@ char integerToStringOutput[128];
 template<typename T>
 char* IntToStr(T value) {
 
-	uint_8 isNegative = 0;
+	uint8_t isNegative = 0;
 
 	if (value < 0) {
 		isNegative = 1;
@@ -112,38 +111,38 @@ char* IntToStr(T value) {
 		integerToStringOutput[0] = '-';
 	}
 
-	uint_8 size = 0;
-	uint_64 sizeTester = (uint_64)value;
+	uint8_t size = 0;
+	uint64_t sizeTester = (uint64_t)value;
 	while (sizeTester / 10 > 0) {
 		sizeTester /= 10;
 		size++;
 	}
 
-	uint_8 index = 0;
-	uint_64 newValue = (uint_64)value;
+	uint8_t index = 0;
+	uint64_t newValue = (uint64_t)value;
 	while (newValue / 10 > 0) {
-		uint_8 remainder = newValue % 10;
+		uint8_t remainder = newValue % 10;
 		newValue /= 10;
 		integerToStringOutput[isNegative + size - index] = remainder + 48; 
 		index++;
 	}
-	uint_8 remainder = newValue % 10;
+	uint8_t remainder = newValue % 10;
 	integerToStringOutput[isNegative + size - index] = remainder + 48;
 	integerToStringOutput[isNegative + size + 1] = 0;
 	return integerToStringOutput;
 }
 
-char* IntToStr(uint8_t value) {return IntToStr<uint_8>(value);}
-char* IntToStr(uint16_t value) {return IntToStr<uint_16>(value);}
-char* IntToStr(uint32_t value) {return IntToStr<uint_32>(value);}
-char* IntToStr(uint64_t value) {return IntToStr<uint_64>(value);}
+char* IntToStr(uint8_t value) {return IntToStr<uint8_t>(value);}
+char* IntToStr(uint16_t value) {return IntToStr<uint16_t>(value);}
+char* IntToStr(uint32_t value) {return IntToStr<uint32_t>(value);}
+char* IntToStr(uint64_t value) {return IntToStr<uint64_t>(value);}
 char* IntToStr(char value) {return IntToStr<char>(value);}
 char* IntToStr(short value) {return IntToStr<short>(value);}
 char* IntToStr(int value) {return IntToStr<int>(value);}
 char* IntToStr(long long value) {return IntToStr<long long>(value);}
 
 char floatToStringOutput[128];
-char* FloatToString(float value, uint_8 decimalPlaces) {
+char* FloatToString(float value, uint8_t decimalPlaces) {
 	char* intPtr = (char*)IntToStr((int)value);
 	char* floatPtr = floatToStringOutput;
 
@@ -161,7 +160,7 @@ char* FloatToString(float value, uint_8 decimalPlaces) {
 
 	float newValue = value - (int)value;
 
-	for (uint_8 i = 0; i < decimalPlaces; i++) {
+	for (uint8_t i = 0; i < decimalPlaces; i++) {
 		newValue *= 10;
 		*floatPtr = (int)newValue + 48;
 		newValue -= (int)newValue;

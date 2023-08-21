@@ -75,7 +75,7 @@ uint32_t RGB(uint8_t R, uint8_t G, uint8_t B){
 
 struct limine_framebuffer *framebuffer;
 
-//extern void far_jump_to_kernel();
+extern void far_jump_to_kernel();
 
 void _start(void) {
     if (framebuffer_request.response == NULL
@@ -84,10 +84,14 @@ void _start(void) {
     }
  
     framebuffer = framebuffer_request.response->framebuffers[0];
+    
+    fontInitFrameBuffer(framebuffer);
  
  	DrawString("Hello World!", 200, 25, RGB(34, 150, 249), 1);
  	DrawString("Hello World!", 100, 50, RGB(34, 150, 249), 2);
     DrawString("Hello World!", 100, 100, RGB(34, 150, 249), 3);
+    
+    far_jump_to_kernel();
     
  	while(1);
     //far_jump_to_kernel();

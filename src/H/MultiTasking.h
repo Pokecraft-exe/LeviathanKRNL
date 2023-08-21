@@ -4,8 +4,8 @@
 #include "typedefs.h"
 
 class Task{
-    //friend class
 private:
     uint8_t stack[4096];
-    cpustate*
+    CpuState* cpu;
+    Task();
 }

@@ -597,14 +597,16 @@ static const unsigned char __font_bitmap__[] = {
 	________,
 //  59 $3b 'semicolon'
 //	width 8, bbx 1, bby 0, bbw 3, bbh 6
+	________,
+	________,
 	__XX____,
 	__XX____,
 	________,
 	__XX____,
 	__XX____,
 	_XX_____,
-	________,
-	________,
+	
+	
 //  60 $3c 'less'
 //	width 8, bbx 0, bby 0, bbw 5, bbh 7
 	___XX___,
@@ -977,14 +979,15 @@ static const unsigned char __font_bitmap__[] = {
 	________,
 //  97 $61 'a'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 5
+	________,
+	________,
 	_XXXX___,
 	____XX__,
 	_XXXXX__,
 	XX__XX__,
 	_XXX_XX_,
 	________,
-	________,
-	________,
+	
 //  98 $62 'b'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 7
 	XXX_____,
@@ -997,14 +1000,15 @@ static const unsigned char __font_bitmap__[] = {
 	________,
 //  99 $63 'c'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 5
+	________,
+	________,
 	_XXXX___,
 	XX__XX__,
 	XX______,
 	XX__XX__,
 	_XXXX___,
 	________,
-	________,
-	________,
+	
 // 100 $64 'd'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 7
 	___XXX__,
@@ -1017,14 +1021,15 @@ static const unsigned char __font_bitmap__[] = {
 	________,
 // 101 $65 'e'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 5
+	________,
+	________,
 	_XXXX___,
 	XX__XX__,
 	XXXXXX__,
 	XX______,
 	_XXXX___,
 	________,
-	________,
-	________,
+	
 // 102 $66 'f'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 7
 	__XXX___,
@@ -1037,6 +1042,7 @@ static const unsigned char __font_bitmap__[] = {
 	________,
 // 103 $67 'g'
 //	width 8, bbx 0, bby -1, bbw 7, bbh 6
+	________,
 	_XXX_XX_,
 	XX__XX__,
 	XX__XX__,
@@ -1044,7 +1050,7 @@ static const unsigned char __font_bitmap__[] = {
 	____XX__,
 	XXXXX___,
 	________,
-	________,
+	
 // 104 $68 'h'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 7
 	XXX_____,
@@ -1097,36 +1103,40 @@ static const unsigned char __font_bitmap__[] = {
 	________,
 // 109 $6d 'm'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 5
+	________,
+	________,
 	XX__XX__,
 	XXXXXXX_,
 	XXXXXXX_,
 	XX_X_XX_,
 	XX___XX_,
 	________,
-	________,
-	________,
+	
 // 110 $6e 'n'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 5
+	________,
+	________,
 	XXXXX___,
 	XX__XX__,
 	XX__XX__,
 	XX__XX__,
 	XX__XX__,
 	________,
-	________,
-	________,
+	
 // 111 $6f 'o'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 5
+	________,
+	________,
 	_XXXX___,
 	XX__XX__,
 	XX__XX__,
 	XX__XX__,
 	_XXXX___,
 	________,
-	________,
-	________,
+	
 // 112 $70 'p'
 //	width 8, bbx 0, bby -1, bbw 7, bbh 6
+	________,
 	XX_XXX__,
 	_XX__XX_,
 	_XX__XX_,
@@ -1134,9 +1144,10 @@ static const unsigned char __font_bitmap__[] = {
 	_XX_____,
 	XXXX____,
 	________,
-	________,
+	
 // 113 $71 'q'
 //	width 8, bbx 0, bby -1, bbw 7, bbh 6
+	________,
 	_XXX_XX_,
 	XX__XX__,
 	XX__XX__,
@@ -1144,27 +1155,29 @@ static const unsigned char __font_bitmap__[] = {
 	____XX__,
 	___XXXX_,
 	________,
-	________,
+	
 // 114 $72 'r'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 5
+	________,
+	________,
 	XX_XXX__,
 	_XXX_XX_,
 	_XX__XX_,
 	_XX_____,
 	XXXX____,
 	________,
-	________,
-	________,
+	
 // 115 $73 's'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 5
+	________,
+	________,
 	_XXXXX__,
 	XX______,
 	_XXXX___,
 	____XX__,
 	XXXXX___,
 	________,
-	________,
-	________,
+	
 // 116 $74 't'
 //	width 8, bbx 1, bby 0, bbw 5, bbh 7
 	___X____,
@@ -1177,46 +1190,51 @@ static const unsigned char __font_bitmap__[] = {
 	________,
 // 117 $75 'u'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 5
+	________,
+	________,
 	XX__XX__,
 	XX__XX__,
 	XX__XX__,
 	XX__XX__,
 	_XXX_XX_,
 	________,
-	________,
-	________,
+	
 // 118 $76 'v'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 5
+	________,
+	________,
 	XX__XX__,
 	XX__XX__,
 	XX__XX__,
 	_XXXX___,
 	__XX____,
 	________,
-	________,
-	________,
+	
 // 119 $77 'w'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 5
+	________,
+	________,
 	XX___XX_,
 	XX_X_XX_,
 	XXXXXXX_,
 	XXXXXXX_,
 	_XX_XX__,
 	________,
-	________,
-	________,
+	
 // 120 $78 'x'
 //	width 8, bbx 0, bby 0, bbw 7, bbh 5
+	________,
+	________,
 	XX___XX_,
 	_XX_XX__,
 	__XXX___,
 	_XX_XX__,
 	XX___XX_,
 	________,
-	________,
-	________,
+	
 // 121 $79 'y'
 //	width 8, bbx 0, bby -1, bbw 6, bbh 6
+	________,
 	XX__XX__,
 	XX__XX__,
 	XX__XX__,
@@ -1224,17 +1242,18 @@ static const unsigned char __font_bitmap__[] = {
 	____XX__,
 	XXXXX___,
 	________,
-	________,
+	
 // 122 $7a 'z'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 5
+	________,
+	________,
 	XXXXXX__,
 	X__XX___,
 	__XX____,
 	_XX__X__,
 	XXXXXX__,
 	________,
-	________,
-	________,
+	
 // 123 $7b 'braceleft'
 //	width 8, bbx 0, bby 0, bbw 6, bbh 7
 	___XXX__,
@@ -7873,14 +7892,22 @@ const struct bitmap_font font = {
 	.Bitmap = __font_bitmap__,
 };
 
+struct limine_framebuffer *Fontframebuffer;
+
+int fontInitFrameBuffer(struct limine_framebuffer* fb) {
+    Fontframebuffer = fb;
+    if (Fontframebuffer != fb) return 0;
+    return 1;
+}
+
 const char set[] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
 
 void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color) {
-    uint32_t *fb_ptr = framebuffer->address;
+    uint32_t *fb_ptr = Fontframebuffer->address;
     int i,j;
     for (j=0; j<size_y; j++) {
         for (i=0; i<size_x; i++) {
-    		fb_ptr[framebuffer->width*(y+j)+(x+i)] = color;
+    		fb_ptr[Fontframebuffer->width*(y+j)+(x+i)] = color;
     	}
     }
 }
@@ -7897,7 +7924,7 @@ void DrawChar(char c, uint16_t x, uint16_t y, uint32_t color, uint8_t size) {
     }
 }
 
-void DrawString(const char* str, uint8_t x, uint8_t y, uint32_t color, uint8_t size) {
+void DrawString(const char* str, uint16_t x, uint16_t y, uint32_t color, uint8_t size) {
     while (*str) {
         DrawChar(*str++, x, y, color, size);
         x += (8*size);

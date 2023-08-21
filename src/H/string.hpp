@@ -1,5 +1,5 @@
 #pragma once
-#include "lalloc.h"
+#include "lalloc.hpp"
 typedef long unsigned int size_t;
 
 class string{

@@ -1,21 +1,20 @@
-/*#include "H/KBscancodes.h"
+//#include "H/KBscancodes.h"
 #include "H/printf.h"
-#include "H/IDT.h"
+/*#include "H/IDT.h"
 #include "H/sound.h"
 #include "H/typedefs.h"
-
+#include "H/kernel.h"
 #include "H/mouse.h"
 #include "H/errors.h"
 //#include "H/Time.h"
 #include "H/lalloc.h"
-#include "H/stddef.h"
-#include "H/Colors.h"*/
+#include "H/stddef.h"*/
 #include "H/serial.h"
 
 void delay(int clocks)
 {
     asm("push %rax");
-    for(uint64 i = 0; i < clocks; i+=8){
+    for(uint64_t i = 0; i < clocks; i+=8){
         asm("xor %rax, %rax");
     }
     asm("pop %rax");
@@ -34,7 +33,7 @@ extern "C" void start_K(){
     write_serial('b');
     //mouseinit();
     write_serial('c');
-    //print("Hello World");
+    print("Hello World");
     write_serial('e');
     
     //initRAMDISK();

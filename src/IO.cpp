@@ -12,39 +12,9 @@ unsigned char inb(unsigned short port){
   return returnVal;
 }
 
-/*CPUState GetState(){
-  CPUState cpu;
-  asm volatile ("mov %%eax, %[VAR]" : [VAR] "=r" (cpu.eax));
-  asm volatile ("mov %%ebx, %[VAR]" : [VAR] "=r" (cpu.ebx));
-  asm volatile ("mov %%ecx, %[VAR]" : [VAR] "=r" (cpu.ecx));
-  asm volatile ("mov %%edx, %[VAR]" : [VAR] "=r" (cpu.edx));
- 
-  asm volatile ("mov %%esi, %[VAR]" : [VAR] "=r" (cpu.esi));
-  asm volatile ("mov %%edi, %[VAR]" : [VAR] "=r" (cpu.edi));
-  asm volatile ("mov %%ebp, %[VAR]" : [VAR] "=r" (cpu.ebp));
+void RemapPic(uint8_t master, uint8_t slave){
 
-        //common::uint32_t gs;
-        //common::uint32_t fs;
-        //common::uint32_t es;
-        //common::uint32_t ds;
-        
-  asm volatile ("mov %%cr0, %[VAR]" : [VAR] "=r" (cpu.cr0));
-  asm volatile ("mov %%cr2, %[VAR]" : [VAR] "=r" (cpu.cr2));
-  asm volatile ("mov %%cr3, %[VAR]" : [VAR] "=r" (cpu.cr3));
-    
-  asm volatile ("mov %%error, %[VAR]" : [VAR] "=r" (cpu.error));
-
-  asm volatile ("mov %%eip, %[VAR]" : [VAR] "=r" (cpu.eip));
-  asm volatile ("mov %%cs, %[VAR]" : [VAR] "=r" (cpu.cs));
-  asm volatile ("mov %%eflags, %[VAR]" : [VAR] "=r" (cpu.eflags));
-  asm volatile ("mov %%esp, %[VAR]" : [VAR] "=r" (cpu.esp));
-  asm volatile ("mov %%ss, %[VAR]" : [VAR] "=r" (cpu.ss));
-  return cpu;
-}*/
-
-void RemapPic(uint8 master, uint8 slave){
-
-    uint8 a1, a2;
+    uint8_t a1, a2;
 
     a1 = inb(PIC1_DATA);
     a2 = inb(PIC2_DATA);

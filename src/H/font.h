@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
-#include "kernel.h"
+#include "limine.h"
 	/// bitmap font structure
 struct bitmap_font {
 	unsigned char Width;		///< max. character width
@@ -271,7 +271,8 @@ struct bitmap_font {
 #define XXXXXXX_ 0xFE
 #define XXXXXXXX 0xFF
 
+int fontInitFrameBuffer(struct limine_framebuffer* fb);
 void DrawChar(char c, uint16_t x, uint16_t y, uint32_t color, uint8_t sizeb);
-void DrawString(const char* str, uint8_t x, uint8_t y, uint32_t color, uint8_t size);
+void DrawString(const char* str, uint16_t x, uint16_t y, uint32_t color, uint8_t size);
 	/// @}
 #endif

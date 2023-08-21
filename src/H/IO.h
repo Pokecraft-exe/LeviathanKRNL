@@ -14,40 +14,57 @@
 #define ICW4_8086 0x01
 #define StackP 0x7bff
 
+extern void push_registers();
+extern void pop_registers();
+
 struct CPUState
     {
-        unsigned long eax;
-        unsigned long ebx;
-        unsigned long ecx;
-        unsigned long edx;
+    	uint64_t rax;
+        uint64_t rbx;
+        uint64_t rcx;
+        uint64_t rdx;
+        
+        uint32_t eax;
+        uint32_t ebx;
+        uint32_t ecx;
+        uint32_t edx;
+        
+        uint16_t ax;
+        uint16_t bx;
+        uint16_t cx;
+        uint16_t dx;
+        
+        uint8_t al;
+        uint8_t bl;
+        uint8_t cl;
+        uint8_t dl;
 
-        unsigned long esi;
-        unsigned long edi;
-        unsigned long ebp;
-
-        /*
-        common::uint32_t gs;
-        common::uint32_t fs;
-        common::uint32_t es;
-        common::uint32_t ds;
-        */
-        unsigned long cr0;
-        unsigned long cr2;
-        unsigned long cr3;
+        uint64_t rsi;
+        uint64_t rdi;
+        uint64_t rbp;
+        
+        uint64_t cr0;
+        uint64_t cr2;
+        uint64_t cr3;
+        uint64_t cr4;
+        uint64_t cr8;
     
-        unsigned long error;
+        uint64_t error;
 
-        unsigned long eip;
-        unsigned long cs;
-        unsigned long eflags;
-        unsigned long esp;
-        unsigned long ss; 
+        uint64_t rip;
+        uint16_t cs;
+        uint16_t ds;
+		uint16_t es;
+		uint16_t fs;
+		uint16_t gs;
+        uint64_t rflags;
+        uint64_t rsp;
+        uint16_t ss; 
     } __attribute__((packed));
     
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
 void RemapPic(uint8 master, uint8 slave);
-CPUState GetState();
 void IRQ_set_mask(unsigned char IRQline);
 void IRQ_clear_mask(unsigned char IRQline);
 void restart();
