@@ -1,8 +1,9 @@
-#include "H/printf.h"
+#include "printf.h"
+#include "serial.h"
 
 uint16_t Console_size = (framebuffer->width*framebuffer->height)/16;
-uint16_t VGA_WIDTH = framebuffer->width/16;
-uint16_t CursorPosition;
+int VGA_WIDTH = framebuffer->width/16;
+uint16_t CursorPosition = 0;
 //for (i = 0; i = 2044; i++) ProtectedPos[i] = 0;
 
 void cls(uint32_t color)
@@ -33,18 +34,33 @@ struct point CoordsFromPosition(uint32_t position){
 	coords.x = coords.y*VGA_WIDTH-position;
 	return coords;
 }
+int XCoordsFromPosition(uint32_t position){
+	return (position/VGA_WIDTH)*VGA_WIDTH-position;
+}
+int YCoordsFromPosition(uint32_t position){
+	return (position/VGA_WIDTH);
+}
 
 void print(const char* str, uint32_t color){
   uint16_t index = CursorPosition;
   int i = 0;
+  write_serial('1');
   while(str[i] != 0)
   {
+  	write_serial('2');
+  	write_serial(str[i]);
     if (str[i] == 10){
         index += VGA_WIDTH;
         index -= index % VGA_WIDTH;
     } else {
-        point coords = CoordsFromPosition(CursorPosition);
-        DrawChar(str[i], coords.x*16, coords.y*16, color, 2);
+	    int x, y;
+    	write_serial('3');
+        y = (index/VGA_WIDTH);
+        write_serial('3');
+        x = y*VGA_WIDTH-index;
+        write_serial('4');
+        DrawChar(str[i], x*16, y*16, color, 2);
+        write_serial('5');
         index++;
     }
     i++;

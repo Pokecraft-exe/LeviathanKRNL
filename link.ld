@@ -33,6 +33,7 @@ SECTIONS
     .bss : {
         *(COMMON)
         *(.bss .bss.*)
+        . = ALIGN(8);
     } :data
  
     /DISCARD/ : {

@@ -2,7 +2,7 @@
 #ifndef IO
 #define IO
 
-#include "typedefs.h"
+#include <stdint.h>
 
 #define PIC1_COMMAND 0x20
 #define PIC1_DATA (uint16_t)0x21
@@ -14,8 +14,8 @@
 #define ICW4_8086 0x01
 #define StackP 0x7bff
 
-extern void push_registers();
-extern void pop_registers();
+extern "C" void pusha();
+extern "C" void popa();
 
 struct CPUState
     {
@@ -24,20 +24,10 @@ struct CPUState
         uint64_t rcx;
         uint64_t rdx;
         
-        uint32_t eax;
-        uint32_t ebx;
-        uint32_t ecx;
-        uint32_t edx;
-        
         uint16_t ax;
         uint16_t bx;
         uint16_t cx;
         uint16_t dx;
-        
-        uint8_t al;
-        uint8_t bl;
-        uint8_t cl;
-        uint8_t dl;
 
         uint64_t rsi;
         uint64_t rdi;
@@ -64,10 +54,14 @@ struct CPUState
     
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
-void RemapPic(uint8 master, uint8 slave);
+void RemapPic(uint8_t master, uint8_t slave);
 void IRQ_set_mask(unsigned char IRQline);
+void IRQ_set_all();
 void IRQ_clear_mask(unsigned char IRQline);
+void IRQ_clear_all();
 void restart();
+void NMI_enable();
+void NMI_disable();
 
 class Port8Bit{
 private:

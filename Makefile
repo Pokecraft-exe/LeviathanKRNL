@@ -10,7 +10,7 @@ HEADDIR := headers
 
 DFLAGS = -h
 
-CFLAGS += -g -ffreestanding -mno-red-zone -m64
+CFLAGS += -g -ffreestanding -mno-red-zone -m64 -I $(HEADDIR)
  
 LDFLAGS = -nostdlib -static -m elf_x86_64 -z max-page-size=0x1000 -T link.ld
  
@@ -30,7 +30,7 @@ all: $(KERNEL)
 $(KERNEL): $(OBJ)
 	$(LD) $(OBJ) $(LDFLAGS) -o $@
 	cp -v boot.elf limine/iso_root/
- 
+	rm image.iso
 	xorriso -as mkisofs -b limine-cd.bin \
         -no-emul-boot -boot-load-size 4 -boot-info-table \
         --efi-boot limine-cd-efi.bin \
@@ -38,11 +38,14 @@ $(KERNEL): $(OBJ)
         limine/iso_root -o image.iso
  
 	./limine/limine-deploy image.iso
+	rm limine/iso_root/boot.elf boot.elf $(OBJ)
 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -std=gnu11 -c $^ -o $@
 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CC) $(CFLAGS) -mcmodel=large -c "$(SRCDIR)/allocator.cpp" -o "$(OBJDIR)/allocator.o"
+	$(CC) $(CFLAGS) -mgeneral-regs-only  -c "$(SRCDIR)/IDT.cpp" -o "$(OBJDIR)/IDT.o"
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $^ -o $@
 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.d

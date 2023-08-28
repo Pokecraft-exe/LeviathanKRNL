@@ -272,7 +272,7 @@ struct bitmap_font {
 #define XXXXXXXX 0xFF
 
 int fontInitFrameBuffer(struct limine_framebuffer* fb);
-void DrawChar(char c, uint16_t x, uint16_t y, uint32_t color, uint8_t sizeb);
+void DrawChar(char c, uint16_t x, uint16_t y, uint32_t color, uint8_t size);
 void DrawString(const char* str, uint16_t x, uint16_t y, uint32_t color, uint8_t size);
 	/// @}
 #endif

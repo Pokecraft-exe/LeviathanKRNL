@@ -2,16 +2,12 @@
 #ifndef KBSCANCODES
 #define KBSCANCODES
 
-#include "typedefs.h"
-#include "printf.h"
-#include "IDT.h"
-#include "sound.h"
+#include "allocator.hpp"
 
 extern bool ShiftPressed;
-extern uint_8 LastScancode;
-extern string chrcode;
+extern uint8_t LastScancode;
 
-extern char KEY;
+extern char * KEY;
 
 const char ScanCodeLookupTable[] ={
     0, 0, '&', '2',
@@ -31,7 +27,7 @@ const char ScanCodeLookupTable[] ={
     0, ' '
   };
   
-void StandardKeyboardHandler(uint8 scancodes, uint8 chr);
-void KeyboardHandler0xE0(uint_8 scanCode);
-void Keyboardhandler(uint8 scancodes, uint8 chr);
+void StandardKeyboardHandler(uint8_t scancodes, uint8_t chr);
+void KeyboardHandler0xE0(uint8_t scanCode);
+void Keyboardhandler(uint8_t scancodes, uint8_t chr);
 #endif

@@ -43,6 +43,7 @@ gdt_descriptor:
 codeseg equ gdt_codedesc - gdt_nulldesc
 GLOBAL codeseg
 dataseg equ gdt_datadesc - gdt_nulldesc
+GLOBAL dataseg
 
 
 extern start_K
@@ -61,7 +62,8 @@ global far_jump_to_kernel
 far_jump_to_kernel:
 	call EditGDT
 	lgdt [gdt_descriptor]
-	jmp jump_gdt
-jump_gdt:
-	call start_K
+	mov rax, start_K
+    push qword 0x8
+    push rax
+    o64 retf
 [BITS 32]

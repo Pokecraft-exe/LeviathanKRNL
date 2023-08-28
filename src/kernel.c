@@ -1,5 +1,6 @@
-#include "H/kernel.h"
- 
+#include "kernel.h"
+#include "font.h"
+
 static volatile struct limine_framebuffer_request framebuffer_request = {
     .id = LIMINE_FRAMEBUFFER_REQUEST,
     .revision = 0
@@ -86,10 +87,6 @@ void _start(void) {
     framebuffer = framebuffer_request.response->framebuffers[0];
     
     fontInitFrameBuffer(framebuffer);
- 
- 	DrawString("Hello World!", 200, 25, RGB(34, 150, 249), 1);
- 	DrawString("Hello World!", 100, 50, RGB(34, 150, 249), 2);
-    DrawString("Hello World!", 100, 100, RGB(34, 150, 249), 3);
     
     far_jump_to_kernel();
     

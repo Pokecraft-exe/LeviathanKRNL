@@ -1,7 +1,7 @@
 #ifndef PRINTF
 #define PRINTF
 
-#include "font.h"
+#include "font.hpp"
 #include "kernel.h"
 
 extern uint16_t CursorPosition;

@@ -1,8 +1,9 @@
 // Created from bdf2c Version 3, (c) 2009, 2010 by Lutz Sammer
 //	License AGPLv3: GNU Affero General Public License version 3
 
-#include "H/font.h"
+#include "font.h"
 
+#define bool char
 	/// character bitmap for each encoding
 static const unsigned char __font_bitmap__[] = {
 //   0 $00 'uni0000.dup1'
@@ -7912,6 +7913,20 @@ void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color) {
     }
 }
 
+void DrawCharBackground(char c, uint16_t x, uint16_t y, uint32_t color, uint32_t back_color, uint8_t size) {
+    uint8_t i,j;
+    // Draw pixels
+    for (j=0; j<8; j++) {
+        for (i=0; i<8; i++) {
+            if (reverse_byte(__font_bitmap__[c*8+j]) & (1<<i)) {
+        		DrawSquare(x+(i*size), y+(j*size), size, size, color);
+            }else {
+            	DrawSquare(x+(i*size), y+(j*size), size, size, back_color);
+            }
+        }
+    }
+}
+
 void DrawChar(char c, uint16_t x, uint16_t y, uint32_t color, uint8_t size) {
     uint8_t i,j;
     // Draw pixels
@@ -7925,6 +7940,20 @@ void DrawChar(char c, uint16_t x, uint16_t y, uint32_t color, uint8_t size) {
 }
 
 void DrawString(const char* str, uint16_t x, uint16_t y, uint32_t color, uint8_t size) {
+    while (*str) {
+        DrawChar(*str++, x, y, color, size);
+        x += (8*size);
+    }
+}
+
+void DrawStringBackground(const char* str, uint16_t x, uint16_t y, uint8_t size, uint32_t color, uint32_t bg_color, bool background) {
+    if (background){
+    	while (*str) {
+        	DrawCharBackground(*str++, x, y, color, bg_color, size);
+        	x += (8*size);
+    	}
+    	return;
+    }
     while (*str) {
         DrawChar(*str++, x, y, color, size);
         x += (8*size);

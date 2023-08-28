@@ -1,4 +1,4 @@
-#include "H/IO.h"
+#include "IO.h"
 
 void outb(unsigned short port, unsigned char val){
   asm volatile ("outb %0, %1" : : "a"(val), "Nd"(port));
@@ -53,6 +53,10 @@ void IRQ_set_mask(unsigned char IRQline) {
     outb(port, value);        
 }
  
+void IRQ_set_all(){
+	for(int i = 0; i < 15; i++) {IRQ_set_mask(i);}
+}
+ 
 void IRQ_clear_mask(unsigned char IRQline) {
     uint16_t port;
     uint8_t value;
@@ -65,6 +69,20 @@ void IRQ_clear_mask(unsigned char IRQline) {
     }
     value = inb(port) & ~(1 << IRQline);
     outb(port, value);        
+}
+
+void IRQ_clear_all(){
+	for(int i = 0; i < 15; i++) {IRQ_clear_mask(i);}
+}
+
+void NMI_enable() {
+    outb(0x70, inb(0x70) & 0x7F);
+    inb(0x71);
+}
+ 
+void NMI_disable() {
+    outb(0x70, inb(0x70) | 0x80);
+    inb(0x71);
 }
 
 void restart(){
