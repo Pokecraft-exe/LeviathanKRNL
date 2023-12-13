@@ -1,9 +1,8 @@
 #include "printf.h"
 #include "serial.h"
 
+int VGA_WIDTH;
 uint16_t Console_size = (framebuffer->width*framebuffer->height)/16;
-int VGA_WIDTH = framebuffer->width/16;
-uint16_t CursorPosition = 0;
 //for (i = 0; i = 2044; i++) ProtectedPos[i] = 0;
 
 void cls(uint32_t color)
@@ -28,63 +27,65 @@ struct point{
 	int y;
 };
 
-struct point CoordsFromPosition(uint32_t position){
-	point coords;
-	coords.y = (position/VGA_WIDTH);
-	coords.x = coords.y*VGA_WIDTH-position;
-	return coords;
-}
-int XCoordsFromPosition(uint32_t position){
-	return (position/VGA_WIDTH)*VGA_WIDTH-position;
-}
-int YCoordsFromPosition(uint32_t position){
-	return (position/VGA_WIDTH);
+void printNoReturn(const char* str, uint32_t color) {
+	while (*str) {
+    if (*str == '\n'){
+        CursorPosition += VGA_WIDTH;
+        CursorPosition -= CursorPosition % VGA_WIDTH;
+    } else {
+	    int x, y;
+        y = CursorPosition / VGA_WIDTH;
+        x = CursorPosition % VGA_WIDTH;
+        DrawCharBackground(*str++, x*16, y*16, color, 0, 2);
+        CursorPosition++;
+    }
+  }
 }
 
 void print(const char* str, uint32_t color){
-  uint16_t index = CursorPosition;
-  int i = 0;
-  write_serial('1');
-  while(str[i] != 0)
-  {
-  	write_serial('2');
-  	write_serial(str[i]);
-    if (str[i] == 10){
-        index += VGA_WIDTH;
-        index -= index % VGA_WIDTH;
+  while (*str) {
+    if (*str == '\n'){
+        CursorPosition += VGA_WIDTH;
+        CursorPosition -= CursorPosition % VGA_WIDTH;
     } else {
 	    int x, y;
-    	write_serial('3');
-        y = (index/VGA_WIDTH);
-        write_serial('3');
-        x = y*VGA_WIDTH-index;
-        write_serial('4');
-        DrawChar(str[i], x*16, y*16, color, 2);
-        write_serial('5');
-        index++;
-    }
-    i++;
-    SetCursorPosition(index);
-  }
-  index+= VGA_WIDTH;
-  index -= index % VGA_WIDTH;
-  SetCursorPosition(index);
-}
-
-void printchar(char chr, uint32_t color){
-    switch (chr) {
-      case 10:
-        SetCursorPosition(CursorPosition += VGA_WIDTH);
-        SetCursorPosition(CursorPosition -= CursorPosition % VGA_WIDTH);
-        break;
-      default:
-      	point coords = CoordsFromPosition(CursorPosition);
-        DrawChar(chr, coords.x*16, coords.y*16, color, 2);
+        y = CursorPosition / VGA_WIDTH;
+        x = CursorPosition % VGA_WIDTH;
+        DrawCharBackground(*str++, x*16, y*16, color, 0, 2);
         CursorPosition++;
     }
+  }
+  CursorPosition += VGA_WIDTH;
+  CursorPosition -= CursorPosition % VGA_WIDTH;
 }
 
+extern "C" void fprint(const char* str) {
+   print(str, 0xffffff);
+}
 
+void printchr(const char chr, uint32_t color){
+  int x, y;
+  y = CursorPosition / VGA_WIDTH;
+  x = CursorPosition % VGA_WIDTH;
+  DrawCharBackground(chr, x*16, y*16, color, 0, 2);
+  CursorPosition++;
+}
+
+char string[67];
+template <typename T>
+char* binToStr(T value) {
+	string = "0b\0";
+	
+	for (int i = 0; i < sizeof(T) * 8; i++) {
+		string[i] = (value & (0x80>>(i%8))) + 48;
+	}
+	return string;
+}
+
+char* binToStr(uint8_t value) {return binToStr(value);}
+char* binToStr(uint16_t value) {return binToStr(value);}
+char* binToStr(uint32_t value) {return binToStr(value);}
+char* binToStr(uint64_t value) {return binToStr(value);}
 
 char hexToStringOutput[128];
 template<typename T>
@@ -106,6 +107,7 @@ char* HexToString(T value) {
 }
 
 char* HexToString(void* value) {return HexToString<void*>(value);}
+char* HexToString(uintptr_t* value) {return HexToString<void*>(value);}
 char* HexToString(uint8_t value) {return HexToString<uint8_t>(value);}
 char* HexToString(uint16_t value) {return HexToString<uint16_t>(value);}
 char* HexToString(uint32_t value) {return HexToString<uint32_t>(value);}
@@ -187,3 +189,4 @@ char* FloatToString(float value, uint8_t decimalPlaces) {
 
 	return floatToStringOutput;
 }
+

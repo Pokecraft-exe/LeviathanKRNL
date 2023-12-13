@@ -1,10 +1,11 @@
 #pragma once
-#include "lalloc.hpp"
+#include "allocator.hpp"
 typedef long unsigned int size_t;
 
 class string{
 private:
-	char* str;
+	char* _Ptr;
+	size_t _size;
 public:
 	string();
 	string(const char* a);

@@ -2,7 +2,24 @@
 
 bool ShiftPressed = false;
 uint8_t LastScancode;
-char* KEY = (char*)alloc(1);
+char* KEY;
+const char ScanCodeLookupTable[] ={
+    0, 0, '&', '2',
+    34, 39, '(', '-',
+    0, '_', '9', '0',
+    ')', '=', 0, 0,
+    'a', 'z', 'e', 'r',
+    't', 'y', 'u', 'i',
+    'o', 'p', '^', '$',
+    0, 0, 'q', 's',
+    'd', 'f', 'g', 'h',
+    'j', 'k', 'l', 'm',
+    '0', 0, 0, '*',
+    'w', 'x', 'c', 'v',
+    'b', 'n', ',', ';',
+    ':', '!', 0, '*',
+    0, ' '
+  };
   
 void StandardKeyboardHandler(uint8_t scancodes, uint8_t chr){
     if (chr != 0){
@@ -183,14 +200,17 @@ void KeyboardHandler0xE0(uint8_t scanCode) {
 	}
 }
 
-void Keyboardhandler(uint8_t scancodes, uint8_t chr){
+void Keyboardhandler(uint8_t scancodes){
+	if (scancodes < 0x3A){
+		*KEY = ScanCodeLookupTable[scancodes];
+	} else {
     	switch (LastScancode) {
         	case 0xE0:
 		        KeyboardHandler0xE0(scancodes);
 		        break;
           	default:
-	        	StandardKeyboardHandler(scancodes, chr);
+	        	StandardKeyboardHandler(scancodes, *KEY);
+		}
 	}
-
 	LastScancode = scancodes;
 }

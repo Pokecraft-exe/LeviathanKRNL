@@ -14,11 +14,13 @@
 #define ICW4_8086 0x01
 #define StackP 0x7bff
 
+#define gregister(x) register uint64_t x asm(#x)
+#define sregister(x, y) asm("mov" %0 ", " #x : "r"(y))
+
 extern "C" void pusha();
 extern "C" void popa();
 
-struct CPUState
-    {
+struct CPUState {
     	uint64_t rax;
         uint64_t rbx;
         uint64_t rcx;
@@ -50,7 +52,46 @@ struct CPUState
         uint64_t rflags;
         uint64_t rsp;
         uint16_t ss; 
-    } __attribute__((packed));
+} __attribute__((packed));
+
+    
+class Port8Bit{
+private:
+    uint16_t portnumber;
+public:
+    Port8Bit(uint16_t port);
+    void Write(uint8_t data);
+    uint8_t Read();
+};
+
+class Port8BitSlow{
+private:
+    uint16_t portnumber;
+public:
+    Port8BitSlow(uint16_t port);
+    void Write(uint8_t data);
+    uint8_t Read();
+};
+
+class Port16Bit{
+private:
+    uint16_t portnumber;
+public:
+    Port16Bit(uint16_t port);
+    void Write(uint16_t data);
+    uint16_t Read();
+};
+
+class Port32Bit{
+private:
+    uint16_t portnumber;
+public:
+    Port32Bit(uint16_t port);
+    void Write(uint32_t data);
+    uint32_t Read();
+};
+
+
     
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
@@ -62,81 +103,6 @@ void IRQ_clear_all();
 void restart();
 void NMI_enable();
 void NMI_disable();
-
-class Port8Bit{
-private:
-    uint16_t portnumber;
-public:
-    Port8Bit(uint16_t port){
-        portnumber = port;
-    }
-    void Write(uint8_t data){
-        asm volatile ("outb %0, %1" : : "a"(data), "Nd"(portnumber));
-    }
-    uint8_t Read(){
-        uint8_t returnVal;
-        asm volatile ("inb %1, %0"
-        : "=a"(returnVal)
-        : "Nd"(portnumber));
-        return returnVal;
-    }
-};
-
-class Port8BitSlow{
-private:
-    uint16_t portnumber;
-public:
-    Port8BitSlow(uint16_t port){
-        portnumber = port;
-    }
-    void Write(uint8_t data){
-        asm volatile ("outb %0, %1\njmp 1f\n1: jmp 1f\n1:" : : "a"(data), "Nd"(portnumber));
-    }
-    uint8_t Read(){
-        uint8_t returnVal;
-        asm volatile ("inb %1, %0"
-        : "=a"(returnVal)
-        : "Nd"(portnumber));
-        return returnVal;
-    }
-};
-
-class Port16Bit{
-private:
-    uint16_t portnumber;
-public:
-    Port16Bit(uint16_t port){
-        portnumber = port;
-    }
-    void Write(uint16_t data){
-        asm volatile ("outw %0, %1" : : "a"(data), "Nd"(portnumber));
-    }
-    uint16_t Read(){
-        uint16_t returnVal;
-        asm volatile ("inw %1, %0"
-        : "=a"(returnVal)
-        : "Nd"(portnumber));
-        return returnVal;
-    }
-};
-
-class Port32Bit{
-private:
-    uint16_t portnumber;
-public:
-    Port32Bit(uint16_t port){
-        portnumber = port;
-    }
-    void Write(uint32_t data){
-        asm volatile ("outl %0, %1" : : "a"(data), "Nd"(portnumber));
-    }
-    uint32_t Read(){
-        uint32_t returnVal;
-        asm volatile ("inl %1, %0"
-        : "=a"(returnVal)
-        : "Nd"(portnumber));
-        return returnVal;
-    }
-};
+extern "C" uint64_t gcr2();
 
 #endif

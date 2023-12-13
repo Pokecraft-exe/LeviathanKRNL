@@ -2,8 +2,6 @@
 //	License AGPLv3: GNU Affero General Public License version 3
 
 #include "font.h"
-
-#define bool char
 	/// character bitmap for each encoding
 static const unsigned char __font_bitmap__[] = {
 //   0 $00 'uni0000.dup1'

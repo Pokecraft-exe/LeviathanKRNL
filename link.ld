@@ -19,6 +19,11 @@ SECTIONS
     } :text
  
     . += CONSTANT(MAXPAGESIZE);
+
+    .idt BLOCK(0x1000) : ALIGN(0x1000) {
+        IDTA = .;
+        . = . + 0x1000;
+    }
  
     .rodata : {
         *(.rodata .rodata.*)
@@ -40,4 +45,5 @@ SECTIONS
         *(.eh_frame)
         *(.note .note.*)
     }
+    HEAP = . ;
 }

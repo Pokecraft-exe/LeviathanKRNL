@@ -1,32 +1,59 @@
 #pragma once
 #include <stdint.h>
-#define PAGE_NO_KEY 0b000
-#define PAGE_HAS_KEY 0b001
+#include "memmap.hpp"
+#include "bitmap.hpp"
 #define PAGE_KEY_WRITE 0b010
 #define PAGE_READ_ONLY 0b010
-#define PAGE_KEY_UINT64 0b100
-#define PAGE_KEY_UINT32 0b000
+#define PAGING_FREE_PAGE 1
+#define PAGING_LOCK_PAGE 2
+#define PAGING_RESERVE_PAGE 3
+#define PAGING_UNRESERVE_PAGE 4
+typedef long unsigned int size_t;
 
-struct page {
-	bool present;
-	bool write;
-	bool user;
-	bool zero1;
-	bool zero2;
-	bool size;
-	uint8_t size1;
-	uint8_t size2;
-	uint8_t key;
-	uint8_t XD;
-};
+namespace paging {
 
-#ifdef PAGING_CPP_CODE
-extern "C" void enable_pae();
-extern "C" void set_long_mode(void*);
-extern "C" void enable_paging();
-extern "C" void reloadCS();
-#endif
+	class pageMapIndexer {
+		public:
+			pageMapIndexer(uint64_t virtualAddress);
+			uint64_t PDP_i;
+			uint64_t PD_i;
+			uint64_t PT_i;
+			uint64_t P_i;
+	};
 
-extern "C" void disable_paging();
-uint64_t* getPage();
-void c_enablePaging();
+	struct page {
+		bool present : 1;
+		bool write : 1;
+		bool user : 1;
+		bool wrightThrough : 1;
+		bool cacheDisabled : 1;
+		bool accessed : 1;
+		bool zero : 1;
+		bool zero2 : 1;
+		bool zero3 : 1;
+		uint8_t avaliable : 3;
+		uint64_t address : 53;
+	};
+
+	struct pageTable {
+		page pageDirectory[512];
+	}__attribute__((aligned(0x1000)));
+
+	namespace pageManager {
+		void setPML4(pageTable* PML4Address);
+		void mapMemory(void* virtualAddress, void* physicalAddress);
+	}
+
+	void ReadMemoryMap();
+
+	void freePage(uintptr_t* ptr);
+	void lockPage(uintptr_t* ptr);
+	void reservePage(uintptr_t* ptr);
+	void unreservePage(uintptr_t* ptr);
+	void editPages(uintptr_t* ptr, size_t count, int status);
+	uintptr_t* requestPage();
+	uint64_t getFreeMemory();
+	uint64_t getUsedMemory();
+	uint64_t getSystemMemory();
+	extern "C" void disable_paging();
+}

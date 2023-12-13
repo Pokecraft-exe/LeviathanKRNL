@@ -1,12 +1,10 @@
-GLOBAL pusha
-GLOBAL popa
-GLOBAL gcr2
+SECTION text
+global isr_keyboard_handler
+ 
+extern isr1_handler
 
-gcr2:
-    mov rax, cr2
-
-pusha:
-	push rax
+isr_keyboard_handler:
+    push rax
     push rbx
     push rcx
     push rdx
@@ -21,9 +19,9 @@ pusha:
     push r13
     push r14
     push r15
-
-popa:
-	pop r15
+    cld
+    call isr1_handler
+    pop r15
 	pop r14
 	pop r13
 	pop r12
@@ -38,3 +36,6 @@ popa:
 	pop rcx
 	pop rbx
 	pop rax
+    iret
+    
+

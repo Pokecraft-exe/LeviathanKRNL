@@ -21,8 +21,10 @@ rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(su
 SRC = $(call rwildcard,$(SRCDIR), *.c)
 CPPSRC += $(call rwildcard,$(SRCDIR), *.cpp)
 SSRC += $(call rwildcard,$(SRCDIR), *.s)
+LSSRC += $(call rwildcard,$(SRCDIR), *.ls)
 OBJ = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
 OBJ += $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(CPPSRC))
+OBJ += $(patsubst $(SRCDIR)/%.ls, $(OBJDIR)/%.obj, $(LSSRC))
 OBJ += $(patsubst $(SRCDIR)/%.s, $(OBJDIR)/%.o, $(SSRC))
  
 all: $(KERNEL)
@@ -30,22 +32,33 @@ all: $(KERNEL)
 $(KERNEL): $(OBJ)
 	$(LD) $(OBJ) $(LDFLAGS) -o $@
 	cp -v boot.elf limine/iso_root/
-	rm image.iso
-	xorriso -as mkisofs -b limine-cd.bin \
-        -no-emul-boot -boot-load-size 4 -boot-info-table \
-        --efi-boot limine-cd-efi.bin \
-        -efi-boot-part --efi-boot-image --protective-msdos-label \
-        limine/iso_root -o image.iso
- 
+	if rm image.iso; then \
+		xorriso -as mkisofs -b limine-cd.bin \
+        	-no-emul-boot -boot-load-size 4 -boot-info-table \
+        	--efi-boot limine-cd-efi.bin \
+        	-efi-boot-part --efi-boot-image --protective-msdos-label \
+        	limine/iso_root -o image.iso \
+	else \
+		echo -e "\033[38;2;255;0;0m image.iso does not exist or was already removed\033[0m "; \
+		xorriso -as mkisofs -b limine-cd.bin \
+        	-no-emul-boot -boot-load-size 4 -boot-info-table \
+        	--efi-boot limine-cd-efi.bin \
+        	-efi-boot-part --efi-boot-image --protective-msdos-label \
+        	limine/iso_root -o image.iso; \
+ 	fi
 	./limine/limine-deploy image.iso
-	rm limine/iso_root/boot.elf boot.elf $(OBJ)
+	rm limine/iso_root/boot.elf boot.elf
 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -std=gnu11 -c $^ -o $@
 	
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+$(OBJDIR)/allocator.o: $(SRCDIR)/allocator.cpp
 	$(CC) $(CFLAGS) -mcmodel=large -c "$(SRCDIR)/allocator.cpp" -o "$(OBJDIR)/allocator.o"
-	$(CC) $(CFLAGS) -mgeneral-regs-only  -c "$(SRCDIR)/IDT.cpp" -o "$(OBJDIR)/IDT.o"
+
+$(OBJDIR)/IDT.o: $(SRCDIR)/IDT.cpp
+	$(CC) $(CFLAGS) -mgeneral-regs-only -c "$(SRCDIR)/IDT.cpp" -o "$(OBJDIR)/IDT.o"
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $^ -o $@
 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.d
@@ -53,6 +66,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.d
  
 $(OBJDIR)/%.o: $(SRCDIR)/%.s
 	nasm $(NASMFLAGS) $< -o $@
+	
+$(OBJDIR)/%.obj: $(SRCDIR)/%.ls
+	lscc $< -o $@ -f elf64 -cc SysV
 
 clear:
-	rm image.iso limine/iso_root/boot.elf boot.elf $(OBJ)
+	rm limine/iso_root/boot.elf boot.elf $(OBJ)

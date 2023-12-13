@@ -8,6 +8,7 @@
 #include "printf.h"
 #include "allocator.hpp"
 #include "KBscancodes.hpp"
+#include "paging.hpp"
 #define IDT_EntryCount 64
 #define IDT_IG 0b10001110
 #define IDT_TG 0b10001111
@@ -46,7 +47,16 @@ struct IDT64{
   }
 };
 
-struct interrupt_frame;
+
+struct interrupt_frame
+{
+    uint16_t ip;
+    uint16_t cs;
+    uint16_t flags;
+    uint16_t sp;
+    uint16_t ss;
+    uint64_t error;
+};
 
 struct IDTR{
   uint16_t size;
@@ -54,17 +64,18 @@ struct IDTR{
 }__attribute__((packed));
 
 __attribute__((interrupt)) void cmos(interrupt_frame* frame);
-__attribute__((interrupt)) void isr1_handler(interrupt_frame* frame);
-__attribute__((interrupt)) void isr0(interrupt_frame* frame);
-__attribute__((interrupt)) void isr4(interrupt_frame* frame);
+extern "C" __attribute__((naked)) void irq1(interrupt_frame* frame);
+extern "C" void isr1_handler(interrupt_frame* frame);
 __attribute__((interrupt)) void isr5(interrupt_frame* frame);
 __attribute__((interrupt)) void isr6(interrupt_frame* frame);
 __attribute__((interrupt)) void isr7(interrupt_frame* frame);
 __attribute__((interrupt)) void isr8(interrupt_frame* frame);
-__attribute__((interrupt)) void isr13(interrupt_frame* frame);
 __attribute__((interrupt)) void isr14(interrupt_frame* frame);
+extern "C" __attribute__((naked)) void isr0xD(interrupt_frame* frame);
+void isr13(interrupt_frame* frame);
   
 void InitIDT();
   
-void add_IRQ(char IRQ, void(*function)(interrupt_frame*), uint8_t gate);
+void add_IRQ(char IRQ, void(*function)(interrupt_frame* frame), uint8_t gate);
+void add_IRQ_asm(char IRQ, uint64_t function, uint8_t gate);
 #endif
