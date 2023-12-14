@@ -1,5 +1,8 @@
 extern fprint(str)
 
+def start():
+end
+
 def hello():
   fprint("hello world from LightSharp!")
 end

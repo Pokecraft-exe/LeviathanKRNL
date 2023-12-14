@@ -1,33 +1,42 @@
 #include "IDT.h"
 
 IDTR idtTable;
+
+char IDTSPACE[4096];
   
 void InitIDT(){
-    idtTable.address = (uint64_t*)paging::requestPage();
+    idtTable.address = (uint64_t*)IDTSPACE;
     idtTable.size = 0x0fff;
-    
-    asm ("lidt %0" :: "m"(idtTable));
 
-    //RemapPic(0,0);
+	asm("lidt %0" : "=m"(idtTable));
+
+    RemapPic(0,0);
     
-    //outb(0x21, 0xfd);//0b11111101);
-    //outb(0xA1, 0xff);//0b11111111);
+    outb(0x21, 0xff);
+    outb(0xA1, 0xff);
     
-    //asm ("sti");
+    asm ("sti");
 }
   
 void add_IRQ(char IRQ, void(*function)(interrupt_frame* frame), uint8_t gate) {
-  	//IRQ_clear_mask(IRQ);
+  	IRQ_clear_mask(IRQ);
 	IDT64* newInterrupt = (IDT64*)(idtTable.address + IRQ * sizeof(IDT64));
 	newInterrupt->Set_Offset((uint64_t)function);
 	newInterrupt->types_attr = gate;
 	newInterrupt->codeseg = 0x8;
 }
 
-__attribute__((interrupt)) void cmos(interrupt_frame* frame) {
+void add_IRQ(char IRQ, void(*function)(), uint8_t gate) {
+  	IRQ_clear_mask(IRQ);
+	IDT64* newInterrupt = (IDT64*)(idtTable.address + IRQ * sizeof(IDT64));
+	newInterrupt->Set_Offset((uint64_t)function);
+	newInterrupt->types_attr = gate;
+	newInterrupt->codeseg = 0x8;
+}
+
+__attribute__((interrupt)) extern "C" void Schedule(interrupt_frame* frame) {
 	DrawChar('a', 500, 500, 0x00FF, 2);
-	outb(0x20, 0x20);
-	outb(0xa0, 0x20);
+	while(1);
 }
     
 extern "C" __attribute__((naked)) void irq1(interrupt_frame* frame) {

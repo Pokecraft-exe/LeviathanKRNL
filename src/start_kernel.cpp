@@ -95,11 +95,11 @@ extern "C" void start_K(){
         paging::getUsedMemory() +
         paging::getSystemMemory()
         == memory_size) {
-        printNoReturn("Paging [");
+        printNoReturn("Paging Size [");
         printNoReturn("Correct", 0x00ff00);
         print("]");
     } else {
-        printNoReturn("Memmap [");
+        printNoReturn("Paging Size [");
         printNoReturn("Error", 0xff0000);
         print("]");
         while(1);
@@ -118,14 +118,17 @@ extern "C" void start_K(){
     printNoReturn("system memory: ");
 	printNoReturn(IntToStr(formatbytes(paging::getSystemMemory())));
     print(getByteFormat(paging::getSystemMemory()));
+
+    register uint64_t rbx asm("rbx");
+    rbx = 1;
+
+    init_PIT();
+    
+    InitIDT();
+    add_IRQ(ISA::PIT, IRQ0_handler, IDT_IG);
+
     
     paging::pageTable* PML4 = (paging::pageTable*)paging::requestPage();
-    
-    
-    hello();
-    
-    print(IntToStr(ret1()), 0x0000ff);
-    print("hell", 0xffffff);
     
     print(HexToString(PML4));
     
@@ -145,15 +148,7 @@ extern "C" void start_K(){
         asm ("mov %0, %%cr3" : : "r" (PML4));
     }
 
-    IRQ_set_all();
-    init_serial();
     
-    InitIDT();
-    add_IRQ(ISA::KEYBOARD, isr1_handler, IDT_IG);
-	
-	add_IRQ(0xD, isr0xD, IDT_TG);
-	add_IRQ(14, isr14, IDT_TG);
-
 
     //initRAMDISK();
     //restart();

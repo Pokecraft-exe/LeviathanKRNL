@@ -31,23 +31,23 @@ all: $(KERNEL)
  
 $(KERNEL): $(OBJ)
 	$(LD) $(OBJ) $(LDFLAGS) -o $@
-	cp -v boot.elf limine/iso_root/
+	cp -v boot.elf iso_root/
 	if rm image.iso; then \
-		xorriso -as mkisofs -b limine-cd.bin \
+		xorriso -as mkisofs -b limine-bios-cd.bin \
         	-no-emul-boot -boot-load-size 4 -boot-info-table \
-        	--efi-boot limine-cd-efi.bin \
+        	--efi-boot limine-uefi-cd.bin \
         	-efi-boot-part --efi-boot-image --protective-msdos-label \
-        	limine/iso_root -o image.iso \
+        	iso_root -o image.iso; \
 	else \
 		echo -e "\033[38;2;255;0;0m image.iso does not exist or was already removed\033[0m "; \
-		xorriso -as mkisofs -b limine-cd.bin \
+		xorriso -as mkisofs -b limine-bios-cd.bin \
         	-no-emul-boot -boot-load-size 4 -boot-info-table \
-        	--efi-boot limine-cd-efi.bin \
+        	--efi-boot limine-uefi-cd.bin \
         	-efi-boot-part --efi-boot-image --protective-msdos-label \
-        	limine/iso_root -o image.iso; \
+        	iso_root -o image.iso; \
  	fi
-	./limine/limine-deploy image.iso
-	rm limine/iso_root/boot.elf boot.elf
+	./limine/limine bios-install image.iso
+	rm iso_root/boot.elf boot.elf
 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -std=gnu11 -c $^ -o $@
@@ -71,4 +71,4 @@ $(OBJDIR)/%.obj: $(SRCDIR)/%.ls
 	lscc $< -o $@ -f elf64 -cc SysV
 
 clear:
-	rm limine/iso_root/boot.elf boot.elf $(OBJ)
+	rm iso_root/boot.elf boot.elf $(OBJ)

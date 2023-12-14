@@ -1,7 +1,1 @@
-/usr/bin/qemu-system-x86_64 image.iso \
-    -machine accel=tcg \
-    -m 2015 \
-    -net nic \
-    -net user \
-    -rtc base=localtime \
-    -no-reboot
+/usr/bin/qemu-system-x86_64 image.iso -m 2G -d in_asm,int -D log.log -no-reboot
