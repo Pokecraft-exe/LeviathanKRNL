@@ -4,6 +4,10 @@ std::stdin::stdin() {
     color(0xffffff);
 }
 
+std::stdin::stdin(color::Color color__) {
+    color(color__);
+}
+
 char std::endl = '\n';
 
 template <typename t>
@@ -62,36 +66,36 @@ std::stdin std::stdin::operator <<(const char* data) {
         } while (*data != 0);
     }
 
-    return stdin();
+    return stdin(color_);
 }
 
 std::stdin std::stdin::operator <<(char data) {
     printchr(data, color_);
-    return stdin();
+    return stdin(color_);
 }
 
 std::stdin std::stdin::operator <<(void* data) {
     printNoReturn(hex(data), color_);
-    return stdin();
+    return stdin(color_);
 }
 
 std::stdin std::stdin::operator <<(int data) {
     printNoReturn(IntToStr(data), color_);
-    return stdin();
+    return stdin(color_);
 }
 std::stdin std::stdin::operator <<(uint8_t data) {
     printNoReturn(IntToStr(data), color_);
-    return stdin();
+    return stdin(color_);
 }
 std::stdin std::stdin::operator <<(uint16_t data) {
     printNoReturn(IntToStr(data), color_);
-    return stdin();
+    return stdin(color_);
 }
 std::stdin std::stdin::operator <<(uint32_t data) {
     printNoReturn(IntToStr(data), color_);
-    return stdin();
+    return stdin(color_);
 }
 std::stdin std::stdin::operator <<(uint64_t data) {
     printNoReturn(IntToStr(data), color_);
-    return stdin();
+    return stdin(color_);
 }

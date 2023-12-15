@@ -1,10 +1,14 @@
 section .text:
 
+extern breakpoint
+
  global init_PIT
  init_PIT:
     push rax
     push rbx
     push rdx
+
+    call breakpoint
  
     ; Do some checking
  
@@ -17,7 +21,7 @@ section .text:
     jae .gotReloadValue               ; yes, use fastest possible frequency
  
     ; Calculate the reload value
- 
+
     mov rax,3579545
     mov rdx,0                         ;edx:eax = 3579545
     div rbx                           ;eax = 3579545 / frequency, edx = remainder

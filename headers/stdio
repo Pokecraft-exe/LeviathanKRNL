@@ -13,6 +13,7 @@ namespace std {
         color::Color color_;
     public:
         stdin();
+        stdin(color::Color);
         void color(color::Color);
         color::Color color();
         stdin operator <<(const char*);

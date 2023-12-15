@@ -117,8 +117,6 @@ uintptr_t* paging::requestPage() {
 			return (uintptr_t*)(i*4096);
 		}
 	}
-	print("hello world!");
-	while(1);
 	return nullptr; // swap
 }
 paging::pageMapIndexer::pageMapIndexer(uint64_t address) {

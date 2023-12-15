@@ -26,6 +26,11 @@ void delay(int clocks)
     return;
 }
 
+extern "C" void breakpoint(){
+    puts("breakpoint\n\r");
+    while (read_serial() != '\r');
+}
+
 uint16_t CursorPosition = 0;
 
 extern "C" void hello();
@@ -142,16 +147,17 @@ extern "C" void start_K(){
 
         for (size_t i = 0; i < memory_size; i += 0x1000) {
             paging::pageManager::mapMemory((void*)i, (void*)i);
+            if (i % 100000 == 0) {
+                puts(IntToStr(i));
+                puts("\n\r");
+            }
         }
-
-        for (size_t i = (uint64_t)framebuffer->address; i < framebuffer->width + 0x1000; i += 0x1000) {
-            paging::pageManager::mapMemory((void*)i, (void*)i);
-        }
-        
         asm ("mov %0, %%cr3" : : "r" (PML4));
     }
 
     cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+
+    init_serial();
 
     InitIDT();
 
