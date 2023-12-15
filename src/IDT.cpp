@@ -1,11 +1,9 @@
 #include "IDT.h"
 
 IDTR idtTable;
-
-char IDTSPACE[4096];
   
 void InitIDT(){
-    idtTable.address = (uint64_t*)IDTSPACE;
+    idtTable.address = (uint64_t*)paging::requestPage();
     idtTable.size = 0x0fff;
 
 	asm("lidt %0" : "=m"(idtTable));

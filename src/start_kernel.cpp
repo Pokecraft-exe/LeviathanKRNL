@@ -70,8 +70,6 @@ bool sort(int a, int b) {
     return a < b;
 }
 
-template int std::quickSort<int>(int*, bool(*)(int, int), int, int);
-
 extern "C" void start_K(){
     //__BOOTSCREEN__();
     //MasterVolume = 100;
@@ -145,19 +143,14 @@ extern "C" void start_K(){
     {
         paging::pageManager::setPML4(PML4);
 
-        for (size_t i = 0; i < memory_size; i += 0x1000) {
+        for (size_t i = 0; i < memory_size - (memory_size%0x1000); i += 0x1000) {
             paging::pageManager::mapMemory((void*)i, (void*)i);
-            if (i % 100000 == 0) {
-                puts(IntToStr(i));
-                puts("\n\r");
-            }
         }
         asm ("mov %0, %%cr3" : : "r" (PML4));
     }
 
+    cout.color(0xffffff);
     cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
-
-    init_serial();
 
     InitIDT();
 
