@@ -23,7 +23,7 @@ void* memclear(void* dest, size_t len)
 template int std::quickSort<Chunk>(Chunk*, bool (*)(Chunk, Chunk), int, int);
 
 bool sort(Chunk a, Chunk b){
-    return a.start > b.start;
+    return a.start < b.start;
 }
 
 bool init_heap() {

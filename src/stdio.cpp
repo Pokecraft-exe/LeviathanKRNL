@@ -21,25 +21,46 @@ color::Color std::stdin::color() {
 };
 
 std::stdin std::stdin::operator <<(const char* data) {
-    do{
-        if (*(data+1) == 0
-        && *(data+2) == 'm') {
-            printchr(*data, color_);
-            color_.R(*(data+6));
-            color_.G(*(data+5));
-            color_.B(*(data+4));
-            if (*(data+8) == ']') {
-                color_.A(*(data+8));
-                data += 9;
-            } else {
-                data += 8;
+    if (*(data) == 0) {
+        do{
+            if (*(data+1) == 'm') {
+                printchr(*data, color_);
+                color_.R(*(data+5));
+                color_.G(*(data+4));
+                color_.B(*(data+3));
+                if (*(data+8) == ']') {
+                    color_.A(*(data+7));
+                    data += 8;
+                } else {
+                    data += 7;
+                }
             }
-        }
-        else {
-            printchr(*data, color_);
-            data++;
-        }
-    } while (*data != 0);
+            else {
+                printchr(*data, color_);
+                data++;
+            }
+        } while (*data != 0);
+    } else {
+        do{
+            if (*(data+1) == 0
+            && *(data+2) == 'm') {
+                printchr(*data, color_);
+                color_.R(*(data+6));
+                color_.G(*(data+5));
+                color_.B(*(data+4));
+                if (*(data+8) == ']') {
+                    color_.A(*(data+8));
+                    data += 9;
+                } else {
+                    data += 8;
+                }
+            }
+            else {
+                printchr(*data, color_);
+                data++;
+            }
+        } while (*data != 0);
+    }
 
     return stdin();
 }

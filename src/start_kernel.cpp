@@ -14,6 +14,7 @@
 #include "paging.hpp"
 #include "kernel.h"
 #include "stdio"
+#include "algorythm"
 
 void delay(int clocks)
 {
@@ -60,6 +61,12 @@ char* getByteFormat(uint64_t bytes) {
 
 int cursorpos[2] = { 0, 0 };
 
+bool sort(int a, int b) {
+    return a < b;
+}
+
+template int std::quickSort<int>(int*, bool(*)(int, int), int, int);
+
 extern "C" void start_K(){
     //__BOOTSCREEN__();
     //MasterVolume = 100;
@@ -105,48 +112,28 @@ extern "C" void start_K(){
         while(1);
     }
 
+    void* a = alloc(100);
+    void* b = alloc(1);
+
+    if (a == b - 100) {
+        cout << "Allocator [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    } else {
+        cout << "Allocator [\0m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
+    }
+
     //paging::editPages((uintptr_t*)&kernelStart, (kernelSize / 4096) + 1, PAGING_RESERVE_PAGE);
+
+    cout << "\0m[\xff\xff\x00]\n";
 
     cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
     
     cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
     
     cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
-
-    /*InitIDT();
-
-    register uint64_t rbx asm("rbx");
-    rbx = 1;
-
-    init_PIT();
-    add_IRQ(ISA::PIT, IRQ0_handler, IDT_IG);*/
-
-    void* a = alloc(100);
-    void* b = alloc(20);
-
-    bool allocCorrect = (a == b - 100);
-    if (allocCorrect) {
-        cout << "Allocator [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
-    } else {
-        cout << "Allocator [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
-    }
-
-    free(a);
-    void*c = alloc(20);
-    if (a == c) {
-        cout << "Free [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
-    } else {
-        cout << "Free [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
-        cout << "c = " << c << std::endl;
-        cout << "a = " << a << std::endl;
-    }
-
-    while(1);
-
     
     paging::pageTable* PML4 = (paging::pageTable*)paging::requestPage();
     
-    print(HexToString(PML4));
+    cout << "PML4 = 0x" << (void*)PML4 << std::endl;
     
     memset(PML4, 0, 0x1000);
 
@@ -164,7 +151,18 @@ extern "C" void start_K(){
         asm ("mov %0, %%cr3" : : "r" (PML4));
     }
 
-    
+    cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+
+    InitIDT();
+
+    register uint64_t rbx asm("rbx");
+    rbx = 1000;
+
+    init_PIT();
+
+cout << "HELL YEAH WE PASSED!!";
+
+    add_IRQ(ISA::PIT, IRQ0_handler, IDT_IG);
 
     //_hRAMDISK();
     //restart();
