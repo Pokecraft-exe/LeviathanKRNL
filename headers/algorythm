@@ -1,0 +1,39 @@
+#pragma once
+
+namespace std {
+    namespace __private_std {
+        template <typename T>
+        int partition(T array[], bool (*key)(T, T), int begin, int end) {
+            int pivot = begin;
+            for (int i = begin+1; i < end+1; i++) {
+                if (key(array[i], array[begin])) {
+                    pivot++;
+                    T temp = array[i];
+                    array[i] = array[pivot];
+                    array[pivot] = temp;
+                }
+            }
+            T temp = array[pivot];
+            array[pivot] = array[begin];
+            array[begin] = temp;
+            return pivot;
+        }
+
+        template <typename T>
+        int _quickSort(T array[], bool (*key)(T, T), int begin, int end) {
+            if (begin >= end)
+                return 0;
+            int pivot = partition<T>(array, key, begin, end);
+            _quickSort<T>(array, key, begin, pivot-1);
+            _quickSort<T>(array, key, pivot+1, end);
+            return pivot;
+        }
+    }
+
+    template <typename T>
+    int quickSort(T array[], bool (*key)(T, T), int begin, int end) {
+        if (end <= begin)
+            return 0;
+        return __private_std::_quickSort<T>(array, key, begin, end);
+    }
+}

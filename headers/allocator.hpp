@@ -1,6 +1,8 @@
 #pragma once
 #include <stddef.h>
 #include <stdint.h>
+#include "memmap.hpp"
+#include "algorythm"
 //#define NULL 0
 #define HEAP_CAPACITY 0x1000000
 #define CHUNK_LIST_CAP 2048
@@ -35,6 +37,12 @@ public:
 	}
 };
 
+extern uint8_t HEAP[];
+
+bool init_heap();
 void free(void* ptr);
 void* realloc(void* ptr, size_t size);
 void* alloc(size_t size);
+
+void* memcpy(void* dest, const void* src, size_t len);
+void* memclear(void* dest, size_t len);

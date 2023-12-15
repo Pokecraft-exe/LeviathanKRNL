@@ -20,31 +20,21 @@ void* memclear(void* dest, size_t len)
     return dest;
 }
 
-void bubbleSort(Chunk_List* arr) {
-    size_t n = arr->count;
+template int std::quickSort<Chunk>(Chunk*, bool (*)(Chunk, Chunk), int, int);
 
-       /* # For loop to traverse through all
-        # element in an array*/
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-
-            /*# Range of the array is from 0 to n - i - 1
-            # Swap the elements if the element found
-            #is greater than the adjacent element*/
-            if (arr->chunks[j].start > arr->chunks[j + 1].start || arr->chunks[j].start == 0) {
-                Chunk t = arr->chunks[j];
-                arr->chunks[j] = arr->chunks[j + 1];
-                arr->chunks[j + 1] = t;
-            }
-        }
-    }
+bool sort(Chunk a, Chunk b){
+    return a.start > b.start;
 }
 
 bool init_heap() {
+    uint64_t totalMemsize = memmap::get_memory_size(LIMINE_MEMMAP_ALL);
+    uint64_t realHeapCapacity = totalMemsize - (uintptr_t)&HEAP;
+
     alloced_chunks.count = 2;
     alloced_chunks[0] = { (uintptr_t*)HEAP, 1 };
-    alloced_chunks[1] = { (uintptr_t*)(HEAP + (HEAP_CAPACITY - 1)), 1 };
-    if (((uintptr_t)alloced_chunks[1].start + 1) - (uintptr_t)alloced_chunks[0].start == HEAP_CAPACITY) return 1;
+
+    alloced_chunks[1] = { (uintptr_t*)(HEAP + (realHeapCapacity - 1)), 1 };
+    if (((uintptr_t)alloced_chunks[1].start + 1) - (uintptr_t)alloced_chunks[0].start == realHeapCapacity) return 1;
     return 0;
 }
 
@@ -64,7 +54,7 @@ void free(void* ptr) {
     alloced_chunks[i].start = 0;
     alloced_chunks[i].size = 0;
     // sort the alloced chuncks
-    bubbleSort(&alloced_chunks);
+    std::quickSort<Chunk>(alloced_chunks.chunks, sort, 0, alloced_chunks.count);
     alloced_chunks.count--;
     // invert the last chunks
     Chunk t = alloced_chunks[alloced_chunks.count - 1];
@@ -100,7 +90,6 @@ void* realloc(void* ptr, size_t size) {
             Last_chunk = &alloced_chunks[i];
         }
     }
-    bubbleSort(&alloced_chunks);
     memcpy(new_ptr, ptr, alloced_chunks[i].size);
 
     // free the last chunk
@@ -108,7 +97,7 @@ void* realloc(void* ptr, size_t size) {
     alloced_chunks[i].start = 0;
     alloced_chunks[i].size = 0;
     // sort the alloced chuncks
-    bubbleSort(&alloced_chunks);
+    std::quickSort<Chunk>(alloced_chunks.chunks, sort, 0, alloced_chunks.count);
     alloced_chunks.count--;
     // invert the last chunks
     Chunk t = alloced_chunks[alloced_chunks.count - 1];
@@ -121,8 +110,10 @@ void* alloc(size_t size) {
     // remove or resize the 1st usable chunk in the 
     // freed chunks and return the pointer
     if (size == 0) return nullptr;
+
     uintptr_t* ptr = nullptr;
     Chunk* Last_chunk = &alloced_chunks[0];
+
     for (int i = 1; i < alloced_chunks.count; i++) {
         if (Last_chunk->start + Last_chunk->size != alloced_chunks[i].start) {
             // free chunk found
@@ -136,6 +127,6 @@ void* alloc(size_t size) {
             Last_chunk = &alloced_chunks[i];
         }
     }
-    bubbleSort(&alloced_chunks);
+    std::quickSort<Chunk>(alloced_chunks.chunks, sort, 0, alloced_chunks.count);
     return ptr;
 }

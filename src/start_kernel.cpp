@@ -13,6 +13,7 @@
 #include "memmap.hpp"
 #include "paging.hpp"
 #include "kernel.h"
+#include "stdio"
 
 void delay(int clocks)
 {
@@ -70,22 +71,25 @@ extern "C" void start_K(){
 	    KEY = (char*)alloc(1);
     }
 
+    std::stdin cout;
+
     //print("");
 
-    printNoReturn("Framebuffer [");
-    printNoReturn("Correct", 0x00ff00);
-    print("]");
+    cout << "Framebuffer [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
 
     size_t memory_size = 0;
     if (memmap::memmap_request()) {
-        printNoReturn("Memmap [");
-        printNoReturn("Correct", 0x00ff00);
-        print("]");
+        cout << "Memmap [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
     	memory_size = memmap::get_memory_size(LIMINE_MEMMAP_ALL);
     } else {
-        printNoReturn("Memmap [");
-        printNoReturn("Error", 0xff0000);
-        print("]");
+        cout << "Memmap [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
+        while(1);
+    }
+
+    if (init_heap()) {
+        cout << "Heap [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    } else {
+        cout << "Heap [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
         while(1);
     }
 
@@ -95,37 +99,49 @@ extern "C" void start_K(){
         paging::getUsedMemory() +
         paging::getSystemMemory()
         == memory_size) {
-        printNoReturn("Paging Size [");
-        printNoReturn("Correct", 0x00ff00);
-        print("]");
+        cout << "Paging Size [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
     } else {
-        printNoReturn("Paging Size [");
-        printNoReturn("Error", 0xff0000);
-        print("]");
+        cout << "Paging Size [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
         while(1);
     }
 
     //paging::editPages((uintptr_t*)&kernelStart, (kernelSize / 4096) + 1, PAGING_RESERVE_PAGE);
 
-    printNoReturn("free memory: ");
-	printNoReturn(IntToStr(formatbytes(paging::getFreeMemory())));
-    print(getByteFormat(paging::getFreeMemory()));
+    cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
     
-    printNoReturn("used memory: ");
-	printNoReturn(IntToStr(formatbytes(paging::getUsedMemory())));
-    print(getByteFormat(paging::getUsedMemory()));
+    cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
     
-    printNoReturn("system memory: ");
-	printNoReturn(IntToStr(formatbytes(paging::getSystemMemory())));
-    print(getByteFormat(paging::getSystemMemory()));
+    cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
+
+    /*InitIDT();
 
     register uint64_t rbx asm("rbx");
     rbx = 1;
 
     init_PIT();
-    
-    InitIDT();
-    add_IRQ(ISA::PIT, IRQ0_handler, IDT_IG);
+    add_IRQ(ISA::PIT, IRQ0_handler, IDT_IG);*/
+
+    void* a = alloc(100);
+    void* b = alloc(20);
+
+    bool allocCorrect = (a == b - 100);
+    if (allocCorrect) {
+        cout << "Allocator [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    } else {
+        cout << "Allocator [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
+    }
+
+    free(a);
+    void*c = alloc(20);
+    if (a == c) {
+        cout << "Free [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    } else {
+        cout << "Free [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
+        cout << "c = " << c << std::endl;
+        cout << "a = " << a << std::endl;
+    }
+
+    while(1);
 
     
     paging::pageTable* PML4 = (paging::pageTable*)paging::requestPage();
@@ -150,7 +166,7 @@ extern "C" void start_K(){
 
     
 
-    //initRAMDISK();
+    //_hRAMDISK();
     //restart();
     while(1) {   //mainloop
         ;

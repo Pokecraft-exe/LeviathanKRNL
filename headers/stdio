@@ -1,0 +1,29 @@
+#pragma once
+#include "printf.h"
+#include "color.hpp"
+
+namespace std {
+    extern char endl;
+    
+    template <typename t>
+    char* hex();
+
+    class stdin {
+    private:
+        color::Color color_;
+    public:
+        stdin();
+        void color(color::Color);
+        color::Color color();
+        stdin operator <<(const char*);
+        stdin operator <<(char);
+        stdin operator <<(void*);
+
+        stdin operator <<(int);
+        stdin operator <<(uint8_t);
+        stdin operator <<(uint16_t);
+        stdin operator <<(uint32_t);
+        stdin operator <<(uint64_t);
+
+    };
+}

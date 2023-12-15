@@ -65,10 +65,16 @@ extern "C" void fprint(const char* str) {
 
 void printchr(const char chr, uint32_t color){
   int x, y;
-  y = CursorPosition / VGA_WIDTH;
-  x = CursorPosition % VGA_WIDTH;
-  DrawCharBackground(chr, x*16, y*16, color, 0, 2);
-  CursorPosition++;
+  if (chr == '\n'){
+        CursorPosition += VGA_WIDTH;
+        CursorPosition -= CursorPosition % VGA_WIDTH;
+  }
+  else {
+	y = CursorPosition / VGA_WIDTH;
+  	x = CursorPosition % VGA_WIDTH;
+  	DrawCharBackground(chr, x*16, y*16, color, 0, 2);
+  	CursorPosition++;
+  }
 }
 
 char string[67];

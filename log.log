@@ -17133,6 +17133,39 @@ IN:
 
 ----------------
 IN: 
+0x000000007ffb1e4e:  movzbl (%edi),%eax
+0x000000007ffb1e51:  mov    $0xc8,%edx
+0x000000007ffb1e56:  call   0x7ffb1d6e
+
+----------------
+IN: 
+0x000000007ffb1e5b:  mov    $0x1,%edx
+0x000000007ffb1e60:  test   %eax,%eax
+0x000000007ffb1e62:  je     0x7ffb1e4a
+
+----------------
+IN: 
+0x000000007ffb1e4a:  cmp    %edx,%ebp
+0x000000007ffb1e4c:  jle    0x7ffb1e66
+
+----------------
+IN: 
+0x000000007ffb1fcf:  test   %eax,%eax
+0x000000007ffb1fd1:  jne    0x7ffb1ff5
+
+----------------
+IN: 
+0x000000007ffb1fd3:  movb   $0x61,0xe8f2c
+0x000000007ffb1fda:  xor    %edx,%edx
+0x000000007ffb1fdc:  mov    $0xf4,%eax
+0x000000007ffb1fe1:  call   0x7ffb1da3
+
+----------------
+IN: 
+0x000000007ffad8c8:  jmp    0x7ffad8b7
+
+----------------
+IN: 
 0x000000007ffad9de:  pop    %ebx
 0x000000007ffad9df:  ret    
 
@@ -18083,36 +18116,21 @@ IN:
 
 ----------------
 IN: 
-0x000000007ffb1e4e:  movzbl (%edi),%eax
-0x000000007ffb1e51:  mov    $0xc8,%edx
-0x000000007ffb1e56:  call   0x7ffb1d6e
+0x000000007ffb1fe6:  test   %eax,%eax
+0x000000007ffb1fe8:  jne    0x7ffb1ff5
 
 ----------------
 IN: 
-0x000000007ffb1e5b:  mov    $0x1,%edx
-0x000000007ffb1e60:  test   %eax,%eax
-0x000000007ffb1e62:  je     0x7ffb1e4a
+0x000000007ffb1fea:  push   $0xf13ec
+0x000000007ffb1fef:  call   0xec4d8
 
 ----------------
 IN: 
-0x000000007ffb1e4a:  cmp    %edx,%ebp
-0x000000007ffb1e4c:  jle    0x7ffb1e66
-
-----------------
-IN: 
-0x000000007ffb1fcf:  test   %eax,%eax
-0x000000007ffb1fd1:  jne    0x7ffb1ff5
-
-----------------
-IN: 
-0x000000007ffb1fd3:  movb   $0x61,0xe8f2c
-0x000000007ffb1fda:  xor    %edx,%edx
-0x000000007ffb1fdc:  mov    $0xf4,%eax
-0x000000007ffb1fe1:  call   0x7ffb1da3
-
-----------------
-IN: 
-0x000000007ffad8c8:  jmp    0x7ffad8b7
+0x000000007ffb1ff4:  pop    %edx
+0x000000007ffb1ff5:  pop    %eax
+0x000000007ffb1ff6:  pop    %ebx
+0x000000007ffb1ff7:  pop    %esi
+0x000000007ffb1ff8:  ret    
 
 ----------------
 IN: 
@@ -18687,24 +18705,6 @@ IN:
 0x000000007ffb9ef7:  mov    $0x1,%esi
 0x000000007ffb9efc:  cmpb   $0x0,0x3(%esp)
 0x000000007ffb9f01:  jne    0x7ffb9f0d
-
-----------------
-IN: 
-0x000000007ffb1fe6:  test   %eax,%eax
-0x000000007ffb1fe8:  jne    0x7ffb1ff5
-
-----------------
-IN: 
-0x000000007ffb1fea:  push   $0xf13ec
-0x000000007ffb1fef:  call   0xec4d8
-
-----------------
-IN: 
-0x000000007ffb1ff4:  pop    %edx
-0x000000007ffb1ff5:  pop    %eax
-0x000000007ffb1ff6:  pop    %ebx
-0x000000007ffb1ff7:  pop    %esi
-0x000000007ffb1ff8:  ret    
 
 ----------------
 IN: 
@@ -20933,7 +20933,6 @@ IN:
 0x000000007ffbded4:  xor    %ecx,%ecx
 0x000000007ffbded6:  call   0xee4d2
 
-Servicing hardware INT=0x08
 ----------------
 IN: 
 0x00000000000cb003:  push   %es
@@ -22597,6 +22596,7 @@ IN:
 0x00000000000ee5b6:  lea    0xe(%esp),%eax
 0x00000000000ee5ba:  call   0xec0df
 
+Servicing hardware INT=0x08
 ----------------
 IN: 
 0x0000000000007c00:  jmp    0x7c3e
@@ -27208,6 +27208,178 @@ IN:
 IN: 
 0x000000000000f392:  int    $0x13
 
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
+----------------
+IN: 
+0x000000000000f392:  int    $0x13
+
 Servicing hardware INT=0x08
 ----------------
 IN: 
@@ -27249,179 +27421,6 @@ IN:
 IN: 
 0x000000000000f392:  int    $0x13
 
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-Servicing hardware INT=0x08
 ----------------
 IN: 
 0x000000000000f392:  int    $0x13
@@ -28445,6 +28444,20 @@ IN:
 
 ----------------
 IN: 
+0x0000000000012570:  mov    %esi,-0x18(%ebp)
+0x0000000000012573:  add    %ecx,%esi
+0x0000000000012575:  mov    %edx,-0x14(%ebp)
+0x0000000000012578:  adc    %eax,%edx
+0x000000000001257a:  push   $0x0
+0x000000000001257c:  push   %edi
+0x000000000001257d:  mov    %edx,-0x28(%ebp)
+0x0000000000012580:  push   %edx
+0x0000000000012581:  mov    %esi,-0x2c(%ebp)
+0x0000000000012584:  push   %esi
+0x0000000000012585:  call   0x13c20
+
+----------------
+IN: 
 0x00000000000125cd:  mov    0x34(%ebx),%ecx
 0x00000000000125d0:  mov    %ecx,-0x38(%ebp)
 0x00000000000125d3:  mov    0x14(%ebx),%eax
@@ -28461,28 +28474,6 @@ IN:
 0x00000000000125f1:  push   %ecx
 0x00000000000125f2:  push   %edx
 0x00000000000125f3:  call   0x13c20
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x0000000000012570:  mov    %esi,-0x18(%ebp)
-0x0000000000012573:  add    %ecx,%esi
-0x0000000000012575:  mov    %edx,-0x14(%ebp)
-0x0000000000012578:  adc    %eax,%edx
-0x000000000001257a:  push   $0x0
-0x000000000001257c:  push   %edi
-0x000000000001257d:  mov    %edx,-0x28(%ebp)
-0x0000000000012580:  push   %edx
-0x0000000000012581:  mov    %esi,-0x2c(%ebp)
-0x0000000000012584:  push   %esi
-0x0000000000012585:  call   0x13c20
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
 
 ----------------
 IN: 
@@ -28677,232 +28668,6 @@ IN:
 
 ----------------
 IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-Servicing hardware INT=0x08
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-Servicing hardware INT=0x08
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
 0x0000000000011126:  inc    %ebx
 0x0000000000011127:  cmp    $0xf0,%ebx
 0x000000000001112d:  jne    0x10c35
@@ -28930,6 +28695,7 @@ IN:
 0x00000000000f6efd:  addr32 orw $0x1,0x24(%eax)
 0x00000000000f6f02:  retl   
 
+Servicing hardware INT=0x08
 ----------------
 IN: 
 0x000000000000f392:  int    $0x13
@@ -30062,10 +29828,6 @@ IN:
 
 ----------------
 IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
 0x000000000000fb04:  add    $0x18,%esp
 0x000000000000fb07:  mov    0x41880,%eax
 0x000000000000fb0c:  mov    %eax,0xc(%ebx)
@@ -30485,139 +30247,7 @@ IN:
 IN: 
 0x000000000000f392:  int    $0x13
 
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
 Servicing hardware INT=0x08
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
 ----------------
 IN: 
 0x000000000000f392:  int    $0x13
@@ -34329,6 +33959,7 @@ IN:
 0x00000000000c43fc:  addr32 mov %al,%es:0x3d(%ebx)
 0x00000000000c4401:  jmp    0xc4475
 
+Servicing hardware INT=0x08
 ----------------
 IN: 
 0x000000000001ea51:  add    $0xc,%esp
@@ -35110,7 +34741,6 @@ IN:
 IN: 
 0x000000000000f392:  int    $0x10
 
-Servicing hardware INT=0x08
 ----------------
 IN: 
 0x0000000000030b00:  mov    0x8(%ebp),%esi
@@ -39528,74 +39158,7 @@ IN:
 IN: 
 0x000000000000f392:  int    $0x13
 
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
-----------------
-IN: 
-0x000000000000f392:  int    $0x13
-
+Servicing hardware INT=0x08
 ----------------
 IN: 
 0x000000000000f392:  int    $0x13
@@ -42268,7 +41831,6 @@ IN:
 IN: 
 0x000000000000f392:  int    $0x10
 
-Servicing hardware INT=0x08
 ----------------
 IN: 
 0x000000000000f392:  int    $0x10
@@ -45019,24 +44581,24 @@ IN:
 0xffffffff80000662:  cli    
 0xffffffff80000663:  push   %rbp
 0xffffffff80000664:  mov    %rsp,%rbp
-0xffffffff80000667:  mov    0xac5a(%rip),%rax        # 0xffffffff8000b2c8
+0xffffffff80000667:  mov    0xbdba(%rip),%rax        # 0xffffffff8000c428
 0xffffffff8000066e:  test   %rax,%rax
 0xffffffff80000671:  je     0xffffffff80000683
 
 ----------------
 IN: 
-0xffffffff80000673:  mov    0xac4e(%rip),%rax        # 0xffffffff8000b2c8
+0xffffffff80000673:  mov    0xbdae(%rip),%rax        # 0xffffffff8000c428
 0xffffffff8000067a:  mov    0x8(%rax),%rax
 0xffffffff8000067e:  test   %rax,%rax
 0xffffffff80000681:  jne    0xffffffff80000688
 
 ----------------
 IN: 
-0xffffffff80000688:  mov    0xac39(%rip),%rax        # 0xffffffff8000b2c8
+0xffffffff80000688:  mov    0xbd99(%rip),%rax        # 0xffffffff8000c428
 0xffffffff8000068f:  mov    0x10(%rax),%rax
 0xffffffff80000693:  mov    (%rax),%rax
-0xffffffff80000696:  mov    %rax,0xacab(%rip)        # 0xffffffff8000b348
-0xffffffff8000069d:  mov    0xaca4(%rip),%rax        # 0xffffffff8000b348
+0xffffffff80000696:  mov    %rax,0xbe0b(%rip)        # 0xffffffff8000c4a8
+0xffffffff8000069d:  mov    0xbe04(%rip),%rax        # 0xffffffff8000c4a8
 0xffffffff800006a4:  mov    %rax,%rdi
 0xffffffff800006a7:  callq  0xffffffff80000024
 
@@ -45049,8 +44611,8 @@ IN:
 0xffffffff8000002c:  sub    $0x8,%rsp
 0xffffffff80000030:  mov    %rdi,-0x8(%rbp)
 0xffffffff80000034:  mov    -0x8(%rbp),%rax
-0xffffffff80000038:  mov    %rax,0xb301(%rip)        # 0xffffffff8000b340
-0xffffffff8000003f:  mov    0xb2fa(%rip),%rax        # 0xffffffff8000b340
+0xffffffff80000038:  mov    %rax,0xc461(%rip)        # 0xffffffff8000c4a0
+0xffffffff8000003f:  mov    0xc45a(%rip),%rax        # 0xffffffff8000c4a0
 0xffffffff80000046:  cmp    %rax,-0x8(%rbp)
 0xffffffff8000004a:  je     0xffffffff80000053
 
@@ -45063,220 +44625,395 @@ IN:
 ----------------
 IN: 
 0xffffffff800006ac:  mov    $0x0,%eax
-0xffffffff800006b1:  callq  0xffffffff800054d1
+0xffffffff800006b1:  callq  0xffffffff800061d1
 
 ----------------
 IN: 
-0xffffffff800054d1:  callq  0xffffffff800054b2
+0xffffffff800061d1:  callq  0xffffffff800061b2
 
 ----------------
 IN: 
-0xffffffff800054b2:  mov    $0xaf,%al
-0xffffffff800054b4:  mov    %al,0xffffffff8000548e
-0xffffffff800054bb:  mov    %al,0xffffffff80005496
-0xffffffff800054c2:  mov    %al,0xffffffff8000549e
-0xffffffff800054c9:  mov    %al,0xffffffff800054a6
-0xffffffff800054d0:  retq   
+0xffffffff800061b2:  mov    $0xaf,%al
+0xffffffff800061b4:  mov    %al,0xffffffff8000618e
+0xffffffff800061bb:  mov    %al,0xffffffff80006196
+0xffffffff800061c2:  mov    %al,0xffffffff8000619e
+0xffffffff800061c9:  mov    %al,0xffffffff800061a6
+0xffffffff800061d0:  retq   
 
 ----------------
 IN: 
-0xffffffff800054d6:  lgdt   0xffffffff800054a8
-0xffffffff800054de:  mov    $0xffffffff80005082,%rax
-0xffffffff800054e8:  pushq  $0x8
-0xffffffff800054ea:  push   %rax
-0xffffffff800054eb:  lretq  
+0xffffffff800061d6:  lgdt   0xffffffff800061a8
+0xffffffff800061de:  mov    $0xffffffff800056d1,%rax
+0xffffffff800061e8:  pushq  $0x8
+0xffffffff800061ea:  push   %rax
+0xffffffff800061eb:  lretq  
 
 ----------------
 IN: 
-0xffffffff80005082:  repz (bad) 
-0xffffffff80005085:  cli    
-0xffffffff80005086:  push   %rbp
-0xffffffff80005087:  mov    %rsp,%rbp
-0xffffffff8000508a:  push   %rbx
-0xffffffff8000508b:  sub    $0x28,%rsp
-0xffffffff8000508f:  mov    0x62b2(%rip),%rax        # 0xffffffff8000b348
-0xffffffff80005096:  mov    0x8(%rax),%rax
-0xffffffff8000509a:  shr    $0x4,%rax
-0xffffffff8000509e:  mov    %eax,0x100f35c(%rip)        # 0xffffffff81014400
-0xffffffff800050a4:  mov    $0x1,%edi
-0xffffffff800050a9:  callq  0xffffffff80001162
+0xffffffff800056d1:  repz (bad) 
+0xffffffff800056d4:  cli    
+0xffffffff800056d5:  push   %rbp
+0xffffffff800056d6:  mov    %rsp,%rbp
+0xffffffff800056d9:  push   %rbx
+0xffffffff800056da:  sub    $0xd8,%rsp
+0xffffffff800056e1:  mov    0x6dc0(%rip),%rax        # 0xffffffff8000c4a8
+0xffffffff800056e8:  mov    0x8(%rax),%rax
+0xffffffff800056ec:  shr    $0x4,%rax
+0xffffffff800056f0:  mov    %eax,0x100fe6a(%rip)        # 0xffffffff81015560
+0xffffffff800056f6:  mov    $0x1,%edi
+0xffffffff800056fb:  callq  0xffffffff800010de
 
 ----------------
 IN: 
-0xffffffff80001162:  repz (bad) 
-0xffffffff80001165:  cli    
-0xffffffff80001166:  push   %rbp
-0xffffffff80001167:  mov    %rsp,%rbp
-0xffffffff8000116a:  push   %r12
-0xffffffff8000116c:  push   %rbx
-0xffffffff8000116d:  sub    $0x30,%rsp
-0xffffffff80001171:  lea    -0x7(%rip),%rbx        # 0xffffffff80001171
-0xffffffff80001178:  mov    $0xa19f,%r11
-0xffffffff80001182:  add    %r11,%rbx
-0xffffffff80001185:  mov    %rdi,-0x38(%rbp)
-0xffffffff80001189:  cmpq   $0x0,-0x38(%rbp)
-0xffffffff8000118e:  jne    0xffffffff8000119a
+0xffffffff800010de:  repz (bad) 
+0xffffffff800010e1:  cli    
+0xffffffff800010e2:  push   %rbp
+0xffffffff800010e3:  mov    %rsp,%rbp
+0xffffffff800010e6:  push   %r12
+0xffffffff800010e8:  push   %rbx
+0xffffffff800010e9:  sub    $0x30,%rsp
+0xffffffff800010ed:  lea    -0x7(%rip),%rbx        # 0xffffffff800010ed
+0xffffffff800010f4:  mov    $0xb38b,%r11
+0xffffffff800010fe:  add    %r11,%rbx
+0xffffffff80001101:  mov    %rdi,-0x38(%rbp)
+0xffffffff80001105:  cmpq   $0x0,-0x38(%rbp)
+0xffffffff8000110a:  jne    0xffffffff80001116
 
 ----------------
 IN: 
-0xffffffff8000119a:  movq   $0x0,-0x18(%rbp)
-0xffffffff800011a2:  mov    $0x0,%esi
-0xffffffff800011a7:  mov    $0x50,%rax
-0xffffffff800011b1:  lea    (%rbx,%rax,1),%rax
-0xffffffff800011b5:  mov    %rax,%rdi
-0xffffffff800011b8:  mov    $0xffffffffffff606a,%rax
-0xffffffff800011c2:  lea    (%rbx,%rax,1),%rax
-0xffffffff800011c6:  callq  *%rax
+0xffffffff80001116:  movq   $0x0,-0x18(%rbp)
+0xffffffff8000111e:  mov    $0x0,%esi
+0xffffffff80001123:  mov    $0x48,%rax
+0xffffffff8000112d:  lea    (%rbx,%rax,1),%rax
+0xffffffff80001131:  mov    %rax,%rdi
+0xffffffff80001134:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff8000113e:  lea    (%rbx,%rax,1),%rax
+0xffffffff80001142:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff8000137a:  repz (bad) 
-0xffffffff8000137d:  cli    
-0xffffffff8000137e:  push   %rbp
-0xffffffff8000137f:  mov    %rsp,%rbp
-0xffffffff80001382:  sub    $0x10,%rsp
-0xffffffff80001386:  lea    -0x7(%rip),%rax        # 0xffffffff80001386
-0xffffffff8000138d:  mov    $0x9f8a,%r11
-0xffffffff80001397:  add    %r11,%rax
-0xffffffff8000139a:  mov    %rdi,-0x8(%rbp)
-0xffffffff8000139e:  mov    %esi,-0xc(%rbp)
-0xffffffff800013a1:  mov    -0xc(%rbp),%eax
-0xffffffff800013a4:  cltq   
-0xffffffff800013a6:  shl    $0x4,%rax
-0xffffffff800013aa:  mov    %rax,%rdx
-0xffffffff800013ad:  mov    -0x8(%rbp),%rax
-0xffffffff800013b1:  add    %rdx,%rax
-0xffffffff800013b4:  add    $0x8,%rax
+0xffffffff8000131c:  repz (bad) 
+0xffffffff8000131f:  cli    
+0xffffffff80001320:  push   %rbp
+0xffffffff80001321:  mov    %rsp,%rbp
+0xffffffff80001324:  sub    $0x10,%rsp
+0xffffffff80001328:  lea    -0x7(%rip),%rax        # 0xffffffff80001328
+0xffffffff8000132f:  mov    $0xb150,%r11
+0xffffffff80001339:  add    %r11,%rax
+0xffffffff8000133c:  mov    %rdi,-0x8(%rbp)
+0xffffffff80001340:  mov    %esi,-0xc(%rbp)
+0xffffffff80001343:  mov    -0xc(%rbp),%eax
+0xffffffff80001346:  cltq   
+0xffffffff80001348:  shl    $0x4,%rax
+0xffffffff8000134c:  mov    %rax,%rdx
+0xffffffff8000134f:  mov    -0x8(%rbp),%rax
+0xffffffff80001353:  add    %rdx,%rax
+0xffffffff80001356:  add    $0x8,%rax
+0xffffffff8000135a:  leaveq 
+0xffffffff8000135b:  retq   
+
+----------------
+IN: 
+0xffffffff80001144:  mov    %rax,-0x20(%rbp)
+0xffffffff80001148:  movl   $0x1,-0x24(%rbp)
+0xffffffff8000114f:  jmpq   0xffffffff800012ab
+
+----------------
+IN: 
+0xffffffff800012ab:  mov    -0x24(%rbp),%eax
+0xffffffff800012ae:  movslq %eax,%rdx
+0xffffffff800012b1:  mov    $0x48,%rax
+0xffffffff800012bb:  mov    (%rbx,%rax,1),%rax
+0xffffffff800012bf:  cmp    %rax,%rdx
+0xffffffff800012c2:  jb     0xffffffff80001154
+
+----------------
+IN: 
+0xffffffff800012c8:  mov    $0x48,%rax
+0xffffffff800012d2:  mov    (%rbx,%rax,1),%rax
+0xffffffff800012d6:  mov    %eax,%ecx
+0xffffffff800012d8:  mov    $0x0,%edx
+0xffffffff800012dd:  mov    $0xffffffffffff4314,%rax
+0xffffffff800012e7:  lea    (%rbx,%rax,1),%rax
+0xffffffff800012eb:  mov    %rax,%rsi
+0xffffffff800012ee:  mov    $0x50,%rax
+0xffffffff800012f8:  lea    (%rbx,%rax,1),%rax
+0xffffffff800012fc:  mov    %rax,%rdi
+0xffffffff800012ff:  mov    $0xffffffffffff4ee4,%rax
+0xffffffff80001309:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000130d:  callq  *%rax
+
+----------------
+IN: 
+0xffffffff8000135c:  repz (bad) 
+0xffffffff8000135f:  cli    
+0xffffffff80001360:  push   %rbp
+0xffffffff80001361:  mov    %rsp,%rbp
+0xffffffff80001364:  sub    $0x20,%rsp
+0xffffffff80001368:  lea    -0x7(%rip),%rax        # 0xffffffff80001368
+0xffffffff8000136f:  mov    $0xb110,%r11
+0xffffffff80001379:  add    %r11,%rax
+0xffffffff8000137c:  mov    %rdi,-0x8(%rbp)
+0xffffffff80001380:  mov    %rsi,-0x10(%rbp)
+0xffffffff80001384:  mov    %edx,-0x14(%rbp)
+0xffffffff80001387:  mov    %ecx,-0x18(%rbp)
+0xffffffff8000138a:  mov    -0x18(%rbp),%edx
+0xffffffff8000138d:  cmp    -0x14(%rbp),%edx
+0xffffffff80001390:  jg     0xffffffff80001399
+
+----------------
+IN: 
+0xffffffff80001392:  mov    $0x0,%eax
+0xffffffff80001397:  jmp    0xffffffff800013b8
+
+----------------
+IN: 
 0xffffffff800013b8:  leaveq 
 0xffffffff800013b9:  retq   
 
 ----------------
 IN: 
-0xffffffff800011c8:  mov    %rax,-0x20(%rbp)
-0xffffffff800011cc:  movl   $0x1,-0x24(%rbp)
-0xffffffff800011d3:  jmpq   0xffffffff8000132f
+0xffffffff8000130f:  mov    -0x18(%rbp),%rax
+0xffffffff80001313:  add    $0x30,%rsp
+0xffffffff80001317:  pop    %rbx
+0xffffffff80001318:  pop    %r12
+0xffffffff8000131a:  pop    %rbp
+0xffffffff8000131b:  retq   
 
 ----------------
 IN: 
-0xffffffff8000132f:  mov    -0x24(%rbp),%eax
-0xffffffff80001332:  movslq %eax,%rdx
-0xffffffff80001335:  mov    $0x50,%rax
-0xffffffff8000133f:  mov    (%rbx,%rax,1),%rax
-0xffffffff80001343:  cmp    %rax,%rdx
-0xffffffff80001346:  jb     0xffffffff800011d8
+0xffffffff80005700:  mov    %rax,0x100fe01(%rip)        # 0xffffffff81015508
+0xffffffff80005707:  lea    -0xdc(%rbp),%rax
+0xffffffff8000570e:  mov    %rax,%rdi
+0xffffffff80005711:  callq  0xffffffff80005ce8
 
 ----------------
 IN: 
-0xffffffff8000134c:  mov    $0x50,%rax
-0xffffffff80001356:  lea    (%rbx,%rax,1),%rax
-0xffffffff8000135a:  mov    %rax,%rdi
-0xffffffff8000135d:  mov    $0xffffffffffff547c,%rax
-0xffffffff80001367:  lea    (%rbx,%rax,1),%rax
-0xffffffff8000136b:  callq  *%rax
+0xffffffff80005ce8:  repz (bad) 
+0xffffffff80005ceb:  cli    
+0xffffffff80005cec:  push   %rbp
+0xffffffff80005ced:  mov    %rsp,%rbp
+0xffffffff80005cf0:  sub    $0x20,%rsp
+0xffffffff80005cf4:  mov    %rdi,-0x18(%rbp)
+0xffffffff80005cf8:  mov    -0x18(%rbp),%rax
+0xffffffff80005cfc:  mov    $0xff,%esi
+0xffffffff80005d01:  mov    %rax,%rdi
+0xffffffff80005d04:  callq  0xffffffff800019c2
 
 ----------------
 IN: 
-0xffffffff8000078c:  repz (bad) 
-0xffffffff8000078f:  cli    
-0xffffffff80000790:  push   %rbp
-0xffffffff80000791:  mov    %rsp,%rbp
-0xffffffff80000794:  sub    $0x30,%rsp
-0xffffffff80000798:  lea    -0x7(%rip),%rax        # 0xffffffff80000798
-0xffffffff8000079f:  mov    $0xab78,%r11
-0xffffffff800007a9:  add    %r11,%rax
-0xffffffff800007ac:  mov    %rdi,-0x28(%rbp)
-0xffffffff800007b0:  mov    -0x28(%rbp),%rax
-0xffffffff800007b4:  mov    (%rax),%rax
-0xffffffff800007b7:  mov    %rax,-0x10(%rbp)
-0xffffffff800007bb:  movl   $0x0,-0x4(%rbp)
-0xffffffff800007c2:  jmpq   0xffffffff800008c4
+0xffffffff800019c2:  repz (bad) 
+0xffffffff800019c5:  cli    
+0xffffffff800019c6:  push   %rbp
+0xffffffff800019c7:  mov    %rsp,%rbp
+0xffffffff800019ca:  sub    $0x10,%rsp
+0xffffffff800019ce:  mov    %rdi,-0x8(%rbp)
+0xffffffff800019d2:  mov    %esi,-0xc(%rbp)
+0xffffffff800019d5:  mov    -0x8(%rbp),%rax
+0xffffffff800019d9:  lea    -0xc(%rbp),%rcx
+0xffffffff800019dd:  mov    $0x4,%edx
+0xffffffff800019e2:  mov    %rcx,%rsi
+0xffffffff800019e5:  mov    %rax,%rdi
+0xffffffff800019e8:  callq  0xffffffff800006b8
 
 ----------------
 IN: 
-0xffffffff800008c4:  mov    -0x4(%rbp),%eax
-0xffffffff800008c7:  cltq   
-0xffffffff800008c9:  cmp    %rax,-0x10(%rbp)
-0xffffffff800008cd:  ja     0xffffffff800007c7
+0xffffffff800006b8:  repz (bad) 
+0xffffffff800006bb:  cli    
+0xffffffff800006bc:  push   %rbp
+0xffffffff800006bd:  mov    %rsp,%rbp
+0xffffffff800006c0:  sub    $0x28,%rsp
+0xffffffff800006c4:  lea    -0x7(%rip),%rax        # 0xffffffff800006c4
+0xffffffff800006cb:  mov    $0xbdb4,%r11
+0xffffffff800006d5:  add    %r11,%rax
+0xffffffff800006d8:  mov    %rdi,-0x18(%rbp)
+0xffffffff800006dc:  mov    %rsi,-0x20(%rbp)
+0xffffffff800006e0:  mov    %rdx,-0x28(%rbp)
+0xffffffff800006e4:  mov    -0x18(%rbp),%rax
+0xffffffff800006e8:  mov    %rax,-0x8(%rbp)
+0xffffffff800006ec:  mov    -0x20(%rbp),%rax
+0xffffffff800006f0:  mov    %rax,-0x10(%rbp)
+0xffffffff800006f4:  jmp    0xffffffff80000713
 
 ----------------
 IN: 
-0xffffffff800008d3:  nop    
-0xffffffff800008d4:  nop    
-0xffffffff800008d5:  leaveq 
-0xffffffff800008d6:  retq   
+0xffffffff80000713:  mov    -0x28(%rbp),%rax
+0xffffffff80000717:  lea    -0x1(%rax),%rdx
+0xffffffff8000071b:  mov    %rdx,-0x28(%rbp)
+0xffffffff8000071f:  test   %rax,%rax
+0xffffffff80000722:  setne  %al
+0xffffffff80000725:  test   %al,%al
+0xffffffff80000727:  jne    0xffffffff800006f6
 
 ----------------
 IN: 
-0xffffffff8000136d:  mov    -0x18(%rbp),%rax
-0xffffffff80001371:  add    $0x30,%rsp
-0xffffffff80001375:  pop    %rbx
-0xffffffff80001376:  pop    %r12
-0xffffffff80001378:  pop    %rbp
-0xffffffff80001379:  retq   
+0xffffffff800006f6:  mov    -0x10(%rbp),%rax
+0xffffffff800006fa:  lea    0x1(%rax),%rdx
+0xffffffff800006fe:  mov    %rdx,-0x10(%rbp)
+0xffffffff80000702:  movzbl (%rax),%edx
+0xffffffff80000705:  mov    -0x8(%rbp),%rax
+0xffffffff80000709:  lea    0x1(%rax),%rcx
+0xffffffff8000070d:  mov    %rcx,-0x8(%rbp)
+0xffffffff80000711:  mov    %dl,(%rax)
+0xffffffff80000713:  mov    -0x28(%rbp),%rax
+0xffffffff80000717:  lea    -0x1(%rax),%rdx
+0xffffffff8000071b:  mov    %rdx,-0x28(%rbp)
+0xffffffff8000071f:  test   %rax,%rax
+0xffffffff80000722:  setne  %al
+0xffffffff80000725:  test   %al,%al
+0xffffffff80000727:  jne    0xffffffff800006f6
 
 ----------------
 IN: 
-0xffffffff800050ae:  mov    %rax,0x100f2f3(%rip)        # 0xffffffff810143a8
-0xffffffff800050b5:  mov    $0xffffff,%esi
-0xffffffff800050ba:  lea    0x4fe4(%rip),%rax        # 0xffffffff8000a0a5
-0xffffffff800050c1:  mov    %rax,%rdi
-0xffffffff800050c4:  callq  0xffffffff800032df
+0xffffffff80000729:  mov    -0x18(%rbp),%rax
+0xffffffff8000072d:  leaveq 
+0xffffffff8000072e:  retq   
 
 ----------------
 IN: 
-0xffffffff800032df:  repz (bad) 
-0xffffffff800032e2:  cli    
-0xffffffff800032e3:  push   %rbp
-0xffffffff800032e4:  mov    %rsp,%rbp
-0xffffffff800032e7:  sub    $0x20,%rsp
-0xffffffff800032eb:  mov    %rdi,-0x18(%rbp)
-0xffffffff800032ef:  mov    %esi,-0x1c(%rbp)
-0xffffffff800032f2:  jmpq   0xffffffff800033bc
+0xffffffff800019ed:  nop    
+0xffffffff800019ee:  leaveq 
+0xffffffff800019ef:  retq   
 
 ----------------
 IN: 
-0xffffffff800033bc:  mov    -0x18(%rbp),%rax
-0xffffffff800033c0:  movzbl (%rax),%eax
-0xffffffff800033c3:  test   %al,%al
-0xffffffff800033c5:  jne    0xffffffff800032f7
+0xffffffff80005d09:  lea    -0x4(%rbp),%rax
+0xffffffff80005d0d:  mov    $0xffffff,%esi
+0xffffffff80005d12:  mov    %rax,%rdi
+0xffffffff80005d15:  callq  0xffffffff800019c2
 
 ----------------
 IN: 
-0xffffffff800032f7:  mov    -0x18(%rbp),%rax
-0xffffffff800032fb:  movzbl (%rax),%eax
-0xffffffff800032fe:  cmp    $0xa,%al
-0xffffffff80003300:  jne    0xffffffff80003345
+0xffffffff80005d1a:  lea    -0x4(%rbp),%rdx
+0xffffffff80005d1e:  mov    -0x18(%rbp),%rax
+0xffffffff80005d22:  mov    %rdx,%rsi
+0xffffffff80005d25:  mov    %rax,%rdi
+0xffffffff80005d28:  callq  0xffffffff80005d30
 
 ----------------
 IN: 
-0xffffffff80003345:  movzwl 0x10112b4(%rip),%eax        # 0xffffffff81014600
-0xffffffff8000334c:  movzwl %ax,%eax
-0xffffffff8000334f:  mov    0x10110ab(%rip),%edi        # 0xffffffff81014400
-0xffffffff80003355:  cltd   
-0xffffffff80003356:  idiv   %edi
-0xffffffff80003358:  mov    %eax,-0x4(%rbp)
-0xffffffff8000335b:  movzwl 0x101129e(%rip),%eax        # 0xffffffff81014600
-0xffffffff80003362:  movzwl %ax,%eax
-0xffffffff80003365:  mov    0x1011095(%rip),%ecx        # 0xffffffff81014400
-0xffffffff8000336b:  cltd   
-0xffffffff8000336c:  idiv   %ecx
-0xffffffff8000336e:  mov    %edx,-0x8(%rbp)
-0xffffffff80003371:  mov    -0x4(%rbp),%eax
-0xffffffff80003374:  shl    $0x4,%eax
-0xffffffff80003377:  movzwl %ax,%edx
-0xffffffff8000337a:  mov    -0x8(%rbp),%eax
-0xffffffff8000337d:  shl    $0x4,%eax
-0xffffffff80003380:  movzwl %ax,%esi
-0xffffffff80003383:  mov    -0x18(%rbp),%rax
-0xffffffff80003387:  lea    0x1(%rax),%rcx
-0xffffffff8000338b:  mov    %rcx,-0x18(%rbp)
-0xffffffff8000338f:  movzbl (%rax),%eax
-0xffffffff80003392:  movsbl %al,%eax
-0xffffffff80003395:  mov    -0x1c(%rbp),%ecx
-0xffffffff80003398:  mov    $0x2,%r9d
-0xffffffff8000339e:  mov    $0x0,%r8d
-0xffffffff800033a4:  mov    %eax,%edi
-0xffffffff800033a6:  callq  0xffffffff800000ec
+0xffffffff80005d30:  repz (bad) 
+0xffffffff80005d33:  cli    
+0xffffffff80005d34:  push   %rbp
+0xffffffff80005d35:  mov    %rsp,%rbp
+0xffffffff80005d38:  sub    $0x10,%rsp
+0xffffffff80005d3c:  mov    %rdi,-0x8(%rbp)
+0xffffffff80005d40:  mov    %rsi,-0x10(%rbp)
+0xffffffff80005d44:  mov    -0x8(%rbp),%rax
+0xffffffff80005d48:  mov    -0x10(%rbp),%rdx
+0xffffffff80005d4c:  mov    (%rdx),%edx
+0xffffffff80005d4e:  mov    %edx,(%rax)
+0xffffffff80005d50:  nop    
+0xffffffff80005d51:  leaveq 
+0xffffffff80005d52:  retq   
+
+----------------
+IN: 
+0xffffffff80005d2d:  nop    
+0xffffffff80005d2e:  leaveq 
+0xffffffff80005d2f:  retq   
+
+----------------
+IN: 
+0xffffffff80005716:  lea    -0xd4(%rbp),%rax
+0xffffffff8000571d:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005724:  lea    0x5985(%rip),%rdx        # 0xffffffff8000b0b0
+0xffffffff8000572b:  mov    %rcx,%rsi
+0xffffffff8000572e:  mov    %rax,%rdi
+0xffffffff80005731:  callq  0xffffffff80005d82
+
+----------------
+IN: 
+0xffffffff80005d82:  repz (bad) 
+0xffffffff80005d85:  cli    
+0xffffffff80005d86:  push   %rbp
+0xffffffff80005d87:  mov    %rsp,%rbp
+0xffffffff80005d8a:  sub    $0x20,%rsp
+0xffffffff80005d8e:  mov    %rdi,-0x8(%rbp)
+0xffffffff80005d92:  mov    %rsi,-0x10(%rbp)
+0xffffffff80005d96:  mov    %rdx,-0x18(%rbp)
+0xffffffff80005d9a:  mov    -0x18(%rbp),%rax
+0xffffffff80005d9e:  add    $0x1,%rax
+0xffffffff80005da2:  movzbl (%rax),%eax
+0xffffffff80005da5:  test   %al,%al
+0xffffffff80005da7:  jne    0xffffffff80005e6e
+
+----------------
+IN: 
+0xffffffff80005e6e:  mov    -0x10(%rbp),%rax
+0xffffffff80005e72:  mov    %rax,%rdi
+0xffffffff80005e75:  callq  0xffffffff80001a2e
+
+----------------
+IN: 
+0xffffffff80001a2e:  repz (bad) 
+0xffffffff80001a31:  cli    
+0xffffffff80001a32:  push   %rbp
+0xffffffff80001a33:  mov    %rsp,%rbp
+0xffffffff80001a36:  sub    $0x20,%rsp
+0xffffffff80001a3a:  mov    %rdi,-0x18(%rbp)
+0xffffffff80001a3e:  mov    -0x18(%rbp),%rcx
+0xffffffff80001a42:  lea    -0x4(%rbp),%rax
+0xffffffff80001a46:  mov    $0x4,%edx
+0xffffffff80001a4b:  mov    %rcx,%rsi
+0xffffffff80001a4e:  mov    %rax,%rdi
+0xffffffff80001a51:  callq  0xffffffff800006b8
+
+----------------
+IN: 
+0xffffffff80001a56:  mov    -0x4(%rbp),%eax
+0xffffffff80001a59:  leaveq 
+0xffffffff80001a5a:  retq   
+
+----------------
+IN: 
+0xffffffff80005e7a:  mov    %eax,%edx
+0xffffffff80005e7c:  mov    -0x18(%rbp),%rax
+0xffffffff80005e80:  movzbl (%rax),%eax
+0xffffffff80005e83:  movsbl %al,%eax
+0xffffffff80005e86:  mov    %edx,%esi
+0xffffffff80005e88:  mov    %eax,%edi
+0xffffffff80005e8a:  callq  0xffffffff80003b29
+
+----------------
+IN: 
+0xffffffff80003b29:  repz (bad) 
+0xffffffff80003b2c:  cli    
+0xffffffff80003b2d:  push   %rbp
+0xffffffff80003b2e:  mov    %rsp,%rbp
+0xffffffff80003b31:  sub    $0x20,%rsp
+0xffffffff80003b35:  mov    %edi,%eax
+0xffffffff80003b37:  mov    %esi,-0x18(%rbp)
+0xffffffff80003b3a:  mov    %al,-0x14(%rbp)
+0xffffffff80003b3d:  cmpb   $0xa,-0x14(%rbp)
+0xffffffff80003b41:  jne    0xffffffff80003b86
+
+----------------
+IN: 
+0xffffffff80003b86:  movzwl 0x1011bd3(%rip),%eax        # 0xffffffff81015760
+0xffffffff80003b8d:  movzwl %ax,%eax
+0xffffffff80003b90:  mov    0x10119ca(%rip),%edi        # 0xffffffff81015560
+0xffffffff80003b96:  cltd   
+0xffffffff80003b97:  idiv   %edi
+0xffffffff80003b99:  mov    %eax,-0x4(%rbp)
+0xffffffff80003b9c:  movzwl 0x1011bbd(%rip),%eax        # 0xffffffff81015760
+0xffffffff80003ba3:  movzwl %ax,%eax
+0xffffffff80003ba6:  mov    0x10119b4(%rip),%ecx        # 0xffffffff81015560
+0xffffffff80003bac:  cltd   
+0xffffffff80003bad:  idiv   %ecx
+0xffffffff80003baf:  mov    %edx,-0x8(%rbp)
+0xffffffff80003bb2:  mov    -0x4(%rbp),%eax
+0xffffffff80003bb5:  shl    $0x4,%eax
+0xffffffff80003bb8:  movzwl %ax,%edx
+0xffffffff80003bbb:  mov    -0x8(%rbp),%eax
+0xffffffff80003bbe:  shl    $0x4,%eax
+0xffffffff80003bc1:  movzwl %ax,%esi
+0xffffffff80003bc4:  movsbl -0x14(%rbp),%eax
+0xffffffff80003bc8:  mov    -0x18(%rbp),%ecx
+0xffffffff80003bcb:  mov    $0x2,%r9d
+0xffffffff80003bd1:  mov    $0x0,%r8d
+0xffffffff80003bd7:  mov    %eax,%edi
+0xffffffff80003bd9:  callq  0xffffffff800000ec
 
 ----------------
 IN: 
@@ -45321,7 +45058,7 @@ IN:
 0xffffffff80000135:  movzbl -0x2(%rbp),%eax
 0xffffffff80000139:  add    %edx,%eax
 0xffffffff8000013b:  cltq   
-0xffffffff8000013d:  lea    0x7ebc(%rip),%rdx        # 0xffffffff80008000
+0xffffffff8000013d:  lea    0x8ebc(%rip),%rdx        # 0xffffffff80009000
 0xffffffff80000144:  movzbl (%rax,%rdx,1),%eax
 0xffffffff80000148:  movzbl %al,%eax
 0xffffffff8000014b:  mov    %eax,%edi
@@ -45338,7 +45075,7 @@ IN:
 0xffffffff8000000e:  mov    %al,-0x4(%rbp)
 0xffffffff80000011:  movzbl -0x4(%rbp),%eax
 0xffffffff80000015:  cltq   
-0xffffffff80000017:  lea    0x9862(%rip),%rdx        # 0xffffffff80009880
+0xffffffff80000017:  lea    0xa862(%rip),%rdx        # 0xffffffff8000a880
 0xffffffff8000001e:  movzbl (%rax,%rdx,1),%eax
 0xffffffff80000022:  leaveq 
 0xffffffff80000023:  retq   
@@ -45386,7 +45123,7 @@ IN:
 0xffffffff8000006c:  mov    %edx,-0x1c(%rbp)
 0xffffffff8000006f:  mov    %ecx,-0x20(%rbp)
 0xffffffff80000072:  mov    %r8d,-0x24(%rbp)
-0xffffffff80000076:  mov    0xb2c3(%rip),%rax        # 0xffffffff8000b340
+0xffffffff80000076:  mov    0xc423(%rip),%rax        # 0xffffffff8000c4a0
 0xffffffff8000007d:  mov    (%rax),%rax
 0xffffffff80000080:  mov    %rax,-0x10(%rbp)
 0xffffffff80000084:  movl   $0x0,-0x8(%rbp)
@@ -45411,7 +45148,7 @@ IN:
 
 ----------------
 IN: 
-0xffffffff80000096:  mov    0xb2a3(%rip),%rax        # 0xffffffff8000b340
+0xffffffff80000096:  mov    0xc403(%rip),%rax        # 0xffffffff8000c4a0
 0xffffffff8000009d:  mov    0x8(%rax),%rdx
 0xffffffff800000a1:  mov    -0x18(%rbp),%ecx
 0xffffffff800000a4:  mov    -0x8(%rbp),%eax
@@ -45496,1211 +45233,2545 @@ IN:
 
 ----------------
 IN: 
-0xffffffff800033ab:  movzwl 0x101124e(%rip),%eax        # 0xffffffff81014600
-0xffffffff800033b2:  add    $0x1,%eax
-0xffffffff800033b5:  mov    %ax,0x1011244(%rip)        # 0xffffffff81014600
-0xffffffff800033bc:  mov    -0x18(%rbp),%rax
-0xffffffff800033c0:  movzbl (%rax),%eax
-0xffffffff800033c3:  test   %al,%al
-0xffffffff800033c5:  jne    0xffffffff800032f7
+0xffffffff80003bde:  movzwl 0x1011b7b(%rip),%eax        # 0xffffffff81015760
+0xffffffff80003be5:  add    $0x1,%eax
+0xffffffff80003be8:  mov    %ax,0x1011b71(%rip)        # 0xffffffff81015760
+0xffffffff80003bef:  nop    
+0xffffffff80003bf0:  leaveq 
+0xffffffff80003bf1:  retq   
 
 ----------------
-IN: 
-0xffffffff800033cb:  nop    
-0xffffffff800033cc:  nop    
-0xffffffff800033cd:  leaveq 
-0xffffffff800033ce:  retq   
-
-----------------
-IN: 
-0xffffffff800050c9:  mov    $0xff00,%esi
-0xffffffff800050ce:  lea    0x4fde(%rip),%rax        # 0xffffffff8000a0b3
-0xffffffff800050d5:  mov    %rax,%rdi
-0xffffffff800050d8:  callq  0xffffffff800032df
-
+IN: 
+0xffffffff80005e8f:  addq   $0x1,-0x18(%rbp)
+0xffffffff80005e94:  mov    -0x18(%rbp),%rax
+0xffffffff80005e98:  movzbl (%rax),%eax
+0xffffffff80005e9b:  test   %al,%al
+0xffffffff80005e9d:  jne    0xffffffff80005d9a
+
+----------------
+IN: 
+0xffffffff80005d9a:  mov    -0x18(%rbp),%rax
+0xffffffff80005d9e:  add    $0x1,%rax
+0xffffffff80005da2:  movzbl (%rax),%eax
+0xffffffff80005da5:  test   %al,%al
+0xffffffff80005da7:  jne    0xffffffff80005e6e
+
+----------------
+IN: 
+0xffffffff80005dad:  mov    -0x18(%rbp),%rax
+0xffffffff80005db1:  add    $0x2,%rax
+0xffffffff80005db5:  movzbl (%rax),%eax
+0xffffffff80005db8:  cmp    $0x6d,%al
+0xffffffff80005dba:  jne    0xffffffff80005e6e
+
+----------------
+IN: 
+0xffffffff80005dc0:  mov    -0x10(%rbp),%rax
+0xffffffff80005dc4:  mov    %rax,%rdi
+0xffffffff80005dc7:  callq  0xffffffff80001a2e
+
+----------------
+IN: 
+0xffffffff80005dcc:  mov    %eax,%edx
+0xffffffff80005dce:  mov    -0x18(%rbp),%rax
+0xffffffff80005dd2:  movzbl (%rax),%eax
+0xffffffff80005dd5:  movsbl %al,%eax
+0xffffffff80005dd8:  mov    %edx,%esi
+0xffffffff80005dda:  mov    %eax,%edi
+0xffffffff80005ddc:  callq  0xffffffff80003b29
+
+----------------
+IN: 
+0xffffffff80005de1:  mov    -0x10(%rbp),%rax
+0xffffffff80005de5:  mov    -0x18(%rbp),%rdx
+0xffffffff80005de9:  add    $0x6,%rdx
+0xffffffff80005ded:  movzbl (%rdx),%edx
+0xffffffff80005df0:  movzbl %dl,%edx
+0xffffffff80005df3:  mov    %edx,%esi
+0xffffffff80005df5:  mov    %rax,%rdi
+0xffffffff80005df8:  callq  0xffffffff80001a5c
+
+----------------
+IN: 
+0xffffffff80001a5c:  repz (bad) 
+0xffffffff80001a5f:  cli    
+0xffffffff80001a60:  push   %rbp
+0xffffffff80001a61:  mov    %rsp,%rbp
+0xffffffff80001a64:  sub    $0x10,%rsp
+0xffffffff80001a68:  mov    %rdi,-0x8(%rbp)
+0xffffffff80001a6c:  mov    %esi,%eax
+0xffffffff80001a6e:  mov    %al,-0xc(%rbp)
+0xffffffff80001a71:  mov    -0x8(%rbp),%rax
+0xffffffff80001a75:  movzbl -0xc(%rbp),%edx
+0xffffffff80001a79:  mov    %dl,(%rax)
+0xffffffff80001a7b:  nop    
+0xffffffff80001a7c:  leaveq 
+0xffffffff80001a7d:  retq   
+
+----------------
+IN: 
+0xffffffff80005dfd:  mov    -0x10(%rbp),%rax
+0xffffffff80005e01:  mov    -0x18(%rbp),%rdx
+0xffffffff80005e05:  add    $0x5,%rdx
+0xffffffff80005e09:  movzbl (%rdx),%edx
+0xffffffff80005e0c:  movzbl %dl,%edx
+0xffffffff80005e0f:  mov    %edx,%esi
+0xffffffff80005e11:  mov    %rax,%rdi
+0xffffffff80005e14:  callq  0xffffffff80001a7e
+
+----------------
+IN: 
+0xffffffff80001a7e:  repz (bad) 
+0xffffffff80001a81:  cli    
+0xffffffff80001a82:  push   %rbp
+0xffffffff80001a83:  mov    %rsp,%rbp
+0xffffffff80001a86:  sub    $0x10,%rsp
+0xffffffff80001a8a:  mov    %rdi,-0x8(%rbp)
+0xffffffff80001a8e:  mov    %esi,%eax
+0xffffffff80001a90:  mov    %al,-0xc(%rbp)
+0xffffffff80001a93:  mov    -0x8(%rbp),%rax
+0xffffffff80001a97:  movzbl -0xc(%rbp),%edx
+0xffffffff80001a9b:  mov    %dl,0x1(%rax)
+0xffffffff80001a9e:  nop    
+0xffffffff80001a9f:  leaveq 
+0xffffffff80001aa0:  retq   
+
+----------------
+IN: 
+0xffffffff80005e19:  mov    -0x10(%rbp),%rax
+0xffffffff80005e1d:  mov    -0x18(%rbp),%rdx
+0xffffffff80005e21:  add    $0x4,%rdx
+0xffffffff80005e25:  movzbl (%rdx),%edx
+0xffffffff80005e28:  movzbl %dl,%edx
+0xffffffff80005e2b:  mov    %edx,%esi
+0xffffffff80005e2d:  mov    %rax,%rdi
+0xffffffff80005e30:  callq  0xffffffff80001aa2
+
+----------------
+IN: 
+0xffffffff80001aa2:  repz (bad) 
+0xffffffff80001aa5:  cli    
+0xffffffff80001aa6:  push   %rbp
+0xffffffff80001aa7:  mov    %rsp,%rbp
+0xffffffff80001aaa:  sub    $0x10,%rsp
+0xffffffff80001aae:  mov    %rdi,-0x8(%rbp)
+0xffffffff80001ab2:  mov    %esi,%eax
+0xffffffff80001ab4:  mov    %al,-0xc(%rbp)
+0xffffffff80001ab7:  mov    -0x8(%rbp),%rax
+0xffffffff80001abb:  movzbl -0xc(%rbp),%edx
+0xffffffff80001abf:  mov    %dl,0x2(%rax)
+0xffffffff80001ac2:  nop    
+0xffffffff80001ac3:  leaveq 
+0xffffffff80001ac4:  retq   
+
+----------------
+IN: 
+0xffffffff80005e35:  mov    -0x18(%rbp),%rax
+0xffffffff80005e39:  add    $0x8,%rax
+0xffffffff80005e3d:  movzbl (%rax),%eax
+0xffffffff80005e40:  cmp    $0x5d,%al
+0xffffffff80005e42:  jne    0xffffffff80005e67
+
+----------------
+IN: 
+0xffffffff80005e67:  addq   $0x8,-0x18(%rbp)
+0xffffffff80005e6c:  jmp    0xffffffff80005e94
+
+----------------
+IN: 
+0xffffffff80005e94:  mov    -0x18(%rbp),%rax
+0xffffffff80005e98:  movzbl (%rax),%eax
+0xffffffff80005e9b:  test   %al,%al
+0xffffffff80005e9d:  jne    0xffffffff80005d9a
+
+----------------
+IN: 
+0xffffffff80005e44:  mov    -0x10(%rbp),%rax
+0xffffffff80005e48:  mov    -0x18(%rbp),%rdx
+0xffffffff80005e4c:  add    $0x8,%rdx
+0xffffffff80005e50:  movzbl (%rdx),%edx
+0xffffffff80005e53:  movzbl %dl,%edx
+0xffffffff80005e56:  mov    %edx,%esi
+0xffffffff80005e58:  mov    %rax,%rdi
+0xffffffff80005e5b:  callq  0xffffffff80001ac6
+
+----------------
+IN: 
+0xffffffff80001ac6:  repz (bad) 
+0xffffffff80001ac9:  cli    
+0xffffffff80001aca:  push   %rbp
+0xffffffff80001acb:  mov    %rsp,%rbp
+0xffffffff80001ace:  sub    $0x10,%rsp
+0xffffffff80001ad2:  mov    %rdi,-0x8(%rbp)
+0xffffffff80001ad6:  mov    %esi,%eax
+0xffffffff80001ad8:  mov    %al,-0xc(%rbp)
+0xffffffff80001adb:  mov    -0x8(%rbp),%rax
+0xffffffff80001adf:  movzbl -0xc(%rbp),%edx
+0xffffffff80001ae3:  mov    %dl,0x3(%rax)
+0xffffffff80001ae6:  nop    
+0xffffffff80001ae7:  leaveq 
+0xffffffff80001ae8:  retq   
+
+----------------
+IN: 
+0xffffffff80005e60:  addq   $0x9,-0x18(%rbp)
+0xffffffff80005e65:  jmp    0xffffffff80005e94
+
+----------------
+IN: 
+0xffffffff80005ea3:  mov    -0x8(%rbp),%rax
+0xffffffff80005ea7:  mov    %rax,%rdi
+0xffffffff80005eaa:  callq  0xffffffff80005ce8
+
+----------------
+IN: 
+0xffffffff80005eaf:  mov    -0x8(%rbp),%rax
+0xffffffff80005eb3:  leaveq 
+0xffffffff80005eb4:  retq   
+
+----------------
+IN: 
+0xffffffff80005736:  movzbl 0x6d33(%rip),%eax        # 0xffffffff8000c470
+0xffffffff8000573d:  movsbl %al,%edx
+0xffffffff80005740:  lea    -0xd8(%rbp),%rax
+0xffffffff80005747:  lea    -0xd4(%rbp),%rcx
+0xffffffff8000574e:  mov    %rcx,%rsi
+0xffffffff80005751:  mov    %rax,%rdi
+0xffffffff80005754:  callq  0xffffffff80005eb6
+
+----------------
+IN: 
+0xffffffff80005eb6:  repz (bad) 
+0xffffffff80005eb9:  cli    
+0xffffffff80005eba:  push   %rbp
+0xffffffff80005ebb:  mov    %rsp,%rbp
+0xffffffff80005ebe:  sub    $0x20,%rsp
+0xffffffff80005ec2:  mov    %rdi,-0x8(%rbp)
+0xffffffff80005ec6:  mov    %rsi,-0x10(%rbp)
+0xffffffff80005eca:  mov    %edx,%eax
+0xffffffff80005ecc:  mov    %al,-0x14(%rbp)
+0xffffffff80005ecf:  mov    -0x10(%rbp),%rax
+0xffffffff80005ed3:  mov    %rax,%rdi
+0xffffffff80005ed6:  callq  0xffffffff80001a2e
+
+----------------
+IN: 
+0xffffffff80005edb:  mov    %eax,%edx
+0xffffffff80005edd:  movsbl -0x14(%rbp),%eax
+0xffffffff80005ee1:  mov    %edx,%esi
+0xffffffff80005ee3:  mov    %eax,%edi
+0xffffffff80005ee5:  callq  0xffffffff80003b29
+
+----------------
+IN: 
+0xffffffff80003b43:  mov    0x1011a17(%rip),%eax        # 0xffffffff81015560
+0xffffffff80003b49:  mov    %eax,%edx
+0xffffffff80003b4b:  movzwl 0x1011c0e(%rip),%eax        # 0xffffffff81015760
+0xffffffff80003b52:  add    %edx,%eax
+0xffffffff80003b54:  mov    %ax,0x1011c05(%rip)        # 0xffffffff81015760
+0xffffffff80003b5b:  movzwl 0x1011bfe(%rip),%ecx        # 0xffffffff81015760
+0xffffffff80003b62:  movzwl 0x1011bf7(%rip),%eax        # 0xffffffff81015760
+0xffffffff80003b69:  movzwl %ax,%eax
+0xffffffff80003b6c:  mov    0x10119ee(%rip),%esi        # 0xffffffff81015560
+0xffffffff80003b72:  cltd   
+0xffffffff80003b73:  idiv   %esi
+0xffffffff80003b75:  mov    %edx,%eax
+0xffffffff80003b77:  mov    %eax,%edx
+0xffffffff80003b79:  mov    %ecx,%eax
+0xffffffff80003b7b:  sub    %edx,%eax
+0xffffffff80003b7d:  mov    %ax,0x1011bdc(%rip)        # 0xffffffff81015760
+0xffffffff80003b84:  jmp    0xffffffff80003bef
+
+----------------
+IN: 
+0xffffffff80003bef:  nop    
+0xffffffff80003bf0:  leaveq 
+0xffffffff80003bf1:  retq   
+
+----------------
+IN: 
+0xffffffff80005eea:  mov    -0x8(%rbp),%rax
+0xffffffff80005eee:  mov    %rax,%rdi
+0xffffffff80005ef1:  callq  0xffffffff80005ce8
+
+----------------
+IN: 
+0xffffffff80005ef6:  mov    -0x8(%rbp),%rax
+0xffffffff80005efa:  leaveq 
+0xffffffff80005efb:  retq   
+
+----------------
+IN: 
+0xffffffff80005759:  movq   $0x0,-0x18(%rbp)
+0xffffffff80005761:  callq  0xffffffff80002ba3
+
+----------------
+IN: 
+0xffffffff80002ba3:  repz (bad) 
+0xffffffff80002ba6:  cli    
+0xffffffff80002ba7:  push   %rbp
+0xffffffff80002ba8:  mov    %rsp,%rbp
+0xffffffff80002bab:  mov    0x98b6(%rip),%rax        # 0xffffffff8000c468
+0xffffffff80002bb2:  test   %rax,%rax
+0xffffffff80002bb5:  je     0xffffffff80002bc7
+
+----------------
+IN: 
+0xffffffff80002bb7:  mov    0x98aa(%rip),%rax        # 0xffffffff8000c468
+0xffffffff80002bbe:  mov    0x8(%rax),%rax
+0xffffffff80002bc2:  test   %rax,%rax
+0xffffffff80002bc5:  jne    0xffffffff80002bce
+
+----------------
+IN: 
+0xffffffff80002bce:  mov    $0x0,%eax
+0xffffffff80002bd3:  test   %al,%al
+0xffffffff80002bd5:  je     0xffffffff80002bde
+
+----------------
+IN: 
+0xffffffff80002bde:  mov    0x9883(%rip),%rax        # 0xffffffff8000c468
+0xffffffff80002be5:  mov    (%rax),%rax
+0xffffffff80002be8:  mov    %rax,0x1012921(%rip)        # 0xffffffff81015510
+0xffffffff80002bef:  mov    0x9872(%rip),%rax        # 0xffffffff8000c468
+0xffffffff80002bf6:  mov    0x8(%rax),%rax
+0xffffffff80002bfa:  mov    %rax,0x1012917(%rip)        # 0xffffffff81015518
+0xffffffff80002c01:  mov    0x9860(%rip),%rax        # 0xffffffff8000c468
+0xffffffff80002c08:  mov    0x10(%rax),%rax
+0xffffffff80002c0c:  mov    %rax,0x101290d(%rip)        # 0xffffffff81015520
+0xffffffff80002c13:  mov    $0x1,%eax
+0xffffffff80002c18:  pop    %rbp
+0xffffffff80002c19:  retq   
+
+----------------
+IN: 
+0xffffffff80005766:  test   %al,%al
+0xffffffff80005768:  je     0xffffffff800057ca
+
+----------------
+IN: 
+0xffffffff8000576a:  lea    -0xcc(%rbp),%rax
+0xffffffff80005771:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005778:  lea    0x5959(%rip),%rdx        # 0xffffffff8000b0d8
+0xffffffff8000577f:  mov    %rcx,%rsi
+0xffffffff80005782:  mov    %rax,%rdi
+0xffffffff80005785:  callq  0xffffffff80005d82
+
+----------------
+IN: 
+0xffffffff8000578a:  movzbl 0x6cdf(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005791:  movsbl %al,%edx
+0xffffffff80005794:  lea    -0xd0(%rbp),%rax
+0xffffffff8000579b:  lea    -0xcc(%rbp),%rcx
+0xffffffff800057a2:  mov    %rcx,%rsi
+0xffffffff800057a5:  mov    %rax,%rdi
+0xffffffff800057a8:  callq  0xffffffff80005eb6
+
+----------------
+IN: 
+0xffffffff800057ad:  mov    $0x8,%edi
+0xffffffff800057b2:  callq  0xffffffff80002ad6
+
+----------------
+IN: 
+0xffffffff80002ad6:  repz (bad) 
+0xffffffff80002ad9:  cli    
+0xffffffff80002ada:  push   %rbp
+0xffffffff80002adb:  mov    %rsp,%rbp
+0xffffffff80002ade:  sub    $0x18,%rsp
+0xffffffff80002ae2:  mov    %edi,%eax
+0xffffffff80002ae4:  mov    %al,-0x14(%rbp)
+0xffffffff80002ae7:  movq   $0x0,-0x8(%rbp)
+0xffffffff80002aef:  cmpb   $0x8,-0x14(%rbp)
+0xffffffff80002af3:  je     0xffffffff80002b5d
+
+----------------
+IN: 
+0xffffffff80002b5d:  movw   $0x0,-0xc(%rbp)
+0xffffffff80002b63:  jmp    0xffffffff80002b8d
+
+----------------
+IN: 
+0xffffffff80002b8d:  movzwl -0xc(%rbp),%edx
+0xffffffff80002b91:  mov    0x1012980(%rip),%rax        # 0xffffffff81015518
+0xffffffff80002b98:  cmp    %rax,%rdx
+0xffffffff80002b9b:  jb     0xffffffff80002b65
+
+----------------
+IN: 
+0xffffffff80002b65:  mov    0x10129b4(%rip),%rdx        # 0xffffffff81015520
+0xffffffff80002b6c:  movzwl -0xc(%rbp),%eax
+0xffffffff80002b70:  shl    $0x3,%rax
+0xffffffff80002b74:  add    %rdx,%rax
+0xffffffff80002b77:  mov    (%rax),%rax
+0xffffffff80002b7a:  mov    0x8(%rax),%rax
+0xffffffff80002b7e:  add    %rax,-0x8(%rbp)
+0xffffffff80002b82:  movzwl -0xc(%rbp),%eax
+0xffffffff80002b86:  add    $0x1,%eax
+0xffffffff80002b89:  mov    %ax,-0xc(%rbp)
+0xffffffff80002b8d:  movzwl -0xc(%rbp),%edx
+0xffffffff80002b91:  mov    0x1012980(%rip),%rax        # 0xffffffff81015518
+0xffffffff80002b98:  cmp    %rax,%rdx
+0xffffffff80002b9b:  jb     0xffffffff80002b65
+
+----------------
+IN: 
+0xffffffff80002b9d:  mov    -0x8(%rbp),%rax
+0xffffffff80002ba1:  leaveq 
+0xffffffff80002ba2:  retq   
+
+----------------
+IN: 
+0xffffffff800057b7:  mov    %rax,-0x18(%rbp)
+0xffffffff800057bb:  callq  0xffffffff800007db
+
+----------------
+IN: 
+0xffffffff800007db:  repz (bad) 
+0xffffffff800007de:  cli    
+0xffffffff800007df:  push   %rbp
+0xffffffff800007e0:  mov    %rsp,%rbp
+0xffffffff800007e3:  push   %r15
+0xffffffff800007e5:  push   %r12
+0xffffffff800007e7:  push   %rbx
+0xffffffff800007e8:  sub    $0x18,%rsp
+0xffffffff800007ec:  lea    -0x7(%rip),%rbx        # 0xffffffff800007ec
+0xffffffff800007f3:  mov    $0xbc8c,%r11
+0xffffffff800007fd:  add    %r11,%rbx
+0xffffffff80000800:  mov    $0x8,%edi
+0xffffffff80000805:  mov    %rbx,%r15
+0xffffffff80000808:  mov    $0xffffffffffff665e,%rax
+0xffffffff80000812:  add    %rbx,%rax
+0xffffffff80000815:  callq  *%rax
+
+----------------
+IN: 
+0xffffffff80000817:  mov    %rax,-0x28(%rbp)
+0xffffffff8000081b:  mov    $0x1009310,%rax
+0xffffffff80000825:  lea    (%rbx,%rax,1),%rdx
+0xffffffff80000829:  mov    -0x28(%rbp),%rax
+0xffffffff8000082d:  sub    %rdx,%rax
+0xffffffff80000830:  mov    %rax,-0x30(%rbp)
+0xffffffff80000834:  mov    $0x48,%rax
+0xffffffff8000083e:  movq   $0x2,(%rbx,%rax,1)
+0xffffffff80000846:  mov    $0x0,%esi
+0xffffffff8000084b:  mov    $0x48,%rax
+0xffffffff80000855:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000859:  mov    %rax,%rdi
+0xffffffff8000085c:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000866:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000086a:  callq  *%rax
+
+----------------
+IN: 
+0xffffffff8000086c:  mov    $0x1009310,%rdx
+0xffffffff80000876:  lea    (%rbx,%rdx,1),%rdx
+0xffffffff8000087a:  mov    %rdx,(%rax)
+0xffffffff8000087d:  movq   $0x1,0x8(%rax)
+0xffffffff80000885:  mov    $0x1,%esi
+0xffffffff8000088a:  mov    $0x48,%rax
+0xffffffff80000894:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000898:  mov    %rax,%rdi
+0xffffffff8000089b:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff800008a5:  lea    (%rbx,%rax,1),%rax
+0xffffffff800008a9:  callq  *%rax
+
+----------------
+IN: 
+0xffffffff800008ab:  mov    -0x30(%rbp),%rdx
+0xffffffff800008af:  lea    -0x1(%rdx),%rcx
+0xffffffff800008b3:  mov    $0x1009310,%rdx
+0xffffffff800008bd:  lea    (%rbx,%rdx,1),%rdx
+0xffffffff800008c1:  add    %rcx,%rdx
+0xffffffff800008c4:  mov    %rdx,(%rax)
+0xffffffff800008c7:  movq   $0x1,0x8(%rax)
+0xffffffff800008cf:  mov    $0x1,%esi
+0xffffffff800008d4:  mov    $0x48,%rax
+0xffffffff800008de:  lea    (%rbx,%rax,1),%rax
+0xffffffff800008e2:  mov    %rax,%rdi
+0xffffffff800008e5:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff800008ef:  lea    (%rbx,%rax,1),%rax
+0xffffffff800008f3:  callq  *%rax
+
+----------------
+IN: 
+0xffffffff800008f5:  mov    (%rax),%rax
+0xffffffff800008f8:  mov    %rax,%r12
+0xffffffff800008fb:  mov    $0x0,%esi
+0xffffffff80000900:  mov    $0x48,%rax
+0xffffffff8000090a:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000090e:  mov    %rax,%rdi
+0xffffffff80000911:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff8000091b:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000091f:  callq  *%rax
+
+----------------
+IN: 
+0xffffffff80000921:  mov    (%rax),%rax
+0xffffffff80000924:  mov    %rax,%rdx
+0xffffffff80000927:  mov    %r12,%rax
+0xffffffff8000092a:  sub    %rdx,%rax
+0xffffffff8000092d:  add    $0x1,%rax
+0xffffffff80000931:  cmp    %rax,-0x30(%rbp)
+0xffffffff80000935:  sete   %al
+0xffffffff80000938:  test   %al,%al
+0xffffffff8000093a:  je     0xffffffff80000943
+
+----------------
+IN: 
+0xffffffff8000093c:  mov    $0x1,%eax
+0xffffffff80000941:  jmp    0xffffffff80000948
+
+----------------
+IN: 
+0xffffffff80000948:  add    $0x18,%rsp
+0xffffffff8000094c:  pop    %rbx
+0xffffffff8000094d:  pop    %r12
+0xffffffff8000094f:  pop    %r15
+0xffffffff80000951:  pop    %rbp
+0xffffffff80000952:  retq   
+
+----------------
+IN: 
+0xffffffff800057c0:  test   %al,%al
+0xffffffff800057c2:  je     0xffffffff80005880
+
+----------------
+IN: 
+0xffffffff800057c8:  jmp    0xffffffff8000580f
+
+----------------
+IN: 
+0xffffffff8000580f:  lea    -0xbc(%rbp),%rax
+0xffffffff80005816:  lea    -0xdc(%rbp),%rcx
+0xffffffff8000581d:  lea    0x58f2(%rip),%rdx        # 0xffffffff8000b116
+0xffffffff80005824:  mov    %rcx,%rsi
+0xffffffff80005827:  mov    %rax,%rdi
+0xffffffff8000582a:  callq  0xffffffff80005d82
+
+----------------
+IN: 
+0xffffffff8000582f:  movzbl 0x6c3a(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005836:  movsbl %al,%edx
+0xffffffff80005839:  lea    -0xc0(%rbp),%rax
+0xffffffff80005840:  lea    -0xbc(%rbp),%rcx
+0xffffffff80005847:  mov    %rcx,%rsi
+0xffffffff8000584a:  mov    %rax,%rdi
+0xffffffff8000584d:  callq  0xffffffff80005eb6
+
+----------------
+IN: 
+0xffffffff80005852:  callq  0xffffffff80002e38
+
+----------------
+IN: 
+0xffffffff80002e38:  repz (bad) 
+0xffffffff80002e3b:  cli    
+0xffffffff80002e3c:  push   %rbp
+0xffffffff80002e3d:  mov    %rsp,%rbp
+0xffffffff80002e40:  sub    $0x50,%rsp
+0xffffffff80002e44:  movq   $0x0,-0x50(%rbp)
+0xffffffff80002e4c:  movq   $0x0,-0x48(%rbp)
+0xffffffff80002e54:  movq   $0x0,-0x40(%rbp)
+0xffffffff80002e5c:  movb   $0x1,-0x21(%rbp)
+0xffffffff80002e60:  movq   $0x0,-0x10(%rbp)
+0xffffffff80002e68:  jmpq   0xffffffff80002ef7
+
+----------------
+IN: 
+0xffffffff80002ef7:  mov    0x101261a(%rip),%rax        # 0xffffffff81015518
+0xffffffff80002efe:  cmp    %rax,-0x10(%rbp)
+0xffffffff80002f02:  jb     0xffffffff80002e6d
+
+----------------
+IN: 
+0xffffffff80002e6d:  mov    0x10126ac(%rip),%rdx        # 0xffffffff81015520
+0xffffffff80002e74:  mov    -0x10(%rbp),%rax
+0xffffffff80002e78:  shl    $0x3,%rax
+0xffffffff80002e7c:  add    %rdx,%rax
+0xffffffff80002e7f:  mov    (%rax),%rax
+0xffffffff80002e82:  mov    0x10(%rax),%rax
+0xffffffff80002e86:  test   %rax,%rax
+0xffffffff80002e89:  jne    0xffffffff80002ef2
+
+----------------
+IN: 
+0xffffffff80002ef2:  addq   $0x1,-0x10(%rbp)
+0xffffffff80002ef7:  mov    0x101261a(%rip),%rax        # 0xffffffff81015518
+0xffffffff80002efe:  cmp    %rax,-0x10(%rbp)
+0xffffffff80002f02:  jb     0xffffffff80002e6d
+
+----------------
+IN: 
+0xffffffff80002e8b:  mov    0x101268e(%rip),%rdx        # 0xffffffff81015520
+0xffffffff80002e92:  mov    -0x10(%rbp),%rax
+0xffffffff80002e96:  shl    $0x3,%rax
+0xffffffff80002e9a:  add    %rdx,%rax
+0xffffffff80002e9d:  mov    (%rax),%rax
+0xffffffff80002ea0:  mov    0x8(%rax),%rdx
+0xffffffff80002ea4:  mov    -0x48(%rbp),%rax
+0xffffffff80002ea8:  cmp    %rax,%rdx
+0xffffffff80002eab:  jbe    0xffffffff80002ef2
+
+----------------
+IN: 
+0xffffffff80002ead:  mov    0x101266c(%rip),%rdx        # 0xffffffff81015520
+0xffffffff80002eb4:  mov    -0x10(%rbp),%rax
+0xffffffff80002eb8:  shl    $0x3,%rax
+0xffffffff80002ebc:  add    %rdx,%rax
+0xffffffff80002ebf:  mov    (%rax),%rcx
+0xffffffff80002ec2:  mov    (%rcx),%rax
+0xffffffff80002ec5:  mov    0x8(%rcx),%rdx
+0xffffffff80002ec9:  mov    %rax,-0x50(%rbp)
+0xffffffff80002ecd:  mov    %rdx,-0x48(%rbp)
+0xffffffff80002ed1:  mov    0x10(%rcx),%rax
+0xffffffff80002ed5:  mov    %rax,-0x40(%rbp)
+0xffffffff80002ed9:  mov    0x1012640(%rip),%rdx        # 0xffffffff81015520
+0xffffffff80002ee0:  mov    -0x10(%rbp),%rax
+0xffffffff80002ee4:  shl    $0x3,%rax
+0xffffffff80002ee8:  add    %rdx,%rax
+0xffffffff80002eeb:  mov    (%rax),%rax
+0xffffffff80002eee:  mov    %rax,-0x8(%rbp)
+0xffffffff80002ef2:  addq   $0x1,-0x10(%rbp)
+0xffffffff80002ef7:  mov    0x101261a(%rip),%rax        # 0xffffffff81015518
+0xffffffff80002efe:  cmp    %rax,-0x10(%rbp)
+0xffffffff80002f02:  jb     0xffffffff80002e6d
+
+----------------
+IN: 
+0xffffffff80002f08:  mov    $0x8,%edi
+0xffffffff80002f0d:  callq  0xffffffff80002ad6
+
+----------------
+IN: 
+0xffffffff80002f12:  mov    %rax,-0x30(%rbp)
+0xffffffff80002f16:  mov    -0x30(%rbp),%rax
+0xffffffff80002f1a:  mov    %rax,0x1012607(%rip)        # 0xffffffff81015528
+0xffffffff80002f21:  mov    -0x30(%rbp),%rax
+0xffffffff80002f25:  shr    $0xf,%rax
+0xffffffff80002f29:  add    $0x1,%rax
+0xffffffff80002f2d:  mov    %rax,0x1012614(%rip)        # 0xffffffff81015548
+0xffffffff80002f34:  mov    -0x8(%rbp),%rax
+0xffffffff80002f38:  mov    (%rax),%rax
+0xffffffff80002f3b:  mov    %rax,0x10125fe(%rip)        # 0xffffffff81015540
+0xffffffff80002f42:  jmp    0xffffffff80002f5a
+
+----------------
+IN: 
+0xffffffff80002f5a:  mov    0x10125e7(%rip),%rax        # 0xffffffff81015548
+0xffffffff80002f61:  cmp    %rax,-0x18(%rbp)
+0xffffffff80002f65:  jb     0xffffffff80002f44
+
+----------------
+IN: 
+0xffffffff80002f67:  mov    0x10125da(%rip),%rcx        # 0xffffffff81015548
+0xffffffff80002f6e:  mov    0x10125cb(%rip),%rax        # 0xffffffff81015540
+0xffffffff80002f75:  mov    $0x2,%edx
+0xffffffff80002f7a:  mov    %rcx,%rsi
+0xffffffff80002f7d:  mov    %rax,%rdi
+0xffffffff80002f80:  callq  0xffffffff800032e8
+
+----------------
+IN: 
+0xffffffff800032e8:  repz (bad) 
+0xffffffff800032eb:  cli    
+0xffffffff800032ec:  push   %rbp
+0xffffffff800032ed:  mov    %rsp,%rbp
+0xffffffff800032f0:  sub    $0x40,%rsp
+0xffffffff800032f4:  mov    %rdi,-0x28(%rbp)
+0xffffffff800032f8:  mov    %rsi,-0x30(%rbp)
+0xffffffff800032fc:  mov    %edx,-0x34(%rbp)
+0xffffffff800032ff:  cmpl   $0x4,-0x34(%rbp)
+0xffffffff80003303:  je     0xffffffff800033da
+
+----------------
+IN: 
+0xffffffff80003309:  cmpl   $0x4,-0x34(%rbp)
+0xffffffff8000330d:  jg     0xffffffff8000340e
+
+----------------
+IN: 
+0xffffffff80003313:  cmpl   $0x3,-0x34(%rbp)
+0xffffffff80003317:  je     0xffffffff800033a5
+
+----------------
+IN: 
+0xffffffff8000331d:  cmpl   $0x3,-0x34(%rbp)
+0xffffffff80003321:  jg     0xffffffff8000340e
+
+----------------
+IN: 
+0xffffffff80003327:  cmpl   $0x1,-0x34(%rbp)
+0xffffffff8000332b:  je     0xffffffff80003338
+
+----------------
+IN: 
+0xffffffff8000332d:  cmpl   $0x2,-0x34(%rbp)
+0xffffffff80003331:  je     0xffffffff80003370
+
+----------------
+IN: 
+0xffffffff80003370:  movq   $0x0,-0x10(%rbp)
+0xffffffff80003378:  jmp    0xffffffff80003399
+
+----------------
+IN: 
+0xffffffff80003399:  mov    -0x10(%rbp),%rax
+0xffffffff8000339d:  cmp    -0x30(%rbp),%rax
+0xffffffff800033a1:  jb     0xffffffff8000337a
+
+----------------
+IN: 
+0xffffffff8000337a:  mov    -0x10(%rbp),%rax
+0xffffffff8000337e:  shl    $0xf,%rax
+0xffffffff80003382:  mov    %rax,%rdx
+0xffffffff80003385:  mov    -0x28(%rbp),%rax
+0xffffffff80003389:  add    %rdx,%rax
+0xffffffff8000338c:  mov    %rax,%rdi
+0xffffffff8000338f:  callq  0xffffffff800030ee
+
+----------------
+IN: 
+0xffffffff800030ee:  repz (bad) 
+0xffffffff800030f1:  cli    
+0xffffffff800030f2:  push   %rbp
+0xffffffff800030f3:  mov    %rsp,%rbp
+0xffffffff800030f6:  sub    $0x20,%rsp
+0xffffffff800030fa:  mov    %rdi,-0x18(%rbp)
+0xffffffff800030fe:  mov    -0x18(%rbp),%rax
+0xffffffff80003102:  shr    $0xc,%rax
+0xffffffff80003106:  mov    %rax,-0x8(%rbp)
+0xffffffff8000310a:  mov    0x101242f(%rip),%rdx        # 0xffffffff81015540
+0xffffffff80003111:  mov    -0x8(%rbp),%rax
+0xffffffff80003115:  shr    $0x3,%rax
+0xffffffff80003119:  add    %rdx,%rax
+0xffffffff8000311c:  mov    -0x8(%rbp),%rdx
+0xffffffff80003120:  movzbl %dl,%edx
+0xffffffff80003123:  and    $0x7,%edx
+0xffffffff80003126:  mov    %edx,%esi
+0xffffffff80003128:  mov    %rax,%rdi
+0xffffffff8000312b:  callq  0xffffffff800016f8
+
+----------------
+IN: 
+0xffffffff800016f8:  repz (bad) 
+0xffffffff800016fb:  cli    
+0xffffffff800016fc:  push   %rbp
+0xffffffff800016fd:  mov    %rsp,%rbp
+0xffffffff80001700:  sub    $0x10,%rsp
+0xffffffff80001704:  mov    %rdi,-0x8(%rbp)
+0xffffffff80001708:  mov    %esi,%eax
+0xffffffff8000170a:  mov    %al,-0xc(%rbp)
+0xffffffff8000170d:  mov    -0x8(%rbp),%rax
+0xffffffff80001711:  movzbl (%rax),%eax
+0xffffffff80001714:  movzbl %al,%edx
+0xffffffff80001717:  movzbl -0xc(%rbp),%eax
+0xffffffff8000171b:  mov    $0x80,%esi
+0xffffffff80001720:  mov    %eax,%ecx
+0xffffffff80001722:  sar    %cl,%esi
+0xffffffff80001724:  mov    %esi,%eax
+0xffffffff80001726:  and    %edx,%eax
+0xffffffff80001728:  test   %eax,%eax
+0xffffffff8000172a:  setne  %al
+0xffffffff8000172d:  leaveq 
+0xffffffff8000172e:  retq   
+
+----------------
+IN: 
+0xffffffff80003130:  movzbl %al,%eax
+0xffffffff80003133:  cmp    $0x1,%eax
+0xffffffff80003136:  sete   %al
+0xffffffff80003139:  test   %al,%al
+0xffffffff8000313b:  jne    0xffffffff80003194
+
+----------------
+IN: 
+0xffffffff8000313d:  mov    0x10123fc(%rip),%rdx        # 0xffffffff81015540
+0xffffffff80003144:  mov    -0x8(%rbp),%rax
+0xffffffff80003148:  shr    $0x3,%rax
+0xffffffff8000314c:  add    %rdx,%rax
+0xffffffff8000314f:  mov    -0x8(%rbp),%rdx
+0xffffffff80003153:  movzbl %dl,%edx
+0xffffffff80003156:  mov    %edx,%ecx
+0xffffffff80003158:  and    $0x7,%ecx
+0xffffffff8000315b:  mov    $0x1,%edx
+0xffffffff80003160:  mov    %ecx,%esi
+0xffffffff80003162:  mov    %rax,%rdi
+0xffffffff80003165:  callq  0xffffffff8000165c
+
+----------------
+IN: 
+0xffffffff8000165c:  repz (bad) 
+0xffffffff8000165f:  cli    
+0xffffffff80001660:  push   %rbp
+0xffffffff80001661:  mov    %rsp,%rbp
+0xffffffff80001664:  sub    $0x20,%rsp
+0xffffffff80001668:  mov    %rdi,-0x18(%rbp)
+0xffffffff8000166c:  mov    %esi,%ecx
+0xffffffff8000166e:  mov    %edx,%eax
+0xffffffff80001670:  mov    %ecx,%edx
+0xffffffff80001672:  mov    %dl,-0x1c(%rbp)
+0xffffffff80001675:  mov    %al,-0x20(%rbp)
+0xffffffff80001678:  movzbl -0x1c(%rbp),%edx
+0xffffffff8000167c:  mov    -0x18(%rbp),%rax
+0xffffffff80001680:  mov    %edx,%esi
+0xffffffff80001682:  mov    %rax,%rdi
+0xffffffff80001685:  callq  0xffffffff800016f8
+
+----------------
+IN: 
+0xffffffff8000168a:  mov    %al,-0x1(%rbp)
+0xffffffff8000168d:  movzbl -0x1(%rbp),%eax
+0xffffffff80001691:  cmp    -0x20(%rbp),%al
+0xffffffff80001694:  je     0xffffffff800016f0
+
+----------------
+IN: 
+0xffffffff80001696:  cmpb   $0x0,-0x20(%rbp)
+0xffffffff8000169a:  je     0xffffffff800016c5
+
+----------------
+IN: 
+0xffffffff8000169c:  mov    -0x18(%rbp),%rax
+0xffffffff800016a0:  movzbl (%rax),%eax
+0xffffffff800016a3:  mov    %eax,%esi
+0xffffffff800016a5:  movzbl -0x1c(%rbp),%eax
+0xffffffff800016a9:  mov    $0x80,%edx
+0xffffffff800016ae:  mov    %eax,%ecx
+0xffffffff800016b0:  sar    %cl,%edx
+0xffffffff800016b2:  mov    %edx,%eax
+0xffffffff800016b4:  xor    %esi,%eax
+0xffffffff800016b6:  mov    %eax,%edx
+0xffffffff800016b8:  mov    -0x18(%rbp),%rax
+0xffffffff800016bc:  mov    %dl,(%rax)
+0xffffffff800016be:  mov    $0x1,%eax
+0xffffffff800016c3:  jmp    0xffffffff800016f5
+
+----------------
+IN: 
+0xffffffff800016f5:  leaveq 
+0xffffffff800016f6:  retq   
+
+----------------
+IN: 
+0xffffffff8000316a:  mov    0x10123b7(%rip),%rax        # 0xffffffff81015528
+0xffffffff80003171:  sub    $0x1000,%rax
+0xffffffff80003177:  mov    %rax,0x10123aa(%rip)        # 0xffffffff81015528
+0xffffffff8000317e:  mov    0x10123ab(%rip),%rax        # 0xffffffff81015530
+0xffffffff80003185:  add    $0x1000,%rax
+0xffffffff8000318b:  mov    %rax,0x101239e(%rip)        # 0xffffffff81015530
+0xffffffff80003192:  jmp    0xffffffff80003195
+
+----------------
+IN: 
+0xffffffff80003195:  leaveq 
+0xffffffff80003196:  retq   
+
+----------------
+IN: 
+0xffffffff80003394:  addq   $0x1,-0x10(%rbp)
+0xffffffff80003399:  mov    -0x10(%rbp),%rax
+0xffffffff8000339d:  cmp    -0x30(%rbp),%rax
+0xffffffff800033a1:  jb     0xffffffff8000337a
+
+----------------
+IN: 
+0xffffffff800033a3:  jmp    0xffffffff8000340e
+
+----------------
+IN: 
+0xffffffff8000340e:  nop    
+0xffffffff8000340f:  leaveq 
+0xffffffff80003410:  retq   
+
+----------------
+IN: 
+0xffffffff80002f85:  movq   $0x0,-0x20(%rbp)
+0xffffffff80002f8d:  jmp    0xffffffff80002ffe
+
+----------------
+IN: 
+0xffffffff80002ffe:  mov    0x1012513(%rip),%rax        # 0xffffffff81015518
+0xffffffff80003005:  sub    $0x1,%rax
+0xffffffff80003009:  cmp    %rax,-0x20(%rbp)
+0xffffffff8000300d:  jb     0xffffffff80002f8f
+
+----------------
+IN: 
+0xffffffff80002f8f:  mov    0x101258a(%rip),%rdx        # 0xffffffff81015520
+0xffffffff80002f96:  mov    -0x20(%rbp),%rax
+0xffffffff80002f9a:  shl    $0x3,%rax
+0xffffffff80002f9e:  add    %rdx,%rax
+0xffffffff80002fa1:  mov    (%rax),%rax
+0xffffffff80002fa4:  mov    0x10(%rax),%rax
+0xffffffff80002fa8:  test   %rax,%rax
+0xffffffff80002fab:  je     0xffffffff80002ff9
+
+----------------
+IN: 
+0xffffffff80002fad:  mov    0x101256c(%rip),%rdx        # 0xffffffff81015520
+0xffffffff80002fb4:  mov    -0x20(%rbp),%rax
+0xffffffff80002fb8:  shl    $0x3,%rax
+0xffffffff80002fbc:  add    %rdx,%rax
+0xffffffff80002fbf:  mov    (%rax),%rax
+0xffffffff80002fc2:  mov    0x8(%rax),%rax
+0xffffffff80002fc6:  shr    $0xc,%rax
+0xffffffff80002fca:  add    $0x1,%rax
+0xffffffff80002fce:  mov    0x101254b(%rip),%rcx        # 0xffffffff81015520
+0xffffffff80002fd5:  mov    -0x20(%rbp),%rdx
+0xffffffff80002fd9:  shl    $0x3,%rdx
+0xffffffff80002fdd:  add    %rcx,%rdx
+0xffffffff80002fe0:  mov    (%rdx),%rdx
+0xffffffff80002fe3:  mov    (%rdx),%rdx
+0xffffffff80002fe6:  mov    %rdx,%rcx
+0xffffffff80002fe9:  mov    $0x3,%edx
+0xffffffff80002fee:  mov    %rax,%rsi
+0xffffffff80002ff1:  mov    %rcx,%rdi
+0xffffffff80002ff4:  callq  0xffffffff800032e8
+
+----------------
+IN: 
+0xffffffff800033a5:  movq   $0x0,-0x18(%rbp)
+0xffffffff800033ad:  jmp    0xffffffff800033ce
+
+----------------
+IN: 
+0xffffffff800033ce:  mov    -0x18(%rbp),%rax
+0xffffffff800033d2:  cmp    -0x30(%rbp),%rax
+0xffffffff800033d6:  jb     0xffffffff800033af
+
+----------------
+IN: 
+0xffffffff800033af:  mov    -0x18(%rbp),%rax
+0xffffffff800033b3:  shl    $0xf,%rax
+0xffffffff800033b7:  mov    %rax,%rdx
+0xffffffff800033ba:  mov    -0x28(%rbp),%rax
+0xffffffff800033be:  add    %rdx,%rax
+0xffffffff800033c1:  mov    %rax,%rdi
+0xffffffff800033c4:  callq  0xffffffff8000323f
+
+----------------
+IN: 
+0xffffffff8000323f:  repz (bad) 
+0xffffffff80003242:  cli    
+0xffffffff80003243:  push   %rbp
+0xffffffff80003244:  mov    %rsp,%rbp
+0xffffffff80003247:  sub    $0x20,%rsp
+0xffffffff8000324b:  mov    %rdi,-0x18(%rbp)
+0xffffffff8000324f:  mov    -0x18(%rbp),%rax
+0xffffffff80003253:  shr    $0xc,%rax
+0xffffffff80003257:  mov    %rax,-0x8(%rbp)
+0xffffffff8000325b:  mov    0x10122de(%rip),%rdx        # 0xffffffff81015540
+0xffffffff80003262:  mov    -0x8(%rbp),%rax
+0xffffffff80003266:  shr    $0x3,%rax
+0xffffffff8000326a:  add    %rdx,%rax
+0xffffffff8000326d:  mov    -0x8(%rbp),%rdx
+0xffffffff80003271:  movzbl %dl,%edx
+0xffffffff80003274:  and    $0x7,%edx
+0xffffffff80003277:  mov    %edx,%esi
+0xffffffff80003279:  mov    %rax,%rdi
+0xffffffff8000327c:  callq  0xffffffff800016f8
+
+----------------
+IN: 
+0xffffffff80003281:  movzbl %al,%eax
+0xffffffff80003284:  cmp    $0x1,%eax
+0xffffffff80003287:  sete   %al
+0xffffffff8000328a:  test   %al,%al
+0xffffffff8000328c:  jne    0xffffffff800032e5
+
+----------------
+IN: 
+0xffffffff8000328e:  mov    0x10122ab(%rip),%rdx        # 0xffffffff81015540
+0xffffffff80003295:  mov    -0x8(%rbp),%rax
+0xffffffff80003299:  shr    $0x3,%rax
+0xffffffff8000329d:  add    %rdx,%rax
+0xffffffff800032a0:  mov    -0x8(%rbp),%rdx
+0xffffffff800032a4:  movzbl %dl,%edx
+0xffffffff800032a7:  mov    %edx,%ecx
+0xffffffff800032a9:  and    $0x7,%ecx
+0xffffffff800032ac:  mov    $0x1,%edx
+0xffffffff800032b1:  mov    %ecx,%esi
+0xffffffff800032b3:  mov    %rax,%rdi
+0xffffffff800032b6:  callq  0xffffffff8000165c
+
+----------------
+IN: 
+0xffffffff800032bb:  mov    0x1012266(%rip),%rax        # 0xffffffff81015528
+0xffffffff800032c2:  sub    $0x1000,%rax
+0xffffffff800032c8:  mov    %rax,0x1012259(%rip)        # 0xffffffff81015528
+0xffffffff800032cf:  mov    0x1012262(%rip),%rax        # 0xffffffff81015538
+0xffffffff800032d6:  add    $0x1000,%rax
+0xffffffff800032dc:  mov    %rax,0x1012255(%rip)        # 0xffffffff81015538
+0xffffffff800032e3:  jmp    0xffffffff800032e6
+
+----------------
+IN: 
+0xffffffff800032e6:  leaveq 
+0xffffffff800032e7:  retq   
+
+----------------
+IN: 
+0xffffffff800033c9:  addq   $0x1,-0x18(%rbp)
+0xffffffff800033ce:  mov    -0x18(%rbp),%rax
+0xffffffff800033d2:  cmp    -0x30(%rbp),%rax
+0xffffffff800033d6:  jb     0xffffffff800033af
+
+----------------
+IN: 
+0xffffffff800033d8:  jmp    0xffffffff8000340e
+
+----------------
+IN: 
+0xffffffff80002ff9:  addq   $0x1,-0x20(%rbp)
+0xffffffff80002ffe:  mov    0x1012513(%rip),%rax        # 0xffffffff81015518
+0xffffffff80003005:  sub    $0x1,%rax
+0xffffffff80003009:  cmp    %rax,-0x20(%rbp)
+0xffffffff8000300d:  jb     0xffffffff80002f8f
+
+----------------
+IN: 
+0xffffffff800032e5:  nop    
+0xffffffff800032e6:  leaveq 
+0xffffffff800032e7:  retq   
+
+----------------
+IN: 
+0xffffffff8000300f:  nop    
+0xffffffff80003010:  nop    
+0xffffffff80003011:  leaveq 
+0xffffffff80003012:  retq   
+
+----------------
+IN: 
+0xffffffff80005857:  callq  0xffffffff80003013
+
+----------------
+IN: 
+0xffffffff80003013:  repz (bad) 
+0xffffffff80003016:  cli    
+0xffffffff80003017:  push   %rbp
+0xffffffff80003018:  mov    %rsp,%rbp
+0xffffffff8000301b:  mov    0x1012506(%rip),%rax        # 0xffffffff81015528
+0xffffffff80003022:  pop    %rbp
+0xffffffff80003023:  retq   
+
+----------------
+IN: 
+0xffffffff8000585c:  mov    %rax,%rbx
+0xffffffff8000585f:  callq  0xffffffff80003024
+
+----------------
+IN: 
+0xffffffff80003024:  repz (bad) 
+0xffffffff80003027:  cli    
+0xffffffff80003028:  push   %rbp
+0xffffffff80003029:  mov    %rsp,%rbp
+0xffffffff8000302c:  mov    0x10124fd(%rip),%rax        # 0xffffffff81015530
+0xffffffff80003033:  pop    %rbp
+0xffffffff80003034:  retq   
+
+----------------
+IN: 
+0xffffffff80005864:  add    %rax,%rbx
+0xffffffff80005867:  callq  0xffffffff80003035
+
+----------------
+IN: 
+0xffffffff80003035:  repz (bad) 
+0xffffffff80003038:  cli    
+0xffffffff80003039:  push   %rbp
+0xffffffff8000303a:  mov    %rsp,%rbp
+0xffffffff8000303d:  mov    0x10124f4(%rip),%rax        # 0xffffffff81015538
+0xffffffff80003044:  pop    %rbp
+0xffffffff80003045:  retq   
+
+----------------
+IN: 
+0xffffffff8000586c:  add    %rbx,%rax
+0xffffffff8000586f:  cmp    %rax,-0x18(%rbp)
+0xffffffff80005873:  sete   %al
+0xffffffff80005876:  test   %al,%al
+0xffffffff80005878:  je     0xffffffff80005aec
+
+----------------
+IN: 
+0xffffffff8000587e:  jmp    0xffffffff800058c5
+
+----------------
+IN: 
+0xffffffff800058c5:  lea    -0xac(%rbp),%rax
+0xffffffff800058cc:  lea    -0xdc(%rbp),%rcx
+0xffffffff800058d3:  lea    0x5876(%rip),%rdx        # 0xffffffff8000b150
+0xffffffff800058da:  mov    %rcx,%rsi
+0xffffffff800058dd:  mov    %rax,%rdi
+0xffffffff800058e0:  callq  0xffffffff80005d82
+
+----------------
+IN: 
+0xffffffff800058e5:  movzbl 0x6b84(%rip),%eax        # 0xffffffff8000c470
+0xffffffff800058ec:  movsbl %al,%edx
+0xffffffff800058ef:  lea    -0xb0(%rbp),%rax
+0xffffffff800058f6:  lea    -0xac(%rbp),%rcx
+0xffffffff800058fd:  mov    %rcx,%rsi
+0xffffffff80005900:  mov    %rax,%rdi
+0xffffffff80005903:  callq  0xffffffff80005eb6
+
+----------------
+IN: 
+0xffffffff80005908:  lea    -0x94(%rbp),%rax
+0xffffffff8000590f:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005916:  lea    0x587e(%rip),%rdx        # 0xffffffff8000b19b
+0xffffffff8000591d:  mov    %rcx,%rsi
+0xffffffff80005920:  mov    %rax,%rdi
+0xffffffff80005923:  callq  0xffffffff80005d82
+
+----------------
+IN: 
+0xffffffff80005928:  callq  0xffffffff80003013
+
+----------------
+IN: 
+0xffffffff8000592d:  mov    %rax,%rdi
+0xffffffff80005930:  callq  0xffffffff800055c8
+
+----------------
+IN: 
+0xffffffff800055c8:  repz (bad) 
+0xffffffff800055cb:  cli    
+0xffffffff800055cc:  push   %rbp
+0xffffffff800055cd:  mov    %rsp,%rbp
+0xffffffff800055d0:  sub    $0x18,%rsp
+0xffffffff800055d4:  mov    %rdi,-0x18(%rbp)
+0xffffffff800055d8:  cmpq   $0x3ff,-0x18(%rbp)
+0xffffffff800055e0:  ja     0xffffffff800055e8
+
+----------------
+IN: 
+0xffffffff800055e8:  movq   $0x400,-0x8(%rbp)
+0xffffffff800055f0:  movq   $0x0,-0x10(%rbp)
+0xffffffff800055f8:  jmp    0xffffffff80005604
+
+----------------
+IN: 
+0xffffffff80005604:  mov    -0x18(%rbp),%rax
+0xffffffff80005608:  mov    $0x0,%edx
+0xffffffff8000560d:  divq   -0x8(%rbp)
+0xffffffff80005611:  cmp    $0x400,%rax
+0xffffffff80005617:  ja     0xffffffff800055fa
+
+----------------
+IN: 
+0xffffffff800055fa:  shlq   $0xa,-0x8(%rbp)
+0xffffffff800055ff:  addq   $0x1,-0x10(%rbp)
+0xffffffff80005604:  mov    -0x18(%rbp),%rax
+0xffffffff80005608:  mov    $0x0,%edx
+0xffffffff8000560d:  divq   -0x8(%rbp)
+0xffffffff80005611:  cmp    $0x400,%rax
+0xffffffff80005617:  ja     0xffffffff800055fa
+
 ----------------
 IN: 
-0xffffffff800050dd:  mov    $0xffffff,%esi
-0xffffffff800050e2:  lea    0x4fd2(%rip),%rax        # 0xffffffff8000a0bb
-0xffffffff800050e9:  mov    %rax,%rdi
-0xffffffff800050ec:  callq  0xffffffff800033cf
+0xffffffff80005619:  mov    -0x18(%rbp),%rax
+0xffffffff8000561d:  mov    $0x0,%edx
+0xffffffff80005622:  divq   -0x8(%rbp)
+0xffffffff80005626:  leaveq 
+0xffffffff80005627:  retq   
 
 ----------------
 IN: 
-0xffffffff800033cf:  repz (bad) 
-0xffffffff800033d2:  cli    
-0xffffffff800033d3:  push   %rbp
-0xffffffff800033d4:  mov    %rsp,%rbp
-0xffffffff800033d7:  sub    $0x20,%rsp
-0xffffffff800033db:  mov    %rdi,-0x18(%rbp)
-0xffffffff800033df:  mov    %esi,-0x1c(%rbp)
-0xffffffff800033e2:  jmpq   0xffffffff800034ac
+0xffffffff80005935:  mov    %rax,%rdx
+0xffffffff80005938:  lea    -0x98(%rbp),%rax
+0xffffffff8000593f:  lea    -0x94(%rbp),%rcx
+0xffffffff80005946:  mov    %rcx,%rsi
+0xffffffff80005949:  mov    %rax,%rdi
+0xffffffff8000594c:  callq  0xffffffff80006098
 
 ----------------
 IN: 
-0xffffffff800034ac:  mov    -0x18(%rbp),%rax
-0xffffffff800034b0:  movzbl (%rax),%eax
-0xffffffff800034b3:  test   %al,%al
-0xffffffff800034b5:  jne    0xffffffff800033e7
+0xffffffff80006098:  repz (bad) 
+0xffffffff8000609b:  cli    
+0xffffffff8000609c:  push   %rbp
+0xffffffff8000609d:  mov    %rsp,%rbp
+0xffffffff800060a0:  push   %rbx
+0xffffffff800060a1:  sub    $0x28,%rsp
+0xffffffff800060a5:  mov    %rdi,-0x18(%rbp)
+0xffffffff800060a9:  mov    %rsi,-0x20(%rbp)
+0xffffffff800060ad:  mov    %rdx,-0x28(%rbp)
+0xffffffff800060b1:  mov    -0x20(%rbp),%rax
+0xffffffff800060b5:  mov    %rax,%rdi
+0xffffffff800060b8:  callq  0xffffffff80001a2e
 
 ----------------
 IN: 
-0xffffffff800033e7:  mov    -0x18(%rbp),%rax
-0xffffffff800033eb:  movzbl (%rax),%eax
-0xffffffff800033ee:  cmp    $0xa,%al
-0xffffffff800033f0:  jne    0xffffffff80003435
+0xffffffff800060bd:  mov    %eax,%ebx
+0xffffffff800060bf:  mov    -0x28(%rbp),%rax
+0xffffffff800060c3:  mov    %rax,%rdi
+0xffffffff800060c6:  callq  0xffffffff80003de8
 
 ----------------
 IN: 
-0xffffffff80003435:  movzwl 0x10111c4(%rip),%eax        # 0xffffffff81014600
-0xffffffff8000343c:  movzwl %ax,%eax
-0xffffffff8000343f:  mov    0x1010fbb(%rip),%edi        # 0xffffffff81014400
-0xffffffff80003445:  cltd   
-0xffffffff80003446:  idiv   %edi
-0xffffffff80003448:  mov    %eax,-0x4(%rbp)
-0xffffffff8000344b:  movzwl 0x10111ae(%rip),%eax        # 0xffffffff81014600
-0xffffffff80003452:  movzwl %ax,%eax
-0xffffffff80003455:  mov    0x1010fa5(%rip),%ecx        # 0xffffffff81014400
-0xffffffff8000345b:  cltd   
-0xffffffff8000345c:  idiv   %ecx
-0xffffffff8000345e:  mov    %edx,-0x8(%rbp)
-0xffffffff80003461:  mov    -0x4(%rbp),%eax
-0xffffffff80003464:  shl    $0x4,%eax
-0xffffffff80003467:  movzwl %ax,%edx
-0xffffffff8000346a:  mov    -0x8(%rbp),%eax
-0xffffffff8000346d:  shl    $0x4,%eax
-0xffffffff80003470:  movzwl %ax,%esi
-0xffffffff80003473:  mov    -0x18(%rbp),%rax
-0xffffffff80003477:  lea    0x1(%rax),%rcx
-0xffffffff8000347b:  mov    %rcx,-0x18(%rbp)
-0xffffffff8000347f:  movzbl (%rax),%eax
-0xffffffff80003482:  movsbl %al,%eax
-0xffffffff80003485:  mov    -0x1c(%rbp),%ecx
-0xffffffff80003488:  mov    $0x2,%r9d
-0xffffffff8000348e:  mov    $0x0,%r8d
-0xffffffff80003494:  mov    %eax,%edi
-0xffffffff80003496:  callq  0xffffffff800000ec
+0xffffffff80003de8:  repz (bad) 
+0xffffffff80003deb:  cli    
+0xffffffff80003dec:  push   %rbp
+0xffffffff80003ded:  mov    %rsp,%rbp
+0xffffffff80003df0:  sub    $0x10,%rsp
+0xffffffff80003df4:  mov    %rdi,-0x8(%rbp)
+0xffffffff80003df8:  mov    -0x8(%rbp),%rax
+0xffffffff80003dfc:  mov    %rax,%rdi
+0xffffffff80003dff:  callq  0xffffffff80004c08
 
 ----------------
 IN: 
-0xffffffff8000349b:  movzwl 0x101115e(%rip),%eax        # 0xffffffff81014600
-0xffffffff800034a2:  add    $0x1,%eax
-0xffffffff800034a5:  mov    %ax,0x1011154(%rip)        # 0xffffffff81014600
-0xffffffff800034ac:  mov    -0x18(%rbp),%rax
-0xffffffff800034b0:  movzbl (%rax),%eax
-0xffffffff800034b3:  test   %al,%al
-0xffffffff800034b5:  jne    0xffffffff800033e7
+0xffffffff80004c08:  repz (bad) 
+0xffffffff80004c0b:  cli    
+0xffffffff80004c0c:  push   %rbp
+0xffffffff80004c0d:  mov    %rsp,%rbp
+0xffffffff80004c10:  sub    $0x38,%rsp
+0xffffffff80004c14:  mov    %rdi,-0x38(%rbp)
+0xffffffff80004c18:  movb   $0x0,-0x21(%rbp)
+0xffffffff80004c1c:  movb   $0x0,-0x1(%rbp)
+0xffffffff80004c20:  mov    -0x38(%rbp),%rax
+0xffffffff80004c24:  mov    %rax,-0x10(%rbp)
+0xffffffff80004c28:  jmp    0xffffffff80004c50
 
 ----------------
 IN: 
-0xffffffff800034bb:  mov    0x1010f3f(%rip),%eax        # 0xffffffff81014400
-0xffffffff800034c1:  mov    %eax,%edx
-0xffffffff800034c3:  movzwl 0x1011136(%rip),%eax        # 0xffffffff81014600
-0xffffffff800034ca:  add    %edx,%eax
-0xffffffff800034cc:  mov    %ax,0x101112d(%rip)        # 0xffffffff81014600
-0xffffffff800034d3:  movzwl 0x1011126(%rip),%ecx        # 0xffffffff81014600
-0xffffffff800034da:  movzwl 0x101111f(%rip),%eax        # 0xffffffff81014600
-0xffffffff800034e1:  movzwl %ax,%eax
-0xffffffff800034e4:  mov    0x1010f16(%rip),%esi        # 0xffffffff81014400
-0xffffffff800034ea:  cltd   
-0xffffffff800034eb:  idiv   %esi
-0xffffffff800034ed:  mov    %edx,%eax
-0xffffffff800034ef:  mov    %eax,%edx
-0xffffffff800034f1:  mov    %ecx,%eax
-0xffffffff800034f3:  sub    %edx,%eax
-0xffffffff800034f5:  mov    %ax,0x1011104(%rip)        # 0xffffffff81014600
-0xffffffff800034fc:  nop    
-0xffffffff800034fd:  leaveq 
-0xffffffff800034fe:  retq   
+0xffffffff80004c50:  cmpq   $0x9,-0x10(%rbp)
+0xffffffff80004c55:  ja     0xffffffff80004c2a
 
 ----------------
 IN: 
-0xffffffff800050f1:  movq   $0x0,-0x28(%rbp)
-0xffffffff800050f9:  callq  0xffffffff8000259d
+0xffffffff80004c57:  movb   $0x0,-0x11(%rbp)
+0xffffffff80004c5b:  mov    -0x38(%rbp),%rax
+0xffffffff80004c5f:  mov    %rax,-0x20(%rbp)
+0xffffffff80004c63:  jmp    0xffffffff80004cdc
 
 ----------------
 IN: 
-0xffffffff8000259d:  repz (bad) 
-0xffffffff800025a0:  cli    
-0xffffffff800025a1:  push   %rbp
-0xffffffff800025a2:  mov    %rsp,%rbp
-0xffffffff800025a5:  mov    0x8d5c(%rip),%rax        # 0xffffffff8000b308
-0xffffffff800025ac:  test   %rax,%rax
-0xffffffff800025af:  je     0xffffffff800025c1
+0xffffffff80004cdc:  cmpq   $0x9,-0x20(%rbp)
+0xffffffff80004ce1:  ja     0xffffffff80004c65
 
 ----------------
 IN: 
-0xffffffff800025b1:  mov    0x8d50(%rip),%rax        # 0xffffffff8000b308
-0xffffffff800025b8:  mov    0x8(%rax),%rax
-0xffffffff800025bc:  test   %rax,%rax
-0xffffffff800025bf:  jne    0xffffffff800025c8
+0xffffffff80004ce3:  mov    -0x20(%rbp),%rcx
+0xffffffff80004ce7:  mov    $0xcccccccccccccccd,%rdx
+0xffffffff80004cf1:  mov    %rcx,%rax
+0xffffffff80004cf4:  mul    %rdx
+0xffffffff80004cf7:  shr    $0x3,%rdx
+0xffffffff80004cfb:  mov    %rdx,%rax
+0xffffffff80004cfe:  shl    $0x2,%rax
+0xffffffff80004d02:  add    %rdx,%rax
+0xffffffff80004d05:  add    %rax,%rax
+0xffffffff80004d08:  sub    %rax,%rcx
+0xffffffff80004d0b:  mov    %rcx,%rdx
+0xffffffff80004d0e:  mov    %dl,-0x22(%rbp)
+0xffffffff80004d11:  movzbl -0x22(%rbp),%eax
+0xffffffff80004d15:  lea    0x30(%rax),%ecx
+0xffffffff80004d18:  movzbl -0x21(%rbp),%edx
+0xffffffff80004d1c:  movzbl -0x1(%rbp),%eax
+0xffffffff80004d20:  add    %edx,%eax
+0xffffffff80004d22:  movzbl -0x11(%rbp),%edx
+0xffffffff80004d26:  sub    %edx,%eax
+0xffffffff80004d28:  cltq   
+0xffffffff80004d2a:  lea    0x101092f(%rip),%rdx        # 0xffffffff81015660
+0xffffffff80004d31:  mov    %cl,(%rax,%rdx,1)
+0xffffffff80004d34:  movzbl -0x21(%rbp),%edx
+0xffffffff80004d38:  movzbl -0x1(%rbp),%eax
+0xffffffff80004d3c:  add    %edx,%eax
+0xffffffff80004d3e:  add    $0x1,%eax
+0xffffffff80004d41:  cltq   
+0xffffffff80004d43:  lea    0x1010916(%rip),%rdx        # 0xffffffff81015660
+0xffffffff80004d4a:  movb   $0x0,(%rax,%rdx,1)
+0xffffffff80004d4e:  lea    0x101090b(%rip),%rax        # 0xffffffff81015660
+0xffffffff80004d55:  leaveq 
+0xffffffff80004d56:  retq   
 
 ----------------
 IN: 
-0xffffffff800025c8:  mov    $0x0,%eax
-0xffffffff800025cd:  test   %al,%al
-0xffffffff800025cf:  je     0xffffffff800025d8
+0xffffffff80003e04:  leaveq 
+0xffffffff80003e05:  retq   
 
 ----------------
 IN: 
-0xffffffff800025d8:  mov    0x8d29(%rip),%rax        # 0xffffffff8000b308
-0xffffffff800025df:  mov    (%rax),%rax
-0xffffffff800025e2:  mov    %rax,0x1011dc7(%rip)        # 0xffffffff810143b0
-0xffffffff800025e9:  mov    0x8d18(%rip),%rax        # 0xffffffff8000b308
-0xffffffff800025f0:  mov    0x8(%rax),%rax
-0xffffffff800025f4:  mov    %rax,0x1011dbd(%rip)        # 0xffffffff810143b8
-0xffffffff800025fb:  mov    0x8d06(%rip),%rax        # 0xffffffff8000b308
-0xffffffff80002602:  mov    0x10(%rax),%rax
-0xffffffff80002606:  mov    %rax,0x1011db3(%rip)        # 0xffffffff810143c0
-0xffffffff8000260d:  mov    $0x1,%eax
-0xffffffff80002612:  pop    %rbp
-0xffffffff80002613:  retq   
+0xffffffff800060cb:  mov    %ebx,%esi
+0xffffffff800060cd:  mov    %rax,%rdi
+0xffffffff800060d0:  callq  0xffffffff800038e5
 
 ----------------
 IN: 
-0xffffffff800050fe:  test   %al,%al
-0xffffffff80005100:  je     0xffffffff8000517a
+0xffffffff800038e5:  repz (bad) 
+0xffffffff800038e8:  cli    
+0xffffffff800038e9:  push   %rbp
+0xffffffff800038ea:  mov    %rsp,%rbp
+0xffffffff800038ed:  sub    $0x20,%rsp
+0xffffffff800038f1:  mov    %rdi,-0x18(%rbp)
+0xffffffff800038f5:  mov    %esi,-0x1c(%rbp)
+0xffffffff800038f8:  jmpq   0xffffffff800039c2
 
 ----------------
 IN: 
-0xffffffff80005102:  mov    $0xffffff,%esi
-0xffffffff80005107:  lea    0x4faf(%rip),%rax        # 0xffffffff8000a0bd
-0xffffffff8000510e:  mov    %rax,%rdi
-0xffffffff80005111:  callq  0xffffffff800032df
+0xffffffff800039c2:  mov    -0x18(%rbp),%rax
+0xffffffff800039c6:  movzbl (%rax),%eax
+0xffffffff800039c9:  test   %al,%al
+0xffffffff800039cb:  jne    0xffffffff800038fd
 
 ----------------
 IN: 
-0xffffffff80005116:  mov    $0xff00,%esi
-0xffffffff8000511b:  lea    0x4f91(%rip),%rax        # 0xffffffff8000a0b3
-0xffffffff80005122:  mov    %rax,%rdi
-0xffffffff80005125:  callq  0xffffffff800032df
+0xffffffff800038fd:  mov    -0x18(%rbp),%rax
+0xffffffff80003901:  movzbl (%rax),%eax
+0xffffffff80003904:  cmp    $0xa,%al
+0xffffffff80003906:  jne    0xffffffff8000394b
 
 ----------------
 IN: 
-0xffffffff8000512a:  mov    $0xffffff,%esi
-0xffffffff8000512f:  lea    0x4f85(%rip),%rax        # 0xffffffff8000a0bb
-0xffffffff80005136:  mov    %rax,%rdi
-0xffffffff80005139:  callq  0xffffffff800033cf
+0xffffffff8000394b:  movzwl 0x1011e0e(%rip),%eax        # 0xffffffff81015760
+0xffffffff80003952:  movzwl %ax,%eax
+0xffffffff80003955:  mov    0x1011c05(%rip),%edi        # 0xffffffff81015560
+0xffffffff8000395b:  cltd   
+0xffffffff8000395c:  idiv   %edi
+0xffffffff8000395e:  mov    %eax,-0x4(%rbp)
+0xffffffff80003961:  movzwl 0x1011df8(%rip),%eax        # 0xffffffff81015760
+0xffffffff80003968:  movzwl %ax,%eax
+0xffffffff8000396b:  mov    0x1011bef(%rip),%ecx        # 0xffffffff81015560
+0xffffffff80003971:  cltd   
+0xffffffff80003972:  idiv   %ecx
+0xffffffff80003974:  mov    %edx,-0x8(%rbp)
+0xffffffff80003977:  mov    -0x4(%rbp),%eax
+0xffffffff8000397a:  shl    $0x4,%eax
+0xffffffff8000397d:  movzwl %ax,%edx
+0xffffffff80003980:  mov    -0x8(%rbp),%eax
+0xffffffff80003983:  shl    $0x4,%eax
+0xffffffff80003986:  movzwl %ax,%esi
+0xffffffff80003989:  mov    -0x18(%rbp),%rax
+0xffffffff8000398d:  lea    0x1(%rax),%rcx
+0xffffffff80003991:  mov    %rcx,-0x18(%rbp)
+0xffffffff80003995:  movzbl (%rax),%eax
+0xffffffff80003998:  movsbl %al,%eax
+0xffffffff8000399b:  mov    -0x1c(%rbp),%ecx
+0xffffffff8000399e:  mov    $0x2,%r9d
+0xffffffff800039a4:  mov    $0x0,%r8d
+0xffffffff800039aa:  mov    %eax,%edi
+0xffffffff800039ac:  callq  0xffffffff800000ec
 
 ----------------
 IN: 
-0xffffffff8000513e:  mov    $0x8,%edi
-0xffffffff80005143:  callq  0xffffffff800024d0
+0xffffffff800039b1:  movzwl 0x1011da8(%rip),%eax        # 0xffffffff81015760
+0xffffffff800039b8:  add    $0x1,%eax
+0xffffffff800039bb:  mov    %ax,0x1011d9e(%rip)        # 0xffffffff81015760
+0xffffffff800039c2:  mov    -0x18(%rbp),%rax
+0xffffffff800039c6:  movzbl (%rax),%eax
+0xffffffff800039c9:  test   %al,%al
+0xffffffff800039cb:  jne    0xffffffff800038fd
 
 ----------------
 IN: 
-0xffffffff800024d0:  repz (bad) 
-0xffffffff800024d3:  cli    
-0xffffffff800024d4:  push   %rbp
-0xffffffff800024d5:  mov    %rsp,%rbp
-0xffffffff800024d8:  sub    $0x18,%rsp
-0xffffffff800024dc:  mov    %edi,%eax
-0xffffffff800024de:  mov    %al,-0x14(%rbp)
-0xffffffff800024e1:  movq   $0x0,-0x8(%rbp)
-0xffffffff800024e9:  cmpb   $0x8,-0x14(%rbp)
-0xffffffff800024ed:  je     0xffffffff80002557
+0xffffffff800039d1:  nop    
+0xffffffff800039d2:  nop    
+0xffffffff800039d3:  leaveq 
+0xffffffff800039d4:  retq   
 
 ----------------
 IN: 
-0xffffffff80002557:  movw   $0x0,-0xc(%rbp)
-0xffffffff8000255d:  jmp    0xffffffff80002587
+0xffffffff800060d5:  mov    -0x18(%rbp),%rax
+0xffffffff800060d9:  mov    %rax,%rdi
+0xffffffff800060dc:  callq  0xffffffff80005ce8
 
 ----------------
 IN: 
-0xffffffff80002587:  movzwl -0xc(%rbp),%edx
-0xffffffff8000258b:  mov    0x1011e26(%rip),%rax        # 0xffffffff810143b8
-0xffffffff80002592:  cmp    %rax,%rdx
-0xffffffff80002595:  jb     0xffffffff8000255f
+0xffffffff800060e1:  mov    -0x18(%rbp),%rax
+0xffffffff800060e5:  mov    -0x8(%rbp),%rbx
+0xffffffff800060e9:  leaveq 
+0xffffffff800060ea:  retq   
 
 ----------------
 IN: 
-0xffffffff8000255f:  mov    0x1011e5a(%rip),%rdx        # 0xffffffff810143c0
-0xffffffff80002566:  movzwl -0xc(%rbp),%eax
-0xffffffff8000256a:  shl    $0x3,%rax
-0xffffffff8000256e:  add    %rdx,%rax
-0xffffffff80002571:  mov    (%rax),%rax
-0xffffffff80002574:  mov    0x8(%rax),%rax
-0xffffffff80002578:  add    %rax,-0x8(%rbp)
-0xffffffff8000257c:  movzwl -0xc(%rbp),%eax
-0xffffffff80002580:  add    $0x1,%eax
-0xffffffff80002583:  mov    %ax,-0xc(%rbp)
-0xffffffff80002587:  movzwl -0xc(%rbp),%edx
-0xffffffff8000258b:  mov    0x1011e26(%rip),%rax        # 0xffffffff810143b8
-0xffffffff80002592:  cmp    %rax,%rdx
-0xffffffff80002595:  jb     0xffffffff8000255f
+0xffffffff80005951:  callq  0xffffffff80003013
 
 ----------------
 IN: 
-0xffffffff80002597:  mov    -0x8(%rbp),%rax
-0xffffffff8000259b:  leaveq 
-0xffffffff8000259c:  retq   
+0xffffffff80005956:  mov    %rax,%rdi
+0xffffffff80005959:  callq  0xffffffff80005628
 
 ----------------
 IN: 
-0xffffffff80005148:  mov    %rax,-0x28(%rbp)
-0xffffffff8000514c:  callq  0xffffffff80002832
+0xffffffff80005628:  repz (bad) 
+0xffffffff8000562b:  cli    
+0xffffffff8000562c:  push   %rbp
+0xffffffff8000562d:  mov    %rsp,%rbp
+0xffffffff80005630:  sub    $0x60,%rsp
+0xffffffff80005634:  mov    %rdi,-0x58(%rbp)
+0xffffffff80005638:  lea    0x5a51(%rip),%rax        # 0xffffffff8000b090
+0xffffffff8000563f:  mov    %rax,-0x50(%rbp)
+0xffffffff80005643:  lea    0x5a49(%rip),%rax        # 0xffffffff8000b093
+0xffffffff8000564a:  mov    %rax,-0x48(%rbp)
+0xffffffff8000564e:  lea    0x5a42(%rip),%rax        # 0xffffffff8000b097
+0xffffffff80005655:  mov    %rax,-0x40(%rbp)
+0xffffffff80005659:  lea    0x5a3b(%rip),%rax        # 0xffffffff8000b09b
+0xffffffff80005660:  mov    %rax,-0x38(%rbp)
+0xffffffff80005664:  lea    0x5a33(%rip),%rax        # 0xffffffff8000b09e
+0xffffffff8000566b:  mov    %rax,-0x30(%rbp)
+0xffffffff8000566f:  lea    0x5a2c(%rip),%rax        # 0xffffffff8000b0a2
+0xffffffff80005676:  mov    %rax,-0x28(%rbp)
+0xffffffff8000567a:  lea    0x5a25(%rip),%rax        # 0xffffffff8000b0a6
+0xffffffff80005681:  mov    %rax,-0x20(%rbp)
+0xffffffff80005685:  cmpq   $0x3ff,-0x58(%rbp)
+0xffffffff8000568d:  ja     0xffffffff80005695
 
 ----------------
 IN: 
-0xffffffff80002832:  repz (bad) 
-0xffffffff80002835:  cli    
-0xffffffff80002836:  push   %rbp
-0xffffffff80002837:  mov    %rsp,%rbp
-0xffffffff8000283a:  sub    $0x50,%rsp
-0xffffffff8000283e:  movq   $0x0,-0x50(%rbp)
-0xffffffff80002846:  movq   $0x0,-0x48(%rbp)
-0xffffffff8000284e:  movq   $0x0,-0x40(%rbp)
-0xffffffff80002856:  movb   $0x1,-0x21(%rbp)
-0xffffffff8000285a:  movq   $0x0,-0x10(%rbp)
-0xffffffff80002862:  jmpq   0xffffffff800028f1
+0xffffffff80005695:  movq   $0x400,-0x8(%rbp)
+0xffffffff8000569d:  movq   $0x1,-0x10(%rbp)
+0xffffffff800056a5:  jmp    0xffffffff800056b1
 
 ----------------
 IN: 
-0xffffffff800028f1:  mov    0x1011ac0(%rip),%rax        # 0xffffffff810143b8
-0xffffffff800028f8:  cmp    %rax,-0x10(%rbp)
-0xffffffff800028fc:  jb     0xffffffff80002867
+0xffffffff800056b1:  mov    -0x58(%rbp),%rax
+0xffffffff800056b5:  mov    $0x0,%edx
+0xffffffff800056ba:  divq   -0x8(%rbp)
+0xffffffff800056be:  cmp    $0x400,%rax
+0xffffffff800056c4:  ja     0xffffffff800056a7
 
 ----------------
 IN: 
-0xffffffff80002867:  mov    0x1011b52(%rip),%rdx        # 0xffffffff810143c0
-0xffffffff8000286e:  mov    -0x10(%rbp),%rax
-0xffffffff80002872:  shl    $0x3,%rax
-0xffffffff80002876:  add    %rdx,%rax
-0xffffffff80002879:  mov    (%rax),%rax
-0xffffffff8000287c:  mov    0x10(%rax),%rax
-0xffffffff80002880:  test   %rax,%rax
-0xffffffff80002883:  jne    0xffffffff800028ec
+0xffffffff800056a7:  shlq   $0xa,-0x8(%rbp)
+0xffffffff800056ac:  addq   $0x1,-0x10(%rbp)
+0xffffffff800056b1:  mov    -0x58(%rbp),%rax
+0xffffffff800056b5:  mov    $0x0,%edx
+0xffffffff800056ba:  divq   -0x8(%rbp)
+0xffffffff800056be:  cmp    $0x400,%rax
+0xffffffff800056c4:  ja     0xffffffff800056a7
 
 ----------------
 IN: 
-0xffffffff800028ec:  addq   $0x1,-0x10(%rbp)
-0xffffffff800028f1:  mov    0x1011ac0(%rip),%rax        # 0xffffffff810143b8
-0xffffffff800028f8:  cmp    %rax,-0x10(%rbp)
-0xffffffff800028fc:  jb     0xffffffff80002867
+0xffffffff800056c6:  mov    -0x10(%rbp),%rax
+0xffffffff800056ca:  mov    -0x50(%rbp,%rax,8),%rax
+0xffffffff800056cf:  leaveq 
+0xffffffff800056d0:  retq   
 
 ----------------
 IN: 
-0xffffffff80002885:  mov    0x1011b34(%rip),%rdx        # 0xffffffff810143c0
-0xffffffff8000288c:  mov    -0x10(%rbp),%rax
-0xffffffff80002890:  shl    $0x3,%rax
-0xffffffff80002894:  add    %rdx,%rax
-0xffffffff80002897:  mov    (%rax),%rax
-0xffffffff8000289a:  mov    0x8(%rax),%rdx
-0xffffffff8000289e:  mov    -0x48(%rbp),%rax
-0xffffffff800028a2:  cmp    %rax,%rdx
-0xffffffff800028a5:  jbe    0xffffffff800028ec
+0xffffffff8000595e:  mov    %rax,%rdx
+0xffffffff80005961:  lea    -0x9c(%rbp),%rax
+0xffffffff80005968:  lea    -0x98(%rbp),%rcx
+0xffffffff8000596f:  mov    %rcx,%rsi
+0xffffffff80005972:  mov    %rax,%rdi
+0xffffffff80005975:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff800028a7:  mov    0x1011b12(%rip),%rdx        # 0xffffffff810143c0
-0xffffffff800028ae:  mov    -0x10(%rbp),%rax
-0xffffffff800028b2:  shl    $0x3,%rax
-0xffffffff800028b6:  add    %rdx,%rax
-0xffffffff800028b9:  mov    (%rax),%rcx
-0xffffffff800028bc:  mov    (%rcx),%rax
-0xffffffff800028bf:  mov    0x8(%rcx),%rdx
-0xffffffff800028c3:  mov    %rax,-0x50(%rbp)
-0xffffffff800028c7:  mov    %rdx,-0x48(%rbp)
-0xffffffff800028cb:  mov    0x10(%rcx),%rax
-0xffffffff800028cf:  mov    %rax,-0x40(%rbp)
-0xffffffff800028d3:  mov    0x1011ae6(%rip),%rdx        # 0xffffffff810143c0
-0xffffffff800028da:  mov    -0x10(%rbp),%rax
-0xffffffff800028de:  shl    $0x3,%rax
-0xffffffff800028e2:  add    %rdx,%rax
-0xffffffff800028e5:  mov    (%rax),%rax
-0xffffffff800028e8:  mov    %rax,-0x8(%rbp)
-0xffffffff800028ec:  addq   $0x1,-0x10(%rbp)
-0xffffffff800028f1:  mov    0x1011ac0(%rip),%rax        # 0xffffffff810143b8
-0xffffffff800028f8:  cmp    %rax,-0x10(%rbp)
-0xffffffff800028fc:  jb     0xffffffff80002867
+0xffffffff8000597a:  movzbl 0x6aef(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005981:  movsbl %al,%edx
+0xffffffff80005984:  lea    -0xa0(%rbp),%rax
+0xffffffff8000598b:  lea    -0x9c(%rbp),%rcx
+0xffffffff80005992:  mov    %rcx,%rsi
+0xffffffff80005995:  mov    %rax,%rdi
+0xffffffff80005998:  callq  0xffffffff80005eb6
 
 ----------------
 IN: 
-0xffffffff80002902:  mov    $0x8,%edi
-0xffffffff80002907:  callq  0xffffffff800024d0
+0xffffffff8000599d:  lea    -0x84(%rbp),%rax
+0xffffffff800059a4:  lea    -0xdc(%rbp),%rcx
+0xffffffff800059ab:  lea    0x57f7(%rip),%rdx        # 0xffffffff8000b1a9
+0xffffffff800059b2:  mov    %rcx,%rsi
+0xffffffff800059b5:  mov    %rax,%rdi
+0xffffffff800059b8:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff8000290c:  mov    %rax,-0x30(%rbp)
-0xffffffff80002910:  mov    -0x30(%rbp),%rax
-0xffffffff80002914:  mov    %rax,0x1011aad(%rip)        # 0xffffffff810143c8
-0xffffffff8000291b:  mov    -0x30(%rbp),%rax
-0xffffffff8000291f:  shr    $0xf,%rax
-0xffffffff80002923:  add    $0x1,%rax
-0xffffffff80002927:  mov    %rax,0x1011aba(%rip)        # 0xffffffff810143e8
-0xffffffff8000292e:  mov    -0x8(%rbp),%rax
-0xffffffff80002932:  mov    (%rax),%rax
-0xffffffff80002935:  mov    %rax,0x1011aa4(%rip)        # 0xffffffff810143e0
-0xffffffff8000293c:  jmp    0xffffffff80002954
+0xffffffff800059bd:  callq  0xffffffff80003024
 
 ----------------
 IN: 
-0xffffffff80002954:  mov    0x1011a8d(%rip),%rax        # 0xffffffff810143e8
-0xffffffff8000295b:  cmp    %rax,-0x18(%rbp)
-0xffffffff8000295f:  jb     0xffffffff8000293e
+0xffffffff800059c2:  mov    %rax,%rdi
+0xffffffff800059c5:  callq  0xffffffff800055c8
 
 ----------------
 IN: 
-0xffffffff80002961:  mov    0x1011a80(%rip),%rcx        # 0xffffffff810143e8
-0xffffffff80002968:  mov    0x1011a71(%rip),%rax        # 0xffffffff810143e0
-0xffffffff8000296f:  mov    $0x2,%edx
-0xffffffff80002974:  mov    %rcx,%rsi
-0xffffffff80002977:  mov    %rax,%rdi
-0xffffffff8000297a:  callq  0xffffffff80002ce2
+0xffffffff800059ca:  mov    %rax,%rdx
+0xffffffff800059cd:  lea    -0x88(%rbp),%rax
+0xffffffff800059d4:  lea    -0x84(%rbp),%rcx
+0xffffffff800059db:  mov    %rcx,%rsi
+0xffffffff800059de:  mov    %rax,%rdi
+0xffffffff800059e1:  callq  0xffffffff80006098
 
 ----------------
 IN: 
-0xffffffff80002ce2:  repz (bad) 
-0xffffffff80002ce5:  cli    
-0xffffffff80002ce6:  push   %rbp
-0xffffffff80002ce7:  mov    %rsp,%rbp
-0xffffffff80002cea:  sub    $0x40,%rsp
-0xffffffff80002cee:  mov    %rdi,-0x28(%rbp)
-0xffffffff80002cf2:  mov    %rsi,-0x30(%rbp)
-0xffffffff80002cf6:  mov    %edx,-0x34(%rbp)
-0xffffffff80002cf9:  cmpl   $0x4,-0x34(%rbp)
-0xffffffff80002cfd:  je     0xffffffff80002dd4
+0xffffffff80004c2a:  mov    -0x10(%rbp),%rax
+0xffffffff80004c2e:  mov    $0xcccccccccccccccd,%rdx
+0xffffffff80004c38:  mul    %rdx
+0xffffffff80004c3b:  mov    %rdx,%rax
+0xffffffff80004c3e:  shr    $0x3,%rax
+0xffffffff80004c42:  mov    %rax,-0x10(%rbp)
+0xffffffff80004c46:  movzbl -0x1(%rbp),%eax
+0xffffffff80004c4a:  add    $0x1,%eax
+0xffffffff80004c4d:  mov    %al,-0x1(%rbp)
+0xffffffff80004c50:  cmpq   $0x9,-0x10(%rbp)
+0xffffffff80004c55:  ja     0xffffffff80004c2a
 
 ----------------
 IN: 
-0xffffffff80002d03:  cmpl   $0x4,-0x34(%rbp)
-0xffffffff80002d07:  jg     0xffffffff80002e08
+0xffffffff80004c65:  mov    -0x20(%rbp),%rcx
+0xffffffff80004c69:  mov    $0xcccccccccccccccd,%rdx
+0xffffffff80004c73:  mov    %rcx,%rax
+0xffffffff80004c76:  mul    %rdx
+0xffffffff80004c79:  shr    $0x3,%rdx
+0xffffffff80004c7d:  mov    %rdx,%rax
+0xffffffff80004c80:  shl    $0x2,%rax
+0xffffffff80004c84:  add    %rdx,%rax
+0xffffffff80004c87:  add    %rax,%rax
+0xffffffff80004c8a:  sub    %rax,%rcx
+0xffffffff80004c8d:  mov    %rcx,%rdx
+0xffffffff80004c90:  mov    %dl,-0x23(%rbp)
+0xffffffff80004c93:  mov    -0x20(%rbp),%rax
+0xffffffff80004c97:  mov    $0xcccccccccccccccd,%rdx
+0xffffffff80004ca1:  mul    %rdx
+0xffffffff80004ca4:  mov    %rdx,%rax
+0xffffffff80004ca7:  shr    $0x3,%rax
+0xffffffff80004cab:  mov    %rax,-0x20(%rbp)
+0xffffffff80004caf:  movzbl -0x23(%rbp),%eax
+0xffffffff80004cb3:  lea    0x30(%rax),%ecx
+0xffffffff80004cb6:  movzbl -0x21(%rbp),%edx
+0xffffffff80004cba:  movzbl -0x1(%rbp),%eax
+0xffffffff80004cbe:  add    %edx,%eax
+0xffffffff80004cc0:  movzbl -0x11(%rbp),%edx
+0xffffffff80004cc4:  sub    %edx,%eax
+0xffffffff80004cc6:  cltq   
+0xffffffff80004cc8:  lea    0x1010991(%rip),%rdx        # 0xffffffff81015660
+0xffffffff80004ccf:  mov    %cl,(%rax,%rdx,1)
+0xffffffff80004cd2:  movzbl -0x11(%rbp),%eax
+0xffffffff80004cd6:  add    $0x1,%eax
+0xffffffff80004cd9:  mov    %al,-0x11(%rbp)
+0xffffffff80004cdc:  cmpq   $0x9,-0x20(%rbp)
+0xffffffff80004ce1:  ja     0xffffffff80004c65
 
 ----------------
 IN: 
-0xffffffff80002d0d:  cmpl   $0x3,-0x34(%rbp)
-0xffffffff80002d11:  je     0xffffffff80002d9f
+0xffffffff800059e6:  callq  0xffffffff80003024
 
 ----------------
 IN: 
-0xffffffff80002d17:  cmpl   $0x3,-0x34(%rbp)
-0xffffffff80002d1b:  jg     0xffffffff80002e08
+0xffffffff800059eb:  mov    %rax,%rdi
+0xffffffff800059ee:  callq  0xffffffff80005628
 
 ----------------
 IN: 
-0xffffffff80002d21:  cmpl   $0x1,-0x34(%rbp)
-0xffffffff80002d25:  je     0xffffffff80002d32
+0xffffffff800059f3:  mov    %rax,%rdx
+0xffffffff800059f6:  lea    -0x8c(%rbp),%rax
+0xffffffff800059fd:  lea    -0x88(%rbp),%rcx
+0xffffffff80005a04:  mov    %rcx,%rsi
+0xffffffff80005a07:  mov    %rax,%rdi
+0xffffffff80005a0a:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff80002d27:  cmpl   $0x2,-0x34(%rbp)
-0xffffffff80002d2b:  je     0xffffffff80002d6a
+0xffffffff80005a0f:  movzbl 0x6a5a(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005a16:  movsbl %al,%edx
+0xffffffff80005a19:  lea    -0x90(%rbp),%rax
+0xffffffff80005a20:  lea    -0x8c(%rbp),%rcx
+0xffffffff80005a27:  mov    %rcx,%rsi
+0xffffffff80005a2a:  mov    %rax,%rdi
+0xffffffff80005a2d:  callq  0xffffffff80005eb6
 
 ----------------
 IN: 
-0xffffffff80002d6a:  movq   $0x0,-0x10(%rbp)
-0xffffffff80002d72:  jmp    0xffffffff80002d93
+0xffffffff80005a32:  lea    -0x74(%rbp),%rax
+0xffffffff80005a36:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005a3d:  lea    0x5773(%rip),%rdx        # 0xffffffff8000b1b7
+0xffffffff80005a44:  mov    %rcx,%rsi
+0xffffffff80005a47:  mov    %rax,%rdi
+0xffffffff80005a4a:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff80002d93:  mov    -0x10(%rbp),%rax
-0xffffffff80002d97:  cmp    -0x30(%rbp),%rax
-0xffffffff80002d9b:  jb     0xffffffff80002d74
+0xffffffff80005a4f:  callq  0xffffffff80003035
 
 ----------------
 IN: 
-0xffffffff80002d74:  mov    -0x10(%rbp),%rax
-0xffffffff80002d78:  shl    $0xf,%rax
-0xffffffff80002d7c:  mov    %rax,%rdx
-0xffffffff80002d7f:  mov    -0x28(%rbp),%rax
-0xffffffff80002d83:  add    %rdx,%rax
-0xffffffff80002d86:  mov    %rax,%rdi
-0xffffffff80002d89:  callq  0xffffffff80002ae8
+0xffffffff80005a54:  mov    %rax,%rdi
+0xffffffff80005a57:  callq  0xffffffff800055c8
 
 ----------------
 IN: 
-0xffffffff80002ae8:  repz (bad) 
-0xffffffff80002aeb:  cli    
-0xffffffff80002aec:  push   %rbp
-0xffffffff80002aed:  mov    %rsp,%rbp
-0xffffffff80002af0:  sub    $0x20,%rsp
-0xffffffff80002af4:  mov    %rdi,-0x18(%rbp)
-0xffffffff80002af8:  mov    -0x18(%rbp),%rax
-0xffffffff80002afc:  shr    $0xc,%rax
-0xffffffff80002b00:  mov    %rax,-0x8(%rbp)
-0xffffffff80002b04:  mov    0x10118d5(%rip),%rdx        # 0xffffffff810143e0
-0xffffffff80002b0b:  mov    -0x8(%rbp),%rax
-0xffffffff80002b0f:  shr    $0x3,%rax
-0xffffffff80002b13:  add    %rdx,%rax
-0xffffffff80002b16:  mov    -0x8(%rbp),%rdx
-0xffffffff80002b1a:  movzbl %dl,%edx
-0xffffffff80002b1d:  and    $0x7,%edx
-0xffffffff80002b20:  mov    %edx,%esi
-0xffffffff80002b22:  mov    %rax,%rdi
-0xffffffff80002b25:  callq  0xffffffff800014ac
+0xffffffff80005a5c:  mov    %rax,%rdx
+0xffffffff80005a5f:  lea    -0x78(%rbp),%rax
+0xffffffff80005a63:  lea    -0x74(%rbp),%rcx
+0xffffffff80005a67:  mov    %rcx,%rsi
+0xffffffff80005a6a:  mov    %rax,%rdi
+0xffffffff80005a6d:  callq  0xffffffff80006098
 
 ----------------
 IN: 
-0xffffffff800014ac:  repz (bad) 
-0xffffffff800014af:  cli    
-0xffffffff800014b0:  push   %rbp
-0xffffffff800014b1:  mov    %rsp,%rbp
-0xffffffff800014b4:  sub    $0x10,%rsp
-0xffffffff800014b8:  mov    %rdi,-0x8(%rbp)
-0xffffffff800014bc:  mov    %esi,%eax
-0xffffffff800014be:  mov    %al,-0xc(%rbp)
-0xffffffff800014c1:  mov    -0x8(%rbp),%rax
-0xffffffff800014c5:  movzbl (%rax),%eax
-0xffffffff800014c8:  movzbl %al,%edx
-0xffffffff800014cb:  movzbl -0xc(%rbp),%eax
-0xffffffff800014cf:  mov    $0x80,%esi
-0xffffffff800014d4:  mov    %eax,%ecx
-0xffffffff800014d6:  sar    %cl,%esi
-0xffffffff800014d8:  mov    %esi,%eax
-0xffffffff800014da:  and    %edx,%eax
-0xffffffff800014dc:  test   %eax,%eax
-0xffffffff800014de:  setne  %al
-0xffffffff800014e1:  leaveq 
-0xffffffff800014e2:  retq   
+0xffffffff80005a72:  callq  0xffffffff80003035
 
 ----------------
 IN: 
-0xffffffff80002b2a:  movzbl %al,%eax
-0xffffffff80002b2d:  cmp    $0x1,%eax
-0xffffffff80002b30:  sete   %al
-0xffffffff80002b33:  test   %al,%al
-0xffffffff80002b35:  jne    0xffffffff80002b8e
+0xffffffff80005a77:  mov    %rax,%rdi
+0xffffffff80005a7a:  callq  0xffffffff80005628
 
 ----------------
 IN: 
-0xffffffff80002b37:  mov    0x10118a2(%rip),%rdx        # 0xffffffff810143e0
-0xffffffff80002b3e:  mov    -0x8(%rbp),%rax
-0xffffffff80002b42:  shr    $0x3,%rax
-0xffffffff80002b46:  add    %rdx,%rax
-0xffffffff80002b49:  mov    -0x8(%rbp),%rdx
-0xffffffff80002b4d:  movzbl %dl,%edx
-0xffffffff80002b50:  mov    %edx,%ecx
-0xffffffff80002b52:  and    $0x7,%ecx
-0xffffffff80002b55:  mov    $0x1,%edx
-0xffffffff80002b5a:  mov    %ecx,%esi
-0xffffffff80002b5c:  mov    %rax,%rdi
-0xffffffff80002b5f:  callq  0xffffffff80001410
+0xffffffff80005a7f:  mov    %rax,%rdx
+0xffffffff80005a82:  lea    -0x7c(%rbp),%rax
+0xffffffff80005a86:  lea    -0x78(%rbp),%rcx
+0xffffffff80005a8a:  mov    %rcx,%rsi
+0xffffffff80005a8d:  mov    %rax,%rdi
+0xffffffff80005a90:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff80001410:  repz (bad) 
-0xffffffff80001413:  cli    
-0xffffffff80001414:  push   %rbp
-0xffffffff80001415:  mov    %rsp,%rbp
-0xffffffff80001418:  sub    $0x20,%rsp
-0xffffffff8000141c:  mov    %rdi,-0x18(%rbp)
-0xffffffff80001420:  mov    %esi,%ecx
-0xffffffff80001422:  mov    %edx,%eax
-0xffffffff80001424:  mov    %ecx,%edx
-0xffffffff80001426:  mov    %dl,-0x1c(%rbp)
-0xffffffff80001429:  mov    %al,-0x20(%rbp)
-0xffffffff8000142c:  movzbl -0x1c(%rbp),%edx
-0xffffffff80001430:  mov    -0x18(%rbp),%rax
-0xffffffff80001434:  mov    %edx,%esi
-0xffffffff80001436:  mov    %rax,%rdi
-0xffffffff80001439:  callq  0xffffffff800014ac
+0xffffffff80005a95:  movzbl 0x69d4(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005a9c:  movsbl %al,%edx
+0xffffffff80005a9f:  lea    -0x80(%rbp),%rax
+0xffffffff80005aa3:  lea    -0x7c(%rbp),%rcx
+0xffffffff80005aa7:  mov    %rcx,%rsi
+0xffffffff80005aaa:  mov    %rax,%rdi
+0xffffffff80005aad:  callq  0xffffffff80005eb6
 
 ----------------
 IN: 
-0xffffffff8000143e:  mov    %al,-0x1(%rbp)
-0xffffffff80001441:  movzbl -0x1(%rbp),%eax
-0xffffffff80001445:  cmp    -0x20(%rbp),%al
-0xffffffff80001448:  je     0xffffffff800014a4
+0xffffffff80005ab2:  mov    $0x64,%edi
+0xffffffff80005ab7:  callq  0xffffffff800010de
 
 ----------------
 IN: 
-0xffffffff8000144a:  cmpb   $0x0,-0x20(%rbp)
-0xffffffff8000144e:  je     0xffffffff80001479
+0xffffffff80001154:  mov    -0x20(%rbp),%rax
+0xffffffff80001158:  mov    (%rax),%rdx
+0xffffffff8000115b:  mov    -0x20(%rbp),%rax
+0xffffffff8000115f:  mov    0x8(%rax),%rax
+0xffffffff80001163:  shl    $0x3,%rax
+0xffffffff80001167:  lea    (%rdx,%rax,1),%r12
+0xffffffff8000116b:  mov    -0x24(%rbp),%eax
+0xffffffff8000116e:  mov    %eax,%esi
+0xffffffff80001170:  mov    $0x48,%rax
+0xffffffff8000117a:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000117e:  mov    %rax,%rdi
+0xffffffff80001181:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff8000118b:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000118f:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80001450:  mov    -0x18(%rbp),%rax
-0xffffffff80001454:  movzbl (%rax),%eax
-0xffffffff80001457:  mov    %eax,%esi
-0xffffffff80001459:  movzbl -0x1c(%rbp),%eax
-0xffffffff8000145d:  mov    $0x80,%edx
-0xffffffff80001462:  mov    %eax,%ecx
-0xffffffff80001464:  sar    %cl,%edx
-0xffffffff80001466:  mov    %edx,%eax
-0xffffffff80001468:  xor    %esi,%eax
-0xffffffff8000146a:  mov    %eax,%edx
-0xffffffff8000146c:  mov    -0x18(%rbp),%rax
-0xffffffff80001470:  mov    %dl,(%rax)
-0xffffffff80001472:  mov    $0x1,%eax
-0xffffffff80001477:  jmp    0xffffffff800014a9
+0xffffffff80001191:  mov    (%rax),%rax
+0xffffffff80001194:  cmp    %rax,%r12
+0xffffffff80001197:  setne  %al
+0xffffffff8000119a:  test   %al,%al
+0xffffffff8000119c:  je     0xffffffff800012a7
 
 ----------------
 IN: 
-0xffffffff800014a9:  leaveq 
-0xffffffff800014aa:  retq   
+0xffffffff800011a2:  mov    -0x24(%rbp),%eax
+0xffffffff800011a5:  mov    %eax,%esi
+0xffffffff800011a7:  mov    $0x48,%rax
+0xffffffff800011b1:  lea    (%rbx,%rax,1),%rax
+0xffffffff800011b5:  mov    %rax,%rdi
+0xffffffff800011b8:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff800011c2:  lea    (%rbx,%rax,1),%rax
+0xffffffff800011c6:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80002b64:  mov    0x101185d(%rip),%rax        # 0xffffffff810143c8
-0xffffffff80002b6b:  sub    $0x1000,%rax
-0xffffffff80002b71:  mov    %rax,0x1011850(%rip)        # 0xffffffff810143c8
-0xffffffff80002b78:  mov    0x1011851(%rip),%rax        # 0xffffffff810143d0
-0xffffffff80002b7f:  add    $0x1000,%rax
-0xffffffff80002b85:  mov    %rax,0x1011844(%rip)        # 0xffffffff810143d0
-0xffffffff80002b8c:  jmp    0xffffffff80002b8f
+0xffffffff800011c8:  mov    (%rax),%rdx
+0xffffffff800011cb:  mov    -0x20(%rbp),%rax
+0xffffffff800011cf:  mov    (%rax),%rcx
+0xffffffff800011d2:  mov    -0x20(%rbp),%rax
+0xffffffff800011d6:  mov    0x8(%rax),%rax
+0xffffffff800011da:  shl    $0x3,%rax
+0xffffffff800011de:  add    %rax,%rcx
+0xffffffff800011e1:  mov    %rdx,%rax
+0xffffffff800011e4:  sub    %rcx,%rax
+0xffffffff800011e7:  sar    $0x3,%rax
+0xffffffff800011eb:  mov    %rax,-0x30(%rbp)
+0xffffffff800011ef:  mov    -0x30(%rbp),%rax
+0xffffffff800011f3:  cmp    -0x38(%rbp),%rax
+0xffffffff800011f7:  jb     0xffffffff8000127d
 
 ----------------
 IN: 
-0xffffffff80002b8f:  leaveq 
-0xffffffff80002b90:  retq   
+0xffffffff800011fd:  mov    -0x20(%rbp),%rax
+0xffffffff80001201:  mov    (%rax),%rdx
+0xffffffff80001204:  mov    -0x20(%rbp),%rax
+0xffffffff80001208:  mov    0x8(%rax),%rax
+0xffffffff8000120c:  add    $0x1,%rax
+0xffffffff80001210:  shl    $0x3,%rax
+0xffffffff80001214:  add    %rdx,%rax
+0xffffffff80001217:  mov    %rax,-0x18(%rbp)
+0xffffffff8000121b:  mov    $0x48,%rax
+0xffffffff80001225:  mov    (%rbx,%rax,1),%rax
+0xffffffff80001229:  mov    %eax,%esi
+0xffffffff8000122b:  mov    $0x48,%rax
+0xffffffff80001235:  lea    (%rbx,%rax,1),%rax
+0xffffffff80001239:  mov    %rax,%rdi
+0xffffffff8000123c:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80001246:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000124a:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80002d8e:  addq   $0x1,-0x10(%rbp)
-0xffffffff80002d93:  mov    -0x10(%rbp),%rax
-0xffffffff80002d97:  cmp    -0x30(%rbp),%rax
-0xffffffff80002d9b:  jb     0xffffffff80002d74
+0xffffffff8000124c:  mov    -0x18(%rbp),%rdx
+0xffffffff80001250:  mov    %rdx,(%rax)
+0xffffffff80001253:  mov    -0x38(%rbp),%rdx
+0xffffffff80001257:  mov    %rdx,0x8(%rax)
+0xffffffff8000125b:  mov    $0x48,%rax
+0xffffffff80001265:  mov    (%rbx,%rax,1),%rax
+0xffffffff80001269:  lea    0x1(%rax),%rdx
+0xffffffff8000126d:  mov    $0x48,%rax
+0xffffffff80001277:  mov    %rdx,(%rbx,%rax,1)
+0xffffffff8000127b:  jmp    0xffffffff800012c8
 
 ----------------
 IN: 
-0xffffffff80002d9d:  jmp    0xffffffff80002e08
+0xffffffff80001399:  mov    -0x18(%rbp),%ecx
+0xffffffff8000139c:  mov    -0x14(%rbp),%edx
+0xffffffff8000139f:  mov    -0x10(%rbp),%rsi
+0xffffffff800013a3:  mov    -0x8(%rbp),%rdi
+0xffffffff800013a7:  mov    $0xffffffffffff4f42,%r8
+0xffffffff800013b1:  lea    (%rax,%r8,1),%rax
+0xffffffff800013b5:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80002e08:  nop    
-0xffffffff80002e09:  leaveq 
-0xffffffff80002e0a:  retq   
+0xffffffff800013ba:  repz (bad) 
+0xffffffff800013bd:  cli    
+0xffffffff800013be:  push   %rbp
+0xffffffff800013bf:  mov    %rsp,%rbp
+0xffffffff800013c2:  push   %rbx
+0xffffffff800013c3:  sub    $0x38,%rsp
+0xffffffff800013c7:  lea    -0x7(%rip),%rbx        # 0xffffffff800013c7
+0xffffffff800013ce:  mov    $0xb0b1,%r11
+0xffffffff800013d8:  add    %r11,%rbx
+0xffffffff800013db:  mov    %rdi,-0x28(%rbp)
+0xffffffff800013df:  mov    %rsi,-0x30(%rbp)
+0xffffffff800013e3:  mov    %edx,-0x34(%rbp)
+0xffffffff800013e6:  mov    %ecx,-0x38(%rbp)
+0xffffffff800013e9:  mov    -0x34(%rbp),%eax
+0xffffffff800013ec:  cmp    -0x38(%rbp),%eax
+0xffffffff800013ef:  jl     0xffffffff800013f8
 
 ----------------
 IN: 
-0xffffffff8000297f:  movq   $0x0,-0x20(%rbp)
-0xffffffff80002987:  jmp    0xffffffff800029f8
+0xffffffff800013f8:  mov    -0x38(%rbp),%ecx
+0xffffffff800013fb:  mov    -0x34(%rbp),%edx
+0xffffffff800013fe:  mov    -0x30(%rbp),%rsi
+0xffffffff80001402:  mov    -0x28(%rbp),%rax
+0xffffffff80001406:  mov    %rax,%rdi
+0xffffffff80001409:  mov    $0xffffffffffff4ff9,%rax
+0xffffffff80001413:  lea    (%rbx,%rax,1),%rax
+0xffffffff80001417:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff800029f8:  mov    0x10119b9(%rip),%rax        # 0xffffffff810143b8
-0xffffffff800029ff:  sub    $0x1,%rax
-0xffffffff80002a03:  cmp    %rax,-0x20(%rbp)
-0xffffffff80002a07:  jb     0xffffffff80002989
+0xffffffff80001471:  repz (bad) 
+0xffffffff80001474:  cli    
+0xffffffff80001475:  push   %rbp
+0xffffffff80001476:  mov    %rsp,%rbp
+0xffffffff80001479:  sub    $0x50,%rsp
+0xffffffff8000147d:  lea    -0x7(%rip),%rax        # 0xffffffff8000147d
+0xffffffff80001484:  mov    $0xaffb,%r11
+0xffffffff8000148e:  add    %r11,%rax
+0xffffffff80001491:  mov    %rdi,-0x38(%rbp)
+0xffffffff80001495:  mov    %rsi,-0x40(%rbp)
+0xffffffff80001499:  mov    %edx,-0x44(%rbp)
+0xffffffff8000149c:  mov    %ecx,-0x48(%rbp)
+0xffffffff8000149f:  mov    -0x44(%rbp),%eax
+0xffffffff800014a2:  mov    %eax,-0x4(%rbp)
+0xffffffff800014a5:  mov    -0x44(%rbp),%eax
+0xffffffff800014a8:  add    $0x1,%eax
+0xffffffff800014ab:  mov    %eax,-0x8(%rbp)
+0xffffffff800014ae:  jmpq   0xffffffff8000157b
 
 ----------------
 IN: 
-0xffffffff80002989:  mov    0x1011a30(%rip),%rdx        # 0xffffffff810143c0
-0xffffffff80002990:  mov    -0x20(%rbp),%rax
-0xffffffff80002994:  shl    $0x3,%rax
-0xffffffff80002998:  add    %rdx,%rax
-0xffffffff8000299b:  mov    (%rax),%rax
-0xffffffff8000299e:  mov    0x10(%rax),%rax
-0xffffffff800029a2:  test   %rax,%rax
-0xffffffff800029a5:  je     0xffffffff800029f3
+0xffffffff8000157b:  mov    -0x48(%rbp),%eax
+0xffffffff8000157e:  cmp    -0x8(%rbp),%eax
+0xffffffff80001581:  jge    0xffffffff800014b3
 
 ----------------
 IN: 
-0xffffffff800029a7:  mov    0x1011a12(%rip),%rdx        # 0xffffffff810143c0
-0xffffffff800029ae:  mov    -0x20(%rbp),%rax
-0xffffffff800029b2:  shl    $0x3,%rax
-0xffffffff800029b6:  add    %rdx,%rax
-0xffffffff800029b9:  mov    (%rax),%rax
-0xffffffff800029bc:  mov    0x8(%rax),%rax
-0xffffffff800029c0:  shr    $0xc,%rax
-0xffffffff800029c4:  add    $0x1,%rax
-0xffffffff800029c8:  mov    0x10119f1(%rip),%rcx        # 0xffffffff810143c0
-0xffffffff800029cf:  mov    -0x20(%rbp),%rdx
-0xffffffff800029d3:  shl    $0x3,%rdx
-0xffffffff800029d7:  add    %rcx,%rdx
-0xffffffff800029da:  mov    (%rdx),%rdx
-0xffffffff800029dd:  mov    (%rdx),%rdx
-0xffffffff800029e0:  mov    %rdx,%rcx
-0xffffffff800029e3:  mov    $0x3,%edx
-0xffffffff800029e8:  mov    %rax,%rsi
-0xffffffff800029eb:  mov    %rcx,%rdi
-0xffffffff800029ee:  callq  0xffffffff80002ce2
+0xffffffff800014b3:  mov    -0x40(%rbp),%r8
+0xffffffff800014b7:  mov    -0x44(%rbp),%eax
+0xffffffff800014ba:  cltq   
+0xffffffff800014bc:  shl    $0x4,%rax
+0xffffffff800014c0:  mov    %rax,%rdx
+0xffffffff800014c3:  mov    -0x38(%rbp),%rax
+0xffffffff800014c7:  add    %rdx,%rax
+0xffffffff800014ca:  mov    -0x8(%rbp),%edx
+0xffffffff800014cd:  movslq %edx,%rdx
+0xffffffff800014d0:  mov    %rdx,%rcx
+0xffffffff800014d3:  shl    $0x4,%rcx
+0xffffffff800014d7:  mov    -0x38(%rbp),%rdx
+0xffffffff800014db:  add    %rdx,%rcx
+0xffffffff800014de:  mov    0x8(%rax),%rdx
+0xffffffff800014e2:  mov    (%rax),%rax
+0xffffffff800014e5:  mov    (%rcx),%rdi
+0xffffffff800014e8:  mov    0x8(%rcx),%rsi
+0xffffffff800014ec:  mov    %rdx,%rcx
+0xffffffff800014ef:  mov    %rax,%rdx
+0xffffffff800014f2:  callq  *%r8
 
 ----------------
 IN: 
-0xffffffff80002d9f:  movq   $0x0,-0x18(%rbp)
-0xffffffff80002da7:  jmp    0xffffffff80002dc8
+0xffffffff8000078c:  repz (bad) 
+0xffffffff8000078f:  cli    
+0xffffffff80000790:  push   %rbp
+0xffffffff80000791:  mov    %rsp,%rbp
+0xffffffff80000794:  sub    $0x20,%rsp
+0xffffffff80000798:  lea    -0x7(%rip),%rax        # 0xffffffff80000798
+0xffffffff8000079f:  mov    $0xbce0,%r11
+0xffffffff800007a9:  add    %r11,%rax
+0xffffffff800007ac:  mov    %rsi,%rax
+0xffffffff800007af:  mov    %rdi,%r8
+0xffffffff800007b2:  mov    %r8,%rsi
+0xffffffff800007b5:  mov    %r9,%rdi
+0xffffffff800007b8:  mov    %rax,%rdi
+0xffffffff800007bb:  mov    %rsi,-0x10(%rbp)
+0xffffffff800007bf:  mov    %rdi,-0x8(%rbp)
+0xffffffff800007c3:  mov    %rdx,-0x20(%rbp)
+0xffffffff800007c7:  mov    %rcx,-0x18(%rbp)
+0xffffffff800007cb:  mov    -0x10(%rbp),%rdx
+0xffffffff800007cf:  mov    -0x20(%rbp),%rax
+0xffffffff800007d3:  cmp    %rax,%rdx
+0xffffffff800007d6:  seta   %al
+0xffffffff800007d9:  leaveq 
+0xffffffff800007da:  retq   
 
 ----------------
 IN: 
-0xffffffff80002dc8:  mov    -0x18(%rbp),%rax
-0xffffffff80002dcc:  cmp    -0x30(%rbp),%rax
-0xffffffff80002dd0:  jb     0xffffffff80002da9
+0xffffffff800014f5:  test   %al,%al
+0xffffffff800014f7:  je     0xffffffff80001577
 
 ----------------
 IN: 
-0xffffffff80002da9:  mov    -0x18(%rbp),%rax
-0xffffffff80002dad:  shl    $0xf,%rax
-0xffffffff80002db1:  mov    %rax,%rdx
-0xffffffff80002db4:  mov    -0x28(%rbp),%rax
-0xffffffff80002db8:  add    %rdx,%rax
-0xffffffff80002dbb:  mov    %rax,%rdi
-0xffffffff80002dbe:  callq  0xffffffff80002c39
+0xffffffff80001577:  addl   $0x1,-0x8(%rbp)
+0xffffffff8000157b:  mov    -0x48(%rbp),%eax
+0xffffffff8000157e:  cmp    -0x8(%rbp),%eax
+0xffffffff80001581:  jge    0xffffffff800014b3
 
 ----------------
 IN: 
-0xffffffff80002c39:  repz (bad) 
-0xffffffff80002c3c:  cli    
-0xffffffff80002c3d:  push   %rbp
-0xffffffff80002c3e:  mov    %rsp,%rbp
-0xffffffff80002c41:  sub    $0x20,%rsp
-0xffffffff80002c45:  mov    %rdi,-0x18(%rbp)
-0xffffffff80002c49:  mov    -0x18(%rbp),%rax
-0xffffffff80002c4d:  shr    $0xc,%rax
-0xffffffff80002c51:  mov    %rax,-0x8(%rbp)
-0xffffffff80002c55:  mov    0x1011784(%rip),%rdx        # 0xffffffff810143e0
-0xffffffff80002c5c:  mov    -0x8(%rbp),%rax
-0xffffffff80002c60:  shr    $0x3,%rax
-0xffffffff80002c64:  add    %rdx,%rax
-0xffffffff80002c67:  mov    -0x8(%rbp),%rdx
-0xffffffff80002c6b:  movzbl %dl,%edx
-0xffffffff80002c6e:  and    $0x7,%edx
-0xffffffff80002c71:  mov    %edx,%esi
-0xffffffff80002c73:  mov    %rax,%rdi
-0xffffffff80002c76:  callq  0xffffffff800014ac
+0xffffffff800014f9:  addl   $0x1,-0x4(%rbp)
+0xffffffff800014fd:  mov    -0x8(%rbp),%eax
+0xffffffff80001500:  cltq   
+0xffffffff80001502:  shl    $0x4,%rax
+0xffffffff80001506:  mov    %rax,%rdx
+0xffffffff80001509:  mov    -0x38(%rbp),%rax
+0xffffffff8000150d:  add    %rdx,%rax
+0xffffffff80001510:  mov    0x8(%rax),%rdx
+0xffffffff80001514:  mov    (%rax),%rax
+0xffffffff80001517:  mov    %rax,-0x30(%rbp)
+0xffffffff8000151b:  mov    %rdx,-0x28(%rbp)
+0xffffffff8000151f:  mov    -0x4(%rbp),%eax
+0xffffffff80001522:  cltq   
+0xffffffff80001524:  shl    $0x4,%rax
+0xffffffff80001528:  mov    %rax,%rdx
+0xffffffff8000152b:  mov    -0x38(%rbp),%rax
+0xffffffff8000152f:  add    %rdx,%rax
+0xffffffff80001532:  mov    -0x8(%rbp),%edx
+0xffffffff80001535:  movslq %edx,%rdx
+0xffffffff80001538:  mov    %rdx,%rcx
+0xffffffff8000153b:  shl    $0x4,%rcx
+0xffffffff8000153f:  mov    -0x38(%rbp),%rdx
+0xffffffff80001543:  add    %rdx,%rcx
+0xffffffff80001546:  mov    0x8(%rax),%rdx
+0xffffffff8000154a:  mov    (%rax),%rax
+0xffffffff8000154d:  mov    %rax,(%rcx)
+0xffffffff80001550:  mov    %rdx,0x8(%rcx)
+0xffffffff80001554:  mov    -0x4(%rbp),%eax
+0xffffffff80001557:  cltq   
+0xffffffff80001559:  shl    $0x4,%rax
+0xffffffff8000155d:  mov    %rax,%rdx
+0xffffffff80001560:  mov    -0x38(%rbp),%rax
+0xffffffff80001564:  lea    (%rdx,%rax,1),%rcx
+0xffffffff80001568:  mov    -0x30(%rbp),%rax
+0xffffffff8000156c:  mov    -0x28(%rbp),%rdx
+0xffffffff80001570:  mov    %rax,(%rcx)
+0xffffffff80001573:  mov    %rdx,0x8(%rcx)
+0xffffffff80001577:  addl   $0x1,-0x8(%rbp)
+0xffffffff8000157b:  mov    -0x48(%rbp),%eax
+0xffffffff8000157e:  cmp    -0x8(%rbp),%eax
+0xffffffff80001581:  jge    0xffffffff800014b3
 
 ----------------
 IN: 
-0xffffffff80002c7b:  movzbl %al,%eax
-0xffffffff80002c7e:  cmp    $0x1,%eax
-0xffffffff80002c81:  sete   %al
-0xffffffff80002c84:  test   %al,%al
-0xffffffff80002c86:  jne    0xffffffff80002cdf
+0xffffffff80001587:  mov    -0x4(%rbp),%eax
+0xffffffff8000158a:  cltq   
+0xffffffff8000158c:  shl    $0x4,%rax
+0xffffffff80001590:  mov    %rax,%rdx
+0xffffffff80001593:  mov    -0x38(%rbp),%rax
+0xffffffff80001597:  add    %rdx,%rax
+0xffffffff8000159a:  mov    0x8(%rax),%rdx
+0xffffffff8000159e:  mov    (%rax),%rax
+0xffffffff800015a1:  mov    %rax,-0x20(%rbp)
+0xffffffff800015a5:  mov    %rdx,-0x18(%rbp)
+0xffffffff800015a9:  mov    -0x44(%rbp),%eax
+0xffffffff800015ac:  cltq   
+0xffffffff800015ae:  shl    $0x4,%rax
+0xffffffff800015b2:  mov    %rax,%rdx
+0xffffffff800015b5:  mov    -0x38(%rbp),%rax
+0xffffffff800015b9:  add    %rdx,%rax
+0xffffffff800015bc:  mov    -0x4(%rbp),%edx
+0xffffffff800015bf:  movslq %edx,%rdx
+0xffffffff800015c2:  mov    %rdx,%rcx
+0xffffffff800015c5:  shl    $0x4,%rcx
+0xffffffff800015c9:  mov    -0x38(%rbp),%rdx
+0xffffffff800015cd:  add    %rdx,%rcx
+0xffffffff800015d0:  mov    0x8(%rax),%rdx
+0xffffffff800015d4:  mov    (%rax),%rax
+0xffffffff800015d7:  mov    %rax,(%rcx)
+0xffffffff800015da:  mov    %rdx,0x8(%rcx)
+0xffffffff800015de:  mov    -0x44(%rbp),%eax
+0xffffffff800015e1:  cltq   
+0xffffffff800015e3:  shl    $0x4,%rax
+0xffffffff800015e7:  mov    %rax,%rdx
+0xffffffff800015ea:  mov    -0x38(%rbp),%rax
+0xffffffff800015ee:  lea    (%rdx,%rax,1),%rcx
+0xffffffff800015f2:  mov    -0x20(%rbp),%rax
+0xffffffff800015f6:  mov    -0x18(%rbp),%rdx
+0xffffffff800015fa:  mov    %rax,(%rcx)
+0xffffffff800015fd:  mov    %rdx,0x8(%rcx)
+0xffffffff80001601:  mov    -0x4(%rbp),%eax
+0xffffffff80001604:  leaveq 
+0xffffffff80001605:  retq   
 
 ----------------
 IN: 
-0xffffffff80002c88:  mov    0x1011751(%rip),%rdx        # 0xffffffff810143e0
-0xffffffff80002c8f:  mov    -0x8(%rbp),%rax
-0xffffffff80002c93:  shr    $0x3,%rax
-0xffffffff80002c97:  add    %rdx,%rax
-0xffffffff80002c9a:  mov    -0x8(%rbp),%rdx
-0xffffffff80002c9e:  movzbl %dl,%edx
-0xffffffff80002ca1:  mov    %edx,%ecx
-0xffffffff80002ca3:  and    $0x7,%ecx
-0xffffffff80002ca6:  mov    $0x1,%edx
-0xffffffff80002cab:  mov    %ecx,%esi
-0xffffffff80002cad:  mov    %rax,%rdi
-0xffffffff80002cb0:  callq  0xffffffff80001410
+0xffffffff80001419:  mov    %eax,-0x14(%rbp)
+0xffffffff8000141c:  mov    -0x14(%rbp),%eax
+0xffffffff8000141f:  lea    -0x1(%rax),%ecx
+0xffffffff80001422:  mov    -0x34(%rbp),%edx
+0xffffffff80001425:  mov    -0x30(%rbp),%rsi
+0xffffffff80001429:  mov    -0x28(%rbp),%rax
+0xffffffff8000142d:  mov    %rax,%rdi
+0xffffffff80001430:  mov    $0xffffffffffff4f42,%rax
+0xffffffff8000143a:  lea    (%rbx,%rax,1),%rax
+0xffffffff8000143e:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80002cb5:  mov    0x101170c(%rip),%rax        # 0xffffffff810143c8
-0xffffffff80002cbc:  sub    $0x1000,%rax
-0xffffffff80002cc2:  mov    %rax,0x10116ff(%rip)        # 0xffffffff810143c8
-0xffffffff80002cc9:  mov    0x1011708(%rip),%rax        # 0xffffffff810143d8
-0xffffffff80002cd0:  add    $0x1000,%rax
-0xffffffff80002cd6:  mov    %rax,0x10116fb(%rip)        # 0xffffffff810143d8
-0xffffffff80002cdd:  jmp    0xffffffff80002ce0
+0xffffffff800013f1:  mov    $0x0,%eax
+0xffffffff800013f6:  jmp    0xffffffff8000146b
 
 ----------------
 IN: 
-0xffffffff80002ce0:  leaveq 
-0xffffffff80002ce1:  retq   
+0xffffffff8000146b:  mov    -0x8(%rbp),%rbx
+0xffffffff8000146f:  leaveq 
+0xffffffff80001470:  retq   
 
 ----------------
 IN: 
-0xffffffff80002dc3:  addq   $0x1,-0x18(%rbp)
-0xffffffff80002dc8:  mov    -0x18(%rbp),%rax
-0xffffffff80002dcc:  cmp    -0x30(%rbp),%rax
-0xffffffff80002dd0:  jb     0xffffffff80002da9
+0xffffffff80001440:  mov    -0x14(%rbp),%eax
+0xffffffff80001443:  lea    0x1(%rax),%edi
+0xffffffff80001446:  mov    -0x38(%rbp),%edx
+0xffffffff80001449:  mov    -0x30(%rbp),%rsi
+0xffffffff8000144d:  mov    -0x28(%rbp),%rax
+0xffffffff80001451:  mov    %edx,%ecx
+0xffffffff80001453:  mov    %edi,%edx
+0xffffffff80001455:  mov    %rax,%rdi
+0xffffffff80001458:  mov    $0xffffffffffff4f42,%rax
+0xffffffff80001462:  lea    (%rbx,%rax,1),%rax
+0xffffffff80001466:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80002dd2:  jmp    0xffffffff80002e08
+0xffffffff80001468:  mov    -0x14(%rbp),%eax
+0xffffffff8000146b:  mov    -0x8(%rbp),%rbx
+0xffffffff8000146f:  leaveq 
+0xffffffff80001470:  retq   
 
 ----------------
 IN: 
-0xffffffff800029f3:  addq   $0x1,-0x20(%rbp)
-0xffffffff800029f8:  mov    0x10119b9(%rip),%rax        # 0xffffffff810143b8
-0xffffffff800029ff:  sub    $0x1,%rax
-0xffffffff80002a03:  cmp    %rax,-0x20(%rbp)
-0xffffffff80002a07:  jb     0xffffffff80002989
+0xffffffff800013b7:  nop    
+0xffffffff800013b8:  leaveq 
+0xffffffff800013b9:  retq   
 
 ----------------
 IN: 
-0xffffffff80002cdf:  nop    
-0xffffffff80002ce0:  leaveq 
-0xffffffff80002ce1:  retq   
+0xffffffff80005abc:  mov    %rax,-0x20(%rbp)
+0xffffffff80005ac0:  mov    $0x14,%edi
+0xffffffff80005ac5:  callq  0xffffffff800010de
 
 ----------------
 IN: 
-0xffffffff80002a09:  nop    
-0xffffffff80002a0a:  nop    
-0xffffffff80002a0b:  leaveq 
-0xffffffff80002a0c:  retq   
+0xffffffff80005aca:  mov    %rax,-0x28(%rbp)
+0xffffffff80005ace:  mov    -0x28(%rbp),%rax
+0xffffffff80005ad2:  sub    $0x64,%rax
+0xffffffff80005ad6:  cmp    %rax,-0x20(%rbp)
+0xffffffff80005ada:  sete   %al
+0xffffffff80005add:  mov    %al,-0x29(%rbp)
+0xffffffff80005ae0:  cmpb   $0x0,-0x29(%rbp)
+0xffffffff80005ae4:  je     0xffffffff80005b6d
 
 ----------------
 IN: 
-0xffffffff80005151:  callq  0xffffffff80002a0d
+0xffffffff80005b6d:  lea    -0x64(%rbp),%rax
+0xffffffff80005b71:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005b78:  lea    0x5671(%rip),%rdx        # 0xffffffff8000b1f0
+0xffffffff80005b7f:  mov    %rcx,%rsi
+0xffffffff80005b82:  mov    %rax,%rdi
+0xffffffff80005b85:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff80002a0d:  repz (bad) 
-0xffffffff80002a10:  cli    
-0xffffffff80002a11:  push   %rbp
-0xffffffff80002a12:  mov    %rsp,%rbp
-0xffffffff80002a15:  mov    0x10119ac(%rip),%rax        # 0xffffffff810143c8
-0xffffffff80002a1c:  pop    %rbp
-0xffffffff80002a1d:  retq   
+0xffffffff80005b8a:  movzbl 0x68df(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005b91:  movsbl %al,%edx
+0xffffffff80005b94:  lea    -0x68(%rbp),%rax
+0xffffffff80005b98:  lea    -0x64(%rbp),%rcx
+0xffffffff80005b9c:  mov    %rcx,%rsi
+0xffffffff80005b9f:  mov    %rax,%rdi
+0xffffffff80005ba2:  callq  0xffffffff80005eb6
 
 ----------------
 IN: 
-0xffffffff80005156:  mov    %rax,%rbx
-0xffffffff80005159:  callq  0xffffffff80002a1e
+0xffffffff80005ba7:  mov    -0x20(%rbp),%rax
+0xffffffff80005bab:  mov    %rax,%rdi
+0xffffffff80005bae:  callq  0xffffffff80000953
 
 ----------------
 IN: 
-0xffffffff80002a1e:  repz (bad) 
-0xffffffff80002a21:  cli    
-0xffffffff80002a22:  push   %rbp
-0xffffffff80002a23:  mov    %rsp,%rbp
-0xffffffff80002a26:  mov    0x10119a3(%rip),%rax        # 0xffffffff810143d0
-0xffffffff80002a2d:  pop    %rbp
-0xffffffff80002a2e:  retq   
+0xffffffff80000953:  repz (bad) 
+0xffffffff80000956:  cli    
+0xffffffff80000957:  push   %rbp
+0xffffffff80000958:  mov    %rsp,%rbp
+0xffffffff8000095b:  push   %r12
+0xffffffff8000095d:  push   %rbx
+0xffffffff8000095e:  sub    $0x40,%rsp
+0xffffffff80000962:  lea    -0x7(%rip),%rbx        # 0xffffffff80000962
+0xffffffff80000969:  mov    $0xbb16,%r11
+0xffffffff80000973:  add    %r11,%rbx
+0xffffffff80000976:  mov    %rdi,-0x48(%rbp)
+0xffffffff8000097a:  movq   $0xffffffffffffffff,-0x18(%rbp)
+0xffffffff80000982:  movq   $0x0,-0x20(%rbp)
+0xffffffff8000098a:  jmp    0xffffffff800009d0
 
 ----------------
 IN: 
-0xffffffff8000515e:  add    %rax,%rbx
-0xffffffff80005161:  callq  0xffffffff80002a2f
+0xffffffff800009d0:  mov    $0x48,%rax
+0xffffffff800009da:  mov    (%rbx,%rax,1),%rax
+0xffffffff800009de:  cmp    %rax,-0x20(%rbp)
+0xffffffff800009e2:  jb     0xffffffff8000098c
 
 ----------------
 IN: 
-0xffffffff80002a2f:  repz (bad) 
-0xffffffff80002a32:  cli    
-0xffffffff80002a33:  push   %rbp
-0xffffffff80002a34:  mov    %rsp,%rbp
-0xffffffff80002a37:  mov    0x101199a(%rip),%rax        # 0xffffffff810143d8
-0xffffffff80002a3e:  pop    %rbp
-0xffffffff80002a3f:  retq   
+0xffffffff8000098c:  mov    -0x20(%rbp),%rax
+0xffffffff80000990:  mov    %eax,%esi
+0xffffffff80000992:  mov    $0x48,%rax
+0xffffffff8000099c:  lea    (%rbx,%rax,1),%rax
+0xffffffff800009a0:  mov    %rax,%rdi
+0xffffffff800009a3:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff800009ad:  lea    (%rbx,%rax,1),%rax
+0xffffffff800009b1:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80005166:  add    %rbx,%rax
-0xffffffff80005169:  cmp    %rax,-0x28(%rbp)
-0xffffffff8000516d:  sete   %al
-0xffffffff80005170:  test   %al,%al
-0xffffffff80005172:  je     0xffffffff8000535a
+0xffffffff800009b3:  mov    (%rax),%rax
+0xffffffff800009b6:  cmp    %rax,-0x48(%rbp)
+0xffffffff800009ba:  sete   %al
+0xffffffff800009bd:  test   %al,%al
+0xffffffff800009bf:  je     0xffffffff800009cb
 
 ----------------
 IN: 
-0xffffffff80005178:  jmp    0xffffffff800051b8
+0xffffffff800009cb:  addq   $0x1,-0x20(%rbp)
+0xffffffff800009d0:  mov    $0x48,%rax
+0xffffffff800009da:  mov    (%rbx,%rax,1),%rax
+0xffffffff800009de:  cmp    %rax,-0x20(%rbp)
+0xffffffff800009e2:  jb     0xffffffff8000098c
 
 ----------------
 IN: 
-0xffffffff800051b8:  mov    $0xffffff,%esi
-0xffffffff800051bd:  lea    0x4f08(%rip),%rax        # 0xffffffff8000a0cc
-0xffffffff800051c4:  mov    %rax,%rdi
-0xffffffff800051c7:  callq  0xffffffff800032df
+0xffffffff800009c1:  mov    -0x20(%rbp),%rax
+0xffffffff800009c5:  mov    %rax,-0x18(%rbp)
+0xffffffff800009c9:  jmp    0xffffffff800009e4
 
 ----------------
 IN: 
-0xffffffff800051cc:  mov    $0xff00,%esi
-0xffffffff800051d1:  lea    0x4edb(%rip),%rax        # 0xffffffff8000a0b3
-0xffffffff800051d8:  mov    %rax,%rdi
-0xffffffff800051db:  callq  0xffffffff800032df
+0xffffffff800009e4:  cmpq   $0xffffffffffffffff,-0x18(%rbp)
+0xffffffff800009e9:  je     0xffffffff80000c03
 
 ----------------
 IN: 
-0xffffffff800051e0:  mov    $0xffffff,%esi
-0xffffffff800051e5:  lea    0x4ecf(%rip),%rax        # 0xffffffff8000a0bb
-0xffffffff800051ec:  mov    %rax,%rdi
-0xffffffff800051ef:  callq  0xffffffff800033cf
+0xffffffff800009ef:  mov    -0x18(%rbp),%rax
+0xffffffff800009f3:  mov    %rax,-0x28(%rbp)
+0xffffffff800009f7:  mov    -0x28(%rbp),%rax
+0xffffffff800009fb:  mov    %eax,%esi
+0xffffffff800009fd:  mov    $0x48,%rax
+0xffffffff80000a07:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000a0b:  mov    %rax,%rdi
+0xffffffff80000a0e:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000a18:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000a1c:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff800051f4:  mov    $0xffffff,%esi
-0xffffffff800051f9:  lea    0x4eda(%rip),%rax        # 0xffffffff8000a0da
-0xffffffff80005200:  mov    %rax,%rdi
-0xffffffff80005203:  callq  0xffffffff800032df
+0xffffffff80000a1e:  mov    0x8(%rax),%rdx
+0xffffffff80000a22:  mov    -0x48(%rbp),%rax
+0xffffffff80000a26:  mov    %rdx,%rsi
+0xffffffff80000a29:  mov    %rax,%rdi
+0xffffffff80000a2c:  mov    $0xffffffffffff42b7,%rax
+0xffffffff80000a36:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000a3a:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80005208:  callq  0xffffffff80002a0d
+0xffffffff8000072f:  repz (bad) 
+0xffffffff80000732:  cli    
+0xffffffff80000733:  push   %rbp
+0xffffffff80000734:  mov    %rsp,%rbp
+0xffffffff80000737:  sub    $0x20,%rsp
+0xffffffff8000073b:  lea    -0x7(%rip),%rax        # 0xffffffff8000073b
+0xffffffff80000742:  mov    $0xbd3d,%r11
+0xffffffff8000074c:  add    %r11,%rax
+0xffffffff8000074f:  mov    %rdi,-0x18(%rbp)
+0xffffffff80000753:  mov    %rsi,-0x20(%rbp)
+0xffffffff80000757:  mov    -0x18(%rbp),%rax
+0xffffffff8000075b:  mov    %rax,-0x8(%rbp)
+0xffffffff8000075f:  jmp    0xffffffff80000770
 
 ----------------
 IN: 
-0xffffffff8000520d:  mov    %rax,%rdi
-0xffffffff80005210:  callq  0xffffffff80004f79
+0xffffffff80000770:  mov    -0x20(%rbp),%rax
+0xffffffff80000774:  lea    -0x1(%rax),%rdx
+0xffffffff80000778:  mov    %rdx,-0x20(%rbp)
+0xffffffff8000077c:  test   %rax,%rax
+0xffffffff8000077f:  setne  %al
+0xffffffff80000782:  test   %al,%al
+0xffffffff80000784:  jne    0xffffffff80000761
 
 ----------------
 IN: 
-0xffffffff80004f79:  repz (bad) 
-0xffffffff80004f7c:  cli    
-0xffffffff80004f7d:  push   %rbp
-0xffffffff80004f7e:  mov    %rsp,%rbp
-0xffffffff80004f81:  sub    $0x18,%rsp
-0xffffffff80004f85:  mov    %rdi,-0x18(%rbp)
-0xffffffff80004f89:  cmpq   $0x3ff,-0x18(%rbp)
-0xffffffff80004f91:  ja     0xffffffff80004f99
+0xffffffff80000761:  mov    -0x8(%rbp),%rax
+0xffffffff80000765:  lea    0x1(%rax),%rdx
+0xffffffff80000769:  mov    %rdx,-0x8(%rbp)
+0xffffffff8000076d:  movb   $0x0,(%rax)
+0xffffffff80000770:  mov    -0x20(%rbp),%rax
+0xffffffff80000774:  lea    -0x1(%rax),%rdx
+0xffffffff80000778:  mov    %rdx,-0x20(%rbp)
+0xffffffff8000077c:  test   %rax,%rax
+0xffffffff8000077f:  setne  %al
+0xffffffff80000782:  test   %al,%al
+0xffffffff80000784:  jne    0xffffffff80000761
 
 ----------------
 IN: 
-0xffffffff80004f99:  movq   $0x400,-0x8(%rbp)
-0xffffffff80004fa1:  movq   $0x0,-0x10(%rbp)
-0xffffffff80004fa9:  jmp    0xffffffff80004fb5
+0xffffffff80000786:  mov    -0x18(%rbp),%rax
+0xffffffff8000078a:  leaveq 
+0xffffffff8000078b:  retq   
 
 ----------------
 IN: 
-0xffffffff80004fb5:  mov    -0x18(%rbp),%rax
-0xffffffff80004fb9:  mov    $0x0,%edx
-0xffffffff80004fbe:  divq   -0x8(%rbp)
-0xffffffff80004fc2:  cmp    $0x400,%rax
-0xffffffff80004fc8:  ja     0xffffffff80004fab
+0xffffffff80000a3c:  mov    -0x28(%rbp),%rax
+0xffffffff80000a40:  mov    %eax,%esi
+0xffffffff80000a42:  mov    $0x48,%rax
+0xffffffff80000a4c:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000a50:  mov    %rax,%rdi
+0xffffffff80000a53:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000a5d:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000a61:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80004fab:  shlq   $0xa,-0x8(%rbp)
-0xffffffff80004fb0:  addq   $0x1,-0x10(%rbp)
-0xffffffff80004fb5:  mov    -0x18(%rbp),%rax
-0xffffffff80004fb9:  mov    $0x0,%edx
-0xffffffff80004fbe:  divq   -0x8(%rbp)
-0xffffffff80004fc2:  cmp    $0x400,%rax
-0xffffffff80004fc8:  ja     0xffffffff80004fab
+0xffffffff80000a63:  movq   $0x0,(%rax)
+0xffffffff80000a6a:  mov    -0x28(%rbp),%rax
+0xffffffff80000a6e:  mov    %eax,%esi
+0xffffffff80000a70:  mov    $0x48,%rax
+0xffffffff80000a7a:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000a7e:  mov    %rax,%rdi
+0xffffffff80000a81:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000a8b:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000a8f:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80004fca:  mov    -0x18(%rbp),%rax
-0xffffffff80004fce:  mov    $0x0,%edx
-0xffffffff80004fd3:  divq   -0x8(%rbp)
-0xffffffff80004fd7:  leaveq 
-0xffffffff80004fd8:  retq   
+0xffffffff80000a91:  movq   $0x0,0x8(%rax)
+0xffffffff80000a99:  mov    $0x48,%rax
+0xffffffff80000aa3:  mov    (%rbx,%rax,1),%rax
+0xffffffff80000aa7:  mov    %eax,%ecx
+0xffffffff80000aa9:  mov    $0x0,%edx
+0xffffffff80000aae:  mov    $0xffffffffffff4314,%rax
+0xffffffff80000ab8:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000abc:  mov    %rax,%rsi
+0xffffffff80000abf:  mov    $0x50,%rax
+0xffffffff80000ac9:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000acd:  mov    %rax,%rdi
+0xffffffff80000ad0:  mov    $0xffffffffffff4ee4,%rax
+0xffffffff80000ada:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000ade:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80005215:  mov    %rax,%rdi
-0xffffffff80005218:  callq  0xffffffff80003799
+0xffffffff80000ae0:  mov    $0x48,%rax
+0xffffffff80000aea:  mov    (%rbx,%rax,1),%rax
+0xffffffff80000aee:  lea    -0x1(%rax),%rdx
+0xffffffff80000af2:  mov    $0x48,%rax
+0xffffffff80000afc:  mov    %rdx,(%rbx,%rax,1)
+0xffffffff80000b00:  mov    $0x48,%rax
+0xffffffff80000b0a:  mov    (%rbx,%rax,1),%rax
+0xffffffff80000b0e:  sub    $0x1,%eax
+0xffffffff80000b11:  mov    %eax,%esi
+0xffffffff80000b13:  mov    $0x48,%rax
+0xffffffff80000b1d:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000b21:  mov    %rax,%rdi
+0xffffffff80000b24:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000b2e:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000b32:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80003799:  repz (bad) 
-0xffffffff8000379c:  cli    
-0xffffffff8000379d:  push   %rbp
-0xffffffff8000379e:  mov    %rsp,%rbp
-0xffffffff800037a1:  sub    $0x10,%rsp
-0xffffffff800037a5:  mov    %rdi,-0x8(%rbp)
-0xffffffff800037a9:  mov    -0x8(%rbp),%rax
-0xffffffff800037ad:  mov    %rax,%rdi
-0xffffffff800037b0:  callq  0xffffffff800045b9
+0xffffffff80000b34:  mov    0x8(%rax),%rdx
+0xffffffff80000b38:  mov    (%rax),%rax
+0xffffffff80000b3b:  mov    %rax,-0x40(%rbp)
+0xffffffff80000b3f:  mov    %rdx,-0x38(%rbp)
+0xffffffff80000b43:  mov    $0x48,%rax
+0xffffffff80000b4d:  mov    (%rbx,%rax,1),%rax
+0xffffffff80000b51:  mov    %eax,%esi
+0xffffffff80000b53:  mov    $0x48,%rax
+0xffffffff80000b5d:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000b61:  mov    %rax,%rdi
+0xffffffff80000b64:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000b6e:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000b72:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff800045b9:  repz (bad) 
-0xffffffff800045bc:  cli    
-0xffffffff800045bd:  push   %rbp
-0xffffffff800045be:  mov    %rsp,%rbp
-0xffffffff800045c1:  sub    $0x38,%rsp
-0xffffffff800045c5:  mov    %rdi,-0x38(%rbp)
-0xffffffff800045c9:  movb   $0x0,-0x21(%rbp)
-0xffffffff800045cd:  movb   $0x0,-0x1(%rbp)
-0xffffffff800045d1:  mov    -0x38(%rbp),%rax
-0xffffffff800045d5:  mov    %rax,-0x10(%rbp)
-0xffffffff800045d9:  jmp    0xffffffff80004601
+0xffffffff80000b74:  mov    %rax,%r12
+0xffffffff80000b77:  mov    $0x48,%rax
+0xffffffff80000b81:  mov    (%rbx,%rax,1),%rax
+0xffffffff80000b85:  sub    $0x1,%eax
+0xffffffff80000b88:  mov    %eax,%esi
+0xffffffff80000b8a:  mov    $0x48,%rax
+0xffffffff80000b94:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000b98:  mov    %rax,%rdi
+0xffffffff80000b9b:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000ba5:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000ba9:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80004601:  cmpq   $0x9,-0x10(%rbp)
-0xffffffff80004606:  ja     0xffffffff800045db
+0xffffffff80000bab:  mov    %rax,%rcx
+0xffffffff80000bae:  mov    (%r12),%rax
+0xffffffff80000bb2:  mov    0x8(%r12),%rdx
+0xffffffff80000bb7:  mov    %rax,(%rcx)
+0xffffffff80000bba:  mov    %rdx,0x8(%rcx)
+0xffffffff80000bbe:  mov    $0x48,%rax
+0xffffffff80000bc8:  mov    (%rbx,%rax,1),%rax
+0xffffffff80000bcc:  mov    %eax,%esi
+0xffffffff80000bce:  mov    $0x48,%rax
+0xffffffff80000bd8:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000bdc:  mov    %rax,%rdi
+0xffffffff80000bdf:  mov    $0xffffffffffff4ea4,%rax
+0xffffffff80000be9:  lea    (%rbx,%rax,1),%rax
+0xffffffff80000bed:  callq  *%rax
 
 ----------------
 IN: 
-0xffffffff80004608:  movb   $0x0,-0x11(%rbp)
-0xffffffff8000460c:  mov    -0x38(%rbp),%rax
-0xffffffff80004610:  mov    %rax,-0x20(%rbp)
-0xffffffff80004614:  jmp    0xffffffff8000468d
+0xffffffff80000bef:  mov    %rax,%rcx
+0xffffffff80000bf2:  mov    -0x40(%rbp),%rax
+0xffffffff80000bf6:  mov    -0x38(%rbp),%rdx
+0xffffffff80000bfa:  mov    %rax,(%rcx)
+0xffffffff80000bfd:  mov    %rdx,0x8(%rcx)
+0xffffffff80000c01:  jmp    0xffffffff80000c04
 
 ----------------
 IN: 
-0xffffffff8000468d:  cmpq   $0x9,-0x20(%rbp)
-0xffffffff80004692:  ja     0xffffffff80004616
+0xffffffff80000c04:  add    $0x40,%rsp
+0xffffffff80000c08:  pop    %rbx
+0xffffffff80000c09:  pop    %r12
+0xffffffff80000c0b:  pop    %rbp
+0xffffffff80000c0c:  retq   
 
 ----------------
 IN: 
-0xffffffff80004694:  mov    -0x20(%rbp),%rcx
-0xffffffff80004698:  mov    $0xcccccccccccccccd,%rdx
-0xffffffff800046a2:  mov    %rcx,%rax
-0xffffffff800046a5:  mul    %rdx
-0xffffffff800046a8:  shr    $0x3,%rdx
-0xffffffff800046ac:  mov    %rdx,%rax
-0xffffffff800046af:  shl    $0x2,%rax
-0xffffffff800046b3:  add    %rdx,%rax
-0xffffffff800046b6:  add    %rax,%rax
-0xffffffff800046b9:  sub    %rax,%rcx
-0xffffffff800046bc:  mov    %rcx,%rdx
-0xffffffff800046bf:  mov    %dl,-0x22(%rbp)
-0xffffffff800046c2:  movzbl -0x22(%rbp),%eax
-0xffffffff800046c6:  lea    0x30(%rax),%ecx
-0xffffffff800046c9:  movzbl -0x21(%rbp),%edx
-0xffffffff800046cd:  movzbl -0x1(%rbp),%eax
-0xffffffff800046d1:  add    %edx,%eax
-0xffffffff800046d3:  movzbl -0x11(%rbp),%edx
-0xffffffff800046d7:  sub    %edx,%eax
-0xffffffff800046d9:  cltq   
-0xffffffff800046db:  lea    0x100fe1e(%rip),%rdx        # 0xffffffff81014500
-0xffffffff800046e2:  mov    %cl,(%rax,%rdx,1)
-0xffffffff800046e5:  movzbl -0x21(%rbp),%edx
-0xffffffff800046e9:  movzbl -0x1(%rbp),%eax
-0xffffffff800046ed:  add    %edx,%eax
-0xffffffff800046ef:  add    $0x1,%eax
-0xffffffff800046f2:  cltq   
-0xffffffff800046f4:  lea    0x100fe05(%rip),%rdx        # 0xffffffff81014500
-0xffffffff800046fb:  movb   $0x0,(%rax,%rdx,1)
-0xffffffff800046ff:  lea    0x100fdfa(%rip),%rax        # 0xffffffff81014500
-0xffffffff80004706:  leaveq 
-0xffffffff80004707:  retq   
+0xffffffff80005bb3:  mov    $0x14,%edi
+0xffffffff80005bb8:  callq  0xffffffff800010de
 
 ----------------
 IN: 
-0xffffffff800037b5:  leaveq 
-0xffffffff800037b6:  retq   
+0xffffffff80005bbd:  mov    %rax,-0x38(%rbp)
+0xffffffff80005bc1:  mov    -0x20(%rbp),%rax
+0xffffffff80005bc5:  cmp    -0x38(%rbp),%rax
+0xffffffff80005bc9:  jne    0xffffffff80005c0a
 
 ----------------
 IN: 
-0xffffffff8000521d:  mov    $0xffffff,%esi
-0xffffffff80005222:  mov    %rax,%rdi
-0xffffffff80005225:  callq  0xffffffff800032df
+0xffffffff80005c0a:  lea    -0x54(%rbp),%rax
+0xffffffff80005c0e:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005c15:  lea    0x5613(%rip),%rdx        # 0xffffffff8000b22f
+0xffffffff80005c1c:  mov    %rcx,%rsi
+0xffffffff80005c1f:  mov    %rax,%rdi
+0xffffffff80005c22:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff8000522a:  callq  0xffffffff80002a0d
+0xffffffff80005c27:  movzbl 0x6842(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005c2e:  movsbl %al,%edx
+0xffffffff80005c31:  lea    -0x58(%rbp),%rax
+0xffffffff80005c35:  lea    -0x54(%rbp),%rcx
+0xffffffff80005c39:  mov    %rcx,%rsi
+0xffffffff80005c3c:  mov    %rax,%rdi
+0xffffffff80005c3f:  callq  0xffffffff80005eb6
 
 ----------------
 IN: 
-0xffffffff8000522f:  mov    %rax,%rdi
-0xffffffff80005232:  callq  0xffffffff80004fd9
+0xffffffff80005c44:  lea    -0x48(%rbp),%rax
+0xffffffff80005c48:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005c4f:  lea    0x55f5(%rip),%rdx        # 0xffffffff8000b24b
+0xffffffff80005c56:  mov    %rcx,%rsi
+0xffffffff80005c59:  mov    %rax,%rdi
+0xffffffff80005c5c:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff80004fd9:  repz (bad) 
-0xffffffff80004fdc:  cli    
-0xffffffff80004fdd:  push   %rbp
-0xffffffff80004fde:  mov    %rsp,%rbp
-0xffffffff80004fe1:  sub    $0x60,%rsp
-0xffffffff80004fe5:  mov    %rdi,-0x58(%rbp)
-0xffffffff80004fe9:  lea    0x509b(%rip),%rax        # 0xffffffff8000a08b
-0xffffffff80004ff0:  mov    %rax,-0x50(%rbp)
-0xffffffff80004ff4:  lea    0x5093(%rip),%rax        # 0xffffffff8000a08e
-0xffffffff80004ffb:  mov    %rax,-0x48(%rbp)
-0xffffffff80004fff:  lea    0x508c(%rip),%rax        # 0xffffffff8000a092
-0xffffffff80005006:  mov    %rax,-0x40(%rbp)
-0xffffffff8000500a:  lea    0x5085(%rip),%rax        # 0xffffffff8000a096
-0xffffffff80005011:  mov    %rax,-0x38(%rbp)
-0xffffffff80005015:  lea    0x507d(%rip),%rax        # 0xffffffff8000a099
-0xffffffff8000501c:  mov    %rax,-0x30(%rbp)
-0xffffffff80005020:  lea    0x5076(%rip),%rax        # 0xffffffff8000a09d
-0xffffffff80005027:  mov    %rax,-0x28(%rbp)
-0xffffffff8000502b:  lea    0x506f(%rip),%rax        # 0xffffffff8000a0a1
-0xffffffff80005032:  mov    %rax,-0x20(%rbp)
-0xffffffff80005036:  cmpq   $0x3ff,-0x58(%rbp)
-0xffffffff8000503e:  ja     0xffffffff80005046
+0xffffffff80005c61:  lea    -0x4c(%rbp),%rax
+0xffffffff80005c65:  mov    -0x38(%rbp),%rdx
+0xffffffff80005c69:  lea    -0x48(%rbp),%rcx
+0xffffffff80005c6d:  mov    %rcx,%rsi
+0xffffffff80005c70:  mov    %rax,%rdi
+0xffffffff80005c73:  callq  0xffffffff80005efc
 
 ----------------
 IN: 
-0xffffffff80005046:  movq   $0x400,-0x8(%rbp)
-0xffffffff8000504e:  movq   $0x1,-0x10(%rbp)
-0xffffffff80005056:  jmp    0xffffffff80005062
+0xffffffff80005efc:  repz (bad) 
+0xffffffff80005eff:  cli    
+0xffffffff80005f00:  push   %rbp
+0xffffffff80005f01:  mov    %rsp,%rbp
+0xffffffff80005f04:  push   %rbx
+0xffffffff80005f05:  sub    $0x28,%rsp
+0xffffffff80005f09:  mov    %rdi,-0x18(%rbp)
+0xffffffff80005f0d:  mov    %rsi,-0x20(%rbp)
+0xffffffff80005f11:  mov    %rdx,-0x28(%rbp)
+0xffffffff80005f15:  mov    -0x20(%rbp),%rax
+0xffffffff80005f19:  mov    %rax,%rdi
+0xffffffff80005f1c:  callq  0xffffffff80001a2e
 
 ----------------
 IN: 
-0xffffffff80005062:  mov    -0x58(%rbp),%rax
-0xffffffff80005066:  mov    $0x0,%edx
-0xffffffff8000506b:  divq   -0x8(%rbp)
-0xffffffff8000506f:  cmp    $0x400,%rax
-0xffffffff80005075:  ja     0xffffffff80005058
+0xffffffff80005f21:  mov    %eax,%ebx
+0xffffffff80005f23:  mov    -0x28(%rbp),%rax
+0xffffffff80005f27:  mov    %rax,%rdi
+0xffffffff80005f2a:  callq  0xffffffff800060eb
 
 ----------------
 IN: 
-0xffffffff80005058:  shlq   $0xa,-0x8(%rbp)
-0xffffffff8000505d:  addq   $0x1,-0x10(%rbp)
-0xffffffff80005062:  mov    -0x58(%rbp),%rax
-0xffffffff80005066:  mov    $0x0,%edx
-0xffffffff8000506b:  divq   -0x8(%rbp)
-0xffffffff8000506f:  cmp    $0x400,%rax
-0xffffffff80005075:  ja     0xffffffff80005058
+0xffffffff800060eb:  repz (bad) 
+0xffffffff800060ee:  cli    
+0xffffffff800060ef:  push   %rbp
+0xffffffff800060f0:  mov    %rsp,%rbp
+0xffffffff800060f3:  sub    $0x10,%rsp
+0xffffffff800060f7:  mov    %rdi,-0x8(%rbp)
+0xffffffff800060fb:  mov    -0x8(%rbp),%rax
+0xffffffff800060ff:  mov    %rax,%rdi
+0xffffffff80006102:  callq  0xffffffff80003c68
 
 ----------------
 IN: 
-0xffffffff80005077:  mov    -0x10(%rbp),%rax
-0xffffffff8000507b:  mov    -0x50(%rbp,%rax,8),%rax
-0xffffffff80005080:  leaveq 
-0xffffffff80005081:  retq   
+0xffffffff80003c68:  repz (bad) 
+0xffffffff80003c6b:  cli    
+0xffffffff80003c6c:  push   %rbp
+0xffffffff80003c6d:  mov    %rsp,%rbp
+0xffffffff80003c70:  sub    $0x10,%rsp
+0xffffffff80003c74:  mov    %rdi,-0x8(%rbp)
+0xffffffff80003c78:  mov    -0x8(%rbp),%rax
+0xffffffff80003c7c:  mov    %rax,%rdi
+0xffffffff80003c7f:  callq  0xffffffff80003ff8
 
 ----------------
 IN: 
-0xffffffff80005237:  mov    $0xffffff,%esi
-0xffffffff8000523c:  mov    %rax,%rdi
-0xffffffff8000523f:  callq  0xffffffff800033cf
+0xffffffff80003ff8:  repz (bad) 
+0xffffffff80003ffb:  cli    
+0xffffffff80003ffc:  push   %rbp
+0xffffffff80003ffd:  mov    %rsp,%rbp
+0xffffffff80004000:  sub    $0x38,%rsp
+0xffffffff80004004:  mov    %rdi,-0x38(%rbp)
+0xffffffff80004008:  lea    -0x38(%rbp),%rax
+0xffffffff8000400c:  mov    %rax,-0x10(%rbp)
+0xffffffff80004010:  movb   $0xf,-0x11(%rbp)
+0xffffffff80004014:  movb   $0x0,-0x1(%rbp)
+0xffffffff80004018:  jmpq   0xffffffff800040b5
 
 ----------------
 IN: 
-0xffffffff80005244:  mov    $0xffffff,%esi
-0xffffffff80005249:  lea    0x4e98(%rip),%rax        # 0xffffffff8000a0e8
-0xffffffff80005250:  mov    %rax,%rdi
-0xffffffff80005253:  callq  0xffffffff800032df
+0xffffffff800040b5:  movzbl -0x1(%rbp),%eax
+0xffffffff800040b9:  cmp    -0x11(%rbp),%al
+0xffffffff800040bc:  jb     0xffffffff8000401d
 
 ----------------
 IN: 
-0xffffffff80005258:  callq  0xffffffff80002a1e
+0xffffffff8000401d:  movzbl -0x1(%rbp),%edx
+0xffffffff80004021:  mov    -0x10(%rbp),%rax
+0xffffffff80004025:  add    %rdx,%rax
+0xffffffff80004028:  mov    %rax,-0x20(%rbp)
+0xffffffff8000402c:  mov    -0x20(%rbp),%rax
+0xffffffff80004030:  movzbl (%rax),%eax
+0xffffffff80004033:  shr    $0x4,%al
+0xffffffff80004036:  mov    %al,-0x21(%rbp)
+0xffffffff80004039:  cmpb   $0x9,-0x21(%rbp)
+0xffffffff8000403d:  jbe    0xffffffff80004046
 
 ----------------
 IN: 
-0xffffffff8000525d:  mov    %rax,%rdi
-0xffffffff80005260:  callq  0xffffffff80004f79
+0xffffffff80004046:  mov    $0x30,%edx
+0xffffffff8000404b:  movzbl -0x21(%rbp),%eax
+0xffffffff8000404f:  lea    (%rdx,%rax,1),%ecx
+0xffffffff80004052:  movzbl -0x11(%rbp),%eax
+0xffffffff80004056:  movzbl -0x1(%rbp),%edx
+0xffffffff8000405a:  add    %edx,%edx
+0xffffffff8000405c:  add    $0x1,%edx
+0xffffffff8000405f:  sub    %edx,%eax
+0xffffffff80004061:  cltq   
+0xffffffff80004063:  lea    0x1011576(%rip),%rdx        # 0xffffffff810155e0
+0xffffffff8000406a:  mov    %cl,(%rax,%rdx,1)
+0xffffffff8000406d:  mov    -0x20(%rbp),%rax
+0xffffffff80004071:  movzbl (%rax),%eax
+0xffffffff80004074:  and    $0xf,%eax
+0xffffffff80004077:  mov    %al,-0x21(%rbp)
+0xffffffff8000407a:  cmpb   $0x9,-0x21(%rbp)
+0xffffffff8000407e:  jbe    0xffffffff80004087
 
 ----------------
 IN: 
-0xffffffff80005265:  mov    %rax,%rdi
-0xffffffff80005268:  callq  0xffffffff80003799
+0xffffffff80004087:  mov    $0x30,%edx
+0xffffffff8000408c:  movzbl -0x21(%rbp),%eax
+0xffffffff80004090:  lea    (%rdx,%rax,1),%ecx
+0xffffffff80004093:  movzbl -0x11(%rbp),%eax
+0xffffffff80004097:  movzbl -0x1(%rbp),%edx
+0xffffffff8000409b:  add    %edx,%edx
+0xffffffff8000409d:  sub    %edx,%eax
+0xffffffff8000409f:  cltq   
+0xffffffff800040a1:  lea    0x1011538(%rip),%rdx        # 0xffffffff810155e0
+0xffffffff800040a8:  mov    %cl,(%rax,%rdx,1)
+0xffffffff800040ab:  movzbl -0x1(%rbp),%eax
+0xffffffff800040af:  add    $0x1,%eax
+0xffffffff800040b2:  mov    %al,-0x1(%rbp)
+0xffffffff800040b5:  movzbl -0x1(%rbp),%eax
+0xffffffff800040b9:  cmp    -0x11(%rbp),%al
+0xffffffff800040bc:  jb     0xffffffff8000401d
 
 ----------------
 IN: 
-0xffffffff800045db:  mov    -0x10(%rbp),%rax
-0xffffffff800045df:  mov    $0xcccccccccccccccd,%rdx
-0xffffffff800045e9:  mul    %rdx
-0xffffffff800045ec:  mov    %rdx,%rax
-0xffffffff800045ef:  shr    $0x3,%rax
-0xffffffff800045f3:  mov    %rax,-0x10(%rbp)
-0xffffffff800045f7:  movzbl -0x1(%rbp),%eax
-0xffffffff800045fb:  add    $0x1,%eax
-0xffffffff800045fe:  mov    %al,-0x1(%rbp)
-0xffffffff80004601:  cmpq   $0x9,-0x10(%rbp)
-0xffffffff80004606:  ja     0xffffffff800045db
+0xffffffff80004080:  mov    $0x37,%edx
+0xffffffff80004085:  jmp    0xffffffff8000408c
 
 ----------------
 IN: 
-0xffffffff80004616:  mov    -0x20(%rbp),%rcx
-0xffffffff8000461a:  mov    $0xcccccccccccccccd,%rdx
-0xffffffff80004624:  mov    %rcx,%rax
-0xffffffff80004627:  mul    %rdx
-0xffffffff8000462a:  shr    $0x3,%rdx
-0xffffffff8000462e:  mov    %rdx,%rax
-0xffffffff80004631:  shl    $0x2,%rax
-0xffffffff80004635:  add    %rdx,%rax
-0xffffffff80004638:  add    %rax,%rax
-0xffffffff8000463b:  sub    %rax,%rcx
-0xffffffff8000463e:  mov    %rcx,%rdx
-0xffffffff80004641:  mov    %dl,-0x23(%rbp)
-0xffffffff80004644:  mov    -0x20(%rbp),%rax
-0xffffffff80004648:  mov    $0xcccccccccccccccd,%rdx
-0xffffffff80004652:  mul    %rdx
-0xffffffff80004655:  mov    %rdx,%rax
-0xffffffff80004658:  shr    $0x3,%rax
-0xffffffff8000465c:  mov    %rax,-0x20(%rbp)
-0xffffffff80004660:  movzbl -0x23(%rbp),%eax
-0xffffffff80004664:  lea    0x30(%rax),%ecx
-0xffffffff80004667:  movzbl -0x21(%rbp),%edx
-0xffffffff8000466b:  movzbl -0x1(%rbp),%eax
-0xffffffff8000466f:  add    %edx,%eax
-0xffffffff80004671:  movzbl -0x11(%rbp),%edx
-0xffffffff80004675:  sub    %edx,%eax
-0xffffffff80004677:  cltq   
-0xffffffff80004679:  lea    0x100fe80(%rip),%rdx        # 0xffffffff81014500
-0xffffffff80004680:  mov    %cl,(%rax,%rdx,1)
-0xffffffff80004683:  movzbl -0x11(%rbp),%eax
-0xffffffff80004687:  add    $0x1,%eax
-0xffffffff8000468a:  mov    %al,-0x11(%rbp)
-0xffffffff8000468d:  cmpq   $0x9,-0x20(%rbp)
-0xffffffff80004692:  ja     0xffffffff80004616
+0xffffffff8000408c:  movzbl -0x21(%rbp),%eax
+0xffffffff80004090:  lea    (%rdx,%rax,1),%ecx
+0xffffffff80004093:  movzbl -0x11(%rbp),%eax
+0xffffffff80004097:  movzbl -0x1(%rbp),%edx
+0xffffffff8000409b:  add    %edx,%edx
+0xffffffff8000409d:  sub    %edx,%eax
+0xffffffff8000409f:  cltq   
+0xffffffff800040a1:  lea    0x1011538(%rip),%rdx        # 0xffffffff810155e0
+0xffffffff800040a8:  mov    %cl,(%rax,%rdx,1)
+0xffffffff800040ab:  movzbl -0x1(%rbp),%eax
+0xffffffff800040af:  add    $0x1,%eax
+0xffffffff800040b2:  mov    %al,-0x1(%rbp)
+0xffffffff800040b5:  movzbl -0x1(%rbp),%eax
+0xffffffff800040b9:  cmp    -0x11(%rbp),%al
+0xffffffff800040bc:  jb     0xffffffff8000401d
 
 ----------------
 IN: 
-0xffffffff8000526d:  mov    $0xffffff,%esi
-0xffffffff80005272:  mov    %rax,%rdi
-0xffffffff80005275:  callq  0xffffffff800032df
+0xffffffff8000403f:  mov    $0x37,%edx
+0xffffffff80004044:  jmp    0xffffffff8000404b
 
 ----------------
 IN: 
-0xffffffff8000527a:  callq  0xffffffff80002a1e
+0xffffffff8000404b:  movzbl -0x21(%rbp),%eax
+0xffffffff8000404f:  lea    (%rdx,%rax,1),%ecx
+0xffffffff80004052:  movzbl -0x11(%rbp),%eax
+0xffffffff80004056:  movzbl -0x1(%rbp),%edx
+0xffffffff8000405a:  add    %edx,%edx
+0xffffffff8000405c:  add    $0x1,%edx
+0xffffffff8000405f:  sub    %edx,%eax
+0xffffffff80004061:  cltq   
+0xffffffff80004063:  lea    0x1011576(%rip),%rdx        # 0xffffffff810155e0
+0xffffffff8000406a:  mov    %cl,(%rax,%rdx,1)
+0xffffffff8000406d:  mov    -0x20(%rbp),%rax
+0xffffffff80004071:  movzbl (%rax),%eax
+0xffffffff80004074:  and    $0xf,%eax
+0xffffffff80004077:  mov    %al,-0x21(%rbp)
+0xffffffff8000407a:  cmpb   $0x9,-0x21(%rbp)
+0xffffffff8000407e:  jbe    0xffffffff80004087
 
 ----------------
 IN: 
-0xffffffff8000527f:  mov    %rax,%rdi
-0xffffffff80005282:  callq  0xffffffff80004fd9
+0xffffffff800040c2:  movzbl -0x11(%rbp),%eax
+0xffffffff800040c6:  add    $0x1,%eax
+0xffffffff800040c9:  cltq   
+0xffffffff800040cb:  lea    0x101150e(%rip),%rdx        # 0xffffffff810155e0
+0xffffffff800040d2:  movb   $0x0,(%rax,%rdx,1)
+0xffffffff800040d6:  lea    0x1011503(%rip),%rax        # 0xffffffff810155e0
+0xffffffff800040dd:  leaveq 
+0xffffffff800040de:  retq   
 
 ----------------
 IN: 
-0xffffffff80005287:  mov    $0xffffff,%esi
-0xffffffff8000528c:  mov    %rax,%rdi
-0xffffffff8000528f:  callq  0xffffffff800033cf
+0xffffffff80003c84:  leaveq 
+0xffffffff80003c85:  retq   
 
 ----------------
 IN: 
-0xffffffff80005294:  mov    $0xffffff,%esi
-0xffffffff80005299:  lea    0x4e56(%rip),%rax        # 0xffffffff8000a0f6
-0xffffffff800052a0:  mov    %rax,%rdi
-0xffffffff800052a3:  callq  0xffffffff800032df
+0xffffffff80006107:  leaveq 
+0xffffffff80006108:  retq   
 
 ----------------
 IN: 
-0xffffffff800052a8:  callq  0xffffffff80002a2f
+0xffffffff80005f2f:  mov    %ebx,%esi
+0xffffffff80005f31:  mov    %rax,%rdi
+0xffffffff80005f34:  callq  0xffffffff800038e5
 
 ----------------
 IN: 
-0xffffffff800052ad:  mov    %rax,%rdi
-0xffffffff800052b0:  callq  0xffffffff80004f79
+0xffffffff80005f39:  mov    -0x18(%rbp),%rax
+0xffffffff80005f3d:  mov    %rax,%rdi
+0xffffffff80005f40:  callq  0xffffffff80005ce8
 
 ----------------
 IN: 
-0xffffffff800052b5:  mov    %rax,%rdi
-0xffffffff800052b8:  callq  0xffffffff80003799
+0xffffffff80005f45:  mov    -0x18(%rbp),%rax
+0xffffffff80005f49:  mov    -0x8(%rbp),%rbx
+0xffffffff80005f4d:  leaveq 
+0xffffffff80005f4e:  retq   
 
 ----------------
 IN: 
-0xffffffff800052bd:  mov    $0xffffff,%esi
-0xffffffff800052c2:  mov    %rax,%rdi
-0xffffffff800052c5:  callq  0xffffffff800032df
+0xffffffff80005c78:  movzbl 0x67f1(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005c7f:  movsbl %al,%edx
+0xffffffff80005c82:  lea    -0x50(%rbp),%rax
+0xffffffff80005c86:  lea    -0x4c(%rbp),%rcx
+0xffffffff80005c8a:  mov    %rcx,%rsi
+0xffffffff80005c8d:  mov    %rax,%rdi
+0xffffffff80005c90:  callq  0xffffffff80005eb6
 
 ----------------
 IN: 
-0xffffffff800052ca:  callq  0xffffffff80002a2f
+0xffffffff80005c95:  lea    -0x3c(%rbp),%rax
+0xffffffff80005c99:  lea    -0xdc(%rbp),%rcx
+0xffffffff80005ca0:  lea    0x55a9(%rip),%rdx        # 0xffffffff8000b250
+0xffffffff80005ca7:  mov    %rcx,%rsi
+0xffffffff80005caa:  mov    %rax,%rdi
+0xffffffff80005cad:  callq  0xffffffff80005d82
 
 ----------------
 IN: 
-0xffffffff800052cf:  mov    %rax,%rdi
-0xffffffff800052d2:  callq  0xffffffff80004fd9
+0xffffffff80005cb2:  lea    -0x40(%rbp),%rax
+0xffffffff80005cb6:  mov    -0x20(%rbp),%rdx
+0xffffffff80005cba:  lea    -0x3c(%rbp),%rcx
+0xffffffff80005cbe:  mov    %rcx,%rsi
+0xffffffff80005cc1:  mov    %rax,%rdi
+0xffffffff80005cc4:  callq  0xffffffff80005efc
 
 ----------------
 IN: 
-0xffffffff800052d7:  mov    $0xffffff,%esi
-0xffffffff800052dc:  mov    %rax,%rdi
-0xffffffff800052df:  callq  0xffffffff800033cf
+0xffffffff80005cc9:  movzbl 0x67a0(%rip),%eax        # 0xffffffff8000c470
+0xffffffff80005cd0:  movsbl %al,%edx
+0xffffffff80005cd3:  lea    -0x44(%rbp),%rax
+0xffffffff80005cd7:  lea    -0x40(%rbp),%rcx
+0xffffffff80005cdb:  mov    %rcx,%rsi
+0xffffffff80005cde:  mov    %rax,%rdi
+0xffffffff80005ce1:  callq  0xffffffff80005eb6
 
 ----------------
 IN: 
-0xffffffff800052e4:  mov    $0x1,%ebx
-0xffffffff800052e9:  callq  0xffffffff8000a185
+0xffffffff80005ce6:  jmp    0xffffffff80005ce6
 
-check_exception old: 0xffffffff new 0xe
-     0: v=0e e=0011 i=0 cpl=0 IP=0008:ffffffff8000a185 pc=ffffffff8000a185 SP=0030:ffff80007ff81fa8 CR2=ffffffff8000a185
-RAX=0000000000000180 RBX=0000000000000001 RCX=0000000000000194 RDX=0000000000000014
-RSI=0000000000000040 RDI=000000000000013e RBP=ffff80007ff81fe0 RSP=ffff80007ff81fa8
-R8 =0000000000000000 R9 =0000000000000002 R10=0000000000000000 R11=000000000000ab78
-R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
-RIP=ffffffff8000a185 RFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
-ES =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-CS =0008 0000000000000000 ffffffff 00af9a00 DPL=0 CS64 [-R-]
-SS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-DS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-FS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-GS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-LDT=0000 0000000000000000 00000000 00008200 DPL=0 LDT
-TR =0000 0000000000000000 0000ffff 00008b00 DPL=0 TSS64-busy
-GDT=     ffffffff80005480 00000027
-IDT=     0000000000000000 00000000
-CR0=80010011 CR2=ffffffff8000a185 CR3=000000007ff71000 CR4=00000020
-DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
-DR6=00000000ffff0ff0 DR7=0000000000000400
-CCS=0000000000000014 CCD=0000000000000180 CCO=SUBL
-EFER=0000000000000d00
-check_exception old: 0xe new 0xd
-     1: v=08 e=0000 i=0 cpl=0 IP=0008:ffffffff8000a185 pc=ffffffff8000a185 SP=0030:ffff80007ff81fa8 env->regs[R_EAX]=0000000000000180
-RAX=0000000000000180 RBX=0000000000000001 RCX=0000000000000194 RDX=0000000000000014
-RSI=0000000000000040 RDI=000000000000013e RBP=ffff80007ff81fe0 RSP=ffff80007ff81fa8
-R8 =0000000000000000 R9 =0000000000000002 R10=0000000000000000 R11=000000000000ab78
-R12=0000000000000000 R13=0000000000000000 R14=0000000000000000 R15=0000000000000000
-RIP=ffffffff8000a185 RFL=00000002 [-------] CPL=0 II=0 A20=1 SMM=0 HLT=0
-ES =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-CS =0008 0000000000000000 ffffffff 00af9a00 DPL=0 CS64 [-R-]
-SS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-DS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-FS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-GS =0030 0000000000000000 00000000 00009300 DPL=0 DS   [-WA]
-LDT=0000 0000000000000000 00000000 00008200 DPL=0 LDT
-TR =0000 0000000000000000 0000ffff 00008b00 DPL=0 TSS64-busy
-GDT=     ffffffff80005480 00000027
-IDT=     0000000000000000 00000000
-CR0=80010011 CR2=ffffffff8000a185 CR3=000000007ff71000 CR4=00000020
-DR0=0000000000000000 DR1=0000000000000000 DR2=0000000000000000 DR3=0000000000000000 
-DR6=00000000ffff0ff0 DR7=0000000000000400
-CCS=0000000000000014 CCD=0000000000000180 CCO=SUBL
-EFER=0000000000000d00
-check_exception old: 0x8 new 0xd

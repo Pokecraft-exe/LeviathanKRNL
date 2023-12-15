@@ -42,8 +42,6 @@ char* IntToStr(long long value);
 
 char* FloatToString(float value, uint8_t decimalPlaces);
 
-#define endl '/n'
-
 /*class stdcout {
 	private:
 		int width;
