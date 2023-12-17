@@ -1,34 +1,33 @@
 #include "IDT.h"
 
 IDTR idtTable;
+
+IDT64 IDTs[256] = {};
   
 void InitIDT(){
-    idtTable.address = (uint64_t*)paging::requestPage();
+    idtTable.address = (IDT64*)&IDTs;
     idtTable.size = 0x0fff;
 
-	asm("lidt %0" : "=m"(idtTable));
+	asm("lidt %0" :: "m"(idtTable));
 
-    RemapPic(0,0);
-    
-    outb(0x21, 0xff);
-    outb(0xA1, 0xff);
+    RemapPic(0x20,0x28);
     
     asm ("sti");
 }
   
-void add_IRQ(char IRQ, void(*function)(interrupt_frame* frame), uint8_t gate) {
+void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate) {
   	IRQ_clear_mask(IRQ);
-	IDT64* newInterrupt = (IDT64*)(idtTable.address + IRQ * sizeof(IDT64));
+	IDT64* newInterrupt = &idtTable.address[IRQ];
 	newInterrupt->Set_Offset((uint64_t)function);
-	newInterrupt->types_attr = gate;
+	newInterrupt->types_attr = 0b10000000 | gate;
 	newInterrupt->codeseg = 0x8;
 }
 
-void add_IRQ(char IRQ, void(*function)(), uint8_t gate) {
+void add_IRQ(uint8_t IRQ, void(*function)(), uint8_t gate) {
   	IRQ_clear_mask(IRQ);
-	IDT64* newInterrupt = (IDT64*)(idtTable.address + IRQ * sizeof(IDT64));
+	IDT64* newInterrupt = &idtTable.address[IRQ];
 	newInterrupt->Set_Offset((uint64_t)function);
-	newInterrupt->types_attr = gate;
+	newInterrupt->types_attr = 0b10000000 | gate;
 	newInterrupt->codeseg = 0x8;
 }
 
@@ -109,11 +108,12 @@ __attribute__((interrupt)) void isr8(interrupt_frame* frame) {
 extern "C" __attribute__((naked)) void isr0xD(interrupt_frame* frame) {isr13(frame);};
 void isr13(interrupt_frame* frame) {
 	register uint64_t* rsp asm("rsp");
+	uint64_t errorcode = *rsp;
 	cls(0x0000FF);
-	DrawStringBackground("General protection fault!", 0, 8, 2, 0xFFFFFF, 0x0000FF, 1);
-	DrawStringBackground("Error code:", 0, 24, 2, 0xFFFFFF, 0x0000FF, 1);
-	DrawStringBackground(" 0x", 176, 24, 2, 0xFFFFFF, 0x0000FF, 1);
-	DrawStringBackground(HexToString((uint64_t)*rsp), 224, 24, 2, 0xFFFFFF, 0x0000FF, 1);
+	std::stdin cout;
+	
+	cout.color(0);
+	cout << "General protection fault!\nError code: 0x" << std::hex(errorcode) << std::endl;
 	if (rsp != 0) {
 		limine_memmap_entry* last = memmap::memmap.entries[0];
 		for (size_t i = 1; i < memmap::memmap.entry_count; i++) {
@@ -133,11 +133,14 @@ void isr13(interrupt_frame* frame) {
 };
 __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
 	cls(0x0000FF);
-	DrawStringBackground("Page fault!", 0, 8, 2, 0xFFFFFF, 0x0000FF, 1);
+	std::stdin cout;
+	cout << "\0m[\0\0\0]PageFault!" << std::endl;
 	asm("mov %cr2, %rax");
 	gregister(rax);
-	DrawStringBackground("cr2 =", 0, 24, 2, 0xFFFFFF, 0x0000FF, 1);
-	DrawStringBackground(HexToString(rax), 224, 24, 2, 0xFFFFFF, 0x0000FF, 1);
+	uint64_t* memory = (uint64_t*)rax;
+	cout << "cr2 = " << (void*)memory << std::endl;
+	cout << "memory dump at " << (void*)memory << std::endl;
+	cout << std::hex(*memory-8) << std::hex(*memory) << std::hex(*memory=8) << std::endl;
 	while(1);
 };
 

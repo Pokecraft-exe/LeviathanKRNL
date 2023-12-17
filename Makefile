@@ -39,7 +39,7 @@ $(KERNEL): $(OBJ)
         	-efi-boot-part --efi-boot-image --protective-msdos-label \
         	iso_root -o image.iso; \
 	else \
-		echo -e "\033[38;2;255;0;0m image.iso does not exist or was already removed\033[0m "; \
+		echo "\033[38;2;255;0;0m image.iso does not exist or was already removed\033[0m "; \
 		xorriso -as mkisofs -b limine-bios-cd.bin \
         	-no-emul-boot -boot-load-size 4 -boot-info-table \
         	--efi-boot limine-uefi-cd.bin \

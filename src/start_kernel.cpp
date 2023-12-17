@@ -15,6 +15,12 @@
 #include "kernel.h"
 #include "stdio"
 #include "algorythm"
+#include "color.hpp"
+#include "pit.hpp"
+
+extern "C" void Draw(int, int, uint32_t);
+
+extern "C" void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color);
 
 void delay(int clocks)
 {
@@ -34,7 +40,6 @@ extern "C" void breakpoint(){
 uint16_t CursorPosition = 0;
 
 extern "C" void hello();
-extern "C" long long int ret1();
 
 uint64_t formatbytes(uint64_t bytes) {
     if (bytes < 1024) {
@@ -76,7 +81,7 @@ extern "C" void start_K(){
     //cls();
     //PlaySound(469,MasterVolume);
 
-	{
+    {
         VGA_WIDTH = framebuffer->width/16;
 	    KEY = (char*)alloc(1);
     }
@@ -138,30 +143,34 @@ extern "C" void start_K(){
     
     cout << "PML4 = 0x" << (void*)PML4 << std::endl;
     
+    
     memset(PML4, 0, 0x1000);
 
-    {
+    /*{
         paging::pageManager::setPML4(PML4);
 
-        for (size_t i = 0; i < memory_size - (memory_size%0x1000); i += 0x1000) {
+        for (size_t i = 0; i < memory_size - 0x2000; i += 0x1000) {
             paging::pageManager::mapMemory((void*)i, (void*)i);
         }
         asm ("mov %0, %%cr3" : : "r" (PML4));
-    }
+    }*/
 
     cout.color(0xffffff);
     cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
 
+	DrawSquare(200, 200, 200, 300, 0xffff00);
+
     InitIDT();
-
-    register uint64_t rbx asm("rbx");
-    rbx = 1000;
-
-    init_PIT();
+    
+    timer::PIT::init(1000);
+     
+    add_IRQ(ISA::PIT, pit_handler, IDT_IG);
+    
+    while(1);
 
 cout << "HELL YEAH WE PASSED!!";
 
-    add_IRQ(ISA::PIT, IRQ0_handler, IDT_IG);
+    add_IRQ(ISA::PIT, IRQ0_handler, 0x8e);
 
     //_hRAMDISK();
     //restart();

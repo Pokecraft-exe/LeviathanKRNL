@@ -5,16 +5,17 @@
 
 #include "IO.h"
 #include "font.hpp"
+#include "stdio"
 #include "printf.h"
 #include "allocator.hpp"
 #include "KBscancodes.hpp"
 #include "paging.hpp"
 #define IDT_EntryCount 64
-#define IDT_IG 0b10001110
-#define IDT_TG 0b10001111
+#define IDT_IG 0b00001110
+#define IDT_TG 0b00001111
 
 enum ISA {
-	PIT,
+	PIT = 32,
 	KEYBOARD,
 	CASCADE,
 	COM2,
@@ -45,7 +46,7 @@ struct IDT64{
     offset_mid  = (uint16_t)((Offset & 0x00000000ffff0000) >> 16);
     offset_high = (uint32_t)((Offset & 0xffffffff00000000) >> 32);
   }
-};
+}__attribute__((packed));
 
 
 struct interrupt_frame
@@ -60,7 +61,7 @@ struct interrupt_frame
 
 struct IDTR{
   uint16_t size;
-  uint64_t* address;
+  IDT64* address;
 }__attribute__((packed));
 
 __attribute__((interrupt)) extern "C" void Schedule(interrupt_frame* frame);
@@ -77,6 +78,6 @@ extern "C" __attribute__((naked)) void isr0xD(interrupt_frame* frame);
 void isr13(interrupt_frame* frame);
   
 void InitIDT();
-void add_IRQ(char IRQ, void(*function)(interrupt_frame* frame), uint8_t gate);
-void add_IRQ(char IRQ, void(*function)(), uint8_t gate);
+void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate);
+void add_IRQ(uint8_t IRQ, void(*function)(), uint8_t gate);
 #endif

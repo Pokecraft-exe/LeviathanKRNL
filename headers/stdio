@@ -6,7 +6,9 @@ namespace std {
     extern char endl;
     
     template <typename t>
-    char* hex();
+    char* hex(t data){
+        return HexToString(data);
+    }
 
     class stdin {
     private:

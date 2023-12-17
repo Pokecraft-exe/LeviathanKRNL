@@ -76,7 +76,14 @@ uint32_t RGB(uint8_t R, uint8_t G, uint8_t B){
 
 struct limine_framebuffer *framebuffer;
 
+void Draw(int x, int y, uint32_t color) {
+    uint32_t *fb_ptr = framebuffer->address;
+    fb_ptr[framebuffer->width*y+x] = color;
+}
+
+
 extern void far_jump_to_kernel();
+extern void start_K();
 
 void _start(void) {
     if (framebuffer_request.response == NULL
@@ -89,7 +96,4 @@ void _start(void) {
     fontInitFrameBuffer(framebuffer);
     
     far_jump_to_kernel();
-    
- 	while(1);
-    //far_jump_to_kernel();
 }

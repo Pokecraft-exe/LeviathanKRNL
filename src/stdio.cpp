@@ -10,12 +10,6 @@ std::stdin::stdin(color::Color color__) {
 
 char std::endl = '\n';
 
-template <typename t>
-char* std::hex(t data){
-    return HexToString(data);
-}
-
-
 void std::stdin::color(color::Color color__) {
     color_ = color__;
 };

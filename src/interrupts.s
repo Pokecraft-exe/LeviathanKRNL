@@ -1,55 +1,50 @@
-section .bss
-
-global IRQ0_fractions
-global IRQ0_ms
-global system_timer_fractions
-global system_timer_ms
-global PIT_reload_value
-global IRQ0_frequency
-
-system_timer_fractions:  resd 1          ; Fractions of 1 ms since timer initialized
-system_timer_ms:         resd 1          ; Number of whole ms since timer initialized
-IRQ0_fractions:          resd 1          ; Fractions of 1 ms between IRQs
-IRQ0_ms:                 resd 1          ; Number of whole ms between IRQs
-IRQ0_frequency:          resd 1          ; Actual frequency of PIT
-PIT_reload_value:        resw 1          ; Current PIT reload value
-
-SECTION .text:
-    
-extern Schedule
-global IRQ0_handler
-IRQ0_handler:
-	push rax
-	push rbx
- 
-	mov rax, [IRQ0_fractions]
-	mov rbx, [IRQ0_ms]                    ; eax.ebx = amount of time between IRQs
-	add [system_timer_fractions], rax     ; Update system timer tick fractions
-	adc [system_timer_ms], rbx            ; Update system timer tick milli-seconds
-
-    call TimerIRQ
-    call Schedule
- 
-	mov al, 0x20
-	out 0x20, al                          ; Send the EOI to the PIC
- 
-	pop rbx
-	pop rax
-	iretd
-
-
-global TimerIRQ
-TimerIRQ:
-    push rax
-    mov rax, [CountDown]
-    test rax, rax
-    jz TimerDone
-    dec rax
-    mov [CountDown], rax
-TimerDone:
-    pop rax
-    iretd
-
 section .data:
-global CountDown
-    CountDown: dq 0
+  extern ticks
+section .text:
+
+extern Schedule
+%macro pushaq 0
+    push rax
+    push rbx
+    push rcx
+    push rdx
+    push rbp
+    push rdi
+    push rsi
+    push r8
+    push r9
+    push r10
+    push r11
+    push r12
+    push r13
+    push r14
+    push r15
+%endmacro
+
+%macro popaq 0
+    pop r15
+    pop r14
+    pop r13
+    pop r12
+    pop r11
+    pop r10
+    pop r9
+    pop r8
+    pop rsi
+    pop rdi
+    pop rbp
+    pop rdx
+    pop rcx
+    pop rbx
+    pop rax
+%endmacro
+
+global pit_handler
+pit_handler:
+    pushaq
+    mov rax, [ticks]
+    inc rax
+    mov [ticks], rax
+    call Schedule
+    popaq
+    iretq
