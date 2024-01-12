@@ -46,5 +46,7 @@ pit_handler:
     inc rax
     mov [ticks], rax
     call Schedule
+    mov al,20h
+    out 20h,al
     popaq
     iretq

@@ -77,14 +77,14 @@ void printchr(const char chr, uint32_t color){
   }
 }
 
-char string[67];
+char string[200];
 template <typename T>
 char* binToStr(T value) {
-	string = "0b\0";
-	
-	for (int i = 0; i < sizeof(T) * 8; i++) {
+	int i = 0;
+	for (i; i < sizeof(T) * 8; i++) {
 		string[i] = (value & (0x80>>(i%8))) + 48;
 	}
+	string[i++] = 0;
 	return string;
 }
 

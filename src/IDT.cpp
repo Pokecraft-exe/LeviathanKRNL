@@ -2,91 +2,39 @@
 
 IDTR idtTable;
 
-IDT64 IDTs[256] = {};
+__attribute__((aligned(0x10)))
+IDT64 IDTs[256];
   
 void InitIDT(){
-    idtTable.address = (IDT64*)&IDTs;
+    idtTable.address = (uint64_t)&IDTs[0];
     idtTable.size = 0x0fff;
 
-	asm("lidt %0" :: "m"(idtTable));
-
-    RemapPic(0x20,0x28);
-    
+    asm("lidt %0" :: "m"(idtTable));
     asm ("sti");
+
+    RemapPic(0x20,0b00000001);
 }
   
 void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate) {
   	IRQ_clear_mask(IRQ);
-	IDT64* newInterrupt = &idtTable.address[IRQ];
-	newInterrupt->Set_Offset((uint64_t)function);
+	IDT64* newInterrupt = &IDTs[IRQ];
 	newInterrupt->types_attr = 0b10000000 | gate;
 	newInterrupt->codeseg = 0x8;
 }
 
 void add_IRQ(uint8_t IRQ, void(*function)(), uint8_t gate) {
-  	IRQ_clear_mask(IRQ);
-	IDT64* newInterrupt = &idtTable.address[IRQ];
-	newInterrupt->Set_Offset((uint64_t)function);
-	newInterrupt->types_attr = 0b10000000 | gate;
-	newInterrupt->codeseg = 0x8;
+  	IRQ_clear_mask(IRQ);	
+	IDTs[IRQ].offset_low  = (uint16_t)(((uint64_t)function & 0x000000000000ffff));
+	IDTs[IRQ].offset_mid  = (uint16_t)(((uint64_t)function & 0x00000000ffff0000) >> 16);
+	IDTs[IRQ].offset_high = (uint32_t)(((uint64_t)function & 0xffffffff00000000) >> 32);
+	
+	IDTs[IRQ].types_attr = 0b10000000 | gate;
+	IDTs[IRQ].codeseg = 0x8;
 }
 
 __attribute__((interrupt)) extern "C" void Schedule(interrupt_frame* frame) {
-	DrawChar('a', 500, 500, 0x00FF, 2);
-	while(1);
+    	DrawChar('a', 500, 500, 0x00FF, 2);
 }
-    
-extern "C" __attribute__((naked)) void irq1(interrupt_frame* frame) {
-	asm("push %rax \n\
-    push %rbx\n\
-    push %rcx\n\
-    push %rdx\n\
-    push %rbp\n\
-    push %rdi\n\
-    push %rsi\n\
-    push %r8\n\
-    push %r9\n\
-    push %r10\n\
-    push %r11\n\
-    push %r12\n\
-    push %r13\n\
-    push %r14\n\
-    push %r15\n\
-    cld\n");
-    isr1_handler(frame);
-    asm("pop %r15\n\
-	pop %r14\n\
-	pop %r13\n\
-	pop %r12\n\
-	pop %r11\n\
-	pop %r10\n\
-	pop %r9\n\
-	pop %r8\n\
-	pop %rsi\n\
-	pop %rdi\n\
-	pop %rbp\n\
-	pop %rdx\n\
-	pop %rcx\n\
-	pop %rbx\n\
-	pop %rax\n\
-    iretq");
-}
-    
-extern "C" {
-    void isr1_handler(interrupt_frame* frame){
-        uint8_t scancode = inb(0x60);
-		uint8_t chr = 0;
-		
-		if (scancode < 0x3A){
-			chr = ScanCodeLookupTable[scancode];
-		}
-        //Keyboardhandler(scanCode);
-        printchr(chr);
-        outb(0x20, 0x20);
-        outb(0xa0, 0x20);
-    }
-}
-
 
 void print(char* str) {DrawString(str, 100, 100, 0xff, 2);}
 

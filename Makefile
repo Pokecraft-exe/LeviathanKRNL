@@ -47,7 +47,7 @@ $(KERNEL): $(OBJ)
         	iso_root -o image.iso; \
  	fi
 	./limine/limine bios-install image.iso
-	rm iso_root/boot.elf boot.elf
+	rm iso_root/boot.elf
 	
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -std=gnu11 -c $^ -o $@

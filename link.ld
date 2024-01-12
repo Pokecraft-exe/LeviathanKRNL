@@ -5,9 +5,10 @@ ENTRY(_start)
  
 PHDRS
 {
-    text    PT_LOAD    FLAGS((1 << 0) |(1 << 1)| (1 << 2)) ; /* Execute + Read */
+    text    PT_LOAD    FLAGS((1 << 0) | (1 << 1) | (1 << 2)) ; /* Execute + Read */
     rodata  PT_LOAD    FLAGS((1 << 2)) ;            /* Read only */
     data    PT_LOAD    FLAGS((1 << 1) | (1 << 2)) ; /* Write + Read */
+    idt     PT_LOAD    FLAGS((1 << 1) | (1 << 2));
 }
  
 SECTIONS
@@ -15,15 +16,11 @@ SECTIONS
     . = 0xffffffff80000000;
  	
     .text : {
+        pit_handler = .;
         *(.text .text.*)
     } :text
- 
+    
     . += CONSTANT(MAXPAGESIZE);
-
-    .idt BLOCK(0x1000) : ALIGN(0x1000) {
-        IDTA = .;
-        . = . + 0x1000;
-    }
  
     .rodata : {
         *(.rodata .rodata.*)

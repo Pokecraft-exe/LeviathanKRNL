@@ -9,6 +9,10 @@ namespace std {
     char* hex(t data){
         return HexToString(data);
     }
+    template <typename t>
+    char* bin(t data){
+        return binToStr(data);
+    }
 
     class stdin {
     private:

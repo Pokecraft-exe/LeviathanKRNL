@@ -62,6 +62,12 @@ global far_jump_to_kernel
 far_jump_to_kernel:
 	call EditGDT
 	lgdt [gdt_descriptor]
+	mov ax, 0x10
+	mov ds, ax
+	mov es, ax
+	mov fs, ax
+	mov gs, ax
+	mov ss, ax
 	mov rax, start_K
     push qword 0x8
     push rax

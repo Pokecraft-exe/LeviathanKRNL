@@ -22,6 +22,18 @@ extern "C" void Draw(int, int, uint32_t);
 
 extern "C" void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color);
 
+extern IDTR idtTable;
+extern IDT64 IDTs;
+
+extern "C" {
+void handler1();
+void handler2();
+void handler3();
+void handler4();
+void handler5();
+void handler6();
+}
+
 void delay(int clocks)
 {
     asm("push %rax");
@@ -76,10 +88,6 @@ bool sort(int a, int b) {
 }
 
 extern "C" void start_K(){
-    //__BOOTSCREEN__();
-    //MasterVolume = 100;
-    //cls();
-    //PlaySound(469,MasterVolume);
 
     {
         VGA_WIDTH = framebuffer->width/16;
@@ -87,8 +95,6 @@ extern "C" void start_K(){
     }
 
     std::stdin cout;
-
-    //print("");
 
     cout << "Framebuffer [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
 
@@ -129,8 +135,6 @@ extern "C" void start_K(){
         cout << "Allocator [\0m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
     }
 
-    //paging::editPages((uintptr_t*)&kernelStart, (kernelSize / 4096) + 1, PAGING_RESERVE_PAGE);
-
     cout << "\0m[\xff\xff\x00]\n";
 
     cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
@@ -139,38 +143,44 @@ extern "C" void start_K(){
     
     cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
     
-    paging::pageTable* PML4 = (paging::pageTable*)paging::requestPage();
+    /*paging::pageTable* PML4 = (paging::pageTable*)paging::requestPage();
     
     cout << "PML4 = 0x" << (void*)PML4 << std::endl;
     
     
     memset(PML4, 0, 0x1000);
 
-    /*{
+    {
         paging::pageManager::setPML4(PML4);
 
         for (size_t i = 0; i < memory_size - 0x2000; i += 0x1000) {
             paging::pageManager::mapMemory((void*)i, (void*)i);
         }
         asm ("mov %0, %%cr3" : : "r" (PML4));
-    }*/
+    }
 
     cout.color(0xffffff);
-    cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;*/
 
 	DrawSquare(200, 200, 200, 300, 0xffff00);
+    
+    add_IRQ(ISA::PIT, pit_handler, IDT_IG);
 
     InitIDT();
-    
+      
     timer::PIT::init(1000);
-     
-    add_IRQ(ISA::PIT, pit_handler, IDT_IG);
+    
+    cout.color(0xffffff);
+    cout << "hello to pit";
+    
+    /*void* handlers[6] = {(void*)&handler1, (void*)&handler2, (void*)&handler3, (void*)&handler4, (void*)&handler5, (void*)&handler6};
+    
+    for (int i = 0; i < 255; i++) {
+    	add_IRQ(i, handlers[i%6], IDT_IG);
+    }*/
+    //
     
     while(1);
-
-cout << "HELL YEAH WE PASSED!!";
-
-    add_IRQ(ISA::PIT, IRQ0_handler, 0x8e);
 
     //_hRAMDISK();
     //restart();

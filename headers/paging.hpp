@@ -32,7 +32,7 @@ namespace paging {
 		bool zero2 : 1;
 		bool zero3 : 1;
 		uint8_t avaliable : 3;
-		uint64_t address : 53;
+		uint64_t address : 52;
 	};
 
 	struct pageTable {

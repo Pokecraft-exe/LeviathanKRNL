@@ -1,20 +1,19 @@
 
 #include "pit.hpp"
 
+extern void puts(const char*);
+
 namespace timer {
 	namespace PIT {
 		uint32_t frequencies;
 		void init(uint32_t frequency)
 		{
-		    uint32_t divisor = 1193181 / frequency;
+		    uint32_t divisor = 1193182 / frequency;
 		    frequencies = frequency;
 	
 		    outb(0x43, 0x36);
 		    outb(0x40, (uint8_t)divisor & 0xFF);
 		    outb(0x40, (uint8_t)(divisor >> 8) & 0xFF);
-		
-		    std::stdin cout;
-		    cout << "Initialized PIT with frequency: " << frequency << "Hz" << std::endl;
 		}
 		uint64_t ticks = 0;
 	

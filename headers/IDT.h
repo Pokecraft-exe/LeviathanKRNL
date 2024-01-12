@@ -41,11 +41,6 @@ struct IDT64{
   uint16_t offset_mid;
   uint32_t offset_high;
   uint32_t zero;
-  void Set_Offset(uint64_t Offset){
-    offset_low  = (uint16_t)((Offset & 0x000000000000ffff)		);
-    offset_mid  = (uint16_t)((Offset & 0x00000000ffff0000) >> 16);
-    offset_high = (uint32_t)((Offset & 0xffffffff00000000) >> 32);
-  }
 }__attribute__((packed));
 
 
@@ -61,7 +56,7 @@ struct interrupt_frame
 
 struct IDTR{
   uint16_t size;
-  IDT64* address;
+  uint64_t address;
 }__attribute__((packed));
 
 __attribute__((interrupt)) extern "C" void Schedule(interrupt_frame* frame);
