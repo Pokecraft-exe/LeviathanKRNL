@@ -81,11 +81,8 @@ bool sort(int a, int b) {
 
 extern "C" void start_K(){
 
-    {
-        VGA_WIDTH = framebuffer->width/16;
-	    KEY = (char*)alloc(1);
-    }
-
+    VGA_WIDTH = framebuffer->width/16;
+    
     std::stdin cout;
 
     cout << "Framebuffer [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
@@ -112,20 +109,32 @@ extern "C" void start_K(){
         paging::getUsedMemory() +
         paging::getSystemMemory()
         == memory_size) {
-        cout << "Paging Size [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+        cout << "Memory Size [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
     } else {
-        cout << "Paging Size [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
+        cout << "Memory Size [\x00m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
         while(1);
     }
 
     void* a = alloc(100);
+    void* c = alloc(100);
     void* b = alloc(1);
+    free(c);
+    void* d = alloc(2);
 
-    if (a == b - 100) {
+    if (a == d - 800) {
         cout << "Allocator [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+        free(a);
+        free(b);
+        free(d);
     } else {
         cout << "Allocator [\0m[\xff\x00\x00]Error\x00m[\xff\xff\xff]]]" << std::endl;
+        dumpChunks();
+        extern Chunk_List alloced_chunks;
+        cout << "chunks count: " << alloced_chunks.count;
+        while(1);
     }
+    
+    KEY = (char*)alloc(1);
 
     cout << "\0m[\xff\xff\x00]\n";
 
@@ -134,27 +143,8 @@ extern "C" void start_K(){
     cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
     
     cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
-    
-    /*paging::pageTable* PML4 = (paging::pageTable*)paging::requestPage();
-    
-    cout << "PML4 = 0x" << (void*)PML4 << std::endl;
-    
-    
-    memset(PML4, 0, 0x1000);
 
-    {
-        paging::pageManager::setPML4(PML4);
-
-        for (size_t i = 0; i < memory_size - 0x2000; i += 0x1000) {
-            paging::pageManager::mapMemory((void*)i, (void*)i);
-        }
-        asm ("mov %0, %%cr3" : : "r" (PML4));
-    }
-
-    cout.color(0xffffff);
-    cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;*/
-
-	DrawSquare(200, 200, 200, 300, 0xffff00);
+	DrawSquare(200, 400, 200, 300, 0xffff00);
 	
     for(int i = 0; i <= 31; i++) {
       add_IRQ(ISA::PIT, exception_handlers[i], IDT_TG);
@@ -164,26 +154,13 @@ extern "C" void start_K(){
 
     InitIDT();
     
-    asm("int $0xe;");
+    //asm("int $0xe;");
       
     timer::PIT::init(1000);
     
     cout.color(0xffffff);
     cout << "hello to pit";
-    
-    /*void* handlers[6] = {(void*)&handler1, (void*)&handler2, (void*)&handler3, (void*)&handler4, (void*)&handler5, (void*)&handler6};
-    
-    for (int i = 0; i < 255; i++) {
-    	add_IRQ(i, handlers[i%6], IDT_IG);
-    }*/
-    //
-    
-    while(1);
 
     //_hRAMDISK();
-    //restart();
-    while(1) {   //mainloop
-        ;
-	}
-    return;
+    while(1); //mainloop
 }
