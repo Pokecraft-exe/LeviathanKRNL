@@ -64,15 +64,8 @@ extern "C" __attribute__((naked)) void irq1(interrupt_frame* frame);
 extern "C" void isr1_handler(interrupt_frame* frame);
 extern "C" void IRQ0_handler();
 extern "C" void init_PIT();
-__attribute__((interrupt)) void isr5(interrupt_frame* frame);
-__attribute__((interrupt)) void isr6(interrupt_frame* frame);
-__attribute__((interrupt)) void isr7(interrupt_frame* frame);
-__attribute__((interrupt)) void isr8(interrupt_frame* frame);
-__attribute__((interrupt)) void isr14(interrupt_frame* frame);
-extern "C" __attribute__((naked)) void isr0xD(interrupt_frame* frame);
-void isr13(interrupt_frame* frame);
   
 void InitIDT();
 void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate);
-void add_IRQ(uint8_t IRQ, void(*function)(), uint8_t gate);
+void add_IRQ(uint8_t IRQ, void*function, uint8_t gate);
 #endif

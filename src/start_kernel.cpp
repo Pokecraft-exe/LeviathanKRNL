@@ -24,15 +24,7 @@ extern "C" void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color)
 
 extern IDTR idtTable;
 extern IDT64 IDTs;
-
-extern "C" {
-void handler1();
-void handler2();
-void handler3();
-void handler4();
-void handler5();
-void handler6();
-}
+extern void** exception_handlers;
 
 void delay(int clocks)
 {
@@ -163,10 +155,16 @@ extern "C" void start_K(){
     cout << "Paging [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;*/
 
 	DrawSquare(200, 200, 200, 300, 0xffff00);
+	
+    for(int i = 0; i <= 31; i++) {
+      add_IRQ(ISA::PIT, exception_handlers[i], IDT_TG);
+    }
     
-    add_IRQ(ISA::PIT, pit_handler, IDT_IG);
+    add_IRQ(ISA::PIT, (void*)pit_handler, IDT_IG);
 
     InitIDT();
+    
+    asm("int $0xe;");
       
     timer::PIT::init(1000);
     
