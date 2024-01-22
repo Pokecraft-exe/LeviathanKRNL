@@ -51,4 +51,17 @@ pit_handler:
     popaq
     iretq
     
+extern fprint
 
+global isr0xe
+isr0xe:
+  pushaq
+  mov rcx, [LC1]
+  call fprint
+  .loop
+  jmp .loop
+  
+  
+  
+section .data:
+  LC1: db "PageFault", 0

@@ -17,6 +17,7 @@
 #include "algorythm"
 #include "color.hpp"
 #include "pit.hpp"
+#include "pci.hpp"
 
 extern "C" void Draw(int, int, uint32_t);
 
@@ -25,6 +26,13 @@ extern "C" void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color)
 extern IDTR idtTable;
 extern IDT64 IDTs;
 extern void** exception_handlers;
+
+extern "C" void detectFPU();
+extern "C" void detectSSE();
+extern "C" void enableAVX();
+extern "C" uint32_t fpuPresent;
+extern "C" bool ssePresent;
+extern "C" void hello();
 
 void delay(int clocks)
 {
@@ -42,8 +50,6 @@ extern "C" void breakpoint(){
 }
 
 uint16_t CursorPosition = 0;
-
-extern "C" void hello();
 
 uint64_t formatbytes(uint64_t bytes) {
     if (bytes < 1024) {
@@ -135,8 +141,28 @@ extern "C" void start_K(){
     }
     
     KEY = (char*)alloc(1);
+    
+    /*
+    detectFPU();
+    if (fpuPresent == 0) {
+        cout << "FPU [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    } else {
+        cout << "FPU [\0m[\xff\x00\x00]Not present or enabled\x00m[\xff\xff\xff]]]" << std::endl;
+        while(1);
+    }
+    
+    /*detectSSE();
+    if (fpuPresent == 0) {
+        cout << "SSE [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    } else {
+        cout << "SSE [\0m[\xff\x00\x00]Not present\x00m[\xff\xff\xff]]]" << std::endl;
+        while(1);
+    }
+    
+    enableAVX();
+    */
 
-    cout << "\0m[\xff\xff\x00]\n";
+    cout.color(0xffff00);
 
     cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
     
@@ -144,22 +170,30 @@ extern "C" void start_K(){
     
     cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
 
-	DrawSquare(200, 400, 200, 300, 0xffff00);
+    DrawSquare(200, 400, 200, 300, 0xffff00);
 	
-    for(int i = 0; i <= 31; i++) {
-      add_IRQ(ISA::PIT, exception_handlers[i], IDT_TG);
-    }
+    /*for(int i = 0; i <= 31; i++) {
+      if (exception_handlers[i] != nullptr)
+      add_IRQ(i, exception_handlers[i], IDT_TG);
+    }*/
+    
+    add_IRQ(0xe, exception_handlers[0xe], IDT_TG);
+    //add_IRQ(0x8, exception_handlers[0x8], IDT_TG);
+    //add_IRQ(0xd, exception_handlers[0xd], IDT_TG);
     
     add_IRQ(ISA::PIT, (void*)pit_handler, IDT_IG);
 
+    cout.color(0xffffff);
+    cout << pci::GetPresent() << " PCI slots present\n";
+
     InitIDT();
     
-    //asm("int $0xe;");
+    
+    asm("int $0xe;");
       
     timer::PIT::init(1000);
     
-    cout.color(0xffffff);
-    cout << "hello to pit";
+    cout << "hello to pit\n";
 
     //_hRAMDISK();
     while(1); //mainloop

@@ -16,10 +16,12 @@ void InitIDT(){
 }
   
 void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate) {
-  	IRQ_clear_mask(IRQ);
-	IDT64* newInterrupt = &IDTs[IRQ];
-	newInterrupt->types_attr = 0b10000000 | gate;
-	newInterrupt->codeseg = 0x8;
+  	//IRQ_clear_mask(IRQ);
+	IDTs[IRQ].offset_low  = (uint16_t)(((uint64_t)function & 0x000000000000ffff));
+	IDTs[IRQ].offset_mid  = (uint16_t)(((uint64_t)function & 0x00000000ffff0000) >> 16);
+	IDTs[IRQ].offset_high = (uint32_t)(((uint64_t)function & 0xffffffff00000000) >> 32);
+	IDTs[IRQ].types_attr = 0b10000000 | gate;
+	IDTs[IRQ].codeseg = 0x8;
 }
 
 void add_IRQ(uint8_t IRQ, void* function, uint8_t gate) {
@@ -100,6 +102,8 @@ __attribute__((interrupt)) void isr28(interrupt_frame* frame) {print("hypervisor
 __attribute__((interrupt)) void isr29(interrupt_frame* frame) {print("VMM communication error");while(1);};
 __attribute__((interrupt)) void isr30(interrupt_frame* frame) {print("Security exception");while(1);};
 
+extern "C" void isr0xe();
+
 void* exception_handlers[32] = {
 (void*)&isr0,
 (void*)&isr1,
@@ -115,7 +119,7 @@ void* exception_handlers[32] = {
 (void*)&isr11,
 (void*)&isr12,
 (void*)&isr13,
-(void*)&isr14,
+(void*)&isr0xe,
 nullptr,
 (void*)&isr16,
 (void*)&isr17,
