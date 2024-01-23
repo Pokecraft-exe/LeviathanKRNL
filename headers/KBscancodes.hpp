@@ -7,7 +7,7 @@
 extern bool ShiftPressed;
 extern uint8_t LastScancode;
 
-extern char * KEY;
+extern char KEY;
 
 extern const char ScanCodeLookupTable[];
   

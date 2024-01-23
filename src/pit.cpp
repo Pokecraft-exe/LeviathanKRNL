@@ -17,12 +17,6 @@ namespace timer {
 		}
 		uint64_t ticks = 0;
 	
-		void addTicks()
-		{
-		    ticks++;
-		    outb(0x20, 0x20);
-		}
-	
 		uint64_t getTicks()
 		{
 		    return ticks;

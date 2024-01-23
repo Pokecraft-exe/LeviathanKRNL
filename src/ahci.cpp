@@ -1,4 +1,5 @@
 #include "ahci.hpp"
+using std::cout;
 
 int check_type(HBA_PORT *port)
 {
@@ -28,7 +29,6 @@ int check_type(HBA_PORT *port)
 void probe_port(HBA_MEM *abar)
 {
 	// Search disk in implemented ports
-	std::stdin cout;
 	uint32_t pi = abar->pi;
 	int i = 0;
 	while (i<32)

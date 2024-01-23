@@ -1,14 +1,10 @@
-//#include "H/KBscancodes.h"
 #include "printf.h"
 #include "font.hpp"
 #include "IDT.h"
 #include "allocator.hpp"
 /*#include "sound.h"
-#include "typedefs.h"
 #include "mouse.h"
-#include "errors.h"
-//#include "Time.h"
-#include "stddef.h"*/
+#include "Time.h"*/
 #include "serial.h"
 #include "memmap.hpp"
 #include "paging.hpp"
@@ -18,6 +14,7 @@
 #include "color.hpp"
 #include "pit.hpp"
 #include "pci.hpp"
+using std::cout, std::cin;
 
 extern "C" void Draw(int, int, uint32_t);
 
@@ -85,20 +82,27 @@ bool sort(int a, int b) {
 }
 
 void thread1() {
-    std::stdin cout;
     while(1) cout << 'a';
 }
 
 void thread2() {
-    std::stdin cout;
     while(1) cout << 'b';
+}
+
+void reboot()
+{
+    uint8_t good = 0x02;
+    while (good & 0x02)
+        good = inb(0x64);
+    outb(0x64, 0xFE);
+    asm("hlt");
 }
 
 extern "C" void start_K(){
 
     VGA_WIDTH = framebuffer->width/16;
-    
-    std::stdin cout;
+
+    cout.color(0XFFFFFF);
 
     cout << "Framebuffer [\x00m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
 
@@ -149,10 +153,6 @@ extern "C" void start_K(){
         while(1);
     }
     
-    KEY = (char*)alloc(1);
-    
-    
-    
     detectFPU();
     if (fpuPresent == 0) {
         cout << "FPU [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
@@ -169,16 +169,7 @@ extern "C" void start_K(){
         while(1);
     }
     
-    /*enableAVX();
-    */
-
-    cout.color(0xffff00);
-
-    cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
-    
-    cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
-    
-    cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
+    //enableAVX();
 
     DrawSquare(200, 400, 200, 300, 0xffff00);
 	
@@ -210,17 +201,35 @@ extern "C" void start_K(){
     add_IRQ(ISA::PIT, (void*)Schedule, IDT_IG);
     add_IRQ(ISA::KEYBOARD, (void*)keyboardHandler, IDT_IG);
 
-    cout.color(0xffffff);
-    cout << pci::GetPresent() << " PCI slots present\n";
-
     InitIDT();
       
     timer::PIT::init(1000);
 
+    string command = "";
+    command.resize(100);
+
     //_hRAMDISK();
-    extern uint64_t _ticks;
-    extern bool keypressed;
-    
-    while(1) {//
+
+    cout << '>';
+
+    while(1) {
+        cin >> command;
+        cout << '\n';
+        if (command == "cls") cls(0);
+        if (command == "pci") cout << pci::GetPresent() << " PCI slots present\n";
+        if (command == "memmap") {
+            cout.color(0xffff00);
+            cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
+            cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
+            cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
+            cout.color(0xffffff);
+        }
+        if (command == "credit") {
+            cout << "\0m[\xff\xff\xaa]Leviathan Kernel(c) is a property of Pokecraft-exe AKA \nPokechaNyaa, Julian Lavis--Fabbri\n";
+            cout.color(0xffffff);
+        }
+        if (command == "reboot") reboot();
+        if (command == "qshutdown") Port16Bit(0x604).Write(0x2000);
+        cout << '>';
     } //mainloop
 }

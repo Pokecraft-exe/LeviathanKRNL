@@ -1,6 +1,6 @@
 #include "scheduler.hpp"
 
-Task tasks[100] = {0};
+TaskManager::Task tasks[100] = {};
 int tnum = 0;
 
 namespace TaskManager {
@@ -25,16 +25,15 @@ void Task::avort(){
     active = false;
 }
     
-Task* Thread(void* target, void* args, int len) {
-    int i;
-    for (i = 0; i < tnum; i++) {
-        if (tasks[i].present == false) {
-            
-        }
-    }
-    if (i == tnum - 1) {
-        tnum++;
-    }
+Task* Thread(void* target, int ms, void* args, int len) {
+    tasks[tnum].args = args;
+    tasks[tnum].alen = len;
+    tasks[tnum].present = true;
+    getState();
+    memcpy(&tasks[tnum].cpu, &GlobalCPUState, sizeof(CPUState));
+    tasks[tnum].cpu.rip = (uint64_t)target;
+    tasks[tnum].cpu.rsp = (uint64_t)tasks[tnum].stack;
+    tnum++;
 }
 
 }

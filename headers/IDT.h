@@ -7,9 +7,11 @@
 #include "font.hpp"
 #include "stdio"
 #include "printf.h"
+#include "pit.hpp"
 #include "serial.h"
 #include "allocator.hpp"
 #include "KBscancodes.hpp"
+#include "scheduler.hpp"
 #include "paging.hpp"
 #define IDT_EntryCount 64
 #define IDT_IG 0b00001110
@@ -47,12 +49,11 @@ struct IDT64{
 
 struct interrupt_frame
 {
-    uint16_t ip;
+    uint64_t rip;
     uint16_t cs;
-    uint16_t flags;
-    uint16_t sp;
+    uint64_t rflags;
+    uint64_t rsp;
     uint16_t ss;
-    uint64_t error;
 };
 
 struct IDTR{
@@ -63,6 +64,7 @@ struct IDTR{
 __attribute__((interrupt)) void Schedule(interrupt_frame* frame);
 __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame);
 extern "C" void init_PIT();
+char pollKey(char* e);
   
 void InitIDT();
 void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate);

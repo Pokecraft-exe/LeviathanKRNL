@@ -17,35 +17,33 @@
 #define gregister(x) register uint64_t x asm(#x)
 #define sregister(x, y) asm("mov" %0 ", " #x : "r"(y))
 
-extern "C" void pusha();
-extern "C" void popa();
+extern "C" void getState();
 
 struct CPUState {
-	uint64_t r15
-	uint64_t r14
-	uint64_t r13
-	uint64_t r12
-	uint64_t r11
-	uint64_t r10
-	uint64_t r9
-	uint64_t r8
+	uint64_t r15;
+	uint64_t r14;
+	uint64_t r13;
+	uint64_t r12;
+	uint64_t r11;
+	uint64_t r10;
+	uint64_t r9;
+	uint64_t r8;
 	
-	uint64_t rsi
-	uint64_t rdi
-	uint64_t rbp
+	uint64_t rsi;
+	uint64_t rdi;
+	uint64_t rbp;
 	
-	uint64_t rdx
-	uint64_t rcx
-	uint64_t rbx
-	uint64_t rax
-    
-    uint64_t error;
+	uint64_t rdx;
+	uint64_t rcx;
+	uint64_t rbx;
+	uint64_t rax;
 
     uint64_t rip;
     uint64_t rflags;
     uint64_t rsp;
 } __attribute__((packed));
 
+extern "C" CPUState GlobalCPUState;
     
 class Port8Bit{
 private:
@@ -82,8 +80,6 @@ public:
     void Write(uint32_t data);
     uint32_t Read();
 };
-
-
     
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);

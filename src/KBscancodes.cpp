@@ -2,7 +2,7 @@
 
 bool ShiftPressed = false;
 uint8_t LastScancode;
-char* KEY;
+char KEY;
 const char ScanCodeLookupTable[] ={
     0, 0, '&', '2',
     34, 39, '(', '-',
@@ -28,74 +28,74 @@ void StandardKeyboardHandler(uint8_t scancodes, uint8_t chr){
         case true:
             switch (scancodes){
                 case 0x32:
-                    *KEY = '?';
+                    KEY = '?';
                     break;
                 case 0x33:
-                    *KEY = '.';
+                    KEY = '.';
                     break;
                 case 0x34:
-                    *KEY = '/';
+                    KEY = '/';
                     break;
                 case 0x35:
-                    *KEY = '!';
+                    KEY = '!';
                     break;
                 /*case 0x2B:
-                    *KEY = 'µ';
+                    KEY = 'µ';
                     break;
                 case 0x1B:
-                    *KEY = '£';
+                    KEY = '£';
                     break;
                 case 0x1A:
-                    *KEY = '¨';
+                    KEY = '¨';
                     break;*/
                 case 0x02:
-                    *KEY = '1';
+                    KEY = '1';
                     break;
                 case 0x03:
-                    *KEY = '2';
+                    KEY = '2';
                     break;
                 case 0x04:
-                    *KEY = '3';
+                    KEY = '3';
                     break;
                 case 0x05:
-                    *KEY = '4';
+                    KEY = '4';
                     break;
                 case 0x06:
-                    *KEY = '5';
+                    KEY = '5';
                     break;
                 case 0x07:
-                    *KEY = '6';
+                    KEY = '6';
                     break;
                 case 0x08:
-                    *KEY = '7';
+                    KEY = '7';
                     break;
                 case 0x09:
-                    *KEY = '8';
+                    KEY = '8';
                     break;
                 case 0x0A:
-                    *KEY = '9';
+                    KEY = '9';
                     break;
                 case 0x0B:
-                    *KEY = '0';
+                    KEY = '0';
                     break;
                 case 0x0C:
-                    //*KEY = '°';
+                    //KEY = '°';
                     break;
                 case 0x0D:
-                    *KEY = '+';
+                    KEY = '+';
                     break;
                 default:
-                    *KEY = chr - 32;
+                    KEY = chr - 32;
             }
             break;
         case false:
-            *KEY = chr;
+            KEY = chr;
             break;
         }
     }else{
         switch (scancodes) {
                 case 0x0E: //backspace
-                    *KEY = 255;
+                    KEY = 255;
                  break;
 	          	case 0x2A: //Left Shift
 	        		ShiftPressed = true;
@@ -110,53 +110,53 @@ void StandardKeyboardHandler(uint8_t scancodes, uint8_t chr){
          			ShiftPressed = false;
          			break;
                 case 0x1C: //enter
-                    *KEY = '\n';
+                    KEY = 10;
                     break;
                  // numpad
                  case 0x52:
-                     *KEY = '0';
+                     KEY = '0';
                  case 0xD2:
                      break;
                  case 0x4F:
-                     *KEY = '1';
+                     KEY = '1';
                      break;
                  case 0x50:
-                     *KEY = '2';
+                     KEY = '2';
                      break;
                  case 0x51:
-                     *KEY = '3';
+                     KEY = '3';
                      break;
                  case 0x4B:
-                     *KEY = '4';
+                     KEY = '4';
                      break;
                  case 0x4C:
-                     *KEY = '5';
+                     KEY = '5';
                      break;
                  case 0xCC:
                      break;
                  case 0x4D:
-                     *KEY = '6';
+                     KEY = '6';
                      break;
                  case 0x47:
-                     *KEY = '7';
+                     KEY = '7';
                      break;
                  case 0x48:
-                     *KEY = '8';
+                     KEY = '8';
                      break;
                  case 0x49:
-                     *KEY = '9';
+                     KEY = '9';
                      break;
                 case 0x4A:
-                      *KEY = '-';
+                      KEY = '-';
                       break;
                 case 0x4E:
-                      *KEY = '+';
+                      KEY = '+';
                       break;
                 case 0x53:
-                      *KEY = '.';
+                      KEY = '.';
                       break;
                 case 0x2B:
-                      *KEY = '/';
+                      KEY = '/';
                       break;
                 case 0x3B:
                       break;
@@ -180,7 +180,7 @@ void KeyboardHandler0xE0(uint8_t scanCode) {
         //SetCursorPosition(CursorPosition +1);
         break;
     case 0x35:
-        *KEY = '/';
+        KEY = '/';
         break;
     case 0x5E:
         
@@ -189,7 +189,7 @@ void KeyboardHandler0xE0(uint8_t scanCode) {
         //outb(0x4004, 0x3400);
         break;
     case 0x1C: //enter
-        *KEY = '\n';
+        KEY = 10;
         break;
     case 0x2E:
         break;
@@ -202,14 +202,14 @@ void KeyboardHandler0xE0(uint8_t scanCode) {
 
 void Keyboardhandler(uint8_t scancodes){
 	if (scancodes < 0x3A){
-		*KEY = ScanCodeLookupTable[scancodes];
+		KEY = ScanCodeLookupTable[scancodes];
 	} else {
     	switch (LastScancode) {
         	case 0xE0:
 		        KeyboardHandler0xE0(scancodes);
 		        break;
           	default:
-	        	StandardKeyboardHandler(scancodes, *KEY);
+	        	StandardKeyboardHandler(scancodes, 0);
 		}
 	}
 	LastScancode = scancodes;

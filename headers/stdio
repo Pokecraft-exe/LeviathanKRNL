@@ -1,6 +1,8 @@
 #pragma once
 #include "printf.h"
+#include "IDT.h"
 #include "color.hpp"
+#include "string"
 
 namespace std {
     extern char endl;
@@ -14,23 +16,41 @@ namespace std {
         return binToStr(data);
     }
 
-    class stdin {
+    class ostream {
     private:
         color::Color color_;
     public:
-        stdin();
-        stdin(color::Color);
+        ostream();
+        ostream(color::Color);
         void color(color::Color);
         color::Color color();
-        stdin operator <<(const char*);
-        stdin operator <<(char);
-        stdin operator <<(void*);
+        ostream operator <<(const char*);
+        ostream operator <<(string);
+        ostream operator <<(char);
+        ostream operator <<(void*);
 
-        stdin operator <<(int);
-        stdin operator <<(uint8_t);
-        stdin operator <<(uint16_t);
-        stdin operator <<(uint32_t);
-        stdin operator <<(uint64_t);
-
+        ostream operator <<(int);
+        ostream operator <<(uint8_t);
+        ostream operator <<(uint16_t);
+        ostream operator <<(uint32_t);
+        ostream operator <<(uint64_t);
+        ostream operator <<(float);
+        ostream operator <<(double);
     };
+
+    class istream {
+    public:
+        istream();
+        istream operator >>(string&);
+        istream operator >>(int&);
+        istream operator >>(uint8_t&);
+        istream operator >>(uint16_t&);
+        istream operator >>(uint32_t&);
+        istream operator >>(uint64_t&);
+        istream operator >>(float&);
+        istream operator >>(double&);
+    };
+
+    extern ostream cout;
+    extern istream cin;
 }

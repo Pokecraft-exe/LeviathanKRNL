@@ -115,7 +115,6 @@ void* alloc(size_t size) {
 
     uintptr_t* ptr = nullptr;
     Chunk* Last_chunk = &alloced_chunks[0];
-    std::stdin cout;
 
     // iterate through chunks
     for (int i = 1; i < alloced_chunks.count; i++) {
@@ -137,11 +136,10 @@ void* alloc(size_t size) {
 }
 
 void dumpChunks() {
-    std::stdin cout;
     int i = 0;
     while (i < CHUNK_LIST_CAP) {
         if (alloced_chunks[i].start != nullptr) {
-    	cout << '[' << i << "] : " << alloced_chunks[i].start << " : " << alloced_chunks[i].size << std::endl;
+    	std::cout << '[' << i << "] : " << alloced_chunks[i].start << " : " << alloced_chunks[i].size << std::endl;
     	}
     	i++;
     }

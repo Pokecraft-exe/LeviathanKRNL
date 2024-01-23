@@ -1,4 +1,5 @@
 #include "IDT.h"
+using std::cout;
 
 IDTR idtTable;
 
@@ -33,30 +34,56 @@ void add_IRQ(uint8_t IRQ, void* function, uint8_t gate) {
 	IDTs[IRQ].codeseg = 0x8;
 }
 
-int _ticks = 0;
+int currentTask = 0;
+extern "C" void* jumpNextTask();
+extern "C" void jumpToAddress(void*);
+bool isSchedulingActive = false;
 
 __attribute__((interrupt)) void Schedule(interrupt_frame* frame) {
-    _ticks++;
-    DrawChar('a', 500, 500, 0x00FF, 2);
-	outb(0x20, 0x20);
+    timer::PIT::ticks++;
+	if (isSchedulingActive) {
+	    if (timer::PIT::ticks % 10) {
+    
+        	// save the last task's state
+        	tasks[currentTask].cpu.rip = frame->rip;
+        	tasks[currentTask].cpu.rsp = frame->rsp;
+    	    tasks[currentTask].cpu.rflags = frame->rflags;
+        
+	        currentTask++;
+        
+        	//load next task
+        	GlobalCPUState = tasks[currentTask].cpu;
+        
+        	void* address = jumpNextTask();
+    		outb(0x20, 0x20);
+	    	outb(0xa0, 0x20);
+    		jumpToAddress(address);
+    	}
+	}
+    outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }
-
-bool keypressed = 0;
 
 __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame) {
 	uint8_t scanCode = inb(0x60);
 	uint8_t chr = 0;
 
-    keypressed = 1;
-
-	Keyboardhandler(scanCode);
-	
-	if (*KEY == '\n') write_serial('\r');
-	write_serial(*KEY);
-	puts(std::hex(scanCode));
+	if (KEY == 0) {
+		Keyboardhandler(scanCode);
+		if (scanCode == 0x1C) KEY = 10;
+		else if (scanCode == 0x0E) KEY = 127;
+		if (KEY == '\n') puts("\n\r");
+		write_serial(KEY);
+		puts(std::hex(scanCode));
+	}
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
+}
+
+char pollKey(char* e) {
+	*e = KEY;
+	KEY = 0;
+	return *e;
 }
 
 void print(char* str) {
@@ -81,7 +108,6 @@ __attribute__((interrupt)) void isr13(interrupt_frame* frame) {
 	register uint64_t* rsp asm("rsp");
 	uint64_t errorcode = *rsp;
 	cls(0x0000FF);
-	std::stdin cout;
 	
 	cout.color(0xffffff);
 	cout << "General protection fault!\nError code: 0x" << std::hex(errorcode) << std::endl;
@@ -104,7 +130,6 @@ __attribute__((interrupt)) void isr13(interrupt_frame* frame) {
 };
 __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
 	cls(0x0000FF);
-	std::stdin cout;
 	cout << "\0m[\xff\xff\xff]PageFault!" << std::endl;
 	asm("mov %cr2, %rax");
 	gregister(rax);
