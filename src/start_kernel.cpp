@@ -25,7 +25,6 @@ extern "C" void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color)
 
 extern IDTR idtTable;
 extern IDT64 IDTs;
-extern void** exception_handlers;
 
 extern "C" void detectFPU();
 extern "C" void detectSSE();
@@ -85,6 +84,16 @@ bool sort(int a, int b) {
     return a < b;
 }
 
+void thread1() {
+    std::stdin cout;
+    while(1) cout << 'a';
+}
+
+void thread2() {
+    std::stdin cout;
+    while(1) cout << 'b';
+}
+
 extern "C" void start_K(){
 
     VGA_WIDTH = framebuffer->width/16;
@@ -142,7 +151,8 @@ extern "C" void start_K(){
     
     KEY = (char*)alloc(1);
     
-    /*
+    
+    
     detectFPU();
     if (fpuPresent == 0) {
         cout << "FPU [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
@@ -151,7 +161,7 @@ extern "C" void start_K(){
         while(1);
     }
     
-    /*detectSSE();
+    detectSSE();
     if (fpuPresent == 0) {
         cout << "SSE [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
     } else {
@@ -159,7 +169,7 @@ extern "C" void start_K(){
         while(1);
     }
     
-    enableAVX();
+    /*enableAVX();
     */
 
     cout.color(0xffff00);
@@ -172,29 +182,45 @@ extern "C" void start_K(){
 
     DrawSquare(200, 400, 200, 300, 0xffff00);
 	
-    /*for(int i = 0; i <= 31; i++) {
-      if (exception_handlers[i] != nullptr)
-      add_IRQ(i, exception_handlers[i], IDT_TG);
-    }*/
+	add_IRQ(0, (void*)&isr0, IDT_TG);
+	add_IRQ(1, (void*)&isr1, IDT_TG);
+	add_IRQ(2, (void*)&isr2, IDT_TG);
+	add_IRQ(3, (void*)&isr3, IDT_TG);
+	add_IRQ(4, (void*)&isr4, IDT_TG);
+	add_IRQ(5, (void*)&isr5, IDT_TG);
+	add_IRQ(6, (void*)&isr6, IDT_TG);
+	add_IRQ(7, (void*)&isr7, IDT_TG);
+	add_IRQ(8, (void*)&isr8, IDT_TG);
+	add_IRQ(9, (void*)&isr9, IDT_TG);
+	add_IRQ(10, (void*)&isr10, IDT_TG);
+	add_IRQ(11, (void*)&isr11, IDT_TG);
+	add_IRQ(12, (void*)&isr12, IDT_TG);
+	add_IRQ(13, (void*)&isr13, IDT_TG);
+	add_IRQ(14, (void*)&isr14, IDT_TG);
+	add_IRQ(15, (void*)&isr16, IDT_TG);
+	add_IRQ(17, (void*)&isr17, IDT_TG);
+	add_IRQ(18, (void*)&isr18, IDT_TG);
+	add_IRQ(19, (void*)&isr19, IDT_TG);
+	add_IRQ(20, (void*)&isr20, IDT_TG);
+	add_IRQ(21, (void*)&isr21, IDT_TG);
+	add_IRQ(28, (void*)&isr28, IDT_TG);
+	add_IRQ(29, (void*)&isr29, IDT_TG);
+	add_IRQ(30, (void*)&isr30, IDT_TG);
     
-    add_IRQ(0xe, exception_handlers[0xe], IDT_TG);
-    //add_IRQ(0x8, exception_handlers[0x8], IDT_TG);
-    //add_IRQ(0xd, exception_handlers[0xd], IDT_TG);
-    
-    add_IRQ(ISA::PIT, (void*)pit_handler, IDT_IG);
+    add_IRQ(ISA::PIT, (void*)Schedule, IDT_IG);
+    add_IRQ(ISA::KEYBOARD, (void*)keyboardHandler, IDT_IG);
 
     cout.color(0xffffff);
     cout << pci::GetPresent() << " PCI slots present\n";
 
     InitIDT();
-    
-    
-    asm("int $0xe;");
       
     timer::PIT::init(1000);
-    
-    cout << "hello to pit\n";
 
     //_hRAMDISK();
-    while(1); //mainloop
+    extern uint64_t _ticks;
+    extern bool keypressed;
+    
+    while(1) {//
+    } //mainloop
 }

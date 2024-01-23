@@ -1,4 +1,4 @@
-section text
+section .text
 global detectFPU
 global detectSSE
 [bits 64]
@@ -33,6 +33,6 @@ noSSE:
 global fpuPresent
 global ssePresent
 
-section data
+section .data
   fpuPresent: dw 0x55AA
   ssePresent: db 0

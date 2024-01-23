@@ -7,6 +7,7 @@
 #include "font.hpp"
 #include "stdio"
 #include "printf.h"
+#include "serial.h"
 #include "allocator.hpp"
 #include "KBscancodes.hpp"
 #include "paging.hpp"
@@ -59,13 +60,36 @@ struct IDTR{
   uint64_t address;
 }__attribute__((packed));
 
-__attribute__((interrupt)) extern "C" void Schedule(interrupt_frame* frame);
-extern "C" __attribute__((naked)) void irq1(interrupt_frame* frame);
-extern "C" void isr1_handler(interrupt_frame* frame);
-extern "C" void IRQ0_handler();
+__attribute__((interrupt)) void Schedule(interrupt_frame* frame);
+__attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame);
 extern "C" void init_PIT();
   
 void InitIDT();
 void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate);
 void add_IRQ(uint8_t IRQ, void*function, uint8_t gate);
+
+__attribute__((interrupt)) void isr0(interrupt_frame* frame);
+__attribute__((interrupt)) void isr1(interrupt_frame* frame);
+__attribute__((interrupt)) void isr2(interrupt_frame* frame);
+__attribute__((interrupt)) void isr3(interrupt_frame* frame);
+__attribute__((interrupt)) void isr4(interrupt_frame* frame);
+__attribute__((interrupt)) void isr5(interrupt_frame* frame);
+__attribute__((interrupt)) void isr6(interrupt_frame* frame);
+__attribute__((interrupt)) void isr7(interrupt_frame* frame);
+__attribute__((interrupt)) void isr8(interrupt_frame* frame);
+__attribute__((interrupt)) void isr9(interrupt_frame* frame);
+__attribute__((interrupt)) void isr10(interrupt_frame* frame);
+__attribute__((interrupt)) void isr11(interrupt_frame* frame);
+__attribute__((interrupt)) void isr12(interrupt_frame* frame);
+__attribute__((interrupt)) void isr13(interrupt_frame* frame);
+__attribute__((interrupt)) void isr14(interrupt_frame* frame);
+__attribute__((interrupt)) void isr16(interrupt_frame* frame);
+__attribute__((interrupt)) void isr17(interrupt_frame* frame);
+__attribute__((interrupt)) void isr18(interrupt_frame* frame);
+__attribute__((interrupt)) void isr19(interrupt_frame* frame);
+__attribute__((interrupt)) void isr20(interrupt_frame* frame);
+__attribute__((interrupt)) void isr21(interrupt_frame* frame);
+__attribute__((interrupt)) void isr28(interrupt_frame* frame);
+__attribute__((interrupt)) void isr29(interrupt_frame* frame);
+__attribute__((interrupt)) void isr30(interrupt_frame* frame);
 #endif

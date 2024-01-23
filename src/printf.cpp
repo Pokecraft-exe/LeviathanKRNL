@@ -12,6 +12,7 @@ void cls(uint32_t color)
 	for (uint32_t i = 0; i <= max; i++) {
 		fb[i] = color;
 	}
+	CursorPosition = 0;
 }
 
 void SetCursorPosition(uint16_t position){

@@ -12,7 +12,7 @@ void InitIDT(){
     asm("lidt %0" :: "m"(idtTable));
     asm ("sti");
 
-    RemapPic(0x20,0b00000001);
+    RemapPic(0x20,0b00000011);
 }
   
 void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate) {
@@ -33,8 +33,30 @@ void add_IRQ(uint8_t IRQ, void* function, uint8_t gate) {
 	IDTs[IRQ].codeseg = 0x8;
 }
 
-__attribute__((interrupt)) extern "C" void Schedule(interrupt_frame* frame) {
+int _ticks = 0;
+
+__attribute__((interrupt)) void Schedule(interrupt_frame* frame) {
+    _ticks++;
     DrawChar('a', 500, 500, 0x00FF, 2);
+	outb(0x20, 0x20);
+	outb(0xa0, 0x20);
+}
+
+bool keypressed = 0;
+
+__attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame) {
+	uint8_t scanCode = inb(0x60);
+	uint8_t chr = 0;
+
+    keypressed = 1;
+
+	Keyboardhandler(scanCode);
+	
+	if (*KEY == '\n') write_serial('\r');
+	write_serial(*KEY);
+	puts(std::hex(scanCode));
+	outb(0x20, 0x20);
+	outb(0xa0, 0x20);
 }
 
 void print(char* str) {
@@ -61,7 +83,7 @@ __attribute__((interrupt)) void isr13(interrupt_frame* frame) {
 	cls(0x0000FF);
 	std::stdin cout;
 	
-	cout.color(0);
+	cout.color(0xffffff);
 	cout << "General protection fault!\nError code: 0x" << std::hex(errorcode) << std::endl;
 	if (rsp != 0) {
 		limine_memmap_entry* last = memmap::memmap.entries[0];
@@ -83,13 +105,17 @@ __attribute__((interrupt)) void isr13(interrupt_frame* frame) {
 __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
 	cls(0x0000FF);
 	std::stdin cout;
-	cout << "\0m[\0\0\0]PageFault!" << std::endl;
+	cout << "\0m[\xff\xff\xff]PageFault!" << std::endl;
 	asm("mov %cr2, %rax");
 	gregister(rax);
 	uint64_t* memory = (uint64_t*)rax;
-	cout << "cr2 = " << (void*)memory << std::endl;
-	cout << "memory dump at " << (void*)memory << std::endl;
-	cout << std::hex(*memory-8) << std::hex(*memory) << std::hex(*memory=8) << std::endl;
+	if (memory != nullptr) {
+    	cout << "cr2 = " << (void*)memory << std::endl;
+	    cout << "memory dump at " << (void*)memory << std::endl;
+	    cout << std::hex(*(memory-8)) << std::hex(*memory) << std::hex(*(memory+8)) << std::endl;
+	} else {
+	    cout << "no memory dump for software interrupts" << std::endl;
+	}
 	while(1);
 };
 __attribute__((interrupt)) void isr16(interrupt_frame* frame) {print("float exception");while(1);};
@@ -101,40 +127,3 @@ __attribute__((interrupt)) void isr21(interrupt_frame* frame) {print("control pr
 __attribute__((interrupt)) void isr28(interrupt_frame* frame) {print("hypervisor injection exception");while(1);};
 __attribute__((interrupt)) void isr29(interrupt_frame* frame) {print("VMM communication error");while(1);};
 __attribute__((interrupt)) void isr30(interrupt_frame* frame) {print("Security exception");while(1);};
-
-extern "C" void isr0xe();
-
-void* exception_handlers[32] = {
-(void*)&isr0,
-(void*)&isr1,
-(void*)&isr2,
-(void*)&isr3,
-(void*)&isr4,
-(void*)&isr5,
-(void*)&isr6,
-(void*)&isr7,
-(void*)&isr8,
-(void*)&isr9,
-(void*)&isr10,
-(void*)&isr11,
-(void*)&isr12,
-(void*)&isr13,
-(void*)&isr0xe,
-nullptr,
-(void*)&isr16,
-(void*)&isr17,
-(void*)&isr18,
-(void*)&isr19,
-(void*)&isr20,
-(void*)&isr21,
-nullptr,
-nullptr,
-nullptr,
-nullptr,
-nullptr,
-nullptr,
-(void*)&isr28,
-(void*)&isr29,
-(void*)&isr30,
-nullptr
-};
