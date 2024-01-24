@@ -2,7 +2,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include "memmap.hpp"
-#include "algorythm"
+#include "lalgorythm"
 //#define NULL 0
 #define HEAP_CAPACITY 0x1
 #define CHUNK_LIST_CAP 2048

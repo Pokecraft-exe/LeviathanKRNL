@@ -41,6 +41,7 @@ bool isSchedulingActive = false;
 
 __attribute__((interrupt)) void Schedule(interrupt_frame* frame) {
     timer::PIT::ticks++;
+    //puts(std::hex(frame->rip));
 	if (isSchedulingActive) {
 	    if (timer::PIT::ticks % 10) {
     
@@ -72,9 +73,6 @@ __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame) {
 		Keyboardhandler(scanCode);
 		if (scanCode == 0x1C) KEY = 10;
 		else if (scanCode == 0x0E) KEY = 127;
-		if (KEY == '\n') puts("\n\r");
-		write_serial(KEY);
-		puts(std::hex(scanCode));
 	}
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
@@ -87,28 +85,28 @@ char pollKey(char* e) {
 }
 
 void print(char* str) {
-	cls(0);
-	DrawString(str, 100, 100, 0xff, 2);
+    uint32_t c = cout.color();
+    cout.color(0xff0000);
+	cout << str;
+	cout.color(c);
 }
 
-__attribute__((interrupt)) void isr0(interrupt_frame* frame) {print("division by 0");while(1);};
-__attribute__((interrupt)) void isr1(interrupt_frame* frame) {print("debug");while(1);};
-__attribute__((interrupt)) void isr2(interrupt_frame* frame) {print("nmi");while(1);};
-__attribute__((interrupt)) void isr3(interrupt_frame* frame) {print("breakpoint");while(1);};
-__attribute__((interrupt)) void isr4(interrupt_frame* frame) {print("overflow");while(1);};
-__attribute__((interrupt)) void isr5(interrupt_frame* frame) {print("table overload");while(1);};
-__attribute__((interrupt)) void isr6(interrupt_frame* frame) {print("fake instruction");while(1);};
-__attribute__((interrupt)) void isr7(interrupt_frame* frame) {print("FPU don't exist");while(1);};
-__attribute__((interrupt)) void isr8(interrupt_frame* frame) {print("double fault");while(1);};
-__attribute__((interrupt)) void isr9(interrupt_frame* frame) {print("coprocessor segment overrun");while(1);};
-__attribute__((interrupt)) void isr10(interrupt_frame* frame) {print("invalid TSS");while(1);};
-__attribute__((interrupt)) void isr11(interrupt_frame* frame) {print("segment not present");while(1);};
-__attribute__((interrupt)) void isr12(interrupt_frame* frame) {print("stack-segment fault");while(1);};
-__attribute__((interrupt)) void isr13(interrupt_frame* frame) {
-	register uint64_t* rsp asm("rsp");
-	uint64_t errorcode = *rsp;
+__attribute__((interrupt)) void isr0(interrupt_frame* frame) {print("division by 0");};
+__attribute__((interrupt)) void isr1(interrupt_frame* frame) {print("debug");};
+__attribute__((interrupt)) void isr2(interrupt_frame* frame) {print("nmi");;};
+__attribute__((interrupt)) void isr3(interrupt_frame* frame) {print("breakpoint");};
+__attribute__((interrupt)) void isr4(interrupt_frame* frame) {print("overflow");};
+__attribute__((interrupt)) void isr5(interrupt_frame* frame) {print("table overload");};
+__attribute__((interrupt)) void isr6(interrupt_frame* frame) {print("fake instruction");};
+__attribute__((interrupt)) void isr7(interrupt_frame* frame) {print("FPU don't exist");};
+__attribute__((interrupt)) void isr8(interrupt_frame* frame) {print("double fault");};
+__attribute__((interrupt)) void isr9(interrupt_frame* frame) {print("coprocessor segment overrun");};
+__attribute__((interrupt)) void isr10(interrupt_frame* frame) {print("invalid TSS");};
+__attribute__((interrupt)) void isr11(interrupt_frame* frame) {print("segment not present");};
+__attribute__((interrupt)) void isr12(interrupt_frame* frame) {print("stack-segment fault");};
+__attribute__((interrupt)) void isr13(interrupt_frame* frame, unsigned long errorcode) {
 	cls(0x0000FF);
-	
+	register uint64_t* rsp asm("rsp");
 	cout.color(0xffffff);
 	cout << "General protection fault!\nError code: 0x" << std::hex(errorcode) << std::endl;
 	if (rsp != 0) {
@@ -131,7 +129,7 @@ __attribute__((interrupt)) void isr13(interrupt_frame* frame) {
 __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
 	cls(0x0000FF);
 	cout << "\0m[\xff\xff\xff]PageFault!" << std::endl;
-	asm("mov %cr2, %rax");
+	asm("mov %rax, %cr2");
 	gregister(rax);
 	uint64_t* memory = (uint64_t*)rax;
 	if (memory != nullptr) {
@@ -143,12 +141,12 @@ __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
 	}
 	while(1);
 };
-__attribute__((interrupt)) void isr16(interrupt_frame* frame) {print("float exception");while(1);};
-__attribute__((interrupt)) void isr17(interrupt_frame* frame) {print("alignement check");while(1);};
-__attribute__((interrupt)) void isr18(interrupt_frame* frame) {print("machine check");while(1);};
-__attribute__((interrupt)) void isr19(interrupt_frame* frame) {print("SMID float exception");while(1);};
-__attribute__((interrupt)) void isr20(interrupt_frame* frame) {print("virtualization exception");while(1);};
-__attribute__((interrupt)) void isr21(interrupt_frame* frame) {print("control protection exception");while(1);};
-__attribute__((interrupt)) void isr28(interrupt_frame* frame) {print("hypervisor injection exception");while(1);};
-__attribute__((interrupt)) void isr29(interrupt_frame* frame) {print("VMM communication error");while(1);};
-__attribute__((interrupt)) void isr30(interrupt_frame* frame) {print("Security exception");while(1);};
+__attribute__((interrupt)) void isr16(interrupt_frame* frame) {print("float exception");};
+__attribute__((interrupt)) void isr17(interrupt_frame* frame) {print("alignement check");};
+__attribute__((interrupt)) void isr18(interrupt_frame* frame) {print("machine check");};
+__attribute__((interrupt)) void isr19(interrupt_frame* frame) {print("SMID float exception");};
+__attribute__((interrupt)) void isr20(interrupt_frame* frame) {print("virtualization exception");};
+__attribute__((interrupt)) void isr21(interrupt_frame* frame) {print("control protection exception");};
+__attribute__((interrupt)) void isr28(interrupt_frame* frame) {print("hypervisor injection exception");};
+__attribute__((interrupt)) void isr29(interrupt_frame* frame) {print("VMM communication error");};
+__attribute__((interrupt)) void isr30(interrupt_frame* frame) {print("Security exception");};

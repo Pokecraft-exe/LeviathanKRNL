@@ -1,4 +1,6 @@
+#pragma once
 #include "stdio"
+#include "pci.hpp"
 #define	SATA_SIG_ATA	0x00000101	// SATA drive
 #define	SATA_SIG_ATAPI	0xEB140101	// SATAPI drive
 #define	SATA_SIG_SEMB	0xC33C0101	// Enclosure management bridge
@@ -12,6 +14,8 @@
  
 #define HBA_PORT_IPM_ACTIVE 1
 #define HBA_PORT_DET_PRESENT 3
+
+typedef pci::pciPresent ahci;
 
 struct HBA_PORT
 {
@@ -60,3 +64,7 @@ struct HBA_MEM
 	// 0x100 - 0x10FF, Port control registers
 	HBA_PORT ports[1];	// 1 ~ 32
 };
+
+extern ahci ahciController[];
+
+int findAHCI();

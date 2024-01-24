@@ -1,9 +1,17 @@
+#pragma once
 #include "IO.h"
+#include "lalgorythm"
 #define functionPerSlots 8
 #define slotPerBuses 32
 #define busesPerPCI 256
 
 namespace pci {
+
+struct pciPresent {
+	uint8_t bus : 8;
+	uint8_t slot : 5;
+	uint8_t function : 3;
+};
 
 struct BARlayout {
     bool zero : 1;
@@ -87,7 +95,7 @@ struct header0 : commonHeader {
     uint8_t capabilitiesPointer;
     uint32_t reserved__;
     uint8_t maxLatency;
-    uint8_t minGraand;
+    uint8_t minGrant;
     uint8_t interruptPIN;
     uint8_t interruptLine;
 };
@@ -144,8 +152,10 @@ struct header2 : commonHeader {
     uint32_t PCcardLegacyModeBaseAddress;
 };
 
-extern uint32_t vendorIDs[];
+extern pciPresent PCIs[];
+extern int pciNumber;
 uint16_t ReadWord(uint8_t bus, uint8_t slot, uint8_t func, uint8_t offset);
+commonHeader readCommonHeader(uint8_t bus, uint8_t slot, uint8_t function);
 uint16_t CheckVendor(uint8_t bus, uint8_t slot);
 int GetPresent();
 }

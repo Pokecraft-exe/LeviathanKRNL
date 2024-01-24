@@ -2,6 +2,7 @@
 #include "font.hpp"
 #include "IDT.h"
 #include "allocator.hpp"
+#include "ahci.hpp"
 /*#include "sound.h"
 #include "mouse.h"
 #include "Time.h"*/
@@ -10,7 +11,7 @@
 #include "paging.hpp"
 #include "kernel.h"
 #include "stdio"
-#include "algorythm"
+#include "lalgorythm"
 #include "color.hpp"
 #include "pit.hpp"
 #include "pci.hpp"
@@ -230,6 +231,24 @@ extern "C" void start_K(){
         }
         if (command == "reboot") reboot();
         if (command == "qshutdown") Port16Bit(0x604).Write(0x2000);
+        if (command == "ahci") {
+            int ahcinum = findAHCI();
+            cout << "there is " << ahcinum << " ahci sata / ide controller present\n";
+        }
+        if (command == "usb") {
+            int i = 0;
+            for (int j = 0; j < pci::pciNumber; j++) {
+		        uint16_t word = pci::ReadWord(pci::PCIs[j].bus, pci::PCIs[j].slot, pci::PCIs[j].function, 0x8);
+		        uint8_t baseClass = (word & 0xff00) >> 8;
+		        uint8_t subClass = (word & 0x00ff);
+                if (baseClass == 0xC) { // is serial bus class?
+	                if (subClass == 0x3) { // is USB?
+				        i++;
+                    }
+		        }
+            }
+            cout << "there is " << i << " USB controller present\n";
+        }
         cout << '>';
     } //mainloop
 }

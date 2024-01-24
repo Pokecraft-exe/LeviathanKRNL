@@ -63,6 +63,50 @@ void probe_port(HBA_MEM *abar)
 	}
 }
 
-int findAHCI() {
+ahci ahciController[10] = {0};
+uint8_t ahciNumber = 0;
 
+pci::commonHeader* readAHCI(int ahcinum) {
+	pci::commonHeader* header = nullptr;
+	if (ahcinum <= ahciNumber) {
+		uint8_t bus = ahciController[ahcinum].bus;
+		uint8_t slot = ahciController[ahcinum].slot;
+		uint8_t function = ahciController[ahcinum].function;
+		
+		pci::commonHeader common = pci::readCommonHeader(bus, slot, function);
+		if (common.headerType == 0x0) {
+			cout << "ahci " << ahcinum << " headertype of 0x0\n";
+			//pci::header0
+		}
+		if (common.headerType == 0x1) {
+			cout << "ahci " << ahcinum << " headertype of 0x1\n";
+			//pci::header1
+		}
+		if (common.headerType == 0x2) {
+			cout << "ahci " << ahcinum << " headertype of 0x2\n";
+			//pci::header2
+		}
+	}
+	return header;
+}
+
+int findAHCI() {
+	int i = 0;
+    for (int j = 0; j < pci::pciNumber; j++) {
+		uint16_t word = pci::ReadWord(pci::PCIs[j].bus, pci::PCIs[j].slot, pci::PCIs[j].function, 0x8);
+		uint8_t baseClass = (word & 0xff00) >> 8;
+		uint8_t subClass = (word & 0x00ff);
+        if (baseClass == 0x1) { // is controller storage class?
+			cout << "subclass: " << std::hex(subClass) << std::endl;
+	        if (subClass == 0x6 || subClass == 0x1) { // is sata or IDE?
+				ahciController[i].bus = pci::PCIs[j].bus;
+				ahciController[i].slot = pci::PCIs[j].slot;
+				ahciController[i].function = pci::PCIs[j].function;
+				//readAHCI(i);
+				i++;
+            }
+		}
+    }
+	ahciNumber = i;
+	return i;
 }

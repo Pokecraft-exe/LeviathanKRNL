@@ -83,7 +83,7 @@ __attribute__((interrupt)) void isr9(interrupt_frame* frame);
 __attribute__((interrupt)) void isr10(interrupt_frame* frame);
 __attribute__((interrupt)) void isr11(interrupt_frame* frame);
 __attribute__((interrupt)) void isr12(interrupt_frame* frame);
-__attribute__((interrupt)) void isr13(interrupt_frame* frame);
+__attribute__((interrupt)) void isr13(interrupt_frame* frame, unsigned long errorcode);
 __attribute__((interrupt)) void isr14(interrupt_frame* frame);
 __attribute__((interrupt)) void isr16(interrupt_frame* frame);
 __attribute__((interrupt)) void isr17(interrupt_frame* frame);
