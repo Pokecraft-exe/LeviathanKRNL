@@ -76,6 +76,9 @@ void printchr(const char chr, uint32_t color){
   	DrawCharBackground(chr, x*16, y*16, color, 0, 2);
   	CursorPosition++;
   }
+  if (CursorPosition > VGA_WIDTH * 45) {
+	cls(0);
+  }
 }
 
 char string[200];

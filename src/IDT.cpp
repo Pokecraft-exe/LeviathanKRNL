@@ -13,16 +13,7 @@ void InitIDT(){
     asm("lidt %0" :: "m"(idtTable));
     asm ("sti");
 
-    RemapPic(0x20,0b00000011);
-}
-  
-void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate) {
-  	//IRQ_clear_mask(IRQ);
-	IDTs[IRQ].offset_low  = (uint16_t)(((uint64_t)function & 0x000000000000ffff));
-	IDTs[IRQ].offset_mid  = (uint16_t)(((uint64_t)function & 0x00000000ffff0000) >> 16);
-	IDTs[IRQ].offset_high = (uint32_t)(((uint64_t)function & 0xffffffff00000000) >> 32);
-	IDTs[IRQ].types_attr = 0b10000000 | gate;
-	IDTs[IRQ].codeseg = 0x8;
+    RemapPic(0b00100000,0b00000011);
 }
 
 void add_IRQ(uint8_t IRQ, void* function, uint8_t gate) {
@@ -34,36 +25,8 @@ void add_IRQ(uint8_t IRQ, void* function, uint8_t gate) {
 	IDTs[IRQ].codeseg = 0x8;
 }
 
-int currentTask = 0;
-extern "C" void* jumpNextTask();
-extern "C" void jumpToAddress(void*);
-bool isSchedulingActive = false;
-
-__attribute__((interrupt)) void Schedule(interrupt_frame* frame) {
-    timer::PIT::ticks++;
-    //puts(std::hex(frame->rip));
-	if (isSchedulingActive) {
-	    if (timer::PIT::ticks % 10) {
-    
-        	// save the last task's state
-        	tasks[currentTask].cpu.rip = frame->rip;
-        	tasks[currentTask].cpu.rsp = frame->rsp;
-    	    tasks[currentTask].cpu.rflags = frame->rflags;
-        
-	        currentTask++;
-        
-        	//load next task
-        	GlobalCPUState = tasks[currentTask].cpu;
-        
-        	void* address = jumpNextTask();
-    		outb(0x20, 0x20);
-	    	outb(0xa0, 0x20);
-    		jumpToAddress(address);
-    	}
-	}
-    outb(0x20, 0x20);
-	outb(0xa0, 0x20);
-}
+int mouseX = 0;
+int mouseY = 50;
 
 __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame) {
 	uint8_t scanCode = inb(0x60);
@@ -74,6 +37,23 @@ __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame) {
 		if (scanCode == 0x1C) KEY = 10;
 		else if (scanCode == 0x0E) KEY = 127;
 	}
+	outb(0x20, 0x20);
+	outb(0xa0, 0x20);
+}
+
+__attribute__((interrupt)) void mouseHandler(interrupt_frame* frame) {
+	bool isMouse = true;//(inb(0x64) & 0x20) >> 5;
+	/*if (isMouse) {
+		uint8_t byte1 = inb(0x60);
+		uint8_t byte2 = inb(0x60);
+		uint8_t byte3 = inb(0x60);
+		if (byte1 & 0b00100000) {
+			mouseX -= byte2;
+		} else {
+			mouseX += byte2;
+		}
+	}*/
+	DrawChar('^', mouseX, mouseY, 0xffffff, 1);
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }
@@ -105,7 +85,7 @@ __attribute__((interrupt)) void isr10(interrupt_frame* frame) {print("invalid TS
 __attribute__((interrupt)) void isr11(interrupt_frame* frame) {print("segment not present");};
 __attribute__((interrupt)) void isr12(interrupt_frame* frame) {print("stack-segment fault");};
 __attribute__((interrupt)) void isr13(interrupt_frame* frame, unsigned long errorcode) {
-	cls(0x0000FF);
+	//cls(0x0000FF);
 	register uint64_t* rsp asm("rsp");
 	cout.color(0xffffff);
 	cout << "General protection fault!\nError code: 0x" << std::hex(errorcode) << std::endl;
@@ -126,16 +106,31 @@ __attribute__((interrupt)) void isr13(interrupt_frame* frame, unsigned long erro
 	while(inb(0x60) != 0x5E);
 	restart();
 };
+extern "C" void endTextSection();
 __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
-	cls(0x0000FF);
+	getState();
+	CPUState errorState = GlobalCPUState;
+	//cls(0x0000FF);
 	cout << "\0m[\xff\xff\xff]PageFault!" << std::endl;
 	asm("mov %rax, %cr2");
 	gregister(rax);
 	uint64_t* memory = (uint64_t*)rax;
 	if (memory != nullptr) {
-    	cout << "cr2 = " << (void*)memory << std::endl;
-	    cout << "memory dump at " << (void*)memory << std::endl;
-	    cout << std::hex(*(memory-8)) << std::hex(*memory) << std::hex(*(memory+8)) << std::endl;
+	    cout << "memory dump at CR2 = " << (void*)memory << std::endl;
+	    cout << std::hex(*(memory-8)) << " " << std::hex(*memory) << " " << std::hex(*(memory+8)) << std::endl;
+		cout << "\ninterpret string:\n";
+		for (char* address = (char*)(memory-9); address < (char*)(memory+8); cout << (char)*(address++));
+		cout << "\n\nrflags=" << std::hex(errorState.rflags) << std::endl;
+		cout << "rip=" << std::hex(frame->rip) << std::endl;
+		cout << "rax=" << std::hex(errorState.rax) << std::endl;
+		if ((uint64_t)memory > (uint64_t)&endTextSection) {
+			cout << "\n \0m[\xff\xff\0\0]exception in data section\n";
+		} else if ((uint64_t)memory < (uint64_t)0xffffffff80000000) {
+			cout << "\n \0m[\xff\xff\0\0]exception below text section\n";
+		} else {
+			cout << "\n \0m[\xff\xff\0\0]exception in text section\n";
+		}
+
 	} else {
 	    cout << "no memory dump for software interrupts" << std::endl;
 	}

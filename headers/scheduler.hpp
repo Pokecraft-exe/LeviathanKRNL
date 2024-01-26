@@ -2,16 +2,18 @@
 #include "IO.h"
 #include "IDT.h"
 
+extern "C" void Schedule();
+
 namespace TaskManager {
 
 class Task{
 public:
     bool active = 0;
     bool present = 0;
-    uint8_t stack[4096];
     void* args;
     int alen;
-    CPUState cpu;
+    CPUState* cpu;
+    uint8_t stack[4096];
     Task();
     void start();
     void join();
@@ -21,7 +23,8 @@ public:
 
 Task* Thread(void* target, void* args, int len);
 
+
+extern Task tasks[];
+int taskNumber();
+
 }
-
-
-extern TaskManager::Task tasks[];

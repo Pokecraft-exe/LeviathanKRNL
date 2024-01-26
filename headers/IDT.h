@@ -61,14 +61,12 @@ struct IDTR{
   uint64_t address;
 }__attribute__((packed));
 
-__attribute__((interrupt)) void Schedule(interrupt_frame* frame);
 __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame);
-extern "C" void init_PIT();
+__attribute__((interrupt)) void mouseHandler(interrupt_frame* frame) ;
 char pollKey(char* e);
   
 void InitIDT();
-void add_IRQ(uint8_t IRQ, void(*function)(interrupt_frame* frame), uint8_t gate);
-void add_IRQ(uint8_t IRQ, void*function, uint8_t gate);
+void add_IRQ(uint8_t IRQ, void* function, uint8_t gate);
 
 __attribute__((interrupt)) void isr0(interrupt_frame* frame);
 __attribute__((interrupt)) void isr1(interrupt_frame* frame);

@@ -15,6 +15,7 @@
 #include "color.hpp"
 #include "pit.hpp"
 #include "pci.hpp"
+#include "scheduler.hpp"
 using std::cout, std::cin;
 
 extern "C" void Draw(int, int, uint32_t);
@@ -82,14 +83,6 @@ bool sort(int a, int b) {
     return a < b;
 }
 
-void thread1() {
-    while(1) cout << 'a';
-}
-
-void thread2() {
-    while(1) cout << 'b';
-}
-
 void reboot()
 {
     uint8_t good = 0x02;
@@ -97,6 +90,54 @@ void reboot()
         good = inb(0x64);
     outb(0x64, 0xFE);
     asm("hlt");
+}
+
+string command = "";
+
+void shell() {
+    cout << pci::GetPresent() << " PCI slots present\n";
+    int ahcinum = findAHCI();
+    cout << "there is " << ahcinum << " ahci sata / ide controller present\n";
+
+    while(1) cout << 'b';
+    /*command.resize(100);
+    while(1) {
+        cin >> command;
+        cout << '\n';
+        if (command == "cls") cls(0);
+        if (command == "memmap") {
+            cout.color(0xffff00);
+            cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
+            cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
+            cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
+            cout.color(0xffffff);
+        }
+        if (command == "credit") {
+            cout << "\0m[\xff\xff\xaa]Leviathan Kernel(c) is a property of Pokecraft-exe AKA \nPokechaNyaa, Julian Lavis--Fabbri\n";
+            cout.color(0xffffff);
+        }
+        if (command == "reboot") reboot();
+        if (command == "qshutdown") Port16Bit(0x604).Write(0x2000);
+        if (command == "usb") {
+            int i = 0;
+            for (int j = 0; j < pci::pciNumber; j++) {
+		        uint16_t word = pci::ReadWord(pci::PCIs[j].bus, pci::PCIs[j].slot, pci::PCIs[j].function, 0x8);
+		        uint8_t baseClass = (word & 0xff00) >> 8;
+		        uint8_t subClass = (word & 0x00ff);
+                if (baseClass == 0xC) { // is serial bus class?
+	                if (subClass == 0x3) { // is USB?
+				        i++;
+                    }
+		        }
+            }
+            cout << "there is " << i << " USB controller present\n";
+        }
+        cout << '>';
+    } */
+}
+
+void square() {
+    while(1) DrawSquare(200, 400, 200, 300, 0xffff00);
 }
 
 extern "C" void start_K(){
@@ -199,56 +240,38 @@ extern "C" void start_K(){
 	add_IRQ(29, (void*)&isr29, IDT_TG);
 	add_IRQ(30, (void*)&isr30, IDT_TG);
     
-    add_IRQ(ISA::PIT, (void*)Schedule, IDT_IG);
+    //add_IRQ(ISA::PIT, (void*)Schedule, IDT_IG);
     add_IRQ(ISA::KEYBOARD, (void*)keyboardHandler, IDT_IG);
+    add_IRQ(ISA::PS2, (void*)mouseHandler, IDT_IG);
+
+    // mouse init
+    /*outb(0xD4, 0x64);
+    outb(0xF3, 0x60);
+    while(!(inb(0x64) & 1));
+    uint8_t ack = inb(0x60);
+    outb(0xD4, 0x64);
+    outb(100, 0x60);
+    while(!(inb(0x64) & 1));
+    ack = inb(0x60);
+
+    if (ack == 0xFA) {
+        cout << "Mouse [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
+    } else {
+        cout << "Mouse [\0m[\xff\x00\x00]Not present\x00m[\xff\xff\xff]]]" << std::endl;
+    }*/
+
+    TaskManager::Task* squareThread = TaskManager::Thread((void*)&square, nullptr, 0);
+
+    TaskManager::Task* shellThread = TaskManager::Thread((void*)&shell, nullptr, 0);
+      
 
     InitIDT();
-      
-    timer::PIT::init(1000);
 
-    string command = "";
-    command.resize(100);
+    timer::PIT::init(1000);
 
     //_hRAMDISK();
 
     cout << '>';
 
-    while(1) {
-        cin >> command;
-        cout << '\n';
-        if (command == "cls") cls(0);
-        if (command == "pci") cout << pci::GetPresent() << " PCI slots present\n";
-        if (command == "memmap") {
-            cout.color(0xffff00);
-            cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
-            cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
-            cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
-            cout.color(0xffffff);
-        }
-        if (command == "credit") {
-            cout << "\0m[\xff\xff\xaa]Leviathan Kernel(c) is a property of Pokecraft-exe AKA \nPokechaNyaa, Julian Lavis--Fabbri\n";
-            cout.color(0xffffff);
-        }
-        if (command == "reboot") reboot();
-        if (command == "qshutdown") Port16Bit(0x604).Write(0x2000);
-        if (command == "ahci") {
-            int ahcinum = findAHCI();
-            cout << "there is " << ahcinum << " ahci sata / ide controller present\n";
-        }
-        if (command == "usb") {
-            int i = 0;
-            for (int j = 0; j < pci::pciNumber; j++) {
-		        uint16_t word = pci::ReadWord(pci::PCIs[j].bus, pci::PCIs[j].slot, pci::PCIs[j].function, 0x8);
-		        uint8_t baseClass = (word & 0xff00) >> 8;
-		        uint8_t subClass = (word & 0x00ff);
-                if (baseClass == 0xC) { // is serial bus class?
-	                if (subClass == 0x3) { // is USB?
-				        i++;
-                    }
-		        }
-            }
-            cout << "there is " << i << " USB controller present\n";
-        }
-        cout << '>';
-    } //mainloop
+    while(1) cout << 'a';
 }

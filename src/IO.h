@@ -33,22 +33,17 @@ struct CPUState {
 	uint64_t rsi;
 	uint64_t rdi;
 	uint64_t rbp;
-
-    uint16_t ds;
-	uint16_t es;
-	uint16_t fs;
-	uint16_t gs;
 	
 	uint64_t rdx;
 	uint64_t rcx;
 	uint64_t rbx;
 	uint64_t rax;
 
-    uint16_t cs;
-    uint16_t ss;
     uint64_t rip;
+    uint16_t cs;
     uint64_t rflags;
     uint64_t rsp;
+    uint16_t ss;
 } __attribute__((packed));
 
 extern "C" CPUState GlobalCPUState;

@@ -156,6 +156,7 @@ extern pciPresent PCIs[];
 extern int pciNumber;
 uint16_t ReadWord(uint8_t bus, uint8_t slot, uint8_t func, uint8_t offset);
 commonHeader readCommonHeader(uint8_t bus, uint8_t slot, uint8_t function);
+header0 readHeader0(uint8_t bus, uint8_t slot, uint8_t function, commonHeader common);
 uint16_t CheckVendor(uint8_t bus, uint8_t slot);
 int GetPresent();
 }
