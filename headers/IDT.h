@@ -62,7 +62,8 @@ struct IDTR{
 }__attribute__((packed));
 
 __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame);
-__attribute__((interrupt)) void mouseHandler(interrupt_frame* frame) ;
+__attribute__((interrupt)) void mouseHandler(interrupt_frame* frame);
+void SchedulerHandler(interrupt_frame* frame);
 char pollKey(char* e);
   
 void InitIDT();

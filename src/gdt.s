@@ -1,3 +1,4 @@
+[bits 64]
 gdt_nulldesc:
 	dd 0
 	dd 0	

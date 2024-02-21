@@ -19,7 +19,10 @@ void Task::join() {
     active = false;
 }
 void Task::stop(){
-    active = 0;
+    active = false;
+}
+bool Task::started(){
+    return active;
 }
 void Task::avort(){
     present = false;
@@ -35,11 +38,13 @@ Task* Thread(void* target, void* args, int len) {
     tasks[tnum].cpu->rip = (uint64_t)target;
     tasks[tnum].cpu->rflags = 0x202;
     tasks[tnum].cpu->cs = 0x08;
-    tasks[tnum].cpu->ds = 0x10;
+    /*tasks[tnum].cpu->ds = 0x10;
     tasks[tnum].cpu->es = 0x10;
     tasks[tnum].cpu->fs = 0x10;
-    tasks[tnum].cpu->gs = 0x10;
+    tasks[tnum].cpu->gs = 0x10;*/
     tasks[tnum].cpu->rsp = (uint64_t)&tasks[tnum].stack;
+
+    tasks[tnum].stop();
 
     tnum++;
     return &tasks[tnum-1];
@@ -51,18 +56,23 @@ int taskNumber(){
 }
 
 int currentTask = 0;
-bool isSchedulingActive = false;
+int tasksNotPresents = 0;
 
 extern "C" CPUState* NextTask(CPUState* cpustate) {
-    if (timer::PIT::ticks % 10 != 0 || isSchedulingActive == false) return cpustate;
     // save the last task's state
+    int tnum_ = tnum + 1;
 	TaskManager::tasks[currentTask].cpu = cpustate;
-        
-	currentTask++;
-	currentTask %= tnum;
-        
-    //load next task
-	outb(0x20, 0x20);
-	outb(0xa0, 0x20);
+
+    currentTask++;
+    while (currentTask <= tnum_) {
+        if (TaskManager::tasks[currentTask].started()) { // if next task is ready to be loaded
+            //load next task
+        	return TaskManager::tasks[currentTask].cpu;
+        }
+        currentTask++;
+    }
+    currentTask = 0;
+    
+    //load initial task
 	return TaskManager::tasks[currentTask].cpu;
 }

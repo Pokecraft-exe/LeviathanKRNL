@@ -58,6 +58,9 @@ $(OBJDIR)/allocator.o: $(SRCDIR)/allocator.cpp
 $(OBJDIR)/IDT.o: $(SRCDIR)/IDT.cpp
 	$(CC) $(CFLAGS) -mgeneral-regs-only -c "$(SRCDIR)/IDT.cpp" -o "$(OBJDIR)/IDT.o"
 
+$(OBJDIR)/scheduler.o: $(SRCDIR)/scheduler.cpp
+	$(CC) $(CFLAGS) -mgeneral-regs-only -c "$(SRCDIR)/scheduler.cpp" -o "$(OBJDIR)/scheduler.o"
+
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $^ -o $@
 	
@@ -70,5 +73,5 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.s
 $(OBJDIR)/%.obj: $(SRCDIR)/%.ls
 	lscc $< -o $@ -f elf64 -cc SysV
 
-clear:
+clean:
 	rm iso_root/boot.elf boot.elf $(OBJ)

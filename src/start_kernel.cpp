@@ -93,14 +93,23 @@ void reboot()
 }
 
 string command = "";
+void colorchange() {
+    uint32_t c = 0x000000ff;
+    while(1) 
+        DrawSquare(200, 400, 200, 300, c++);
+}
 
 void shell() {
+
+    TaskManager::Task* colorThread = TaskManager::Thread((void*)&colorchange, nullptr, 0);
     cout << pci::GetPresent() << " PCI slots present\n";
     int ahcinum = findAHCI();
     cout << "there is " << ahcinum << " ahci sata / ide controller present\n";
 
-    while(1) cout << 'b';
-    /*command.resize(100);
+    cout << "\n\n type \"help\" to get the list of avaliable commands\n";
+
+    cout << '>';
+
     while(1) {
         cin >> command;
         cout << '\n';
@@ -132,12 +141,24 @@ void shell() {
             }
             cout << "there is " << i << " USB controller present\n";
         }
+        if (command == "help") {
+            cout << "cls        - clear the shell\n";
+            cout << "memmap     - display the memory usage\n";
+            cout << "credit     - display the author\n";
+            cout << "reboot     - do i have to explain?\n";
+            cout << "qshutsowd  - shutdown for qemu\n";
+            cout << "usb        - display the number of usb devices\n";
+            cout << "colorstart - start a new thread\n";
+            cout << "colorstop  - stop that thread\n";
+        }
+        if (command == "colorstart") colorThread->start();
+        if (command == "colorstop") colorThread->stop();
         cout << '>';
-    } */
+    };
 }
 
 void square() {
-    while(1) DrawSquare(200, 400, 200, 300, 0xffff00);
+    while(1) cout << 'c';//DrawSquare(200, 400, 200, 300, 0xffff00);
 }
 
 extern "C" void start_K(){
@@ -215,34 +236,34 @@ extern "C" void start_K(){
 
     DrawSquare(200, 400, 200, 300, 0xffff00);
 	
-	add_IRQ(0, (void*)&isr0, IDT_TG);
-	add_IRQ(1, (void*)&isr1, IDT_TG);
-	add_IRQ(2, (void*)&isr2, IDT_TG);
-	add_IRQ(3, (void*)&isr3, IDT_TG);
-	add_IRQ(4, (void*)&isr4, IDT_TG);
-	add_IRQ(5, (void*)&isr5, IDT_TG);
-	add_IRQ(6, (void*)&isr6, IDT_TG);
-	add_IRQ(7, (void*)&isr7, IDT_TG);
-	add_IRQ(8, (void*)&isr8, IDT_TG);
-	add_IRQ(9, (void*)&isr9, IDT_TG);
-	add_IRQ(10, (void*)&isr10, IDT_TG);
-	add_IRQ(11, (void*)&isr11, IDT_TG);
-	add_IRQ(12, (void*)&isr12, IDT_TG);
-	add_IRQ(13, (void*)&isr13, IDT_TG);
-	add_IRQ(14, (void*)&isr14, IDT_TG);
-	add_IRQ(15, (void*)&isr16, IDT_TG);
-	add_IRQ(17, (void*)&isr17, IDT_TG);
-	add_IRQ(18, (void*)&isr18, IDT_TG);
-	add_IRQ(19, (void*)&isr19, IDT_TG);
-	add_IRQ(20, (void*)&isr20, IDT_TG);
-	add_IRQ(21, (void*)&isr21, IDT_TG);
-	add_IRQ(28, (void*)&isr28, IDT_TG);
-	add_IRQ(29, (void*)&isr29, IDT_TG);
-	add_IRQ(30, (void*)&isr30, IDT_TG);
+	add_IRQ(0, (void*)&isr0, IDT_IG);
+	add_IRQ(1, (void*)&isr1, IDT_IG);
+	add_IRQ(2, (void*)&isr2, IDT_IG);
+	add_IRQ(3, (void*)&isr3, IDT_IG);
+	add_IRQ(4, (void*)&isr4, IDT_IG);
+	add_IRQ(5, (void*)&isr5, IDT_IG);
+	add_IRQ(6, (void*)&isr6, IDT_IG);
+	add_IRQ(7, (void*)&isr7, IDT_IG);
+	add_IRQ(8, (void*)&isr8, IDT_IG);
+	add_IRQ(9, (void*)&isr9, IDT_IG);
+	add_IRQ(10, (void*)&isr10, IDT_IG);
+	add_IRQ(11, (void*)&isr11, IDT_IG);
+	add_IRQ(12, (void*)&isr12, IDT_IG);
+	add_IRQ(13, (void*)&isr13, IDT_IG);
+	add_IRQ(14, (void*)&isr14, IDT_IG);
+	add_IRQ(15, (void*)&isr16, IDT_IG);
+	add_IRQ(17, (void*)&isr17, IDT_IG);
+	add_IRQ(18, (void*)&isr18, IDT_IG);
+	add_IRQ(19, (void*)&isr19, IDT_IG);
+	add_IRQ(20, (void*)&isr20, IDT_IG);
+	add_IRQ(21, (void*)&isr21, IDT_IG);
+	add_IRQ(28, (void*)&isr28, IDT_IG);
+	add_IRQ(29, (void*)&isr29, IDT_IG);
+	add_IRQ(30, (void*)&isr30, IDT_IG);
     
-    //add_IRQ(ISA::PIT, (void*)Schedule, IDT_IG);
+    add_IRQ(ISA::PIT, (void*)&SchedulerHandler, IDT_IG);
     add_IRQ(ISA::KEYBOARD, (void*)keyboardHandler, IDT_IG);
-    add_IRQ(ISA::PS2, (void*)mouseHandler, IDT_IG);
+    //add_IRQ(ISA::PS2, (void*)mouseHandler, IDT_IG);
 
     // mouse init
     /*outb(0xD4, 0x64);
@@ -260,18 +281,19 @@ extern "C" void start_K(){
         cout << "Mouse [\0m[\xff\x00\x00]Not present\x00m[\xff\xff\xff]]]" << std::endl;
     }*/
 
-    TaskManager::Task* squareThread = TaskManager::Thread((void*)&square, nullptr, 0);
+    command.resize(100);
+
+    TaskManager::Thread(nullptr, nullptr, 0); // init scheduling
 
     TaskManager::Task* shellThread = TaskManager::Thread((void*)&shell, nullptr, 0);
       
-
     InitIDT();
 
     timer::PIT::init(1000);
 
+    shellThread->start();
+
     //_hRAMDISK();
 
-    cout << '>';
-
-    while(1) cout << 'a';
+    shellThread->join();
 }

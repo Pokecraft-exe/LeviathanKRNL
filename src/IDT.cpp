@@ -13,11 +13,10 @@ void InitIDT(){
     asm("lidt %0" :: "m"(idtTable));
     asm ("sti");
 
-    RemapPic(0b00100000,0b00000011);
+    RemapPic(0b00100000,0b00000000);
 }
 
 void add_IRQ(uint8_t IRQ, void* function, uint8_t gate) {
-  	//IRQ_clear_mask(IRQ);	
 	IDTs[IRQ].offset_low  = (uint16_t)(((uint64_t)function & 0x000000000000ffff));
 	IDTs[IRQ].offset_mid  = (uint16_t)(((uint64_t)function & 0x00000000ffff0000) >> 16);
 	IDTs[IRQ].offset_high = (uint32_t)(((uint64_t)function & 0xffffffff00000000) >> 32);
@@ -69,6 +68,7 @@ void print(char* str) {
     cout.color(0xff0000);
 	cout << str;
 	cout.color(c);
+	while(1);
 }
 
 __attribute__((interrupt)) void isr0(interrupt_frame* frame) {print("division by 0");};
@@ -103,8 +103,7 @@ __attribute__((interrupt)) void isr13(interrupt_frame* frame, unsigned long erro
 	} else {
 	    DrawStringBackground("This error is internal to the processor", 0, 40, 2, 0xFFFFFF, 0x0000FF, 1);
 	}
-	while(inb(0x60) != 0x5E);
-	restart();
+	while(1);
 };
 extern "C" void endTextSection();
 __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
@@ -134,7 +133,7 @@ __attribute__((interrupt)) void isr14(interrupt_frame* frame) {
 	} else {
 	    cout << "no memory dump for software interrupts" << std::endl;
 	}
-	while(1);
+	print("");
 };
 __attribute__((interrupt)) void isr16(interrupt_frame* frame) {print("float exception");};
 __attribute__((interrupt)) void isr17(interrupt_frame* frame) {print("alignement check");};

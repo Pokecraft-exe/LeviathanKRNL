@@ -7,11 +7,11 @@ extern "C" void Schedule();
 namespace TaskManager {
 
 class Task{
-public:
     bool active = 0;
-    bool present = 0;
     void* args;
     int alen;
+public:
+    bool present = 0;
     CPUState* cpu;
     uint8_t stack[4096];
     Task();
@@ -19,6 +19,7 @@ public:
     void join();
     void stop();
     void avort();
+    bool started();
 };
 
 Task* Thread(void* target, void* args, int len);
