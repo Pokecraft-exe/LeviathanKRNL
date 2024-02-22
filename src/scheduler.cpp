@@ -7,7 +7,9 @@ namespace TaskManager {
 Task tasks[100] = {};
 
 Task::Task() {
-    
+    present = true;
+    active = false;
+    _id = tnum;
 }
 
 void Task::start() {
@@ -18,33 +20,34 @@ void Task::join() {
     present = false;
     active = false;
 }
-void Task::stop(){
+void Task::stop() {
     active = false;
 }
-bool Task::started(){
+int Task::pid() {
+    return _id;
+}
+bool Task::isStarted() {
     return active;
 }
-void Task::avort(){
+bool Task::isPresent() {
+    return present;
+}
+void Task::abort(){
     present = false;
     active = false;
 }
     
 Task* Thread(void* target, void* args, int len) {
-    tasks[tnum].present = true;
+    tasks[tnum] = Task();
 
-    tasks[tnum].cpu = (CPUState*)(tasks[tnum].stack + 4096 - sizeof(CPUState));
+    tasks[tnum].cpu = (CPUState*)(tasks[tnum].stack + STACKSIZE - sizeof(CPUState));
 
     memset(tasks[tnum].cpu, 0, sizeof(CPUState));
+
     tasks[tnum].cpu->rip = (uint64_t)target;
     tasks[tnum].cpu->rflags = 0x202;
     tasks[tnum].cpu->cs = 0x08;
-    /*tasks[tnum].cpu->ds = 0x10;
-    tasks[tnum].cpu->es = 0x10;
-    tasks[tnum].cpu->fs = 0x10;
-    tasks[tnum].cpu->gs = 0x10;*/
     tasks[tnum].cpu->rsp = (uint64_t)&tasks[tnum].stack;
-
-    tasks[tnum].stop();
 
     tnum++;
     return &tasks[tnum-1];
@@ -53,6 +56,16 @@ Task* Thread(void* target, void* args, int len) {
 int taskNumber(){
     return tnum;
 }
+
+void dump() {
+    using std::cout;
+    cout << "there is " << tnum << " tasks\n";
+    for (int i = 0; i < 100; i++) {
+        if (tasks[i].isPresent()) {
+            cout << "PID " << tasks[i].pid() << " ID: " << i << " active: " << (tasks[i].isStarted() ? "true" : "false") << '\n';
+        }
+    }
+}
 }
 
 int currentTask = 0;
@@ -60,12 +73,11 @@ int tasksNotPresents = 0;
 
 extern "C" CPUState* NextTask(CPUState* cpustate) {
     // save the last task's state
-    int tnum_ = tnum + 1;
 	TaskManager::tasks[currentTask].cpu = cpustate;
 
     currentTask++;
-    while (currentTask <= tnum_) {
-        if (TaskManager::tasks[currentTask].started()) { // if next task is ready to be loaded
+    while (currentTask <= tnum + 1) {
+        if (TaskManager::tasks[currentTask].isStarted()) { // if next task is ready to be loaded
             //load next task
         	return TaskManager::tasks[currentTask].cpu;
         }

@@ -111,13 +111,16 @@ std::istream std::istream::operator >>(string& out) {
 
     while(1) {
         char k = pollKey(&str[i]);
+
         switch (k) {
             case 127:
                 if (i <= 0) break;
                 str[i--] = 0;
-                CursorPosition--;
-                printchr(' ');
-                CursorPosition--;
+                deletechr();
+                if (CursorShown) {
+                    deletechr();
+                    cout << '_';
+                }
                 break;
             case 10:
                 str[i] = 0;
@@ -127,8 +130,16 @@ std::istream std::istream::operator >>(string& out) {
             case 0:
                 break;
             default:
-                cout << str[i];
-                i++;
+                if (CursorShown) {
+                    deletechr();
+                    cout << str[i];
+                    i++;
+                    cout << '_';
+                }
+                else {
+                    cout << str[i];
+                    i++;
+                }
         }
     }
 }

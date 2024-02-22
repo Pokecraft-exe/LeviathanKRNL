@@ -7,13 +7,14 @@
 
 extern int VGA_WIDTH;
 extern uint16_t CursorPosition;
+extern bool CursorShown;
 void cls(uint32_t color = 0);
 void SetCursorPosition(unsigned short position);
 uint16_t PositionFromCoords(uint8_t x, uint8_t y);
 void print(const char* str, uint32_t color = 0xffffff);
 void printNoReturn(const char* str, uint32_t color = 0xffffff);
 void printchr(const char chr, uint32_t color = 0xffffff);
-//void scanf(string address);
+void deletechr();
 
 char* binToStr(uint8_t value);
 char* binToStr(uint16_t value);

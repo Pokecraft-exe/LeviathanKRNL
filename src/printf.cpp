@@ -81,6 +81,12 @@ void printchr(const char chr, uint32_t color){
   }
 }
 
+void deletechr() {
+    CursorPosition--;
+    printchr(' ');
+    CursorPosition--;
+}
+
 char string[200];
 template <typename T>
 char* binToStr(T value) {

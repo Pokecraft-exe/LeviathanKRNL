@@ -2,28 +2,30 @@
 #include "IO.h"
 #include "IDT.h"
 
-extern "C" void Schedule();
+#define STACKSIZE 4096//4084
 
 namespace TaskManager {
 
 class Task{
-    bool active = 0;
-    void* args;
-    int alen;
+    bool active;
+    bool present;
+    uint16_t _id;
 public:
-    bool present = 0;
     CPUState* cpu;
-    uint8_t stack[4096];
+    uint8_t stack[STACKSIZE];
     Task();
+    int pid();
     void start();
     void join();
     void stop();
-    void avort();
-    bool started();
+    void abort();
+    bool isStarted();
+    bool isPresent();
 };
 
 Task* Thread(void* target, void* args, int len);
 
+void dump();
 
 extern Task tasks[];
 int taskNumber();

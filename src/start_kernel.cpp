@@ -16,11 +16,8 @@
 #include "pit.hpp"
 #include "pci.hpp"
 #include "scheduler.hpp"
+#include "shell.hpp"
 using std::cout, std::cin;
-
-extern "C" void Draw(int, int, uint32_t);
-
-extern "C" void DrawSquare(int x, int y, int size_x, int size_y, uint32_t color);
 
 extern IDTR idtTable;
 extern IDT64 IDTs;
@@ -32,50 +29,8 @@ extern "C" uint32_t fpuPresent;
 extern "C" bool ssePresent;
 extern "C" void hello();
 
-void delay(int clocks)
-{
-    asm("push %rax");
-    for(uint64_t i = 0; i < clocks; i+=8){
-        asm("xor %rax, %rax");
-    }
-    asm("pop %rax");
-    return;
-}
-
-extern "C" void breakpoint(){
-    puts("breakpoint\n\r");
-    while (read_serial() != '\r');
-}
-
 uint16_t CursorPosition = 0;
-
-uint64_t formatbytes(uint64_t bytes) {
-    if (bytes < 1024) {
-        return bytes;
-    }
-    else {
-        size_t size = 1024;
-        for (size_t i = 0; bytes / size > 1024; i++) {
-            size *= 1024;
-        }
-        return bytes / size;
-    };
-}
-
-char* getByteFormat(uint64_t bytes) {
-    char* arr[7] = { " B", " KB", " MB", "GB", " TB", " PB", " HB"};
-    if (bytes < 1024) {
-        return arr[0];
-    }
-    else {
-        size_t size = 1024;
-        size_t i = 1;
-        for (i; bytes / size > 1024; i++) {
-            size *= 1024;
-        }
-        return arr[i];
-    };
-}
+bool CursorShown = false;
 
 int cursorpos[2] = { 0, 0 };
 
@@ -83,83 +38,7 @@ bool sort(int a, int b) {
     return a < b;
 }
 
-void reboot()
-{
-    uint8_t good = 0x02;
-    while (good & 0x02)
-        good = inb(0x64);
-    outb(0x64, 0xFE);
-    asm("hlt");
-}
-
-string command = "";
-void colorchange() {
-    uint32_t c = 0x000000ff;
-    while(1) 
-        DrawSquare(200, 400, 200, 300, c++);
-}
-
-void shell() {
-
-    TaskManager::Task* colorThread = TaskManager::Thread((void*)&colorchange, nullptr, 0);
-    cout << pci::GetPresent() << " PCI slots present\n";
-    int ahcinum = findAHCI();
-    cout << "there is " << ahcinum << " ahci sata / ide controller present\n";
-
-    cout << "\n\n type \"help\" to get the list of avaliable commands\n";
-
-    cout << '>';
-
-    while(1) {
-        cin >> command;
-        cout << '\n';
-        if (command == "cls") cls(0);
-        if (command == "memmap") {
-            cout.color(0xffff00);
-            cout << "free memory: " << formatbytes(paging::getFreeMemory()) << getByteFormat(paging::getFreeMemory()) << std::endl;
-            cout << "used memory: " << formatbytes(paging::getUsedMemory()) << getByteFormat(paging::getUsedMemory()) << std::endl;
-            cout << "system memory: " << formatbytes(paging::getSystemMemory()) << getByteFormat(paging::getSystemMemory()) << std::endl;
-            cout.color(0xffffff);
-        }
-        if (command == "credit") {
-            cout << "\0m[\xff\xff\xaa]Leviathan Kernel(c) is a property of Pokecraft-exe AKA \nPokechaNyaa, Julian Lavis--Fabbri\n";
-            cout.color(0xffffff);
-        }
-        if (command == "reboot") reboot();
-        if (command == "qshutdown") Port16Bit(0x604).Write(0x2000);
-        if (command == "usb") {
-            int i = 0;
-            for (int j = 0; j < pci::pciNumber; j++) {
-		        uint16_t word = pci::ReadWord(pci::PCIs[j].bus, pci::PCIs[j].slot, pci::PCIs[j].function, 0x8);
-		        uint8_t baseClass = (word & 0xff00) >> 8;
-		        uint8_t subClass = (word & 0x00ff);
-                if (baseClass == 0xC) { // is serial bus class?
-	                if (subClass == 0x3) { // is USB?
-				        i++;
-                    }
-		        }
-            }
-            cout << "there is " << i << " USB controller present\n";
-        }
-        if (command == "help") {
-            cout << "cls        - clear the shell\n";
-            cout << "memmap     - display the memory usage\n";
-            cout << "credit     - display the author\n";
-            cout << "reboot     - do i have to explain?\n";
-            cout << "qshutsowd  - shutdown for qemu\n";
-            cout << "usb        - display the number of usb devices\n";
-            cout << "colorstart - start a new thread\n";
-            cout << "colorstop  - stop that thread\n";
-        }
-        if (command == "colorstart") colorThread->start();
-        if (command == "colorstop") colorThread->stop();
-        cout << '>';
-    };
-}
-
-void square() {
-    while(1) cout << 'c';//DrawSquare(200, 400, 200, 300, 0xffff00);
-}
+int breakpoint(){ return 1; }
 
 extern "C" void start_K(){
 
@@ -233,8 +112,6 @@ extern "C" void start_K(){
     }
     
     //enableAVX();
-
-    DrawSquare(200, 400, 200, 300, 0xffff00);
 	
 	add_IRQ(0, (void*)&isr0, IDT_IG);
 	add_IRQ(1, (void*)&isr1, IDT_IG);
@@ -278,19 +155,25 @@ extern "C" void start_K(){
     if (ack == 0xFA) {
         cout << "Mouse [\0m[\x00\xff\x00]Correct\x00m[\xff\xff\xff]]]" << std::endl;
     } else {
-        cout << "Mouse [\0m[\xff\x00\x00]Not present\x00m[\xff\xff\xff]]]" << std::endl;
+        cout << "Mouse [\0m[\xff\x00\x00]Not present\x0 0m[\xff\xff\xff]]]" << std::endl;
     }*/
+
+    cout << sizeof(TaskManager::Task) << std::endl;
+    cout << (void*)&shell << std::endl;
 
     command.resize(100);
 
-    TaskManager::Thread(nullptr, nullptr, 0); // init scheduling
+    //memset(TaskManager::tasks, 0, 409600);
+
+    TaskManager::Task* initializeScheduler = TaskManager::Thread(nullptr, nullptr, 0); // init scheduling
 
     TaskManager::Task* shellThread = TaskManager::Thread((void*)&shell, nullptr, 0);
       
     InitIDT();
 
-    timer::PIT::init(1000);
+    timer::PIT::init(1);
 
+    //initializeScheduler->abort();
     shellThread->start();
 
     //_hRAMDISK();

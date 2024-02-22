@@ -81,6 +81,7 @@ public:
     uint32_t Read();
 };
     
+int breakpoint();
 void outb(unsigned short port, unsigned char val);
 unsigned char inb(unsigned short port);
 void RemapPic(uint8_t master, uint8_t slave);

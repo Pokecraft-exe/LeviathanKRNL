@@ -26,9 +26,10 @@ namespace timer {
 			ticks = 0;
 		};
 		
-		void wait(uint64_t second){
+		void wait(uint64_t ms){
+			ms /= 10;
 		    uint64_t current_ticks = getTicks();
-		    uint64_t delay = (second * frequencies);
+		    uint64_t delay = (ms * frequencies);
 		    while (1)
 		    {
 		        if (current_ticks + delay < getTicks())
