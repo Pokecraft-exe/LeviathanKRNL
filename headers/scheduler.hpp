@@ -10,6 +10,7 @@ class Task{
     bool active;
     bool present;
     uint16_t _id;
+    uint8_t ms;
 public:
     CPUState* cpu;
     uint8_t stack[STACKSIZE];

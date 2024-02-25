@@ -13,6 +13,7 @@
 #include "KBscancodes.hpp"
 #include "scheduler.hpp"
 #include "paging.hpp"
+#include "mouse.hpp"
 #define IDT_EntryCount 64
 #define IDT_IG 0b00001110
 #define IDT_TG 0b00001111
