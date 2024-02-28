@@ -3,7 +3,7 @@
 
 #include "font.h"
 	/// character bitmap for each encoding
-static const unsigned char __font_bitmap__[] = {
+const unsigned char __font_bitmap__[] = {
 //   0 $00 'uni0000.dup1'
 //	width 8, bbx 0, bby 0, bbw 1, bbh 1
 	________,

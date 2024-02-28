@@ -2,7 +2,7 @@
 #include "printf.h"
 #include "IDT.h"
 #include "color.hpp"
-#include "string"
+#include "string.hpp"
 
 namespace std {
     extern char endl;

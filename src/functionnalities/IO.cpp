@@ -30,8 +30,6 @@ void RemapPic(uint8_t master, uint8_t slave){
 
     outb(PIC1_DATA, 0);
     outb(PIC2_DATA, 0);
-
-    return;
 }
 
 

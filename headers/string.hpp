@@ -1,21 +1,21 @@
 #pragma once
 #include "allocator.hpp"
-typedef long unsigned int size_t;
 
-class string{
+class string {
 private:
+	bool allocated = false;
 	char* _Ptr;
 	size_t _size;
 public:
-	string();
-	string(const char* a);
+	string(const string&);
+	string(char*);
 	size_t size();
 	void destroy();
-	string operator=(const char* a);
-	const char* operator=(string a);
-	string operator++(int);
-	string operator--(int);
-	string* operator*();
-	const char operator[](int index);
-	string operator+(string b);
+	char* c_str();
+	bool isAllocated();
+	void resize(int);
+	char& operator[](int);
+	string operator+(string);
+	bool operator ==(string);
+	bool operator ==(char*);
 };

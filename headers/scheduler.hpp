@@ -2,7 +2,7 @@
 #include "IO.h"
 #include "IDT.h"
 
-#define STACKSIZE 4096//4084
+#define STACKSIZE 4080
 
 namespace TaskManager {
 

@@ -18,6 +18,7 @@
 #include "scheduler.hpp"
 #include "shell.hpp"
 #include "mouse.hpp"
+#include "GUI.hpp"
 using std::cout, std::cin;
 
 extern IDTR idtTable;
@@ -44,6 +45,8 @@ int breakpoint(){ return 1; }
 extern "C" void start_K(){
 
     VGA_WIDTH = framebuffer->width/16;
+    GUI::buffer = GUI::framebuffer((void*)framebuffer->address, framebuffer->width, framebuffer->height);
+    GUI::screen = GUI::framebuffer(framebuffer->width, framebuffer->height, &GUI::buffer);
 
     cout.color(0XFFFFFF);
 
@@ -149,7 +152,7 @@ extern "C" void start_K(){
 
     command.resize(100);
 
-    TaskManager::Task* initializeScheduler = TaskManager::Thread(nullptr, nullptr, 0); // init scheduling
+    TaskManager::Thread(nullptr, nullptr, 0); // init scheduling
 
     TaskManager::Task* shellThread = TaskManager::Thread((void*)&shell, nullptr, 0);
       
@@ -157,7 +160,6 @@ extern "C" void start_K(){
 
     timer::PIT::init(1);
 
-    //initializeScheduler->abort();
     shellThread->start();
 
     //_hRAMDISK();

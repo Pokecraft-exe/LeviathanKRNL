@@ -13,7 +13,9 @@ void InitIDT(){
     asm("lidt %0" :: "m"(idtTable));
     asm ("sti");
 
-    RemapPic(0b00100000,0b00000000);
+    RemapPic(32 ,0);
+
+	IRQ_clear_mask(12);
 }
 
 void add_IRQ(uint8_t IRQ, void* function, uint8_t gate) {
@@ -39,24 +41,42 @@ __attribute__((interrupt)) void keyboardHandler(interrupt_frame* frame) {
 
 __attribute__((interrupt)) void mouseHandler(interrupt_frame* frame) {
 	using Mouse::pointer;
-	switch(pointer.cycle)
-  {
-    case 0:
-      pointer.bytes[0]=Port8Bit(0x60).Read();
-      pointer.cycle++;
-      break;
-    case 1:
-      pointer.bytes[1]=Port8Bit(0x60).Read();
-      pointer.cycle++;
-      break;
-    case 2:
-      pointer.bytes[2]=Port8Bit(0x60).Read();
-      pointer.x=pointer.bytes[1];
-      pointer.y=pointer.bytes[2];
-      pointer.cycle=0;
-      break;
-  }
-	DrawChar('^', pointer.x, pointer.y, 0xffffff, 1);
+    switch (pointer.cycle) {
+        case 0:
+            pointer.bytes[0] = Mouse::read();
+         	pointer.x += pointer.bytes[0];
+            pointer.cycle++;
+            break;
+        case 1:
+            pointer.bytes[1] = Mouse::read();
+            pointer.y -= pointer.bytes[1];
+            pointer.cycle++;
+            break;
+        case 2:
+            pointer.bytes[2] = Mouse::read();
+            Mouse::get_status(pointer.bytes[2]);
+
+            if (pointer.x < 0) pointer.x = 0;
+            if (pointer.y < 0) pointer.y = 0;
+
+            uint32_t color = 0x00000000;
+            if (pointer.leftClick) {
+                color = 0xFF;
+            }
+            else if (pointer.rightClick) {
+                color = 0x00FF;
+            }
+            else if (pointer.middleClick) {
+                color = 0x0000FF;
+            }
+			else {
+				color = 0xFFFFFF;
+			}
+			DrawChar('^', pointer.x, pointer.y, color, 1);
+            pointer.cycle = 0;
+            break;
+    }
+
 	outb(0x20, 0x20);
 	outb(0xa0, 0x20);
 }
@@ -81,7 +101,6 @@ void print(char* str) {
     cout.color(0xff0000);
 	cout << str;
 	cout.color(c);
-	while(1);
 }
 
 __attribute__((interrupt)) void isr0(interrupt_frame* frame) {print("division by 0");};
